@@ -631,8 +631,36 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Program Name: Cve-Toad (repository path: keerthanap8898/CveToad)
+
+    Description: This directory, titled 'Cve-Toad' in the repository
+    "github.com/keerthanap8898/CveToad", is my (Keerthana Purushotham's)
+    project which proposes a secure, ephemeral “CVE-Checker Shell” — a
+    command-line tool that launches a temporary containerized runtime
+    to perform AI-assisted CVE impact analysis.
+
+    The shell initializes with short-lived authentication tokens
+    (≤8 hours) and dynamically installs approved AI model clients
+    (e.g., OpenAI, Anthropic) inside the container. Once execution
+    completes, the container and all secrets are destroyed, leaving
+    no footprint on the host.
+
+    Copyright ⓒ 2025  Keerthana Purushotham.
+    Contact <keerthanap0808@gmail.com>, <keerthupuru@gmail.com>, or <keep.consult@proton.me>.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
