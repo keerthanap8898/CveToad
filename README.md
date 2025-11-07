@@ -1,72 +1,90 @@
-# Cve-Toad 𖥧﹏𓆏࿐⚘𓇗
+> # `Cve-Toad` 𖥧﹏𓆏࿐⚘𓇗
 > #### *`hops on`, `helps you catch some bugs`* 𓆤༉ *, `then hops off`*
-## CVE Impact Predictor – Secure Ephemeral AI Shell
+>
+> ---
+
+## A CVE Impact Predictor, in a Secure Ephemeral AI Shell
+
+### Contents  
+- [Problem Statement](#1-problem-statement)  
+- [Solution Overview](#2-solution-overview)  
+- [Architecture](#3-architecture)  
+  - [Workflow](#workflow)  
+  - [Key Components](#key-components)  
+- [Security Model](#4-security-model)  
+- [Benefits](#5-benefits)  
+- [Future Extensions](#6-future-extensions)  
+- [Summary](#7-summary)  
+- [Appendix – Project Concept](#8-appendix--project-snapshot)  
+- [License](#9-license)
+
+---
 
 ### 1. Problem Statement
 
-Security analysts and system engineers need to quickly assess the potential impact of Common Vulnerabilities and Exposures (CVEs) on diverse local systems (Windows, macOS, Linux) without exposing host data or credentials.
+Security analysts and system engineers need to quickly assess the potential impact of Common Vulnerabilities and Exposures (CVEs) on diverse local systems (Windows, macOS, Linux) without exposing host data or credentials.  
 Existing CVE scanners lack contextual awareness of system architecture and do not leverage modern AI reasoning. Traditional tools also persist sensitive configuration data, creating long-term security risks.
-
-⸻
 
 ### 2. Solution Overview
 
-I propose a secure, ephemeral “CVE-Checker Shell” — a command-line tool that launches a temporary containerized runtime to perform AI-assisted CVE impact analysis.
-The shell initializes with short-lived authentication tokens (≤8 hours) and dynamically installs approved AI model clients (e.g., OpenAI, Anthropic) inside the container. Once execution completes, the container and all secrets are destroyed, leaving no footprint on the host.
-
-⸻
+I propose a secure, ephemeral “CVE‐Checker Shell” — a command‐line tool that launches a temporary containerised runtime to perform AI-assisted CVE impact analysis.  
+The shell initialises with short-lived authentication tokens (≤ 8 hours) and dynamically installs approved AI model clients (e.g., OpenAI, Anthropic) inside the container. Once execution completes, the container and all secrets are destroyed, leaving no footprint on the host.
 
 ### 3. Architecture
 
 #### Workflow
 
-1. CLI authenticates via enterprise SSO and requests a time-bound JWT or Vault token encoding user role and permissions.
-2. The controller script collects system metadata (OS, CPU, packages) on the local host and mounts it read-only into the container as JSON.
-3. The container runs the AI analysis pipeline:
-   - Parses host data
-   - Queries configured AI providers for vulnerability context
-   - Generates prioritized CVE impact report
-4. Upon exit, all runtime artifacts, credentials, and network connections are destroyed.
+1. CLI authenticates via enterprise SSO and requests a time-bound JWT or Vault token encoding user role and permissions.  
+2. The controller script collects system metadata (OS, CPU, packages) on the local host and mounts it read-only into the container as JSON.  
+3. The container runs the AI analysis pipeline:  
+   - Parses host data  
+   - Queries configured AI providers for vulnerability context  
+   - Generates a prioritised CVE impact report  
+4. Upon exit, all runtime artefacts, credentials, and network connections are destroyed.
 
 #### Key Components
-
-- Controller CLI: Handles auth, container lifecycle, token TTL, logging.
-- Ephemeral Container: Sandboxed Python/Rust runtime with model adapters and CVE logic.
-- Role Policy Engine: Defines permissions per role (e.g., admin, analyst).
+```
+- Controller CLI: Handles auth, container lifecycle, token TTL, logging.  
+- Ephemeral Container: Sandboxed Python/Rust runtime with model adapters and CVE logic.  
+- Role Policy Engine: Defines permissions per role (e.g., admin, analyst).  
 - Secrets Backend: Issues expiring tokens and revokes access on logout or TTL expiry.
-
-⸻
-
+```
 ### 4. Security Model
-
-- Isolation: Containerized runtime (Docker/Podman) with no host persistence (--rm).
-- Token Lifespan: Max 8 h TTL; revocable on demand.
-- Role-Based Access: Tokens encode role; container validates signature and policy before execution.
-- Network Control: Outbound traffic limited to approved AI API endpoints.
+```
+- Isolation: Containerised runtime (Docker/Podman) with no host persistence (`--rm`).  
+- Token Lifespan: Max 8 h TTL; revocable on demand.  
+- Role-Based Access: Tokens encode role; container validates signature and policy before execution.  
+- Network Control: Outbound traffic limited to approved AI API endpoints.  
 - Zero Trust: No implicit trust in host or container; each run is independently authenticated.
-
-⸻
-
+```
 ### 5. Benefits
-
-- Eliminates persistent secrets and local installs.
-- Enables cross-platform CVE context analysis tailored to system architecture.
-- Enforces reproducible, auditable sessions aligned with enterprise compliance.
+```
+- Eliminates persistent secrets and local installs.  
+- Enables cross-platform CVE context analysis tailored to system architecture.  
+- Enforces reproducible, auditable sessions aligned with enterprise compliance.  
 - Extensible to support offline or on-prem LLMs for air-gapped environments.
-
-⸻
-
+```
 ### 6. Future Extensions
-
-- Integrate with HashiCorp Vault or AWS STS for federated token issuance.
-- Add Rust backend for lower latency and improved concurrency.
-- Extend to digital twin telemetry for Software-Defined Vehicle (SDV) environments.
-
-⸻
-
+```
+- Integrate with HashiCorp Vault or AWS STS for federated token issuance.  
+- Add Rust backend for lower latency and improved concurrency.  
+- Extend to digital-twin telemetry for Software-Defined Vehicle (SDV) environments.
+```
 ### 7. Summary
+`CVE Impact Predictor combines ephemeral compute, AI reasoning, and strict tokenised authentication to deliver secure, context-aware vulnerability impact analysis. It embodies Amazon’s principles of security by default, least privilege, and short-lived trust, while showcasing modular extensibility for next-generation intelligent security tooling.`
 
-CVE Impact Predictor combines ephemeral compute, AI reasoning, and strict tokenized authentication to deliver secure, context-aware vulnerability impact analysis.
-It embodies Amazon’s principles of security by default, least privilege, and short-lived trust, while showcasing modular extensibility for next-generation intelligent security tooling.
+### 8. Appendix – Project Snapshot
+> “*CveToad*”, a localized, authenticated & containerised, open-src AI-workflow type of application; additionally secured by secret-managers, short-lived session tokens for container-shells with hard memory limits & role-based env configs. The use-case is to help you pin down CVE impact on your system whilst incrementally building user-specific CVE-context.  
+> 
+> The concept is to incrementally feed it the right context to optimise how accurately it predicts individual CVSS vector elements (specific to the CVSS version & CVE’s age/create-date). I’ll likely start with some basic Linux shell and avoid Amazon-Linux (amongst other AWS tools) to keep my work as freely accessible to people outside Amazon and licensing issues.  
+> 
+> #### For example:  
+> > 1. the CVSS-v4 specification document ([first.org/cvss/v4-0/specification-document](first.org/cvss/v4-0/specification-document)) as an automatable base-layer pre-process context,  
+> > 2. ***`sys.info`*** context about the user OS-instance (from outside the shell) to specify system-specific CVE impact details,  
+> > 3. identify useful pkg-attributes like `vendor`, `maintainer`, `rpm name` (*product name*), `dependencies` (*parent/child packages*), etc., from [pagure.io/fedora-packages-static](pagure.io/fedora-packages-static) … and so on.
 
-⸻
+
+### 9. License
+>     CopyrightⒸ 2025  Keerthana Purushotham <keep.consult@proton.me>.
+>     Licensed under the GNU AGPL v3. See LICENSE for details.
+>   [*see license*](https://github.com/keerthanap8898/CveToad/blob/main/LICENSE)
