@@ -81,7 +81,7 @@ The shell initialises with short-lived authentication tokens (≤ 8 hours) and d
 ### 8. `Appendix – Project Snapshot`
 > “*CveToad*”, a localized, authenticated & containerised, open-src AI-workflow type of application; additionally secured by secret-managers, short-lived session tokens for container-shells with hard memory limits & role-based env configs. The use-case is to help you pin down CVE impact on your system whilst incrementally building user-specific CVE-context.  
 > 
-> The concept is to incrementally feed it the right context to optimise how accurately it predicts individual CVSS vector elements (specific to the CVSS version & CVE’s age/create-date). I’ll likely start with some basic Linux shell and avoid Amazon-Linux (amongst other AWS tools) to keep my work as freely accessible to people outside Amazon and licensing issues.  
+> The concept is to incrementally feed it the right context to optimise how accurately it predicts individual CVSS vector elements (specific to the CVSS version & CVE’s age/create-date).  
 > 
 > #### For example:  
 > > 1. the CVSS-v4 specification document ([first.org/cvss/v4-0/specification-document](first.org/cvss/v4-0/specification-document)) as an automatable base-layer pre-process context,  
