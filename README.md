@@ -83,28 +83,35 @@ The shell initialises with short-lived authentication tokens (≤ 8 hours) and d
 > 
 > The concept is to incrementally feed it the right context to optimise how accurately it predicts individual CVSS vector elements (specific to the CVSS version & CVE’s age/create-date).  
 > 
-> #### For example:  
+> ### *For example*:  
 > > 1. the CVSS-v4 specification document ([first.org/cvss/v4-0/specification-document](first.org/cvss/v4-0/specification-document)) as an automatable base-layer pre-process context,  
 > > 2. ***`sys.info`*** context (including rpm-tree data); about the user OS-instance (from outside the shell) to specify system-specific CVE impact details,  
 > > 3. identify useful pkg-attributes like `vendor`, `maintainer`, `rpm name` (*product name*), `dependencies` (*parent/child packages*), etc., from [pagure.io/fedora-packages-static](http://pagure.io/fedora-packages-static) … and so on.
 > >
 > > ---
 > 
-> #### `Reference Links to see`: ***CVE Metadata Element, Exploitability, and CWE Analytical Framework***
-> 1. [**NVD (NIST)** - *nvd.nist.gov*](https://nvd.nist.gov/)
-> 2. [**RedHat API** - *docs.redhat.com/en/documentation/red_hat_security_data_api/1.0*](https://docs.redhat.com/en/documentation/red_hat_security_data_api/1.0/html/red_hat_security_data_api/index)
-> 3. [**Debian** - *security-tracker.debian.org*](https://security-tracker.debian.org/tracker/#:~:text=Search%20for%20package%20or%20bug%20name)
-> 4. [**Suse** - *suse.com/support/security*](https://www.suse.com/support/security/#:~:text=Security%20updates%20by,in%20CSAF%20format)
-> 5. [**Amazon Linux** - *explore.alas.aws.amazon.com*](https://explore.alas.aws.amazon.com/)
-> 6. [**Fedora (Script to pull all package names and meta-data)** : *pagure.io/fedora-packages-static*](https://github.com/keerthanap8898/CveToad/blob/main/first.org/cvss/v4-0/specification-document)
-> 7. [**OSV.dev** - *github.com/google/osv.dev*](https://github.com/google/osv.dev)
-> 8. [**My (** *Keerthana's* **) CVE user Story** - *github.com/keerthanap8898/CveToad/tree/main/CVE-Consumer_User-Story.md*](https://github.com/keerthanap8898/CveToad/blob/main/CVE-Consumer_User-Story.md)
-> 9. [**CVE User-story_Description** - *github.com/keerthanap8898/CveToad/blob/main/CVE-user-story_Description.md*](https://github.com/keerthanap8898/CveToad/blob/main/CVE-user-story_Description.md)
-> 10. [**CVE Meta-data Framework Table Image:** - *github.com/keerthanap8898/CveToad/blob/main/Resources/Images/CVE_Meta-data_Framework_Table.jpg*](https://github.com/keerthanap8898/CveToad/blob/main/Resources/Images/CVE_Meta-data_Framework_Table.jpg)
-> 11. [**CVE-Project Official Repo** - *github.com/CVEProject/cvelistV5*](https://github.com/CVEProject/cvelistV5)
-> 12. [**CVE-Project Official Schema** - *github.com/CVEProject/cve-schema*](https://github.com/CVEProject/cve-schema)
-> 13. [**CVE-Project Automation Working group** - *github.com/CVEProject/automation-working-group*](https://github.com/CVEProject/automation-working-group) .
->
+> ### `Reference Links to see`: ***CVE Metadata Element, Exploitability, and CWE Analytical Framework***
+> > 1. [**NVD (NIST)** - *nvd.nist.gov*](https://nvd.nist.gov/) ,
+> > 2. [**RedHat API** - *docs.redhat.com/en/documentation/red_hat_security_data_api/1.0*](https://docs.redhat.com/en/documentation/red_hat_security_data_api/1.0/html/red_hat_security_data_api/index) ,
+> > 3. [**Debian** - *security-tracker.debian.org*](https://security-tracker.debian.org/tracker/#:~:text=Search%20for%20package%20or%20bug%20name) ,
+> > 4. [**Suse** - *suse.com/support/security*](https://www.suse.com/support/security/#:~:text=Security%20updates%20by,in%20CSAF%20format) ,
+> > 5. [**Amazon Linux** - *explore.alas.aws.amazon.com*](https://explore.alas.aws.amazon.com/) ,
+> > 6. [**Fedora (Script to pull all package names and meta-data)** : *pagure.io/fedora-packages-static*](https://pagure.io/fedora-packages-static) ,
+> > 7. [**OSV.dev** - *github.com/google/osv.dev*](https://github.com/google/osv.dev) .
+> >
+> ---
+> >
+> > 1. [**My (** *Keerthana's* **) CVE user Story** - *github.com/keerthanap8898/CveToad/tree/main/CVE-Consumer_User-Story.md*](https://github.com/keerthanap8898/CveToad/blob/main/CVE-Consumer_User-Story.md) ,
+> > 2. [**CVE User-story_Description** - *github.com/keerthanap8898/CveToad/blob/main/CVE-user-story_Description.md*](https://github.com/keerthanap8898/CveToad/blob/main/CVE-user-story_Description.md) ,
+> > 3. [**CVE Meta-data Framework Table Image:** - *github.com/keerthanap8898/CveToad/blob/main/Resources/Images/CVE_Meta-data_Framework_Table.jpg*](https://github.com/keerthanap8898/CveToad/blob/main/Resources/Images/CVE_Meta-data_Framework_Table.jpg) . 
+> >
+> ---
+> >
+> > 1. [**CVE-Project Official Repo** - *github.com/CVEProject/cvelistV5*](https://github.com/CVEProject/cvelistV5) ,
+> > 2. [**CVE-Project Official Schema** - *github.com/CVEProject/cve-schema*](https://github.com/CVEProject/cve-schema) ,
+> > 3. [**CVE-Project Automation Working group** - *github.com/CVEProject/automation-working-group*](https://github.com/CVEProject/automation-working-group) .
+> >
+---
 
 
 ### 9. `License`
