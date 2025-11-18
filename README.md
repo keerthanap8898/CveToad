@@ -98,11 +98,12 @@ The shell initialises with short-lived authentication tokens (≤ 8 hours) and d
 > 5. [**Amazon Linux** - *explore.alas.aws.amazon.com*](https://explore.alas.aws.amazon.com/)
 > 6. [**Fedora (Script to pull all package names and meta-data)** : *pagure.io/fedora-packages-static*](https://github.com/keerthanap8898/CveToad/blob/main/first.org/cvss/v4-0/specification-document)
 > 7. [**OSV.dev** - *github.com/google/osv.dev*](https://github.com/google/osv.dev)
-> 8. [**My (** *Keerthana's* **) CVE user Story** - *nvd.nist.gov*](https://github.com/keerthanap8898/CveToad/blob/main/CVE-Consumer_User-Story.md)
+> 8. [**My (** *Keerthana's* **) CVE user Story** - *github.com/keerthanap8898/CveToad/tree/main/CVE-Consumer_User-Story.md*](https://github.com/keerthanap8898/CveToad/blob/main/CVE-Consumer_User-Story.md)
 > 9. [**CVE User-story_Description** - *github.com/keerthanap8898/CveToad/blob/main/CVE-user-story_Description.md*](https://github.com/keerthanap8898/CveToad/blob/main/CVE-user-story_Description.md)
-> 10. [**CVE-Project Official Repo** - *github.com/CVEProject/cvelistV5*](https://github.com/CVEProject/cvelistV5)
-> 11. [**CVE-Project Official Schema** - *github.com/CVEProject/cve-schema*](https://github.com/CVEProject/cve-schema)
-> 12. [**CVE-Project Automation Working group** - *github.com/CVEProject/automation-working-group*](https://github.com/CVEProject/automation-working-group) .
+> 10. [**CVE Meta-data Framework Table Image:** - *github.com/keerthanap8898/CveToad/blob/main/Resources/Images/CVE_Meta-data_Framework_Table.jpg*](https://github.com/keerthanap8898/CveToad/blob/main/Resources/Images/CVE_Meta-data_Framework_Table.jpg)
+> 11. [**CVE-Project Official Repo** - *github.com/CVEProject/cvelistV5*](https://github.com/CVEProject/cvelistV5)
+> 12. [**CVE-Project Official Schema** - *github.com/CVEProject/cve-schema*](https://github.com/CVEProject/cve-schema)
+> 13. [**CVE-Project Automation Working group** - *github.com/CVEProject/automation-working-group*](https://github.com/CVEProject/automation-working-group) .
 >
 
 
