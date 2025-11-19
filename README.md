@@ -90,7 +90,7 @@ The shell initialises with short-lived authentication tokens (≤ 8 hours) and d
 > >
 > > ---
 > 
-> ### `Reference Links to see`: ***CVE Metadata Element, Exploitability, and CWE Analytical Framework***
+> ### `Reference Links to see`: ***CVE sources , User-Story Resources , Official Links***
 > > 1. [**NVD (NIST)** - *nvd.nist.gov*](https://nvd.nist.gov/) ,
 > > 2. [**RedHat API** - *docs.redhat.com/en/documentation/red_hat_security_data_api/1.0*](https://docs.redhat.com/en/documentation/red_hat_security_data_api/1.0/html/red_hat_security_data_api/index) ,
 > > 3. [**Debian** - *security-tracker.debian.org*](https://security-tracker.debian.org/tracker/#:~:text=Search%20for%20package%20or%20bug%20name) ,
