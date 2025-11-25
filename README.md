@@ -1,6 +1,7 @@
 > # `Cve-Toad` 𖥧﹏𓆏࿐⚘𓇗
 > #### *`hops on`, `helps you catch some bugs`* 𓆤༉ *, `then hops off`*
->
+> - [*Take the CVE Consumer (User) Survey - forms.gle/QNCciH4vF7gtMaMF6 .*](https://forms.gle/QNCciH4vF7gtMaMF6)
+> 
 > ---
 
 ## A CVE Impact Predictor, in a Secure Ephemeral AI Shell
