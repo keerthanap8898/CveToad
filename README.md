@@ -85,7 +85,7 @@ The shell initialises with short-lived authentication tokens (≤ 8 hours) and d
 > The concept is to incrementally feed it the right context to optimise how accurately it predicts individual CVSS vector elements (specific to the CVSS version & CVE’s age/create-date).  
 > 
 > ### *For example*:  
-> > 1. the CVSS-v4 specification document ([first.org/cvss/v4-0/specification-document](first.org/cvss/v4-0/specification-document)) as an automatable base-layer pre-process context,  
+> > 1. the CVSS-v4 specification document ([first.org/cvss/v4-0/specification-document](https://www.first.org/cvss/v4-0/specification-document)) as an automatable base-layer pre-process context,  
 > > 2. ***`sys.info`*** context (including rpm-tree data); about the user OS-instance (from outside the shell) to specify system-specific CVE impact details,  
 > > 3. identify useful pkg-attributes like `vendor`, `maintainer`, `rpm name` (*product name*), `dependencies` (*parent/child packages*), etc., from [pagure.io/fedora-packages-static](http://pagure.io/fedora-packages-static) … and so on.
 > >
