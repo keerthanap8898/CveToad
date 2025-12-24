@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CVE Keeper</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --panel:#0f1620;
+      --text:#e6edf3;
+      --muted:#9fb0c0;
+      --border:#223043;
+      --link:#7cc7ff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:var(--bg);
+      color:var(--text);
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+    }
+    header, footer{
+      background:rgba(15,22,32,.92);
+      border-bottom:1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    footer{border-top:1px solid var(--border); border-bottom:none;}
+    .bar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 16px;
+    }
+    .title{
+      font-weight:700;
+      letter-spacing:.2px;
+      font-size:18px;
+    }
+    .right{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:320px;
+      justify-content:flex-end;
+    }
+    main{
+      flex:1;
+      min-height:0;
+      display:flex;
+      padding:12px;
+    }
+    .doc{
+      flex:1;
+      min-height:0;
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:10px;
+      overflow:hidden;
+      background:var(--panel);
+    }
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      background:var(--panel);
+    }
+    .audio-card{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:rgba(11,15,20,.7);
+      cursor:grab;
+      user-select:none;
+      touch-action:none;
+      max-width:520px;
+    }
+    .audio-card:active{cursor:grabbing}
+    .btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background:transparent;
+      color:var(--text);
+      padding:6px 10px;
+      border-radius:8px;
+      font-weight:600;
+      cursor:pointer;
+    }
+    .btn:hover{border-color:#39506e}
+    .metrics{
+      font-variant-numeric: tabular-nums;
+      color:var(--muted);
+      font-size:12px;
+      min-width:140px;
+      text-align:right;
+    }
+    .footer-left{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.3;
+      max-width:70ch;
+    }
+    .footer-right{
+      display:flex;
+      gap:14px;
+      font-size:13px;
+    }
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+    /* responsive */
+    @media (max-width: 820px){
+      .bar{flex-direction:column; align-items:flex-start}
+      .right{min-width:unset; width:100%; justify-content:space-between}
+      .metrics{text-align:left}
+      .audio-card{width:100%}
+      main{padding:10px}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="bar">
+      <div class="title">CVE Keeper</div>
+
+      <!-- Click-and-drag audio player -->
+      <div class="right">
+        <div id="audioCard" class="audio-card" title="Drag to reposition">
+          <button id="playBtn" class="btn" type="button">Play</button>
+          <audio id="audio" preload="metadata" controls style="display:none">
+            <source src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/Audio_CVEkeeper.mp3" type="audio/mpeg">
+          </audio>
+
+          <div style="flex:1; min-width:120px; color:var(--muted); font-size:12px;">
+            Audio: CVE Keeper
+          </div>
+
+          <div id="metrics" class="metrics">00:00 / 00:00</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="doc">
+      <!-- PDF document displayed in the body -->
+      <iframe
+        title="CVE Keeper Document"
+        src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://raw.githubusercontent.com/keerthanap8898/CveToad/main/CVEkeeper_CVEtoad_final.pdf">
+      </iframe>
+    </div>
+  </main>
+
+  <footer>
+    <div class="bar">
+      <div class="footer-left">
+        Copyright (C) 2025&nbsp; Keerthana Purushotham &lt;keep.consult@proton.me&gt;.<br/>
+        Licensed under the GNU AGPL v3. See LICENSE for details.
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com/keerthanap8898" target="_blank" rel="noopener noreferrer">Github</a>
+        <a href="https://linkedin.com/in/keerthanapurushotham" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://infosec.exchange/@keepur" target="_blank" rel="me noopener noreferrer">Mastodon (Infosec)</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Audio controls + metrics
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('playBtn');
+    const metrics = document.getElementById('metrics');
+
+    function fmt(t){
+      if (!isFinite(t)) return "00:00";
+      const m = Math.floor(t / 60);
+      const s = Math.floor(t % 60);
+      return String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+    }
+
+    function updateMetrics(){
+      metrics.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
+    }
+
+    playBtn.addEventListener('click', async () => {
+      if (audio.paused) {
+        try { await audio.play(); } catch(e) {}
+      } else {
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener('play', () => playBtn.textContent = 'Pause');
+    audio.addEventListener('pause', () => playBtn.textContent = 'Play');
+    audio.addEventListener('timeupdate', updateMetrics);
+    audio.addEventListener('loadedmetadata', updateMetrics);
+    audio.addEventListener('durationchange', updateMetrics);
+
+    // Autoplay after 3 seconds (may be blocked by browser policy if not interacted)
+    setTimeout(async () => {
+      try { await audio.play(); } catch(e) { /* autoplay may be blocked */ }
+    }, 3000);
+
+    // Click-and-drag audio card (reposition within viewport)
+    const card = document.getElementById('audioCard');
+    let dragging = false, startX = 0, startY = 0, origX = 0, origY = 0;
+
+    // make it positionable after first drag
+    function ensurePositionable(){
+      if (getComputedStyle(card).position !== 'fixed') {
+        const rect = card.getBoundingClientRect();
+        card.style.position = 'fixed';
+        card.style.top = rect.top + 'px';
+        card.style.left = rect.left + 'px';
+        card.style.zIndex = 9999;
+      }
+    }
+
+    function onDown(e){
+      // don't start drag when clicking the button
+      if (e.target && (e.target.id === 'playBtn')) return;
+
+      dragging = true;
+      ensurePositionable();
+
+      const p = ('touches' in e) ? e.touches[0] : e;
+      startX = p.clientX;
+      startY = p.clientY;
+
+      const rect = card.getBoundingClientRect();
+      origX = rect.left;
+      origY = rect.top;
+
+      e.preventDefault();
+    }
+
+    function onMove(e){
+      if (!dragging) return;
+      const p = ('touches' in e) ? e.touches[0] : e;
+      const dx = p.clientX - startX;
+      const dy = p.clientY - startY;
+
+      // clamp to viewport
+      const rect = card.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      const x = Math.min(Math.max(origX + dx, 8), window.innerWidth - w - 8);
+      const y = Math.min(Math.max(origY + dy, 8), window.innerHeight - h - 8);
+
+      card.style.left = x + 'px';
+      card.style.top  = y + 'px';
+    }
+
+    function onUp(){
+      dragging = false;
+    }
+
+    card.addEventListener('mousedown', onDown);
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+
+    card.addEventListener('touchstart', onDown, {passive:false});
+    window.addEventListener('touchmove', onMove, {passive:false});
+    window.addEventListener('touchend', onUp);
+  </script>
+</body>
+</html>
