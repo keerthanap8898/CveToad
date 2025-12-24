@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="fediverse:creator" content="@keepur@infosec.exchange">
   <title>CVE Keeper</title>
   <style>
     :root{
@@ -84,17 +85,46 @@
       max-width:520px;
     }
     .audio-card:active{cursor:grabbing}
-    .btn{
+
+    /* Large red play button */
+    #playBtn{
       appearance:none;
-      border:1px solid var(--border);
-      background:transparent;
-      color:var(--text);
-      padding:6px 10px;
-      border-radius:8px;
-      font-weight:600;
+      background:#e53935;
+      border:1px solid #ff6f60;
+      color:#fff;
+      font-size:15px;
+      font-weight:800;
+      padding:10px 18px;
+      border-radius:12px;
       cursor:pointer;
+      box-shadow:0 6px 16px rgba(229,57,53,0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .btn:hover{border-color:#39506e}
+    #playBtn:hover{
+      box-shadow:0 8px 22px rgba(229,57,53,0.45);
+    }
+    #playBtn:active{
+      transform: scale(0.97);
+    }
+    #playBtn:focus{
+      outline:2px solid rgba(124,199,255,.6);
+      outline-offset:2px;
+    }
+
+    /* Wobble animation */
+    @keyframes play-wobble {
+      0%   { transform: rotate(0deg); }
+      15%  { transform: rotate(-3deg); }
+      30%  { transform: rotate(3deg); }
+      45%  { transform: rotate(-2deg); }
+      60%  { transform: rotate(2deg); }
+      75%  { transform: rotate(-1deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .play-wobble{
+      animation: play-wobble 0.6s ease-in-out;
+    }
+
     .metrics{
       font-variant-numeric: tabular-nums;
       color:var(--muted);
@@ -134,7 +164,7 @@
       <!-- Click-and-drag audio player -->
       <div class="right">
         <div id="audioCard" class="audio-card" title="Drag to reposition">
-          <button id="playBtn" class="btn" type="button">Play</button>
+          <button id="playBtn" type="button">Play</button>
           <audio id="audio" preload="metadata" controls style="display:none">
             <source src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/Audio_CVEkeeper.mp3" type="audio/mpeg">
           </audio>
@@ -209,11 +239,19 @@
       try { await audio.play(); } catch(e) { /* autoplay may be blocked */ }
     }, 3000);
 
+    // Wobble play button every 3 seconds when paused (attention cue)
+    setInterval(() => {
+      if (audio.paused) {
+        playBtn.classList.remove('play-wobble');
+        void playBtn.offsetWidth; // retrigger animation
+        playBtn.classList.add('play-wobble');
+      }
+    }, 3000);
+
     // Click-and-drag audio card (reposition within viewport)
     const card = document.getElementById('audioCard');
     let dragging = false, startX = 0, startY = 0, origX = 0, origY = 0;
 
-    // make it positionable after first drag
     function ensurePositionable(){
       if (getComputedStyle(card).position !== 'fixed') {
         const rect = card.getBoundingClientRect();
@@ -225,7 +263,7 @@
     }
 
     function onDown(e){
-      // don't start drag when clicking the button
+      // don't start drag when clicking the play button
       if (e.target && (e.target.id === 'playBtn')) return;
 
       dragging = true;
@@ -248,7 +286,6 @@
       const dx = p.clientX - startX;
       const dy = p.clientY - startY;
 
-      // clamp to viewport
       const rect = card.getBoundingClientRect();
       const w = rect.width, h = rect.height;
       const x = Math.min(Math.max(origX + dx, 8), window.innerWidth - w - 8);
@@ -258,9 +295,7 @@
       card.style.top  = y + 'px';
     }
 
-    function onUp(){
-      dragging = false;
-    }
+    function onUp(){ dragging = false; }
 
     card.addEventListener('mousedown', onDown);
     window.addEventListener('mousemove', onMove);
