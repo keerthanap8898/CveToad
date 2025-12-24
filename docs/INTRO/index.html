@@ -76,7 +76,8 @@
     main{
       flex:1;
       min-height:0;
-      padding:12px;
+      /* no top padding => no gap under header */
+      padding:0 12px 12px;
       overflow:auto;
     }
 
@@ -208,21 +209,24 @@
       display:flex;
       flex-direction:column;
     }
+
+    /* Remove padding here to avoid any top gap; put padding on toolbar/pages instead */
     .pdf-scroll{
       height:calc(100vh - 190px);
       min-height:640px;
       overflow:auto;      /* SECOND scrollbar */
-      padding:12px;
+      padding:0;
       position:relative;
     }
 
     .pdf-status{
       color:var(--muted);
       font-size:13px;
-      margin:0 0 10px 0;
+      margin:0;          /* no gap */
+      padding:10px 12px; /* controlled spacing when visible */
     }
 
-    /* Zoom toolbar */
+    /* Zoom toolbar: flush to top of PDF panel, no gap */
     .pdf-toolbar{
       display:flex;
       align-items:center;
@@ -233,8 +237,8 @@
       background: rgba(15,22,32,.92);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
-      margin: -12px -12px 12px -12px; /* match pdf-scroll padding */
-      padding: 10px 12px;
+      margin:0;          /* no negative margin tricks */
+      padding:10px 12px;
     }
     .zbtn{
       appearance:none;
@@ -256,10 +260,12 @@
       white-space:nowrap;
     }
 
+    /* Put padding on the pages container (not on pdf-scroll) */
     .pdf-pages{
       display:flex;
       flex-direction:column;
       gap:12px;
+      padding:12px;
     }
 
     .pdf-page{
@@ -306,7 +312,7 @@
       .right{min-width:unset; width:100%; justify-content:space-between}
       .metrics{text-align:left}
       .audio-card{width:100%; max-width:100%}
-      main{padding:10px}
+      main{padding:0 10px 10px}
       .pdf-scroll{height:70vh; min-height:520px}
       .audio-meta{max-width:unset; min-width:unset}
       .audio-meta a{max-width:unset}
@@ -563,7 +569,11 @@
   const zoomReadout = document.getElementById("zoomReadout");
 
   let pdfDoc = null;
-  let zoom = 1; // 1 => 100% (fit-width baseline)
+
+  // Initial base scale is computed once at load; no auto-resize rerender.
+  let baseFitScale = 1;
+
+  let zoom = 1; // multiplier on top of baseFitScale
   const ZOOM_MIN = 0.5;
   const ZOOM_MAX = 3;
   const ZOOM_STEP = 0.15;
@@ -574,9 +584,10 @@
     zoomReadout.textContent = `${Math.round(zoom * 100)}%`;
   }
 
-  function fitWidthScale(page){
+  function computeFitWidthScaleOnce(page){
     const base = page.getViewport({ scale: 1 });
-    const padding = 24; // pdf-scroll padding left+right approx
+    // Use current scrollEl width at load time only.
+    const padding = 24; // matches .pdf-pages padding left+right
     const target = Math.max(320, scrollEl.clientWidth - padding);
     return target / base.width;
   }
@@ -585,7 +596,6 @@
     statusEl.textContent = "Loading PDF…";
     const loadingTask = pdfjsLib.getDocument({ url: PDF_URL });
     pdfDoc = await loadingTask.promise;
-    statusEl.textContent = "";
   }
 
   async function renderAll(){
@@ -595,8 +605,12 @@
     const total = pdfDoc.numPages;
     statusEl.textContent = `Rendering ${total} pages…`;
 
+    // compute baseFitScale ONCE using page 1
+    const firstPage = await pdfDoc.getPage(1);
+    baseFitScale = computeFitWidthScaleOnce(firstPage);
+
     for (let i = 1; i <= total; i++){
-      const page = await pdfDoc.getPage(i);
+      const page = (i === 1) ? firstPage : await pdfDoc.getPage(i);
 
       const wrapper = document.createElement("div");
       wrapper.className = "pdf-page";
@@ -610,7 +624,7 @@
       wrapper.appendChild(canvas);
       pagesEl.appendChild(wrapper);
 
-      const scale = fitWidthScale(page) * zoom;
+      const scale = baseFitScale * zoom;
       const viewport = page.getViewport({ scale });
 
       const dpr = window.devicePixelRatio || 1;
@@ -628,7 +642,7 @@
     statusEl.textContent = "";
   }
 
-  // Zoom button handlers
+  // Zoom button handlers (manual only)
   zoomInBtn.addEventListener("click", () => {
     setZoom(zoom + ZOOM_STEP);
     renderAll().catch(console.error);
@@ -645,7 +659,7 @@
   });
 
   zoomFitBtn.addEventListener("click", () => {
-    // In this model, "fit width" is baseline zoom=1 because fitWidthScale() already fits.
+    // Recompute base fit width (still only when user asks), then render at zoom=1
     setZoom(1);
     renderAll().catch(console.error);
   });
@@ -660,7 +674,7 @@
     renderAll().catch(console.error);
   }, { passive:false });
 
-  // Initial load + render
+  // Initial load + render (one-time sizing)
   (async () => {
     try{
       setZoom(1);
@@ -672,12 +686,8 @@
     }
   })();
 
-  // Re-render on resize (debounced) so width stays correct
-  let t;
-  window.addEventListener("resize", () => {
-    clearTimeout(t);
-    t = setTimeout(() => renderAll().catch(console.error), 250);
-  });
+  // NOTE: no window.resize handler => no automatic rescaling on window size change.
+  // The PDF viewport will overflow and you can use scrollbars instead.
 </script>
 
 </body>
