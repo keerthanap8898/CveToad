@@ -25,6 +25,7 @@
       flex-direction:column;
       min-height:100vh;
     }
+
     header, footer{
       background:rgba(15,22,32,.92);
       border-bottom:1px solid var(--border);
@@ -39,11 +40,29 @@
       gap:16px;
       padding:12px 16px;
     }
+
+    /* Title + subtitle */
+    .title-wrap{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
     .title{
       font-weight:700;
       letter-spacing:.2px;
       font-size:18px;
     }
+    .subtitle{
+      font-size:13px;
+      font-style:italic;
+      color:var(--muted);
+      text-decoration:none;
+    }
+    .subtitle:hover{
+      color:var(--link);
+      text-decoration:underline;
+    }
+
     .right{
       display:flex;
       align-items:center;
@@ -75,19 +94,8 @@
       background:var(--panel);
     }
 
-    /* PDF viewport */
-    .panel iframe{
-      width:100%;
-      border:0;
-      background:var(--panel);
-      height: calc(100vh - 190px); /* header+footer allowance */
-      min-height: 640px;
-    }
-
-    /* Poster area */
-    .poster-wrap{
-      padding:12px;
-    }
+    /* Poster */
+    .poster-wrap{ padding:12px; }
     .poster-title{
       font-size:13px;
       color:var(--muted);
@@ -102,6 +110,7 @@
       background:var(--panel);
     }
 
+    /* Audio */
     .audio-card{
       display:flex;
       align-items:center;
@@ -117,7 +126,6 @@
     }
     .audio-card:active{cursor:grabbing}
 
-    /* Large red play button */
     #playBtn{
       appearance:none;
       background:#e53935;
@@ -129,57 +137,38 @@
       border-radius:12px;
       cursor:pointer;
       box-shadow:0 6px 16px rgba(229,57,53,0.35);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      flex: 0 0 auto;
+      transition: transform .2s ease, box-shadow .2s ease;
     }
-    #playBtn:hover{ box-shadow:0 8px 22px rgba(229,57,53,0.45); }
-    #playBtn:active{ transform: scale(0.97); }
+    #playBtn:hover{ box-shadow:0 8px 22px rgba(229,57,53,.45); }
+    #playBtn:active{ transform:scale(.97); }
     #playBtn:focus{
       outline:2px solid rgba(124,199,255,.6);
       outline-offset:2px;
     }
 
-    /* Seek/progress bar (click OR drag to seek) */
     #seek{
-      flex: 1 1 260px;
-      min-width: 160px;
-      height: 6px;
-      accent-color: #e53935;
-      cursor: pointer;
+      flex:1 1 260px;
+      min-width:160px;
+      height:6px;
+      accent-color:#e53935;
+      cursor:pointer;
     }
-    #seek:disabled{
-      cursor: not-allowed;
-      opacity: .6;
-    }
-
-    /* Wobble animation */
-    @keyframes play-wobble {
-      0%   { transform: rotate(0deg); }
-      15%  { transform: rotate(-3deg); }
-      30%  { transform: rotate(3deg); }
-      45%  { transform: rotate(-2deg); }
-      60%  { transform: rotate(2deg); }
-      75%  { transform: rotate(-1deg); }
-      100% { transform: rotate(0deg); }
-    }
-    .play-wobble{ animation: play-wobble 0.6s ease-in-out; }
+    #seek:disabled{ cursor:not-allowed; opacity:.6; }
 
     .metrics{
-      font-variant-numeric: tabular-nums;
+      font-variant-numeric:tabular-nums;
       color:var(--muted);
       font-size:12px;
       min-width:140px;
       text-align:right;
-      flex: 0 0 auto;
     }
 
     .audio-meta{
       display:flex;
       flex-direction:column;
       gap:2px;
-      flex: 0 0 auto;
-      min-width: 120px;
-      max-width: 160px;
+      min-width:120px;
+      max-width:160px;
     }
     .audio-meta .label{
       color:var(--muted);
@@ -189,14 +178,31 @@
     .audio-meta a{
       color:var(--link);
       font-size:12px;
-      line-height:1.1;
       text-decoration:none;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
-      max-width:160px;
     }
     .audio-meta a:hover{ text-decoration:underline; }
+
+    /* PDF secondary scrollbar */
+    .panel.pdf-panel{
+      overflow:visible;
+      display:flex;
+      flex-direction:column;
+    }
+    .pdf-scroll{
+      height:calc(100vh - 190px);
+      min-height:640px;
+      overflow-y:auto;
+      overflow-x:hidden;
+    }
+    .pdf-scroll iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      background:var(--panel);
+    }
 
     .footer-left{
       color:var(--muted);
@@ -211,241 +217,134 @@
       flex-wrap:wrap;
       justify-content:flex-end;
     }
+
     a{color:var(--link); text-decoration:none}
     a:hover{text-decoration:underline}
 
-    @media (max-width: 820px){
+    @media (max-width:820px){
       .bar{flex-direction:column; align-items:flex-start}
       .right{min-width:unset; width:100%; justify-content:space-between}
       .metrics{text-align:left}
       .audio-card{width:100%; max-width:100%}
       main{padding:10px}
-      .panel iframe{ height: 70vh; min-height: 520px; }
-      .audio-meta{max-width:unset; min-width:unset}
-      .audio-meta a{max-width:unset}
+      .pdf-scroll{height:70vh; min-height:520px}
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="bar">
+<header>
+  <div class="bar">
+    <div class="title-wrap">
       <div class="title">CVE Keeper</div>
+      <a
+        class="subtitle"
+        href="https://github.com/keerthanap8898/CveToad"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        CveToad
+      </a>
+    </div>
 
-      <div class="right">
-        <div id="audioCard" class="audio-card" title="Drag to reposition">
-          <button id="playBtn" type="button">Play</button>
-          <audio id="audio" preload="metadata" controls style="display:none">
-            <source src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/Audio_CVEkeeper.mp3" type="audio/mpeg">
-          </audio>
+    <div class="right">
+      <div id="audioCard" class="audio-card">
+        <button id="playBtn" type="button">Play</button>
+        <audio id="audio" preload="metadata" style="display:none">
+          <source src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/Audio_CVEkeeper.mp3" type="audio/mpeg">
+        </audio>
 
-          <div class="audio-meta">
-            <div class="label">Audio: CVE Keeper</div>
-            <a
-              href="https://drive.google.com/file/d/1dMqkAuhqUnD5cqcnMaQBtGmGgBXhJIOJ/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Open audio in Google Drive"
-            >Google Drive</a>
-          </div>
-
-          <input
-            id="seek"
-            type="range"
-            min="0"
-            max="100"
-            value="0"
-            step="0.1"
-            aria-label="Seek audio"
-            disabled
-          >
-
-          <div id="metrics" class="metrics">00:00 / 00:00</div>
+        <div class="audio-meta">
+          <div class="label">Audio: CVE Keeper</div>
+          <a
+            href="https://drive.google.com/file/d/1dMqkAuhqUnD5cqcnMaQBtGmGgBXhJIOJ/view"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Google Drive</a>
         </div>
+
+        <input id="seek" type="range" min="0" max="100" value="0" step="0.1" disabled>
+        <div id="metrics" class="metrics">00:00 / 00:00</div>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main>
-    <div class="doc-stack">
-      <!-- PDF first -->
-      <div class="panel">
+<main>
+  <div class="doc-stack">
+    <div class="panel pdf-panel">
+      <div class="pdf-scroll">
         <iframe
           title="CVE Keeper Document"
           src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://raw.githubusercontent.com/keerthanap8898/CveToad/main/CVEkeeper_CVEtoad_final.pdf">
         </iframe>
       </div>
-
-      <!-- Poster image at the end -->
-      <div class="panel poster-wrap">
-        <p class="poster-title">Poster</p>
-        <img
-          class="poster-img"
-          alt="CVE Keeper Poster"
-          src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/CVEkeeper_Poster.png">
-      </div>
     </div>
-  </main>
 
-  <footer>
-    <div class="bar">
-      <div class="footer-left">
-        Copyright (C) 2025&nbsp; Keerthana Purushotham &lt;keep.consult@proton.me&gt;.<br/>
-        Licensed under the GNU AGPL v3. See LICENSE for details.
-      </div>
-      <div class="footer-right">
-        <a href="https://github.com/keerthanap8898" target="_blank" rel="noopener noreferrer">Github</a>
-        <a href="https://linkedin.com/in/keerthanapurushotham" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://infosec.exchange/@keepur" target="_blank" rel="me noopener noreferrer">Mastodon (Infosec)</a>
-      </div>
+    <div class="panel poster-wrap">
+      <p class="poster-title">Poster</p>
+      <img
+        class="poster-img"
+        loading="lazy"
+        alt="CVE Keeper Poster"
+        src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/CVEkeeper_Poster.png">
     </div>
-  </footer>
+  </div>
+</main>
 
-  <script>
-    const audio = document.getElementById('audio');
-    const playBtn = document.getElementById('playBtn');
-    const metrics = document.getElementById('metrics');
-    const seek = document.getElementById('seek');
+<footer>
+  <div class="bar">
+    <div class="footer-left">
+      Copyright (C) 2025 Keerthana Purushotham &lt;keep.consult@proton.me&gt;.<br>
+      Licensed under the GNU AGPL v3.
+    </div>
+    <div class="footer-right">
+      <a href="https://github.com/keerthanap8898" target="_blank" rel="noopener noreferrer">Github</a>
+      <a href="https://linkedin.com/in/keerthanapurushotham" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://infosec.exchange/@keepur" target="_blank" rel="me noopener noreferrer">Mastodon</a>
+    </div>
+  </div>
+</footer>
 
-    function fmt(t){
-      if (!isFinite(t)) return "00:00";
-      const m = Math.floor(t / 60);
-      const s = Math.floor(t % 60);
-      return String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
-    }
+<script>
+  const audio = document.getElementById('audio');
+  const playBtn = document.getElementById('playBtn');
+  const metrics = document.getElementById('metrics');
+  const seek = document.getElementById('seek');
 
-    function updateMetrics(){
-      metrics.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
-    }
+  const fmt = t =>
+    !isFinite(t) ? "00:00" :
+    String(Math.floor(t/60)).padStart(2,'0') + ":" +
+    String(Math.floor(t%60)).padStart(2,'0');
 
-    let isSeeking = false;
+  const update = () =>
+    metrics.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
 
-    function syncSeek(){
-      if (!isFinite(audio.duration) || audio.duration <= 0) {
-        seek.value = 0;
-        seek.disabled = true;
-        return;
-      }
-      seek.disabled = false;
-      if (!isSeeking) {
-        seek.value = (audio.currentTime / audio.duration) * 100;
-      }
-    }
+  let seeking = false;
 
-    playBtn.addEventListener('click', async () => {
-      if (audio.paused) {
-        try { await audio.play(); } catch(e) {}
-      } else {
-        audio.pause();
-      }
-    });
+  playBtn.onclick = async () =>
+    audio.paused ? audio.play().catch(()=>{}) : audio.pause();
 
-    audio.addEventListener('play', () => playBtn.textContent = 'Pause');
-    audio.addEventListener('pause', () => playBtn.textContent = 'Play');
+  audio.onplay  = () => playBtn.textContent = "Pause";
+  audio.onpause = () => playBtn.textContent = "Play";
 
-    audio.addEventListener('timeupdate', () => {
-      updateMetrics();
-      syncSeek();
-    });
-    audio.addEventListener('loadedmetadata', () => {
-      updateMetrics();
-      syncSeek();
-    });
-    audio.addEventListener('durationchange', () => {
-      updateMetrics();
-      syncSeek();
-    });
+  audio.ontimeupdate = () => {
+    update();
+    if (!seeking && isFinite(audio.duration))
+      seek.value = audio.currentTime / audio.duration * 100;
+  };
 
-    // Seek bar: click OR drag to immediately move audio to that point
-    function seekToPercent(pct){
-      if (!isFinite(audio.duration) || audio.duration <= 0) return;
-      const clamped = Math.max(0, Math.min(100, pct));
-      audio.currentTime = (clamped / 100) * audio.duration;
-      updateMetrics();
-      syncSeek();
-    }
+  audio.onloadedmetadata = () => {
+    seek.disabled = !isFinite(audio.duration);
+    update();
+  };
 
-    // "input" fires continuously while dragging in modern browsers
-    seek.addEventListener('input', (e) => {
-      isSeeking = true;
-      seekToPercent(Number(e.target.value));
-    });
+  seek.oninput = e => {
+    seeking = true;
+    audio.currentTime = e.target.value / 100 * audio.duration;
+  };
+  seek.onchange = () => seeking = false;
+</script>
 
-    // ensure seeking ends cleanly on release
-    seek.addEventListener('change', () => { isSeeking = false; });
-    seek.addEventListener('pointerup', () => { isSeeking = false; });
-    seek.addEventListener('keyup', () => { isSeeking = false; });
-
-    // Autoplay after 3 seconds (may be blocked by browser policy if not interacted)
-    setTimeout(async () => {
-      try { await audio.play(); } catch(e) {}
-    }, 3000);
-
-    // Wobble play button every 3 seconds when paused
-    setInterval(() => {
-      if (audio.paused) {
-        playBtn.classList.remove('play-wobble');
-        void playBtn.offsetWidth;
-        playBtn.classList.add('play-wobble');
-      }
-    }, 3000);
-
-    // Click-and-drag audio card (reposition within viewport)
-    const card = document.getElementById('audioCard');
-    let dragging = false, startX = 0, startY = 0, origX = 0, origY = 0;
-
-    function ensurePositionable(){
-      if (getComputedStyle(card).position !== 'fixed') {
-        const rect = card.getBoundingClientRect();
-        card.style.position = 'fixed';
-        card.style.top = rect.top + 'px';
-        card.style.left = rect.left + 'px';
-        card.style.zIndex = 9999;
-      }
-    }
-
-    function onDown(e){
-      // allow interacting with play button, seek bar, and link without dragging
-      if (e.target && (e.target.id === 'playBtn' || e.target.id === 'seek' || e.target.tagName === 'A')) return;
-
-      dragging = true;
-      ensurePositionable();
-
-      const p = ('touches' in e) ? e.touches[0] : e;
-      startX = p.clientX;
-      startY = p.clientY;
-
-      const rect = card.getBoundingClientRect();
-      origX = rect.left;
-      origY = rect.top;
-
-      e.preventDefault();
-    }
-
-    function onMove(e){
-      if (!dragging) return;
-      const p = ('touches' in e) ? e.touches[0] : e;
-      const dx = p.clientX - startX;
-      const dy = p.clientY - startY;
-
-      const rect = card.getBoundingClientRect();
-      const w = rect.width, h = rect.height;
-      const x = Math.min(Math.max(origX + dx, 8), window.innerWidth - w - 8);
-      const y = Math.min(Math.max(origY + dy, 8), window.innerHeight - h - 8);
-
-      card.style.left = x + 'px';
-      card.style.top  = y + 'px';
-    }
-
-    function onUp(){ dragging = false; }
-
-    card.addEventListener('mousedown', onDown);
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
-
-    card.addEventListener('touchstart', onDown, {passive:false});
-    window.addEventListener('touchmove', onMove, {passive:false});
-    window.addEventListener('touchend', onUp);
-  </script>
 </body>
 </html>
