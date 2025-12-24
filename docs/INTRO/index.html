@@ -52,7 +52,7 @@
       justify-content:flex-end;
     }
 
-    /* MAIN: allow scrolling content inside */
+    /* MAIN: scrollable content */
     main{
       flex:1;
       min-height:0;
@@ -60,7 +60,6 @@
       overflow:auto;
     }
 
-    /* Document panels stacked: PDF first, poster after */
     .doc-stack{
       display:flex;
       flex-direction:column;
@@ -76,7 +75,7 @@
       background:var(--panel);
     }
 
-    /* Give each embed a sane viewport; scroll main for the rest */
+    /* PDF viewport */
     .panel iframe{
       width:100%;
       border:0;
@@ -85,10 +84,22 @@
       min-height: 640px;
     }
 
-    /* Poster can be shorter than the PDF if you want */
-    .panel.poster iframe{
-      height: 820px;
-      min-height: 520px;
+    /* Poster area */
+    .poster-wrap{
+      padding:12px;
+    }
+    .poster-title{
+      font-size:13px;
+      color:var(--muted);
+      margin:0 0 10px 0;
+    }
+    .poster-img{
+      width:100%;
+      height:auto;
+      display:block;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:var(--panel);
     }
 
     .audio-card{
@@ -163,7 +174,6 @@
     a{color:var(--link); text-decoration:none}
     a:hover{text-decoration:underline}
 
-    /* responsive */
     @media (max-width: 820px){
       .bar{flex-direction:column; align-items:flex-start}
       .right{min-width:unset; width:100%; justify-content:space-between}
@@ -171,7 +181,6 @@
       .audio-card{width:100%}
       main{padding:10px}
       .panel iframe{ height: 70vh; min-height: 520px; }
-      .panel.poster iframe{ height: 60vh; min-height: 420px; }
     }
   </style>
 </head>
@@ -181,7 +190,6 @@
     <div class="bar">
       <div class="title">CVE Keeper</div>
 
-      <!-- Click-and-drag audio player -->
       <div class="right">
         <div id="audioCard" class="audio-card" title="Drag to reposition">
           <button id="playBtn" type="button">Play</button>
@@ -209,12 +217,13 @@
         </iframe>
       </div>
 
-      <!-- Poster at the end -->
-      <div class="panel poster">
-        <iframe
-          title="CVE Keeper Poster"
-          src="https://github.com/keerthanap8898/CveToad/blob/main/CVEkeeper_Poster.png">
-        </iframe>
+      <!-- Poster image at the end -->
+      <div class="panel poster-wrap">
+        <p class="poster-title">Poster</p>
+        <img
+          class="poster-img"
+          alt="CVE Keeper Poster"
+          src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/CVEkeeper_Poster.png">
       </div>
     </div>
   </main>
@@ -234,7 +243,6 @@
   </footer>
 
   <script>
-    // Audio controls + metrics
     const audio = document.getElementById('audio');
     const playBtn = document.getElementById('playBtn');
     const metrics = document.getElementById('metrics');
@@ -264,12 +272,10 @@
     audio.addEventListener('loadedmetadata', updateMetrics);
     audio.addEventListener('durationchange', updateMetrics);
 
-    // Autoplay after 3 seconds (may be blocked by browser policy if not interacted)
     setTimeout(async () => {
-      try { await audio.play(); } catch(e) { /* autoplay may be blocked */ }
+      try { await audio.play(); } catch(e) {}
     }, 3000);
 
-    // Wobble play button every 3 seconds when paused
     setInterval(() => {
       if (audio.paused) {
         playBtn.classList.remove('play-wobble');
@@ -278,7 +284,6 @@
       }
     }, 3000);
 
-    // Click-and-drag audio card (reposition within viewport)
     const card = document.getElementById('audioCard');
     let dragging = false, startX = 0, startY = 0, origX = 0, origY = 0;
 
@@ -294,7 +299,6 @@
 
     function onDown(e){
       if (e.target && (e.target.id === 'playBtn')) return;
-
       dragging = true;
       ensurePositionable();
 
