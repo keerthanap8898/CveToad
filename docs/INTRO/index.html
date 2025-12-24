@@ -113,7 +113,7 @@
       cursor:grab;
       user-select:none;
       touch-action:none;
-      max-width:720px;
+      max-width:760px;
     }
     .audio-card:active{cursor:grabbing}
 
@@ -139,10 +139,10 @@
       outline-offset:2px;
     }
 
-    /* Seek/progress bar */
+    /* Seek/progress bar (click OR drag to seek) */
     #seek{
-      flex: 1 1 220px;
-      min-width: 140px;
+      flex: 1 1 260px;
+      min-width: 160px;
       height: 6px;
       accent-color: #e53935;
       cursor: pointer;
@@ -173,6 +173,31 @@
       flex: 0 0 auto;
     }
 
+    .audio-meta{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      flex: 0 0 auto;
+      min-width: 120px;
+      max-width: 160px;
+    }
+    .audio-meta .label{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.1;
+    }
+    .audio-meta a{
+      color:var(--link);
+      font-size:12px;
+      line-height:1.1;
+      text-decoration:none;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:160px;
+    }
+    .audio-meta a:hover{ text-decoration:underline; }
+
     .footer-left{
       color:var(--muted);
       font-size:12px;
@@ -196,6 +221,8 @@
       .audio-card{width:100%; max-width:100%}
       main{padding:10px}
       .panel iframe{ height: 70vh; min-height: 520px; }
+      .audio-meta{max-width:unset; min-width:unset}
+      .audio-meta a{max-width:unset}
     }
   </style>
 </head>
@@ -212,8 +239,14 @@
             <source src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/Audio_CVEkeeper.mp3" type="audio/mpeg">
           </audio>
 
-          <div style="flex:0 0 auto; min-width:110px; color:var(--muted); font-size:12px;">
-            Audio:
+          <div class="audio-meta">
+            <div class="label">Audio: CVE Keeper</div>
+            <a
+              href="https://drive.google.com/file/d/1dMqkAuhqUnD5cqcnMaQBtGmGgBXhJIOJ/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Open audio in Google Drive"
+            >Google Drive</a>
           </div>
 
           <input
@@ -323,22 +356,25 @@
       syncSeek();
     });
 
-    // Seek bar interaction
-    seek.addEventListener('pointerdown', () => { isSeeking = true; });
-    seek.addEventListener('pointerup', (e) => {
-      isSeeking = false;
-      if (isFinite(audio.duration) && audio.duration > 0) {
-        const pct = Number(e.target.value) / 100;
-        audio.currentTime = pct * audio.duration;
-      }
-    });
+    // Seek bar: click OR drag to immediately move audio to that point
+    function seekToPercent(pct){
+      if (!isFinite(audio.duration) || audio.duration <= 0) return;
+      const clamped = Math.max(0, Math.min(100, pct));
+      audio.currentTime = (clamped / 100) * audio.duration;
+      updateMetrics();
+      syncSeek();
+    }
+
+    // "input" fires continuously while dragging in modern browsers
     seek.addEventListener('input', (e) => {
-      if (isFinite(audio.duration) && audio.duration > 0) {
-        const pct = Number(e.target.value) / 100;
-        audio.currentTime = pct * audio.duration;
-        updateMetrics();
-      }
+      isSeeking = true;
+      seekToPercent(Number(e.target.value));
     });
+
+    // ensure seeking ends cleanly on release
+    seek.addEventListener('change', () => { isSeeking = false; });
+    seek.addEventListener('pointerup', () => { isSeeking = false; });
+    seek.addEventListener('keyup', () => { isSeeking = false; });
 
     // Autoplay after 3 seconds (may be blocked by browser policy if not interacted)
     setTimeout(async () => {
@@ -369,8 +405,8 @@
     }
 
     function onDown(e){
-      // allow interacting with play button and seek bar without dragging
-      if (e.target && (e.target.id === 'playBtn' || e.target.id === 'seek')) return;
+      // allow interacting with play button, seek bar, and link without dragging
+      if (e.target && (e.target.id === 'playBtn' || e.target.id === 'seek' || e.target.tagName === 'A')) return;
 
       dragging = true;
       ensurePositionable();
