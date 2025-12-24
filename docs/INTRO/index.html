@@ -113,7 +113,7 @@
       cursor:grab;
       user-select:none;
       touch-action:none;
-      max-width:520px;
+      max-width:720px;
     }
     .audio-card:active{cursor:grabbing}
 
@@ -130,12 +130,26 @@
       cursor:pointer;
       box-shadow:0 6px 16px rgba(229,57,53,0.35);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      flex: 0 0 auto;
     }
     #playBtn:hover{ box-shadow:0 8px 22px rgba(229,57,53,0.45); }
     #playBtn:active{ transform: scale(0.97); }
     #playBtn:focus{
       outline:2px solid rgba(124,199,255,.6);
       outline-offset:2px;
+    }
+
+    /* Seek/progress bar */
+    #seek{
+      flex: 1 1 220px;
+      min-width: 140px;
+      height: 6px;
+      accent-color: #e53935;
+      cursor: pointer;
+    }
+    #seek:disabled{
+      cursor: not-allowed;
+      opacity: .6;
     }
 
     /* Wobble animation */
@@ -156,6 +170,7 @@
       font-size:12px;
       min-width:140px;
       text-align:right;
+      flex: 0 0 auto;
     }
 
     .footer-left{
@@ -178,7 +193,7 @@
       .bar{flex-direction:column; align-items:flex-start}
       .right{min-width:unset; width:100%; justify-content:space-between}
       .metrics{text-align:left}
-      .audio-card{width:100%}
+      .audio-card{width:100%; max-width:100%}
       main{padding:10px}
       .panel iframe{ height: 70vh; min-height: 520px; }
     }
@@ -197,9 +212,20 @@
             <source src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/Audio_CVEkeeper.mp3" type="audio/mpeg">
           </audio>
 
-          <div style="flex:1; min-width:120px; color:var(--muted); font-size:12px;">
-            Audio: CVE Keeper
+          <div style="flex:0 0 auto; min-width:110px; color:var(--muted); font-size:12px;">
+            Audio:
           </div>
+
+          <input
+            id="seek"
+            type="range"
+            min="0"
+            max="100"
+            value="0"
+            step="0.1"
+            aria-label="Seek audio"
+            disabled
+          >
 
           <div id="metrics" class="metrics">00:00 / 00:00</div>
         </div>
@@ -246,6 +272,7 @@
     const audio = document.getElementById('audio');
     const playBtn = document.getElementById('playBtn');
     const metrics = document.getElementById('metrics');
+    const seek = document.getElementById('seek');
 
     function fmt(t){
       if (!isFinite(t)) return "00:00";
@@ -258,6 +285,20 @@
       metrics.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
     }
 
+    let isSeeking = false;
+
+    function syncSeek(){
+      if (!isFinite(audio.duration) || audio.duration <= 0) {
+        seek.value = 0;
+        seek.disabled = true;
+        return;
+      }
+      seek.disabled = false;
+      if (!isSeeking) {
+        seek.value = (audio.currentTime / audio.duration) * 100;
+      }
+    }
+
     playBtn.addEventListener('click', async () => {
       if (audio.paused) {
         try { await audio.play(); } catch(e) {}
@@ -268,14 +309,43 @@
 
     audio.addEventListener('play', () => playBtn.textContent = 'Pause');
     audio.addEventListener('pause', () => playBtn.textContent = 'Play');
-    audio.addEventListener('timeupdate', updateMetrics);
-    audio.addEventListener('loadedmetadata', updateMetrics);
-    audio.addEventListener('durationchange', updateMetrics);
 
+    audio.addEventListener('timeupdate', () => {
+      updateMetrics();
+      syncSeek();
+    });
+    audio.addEventListener('loadedmetadata', () => {
+      updateMetrics();
+      syncSeek();
+    });
+    audio.addEventListener('durationchange', () => {
+      updateMetrics();
+      syncSeek();
+    });
+
+    // Seek bar interaction
+    seek.addEventListener('pointerdown', () => { isSeeking = true; });
+    seek.addEventListener('pointerup', (e) => {
+      isSeeking = false;
+      if (isFinite(audio.duration) && audio.duration > 0) {
+        const pct = Number(e.target.value) / 100;
+        audio.currentTime = pct * audio.duration;
+      }
+    });
+    seek.addEventListener('input', (e) => {
+      if (isFinite(audio.duration) && audio.duration > 0) {
+        const pct = Number(e.target.value) / 100;
+        audio.currentTime = pct * audio.duration;
+        updateMetrics();
+      }
+    });
+
+    // Autoplay after 3 seconds (may be blocked by browser policy if not interacted)
     setTimeout(async () => {
       try { await audio.play(); } catch(e) {}
     }, 3000);
 
+    // Wobble play button every 3 seconds when paused
     setInterval(() => {
       if (audio.paused) {
         playBtn.classList.remove('play-wobble');
@@ -284,6 +354,7 @@
       }
     }, 3000);
 
+    // Click-and-drag audio card (reposition within viewport)
     const card = document.getElementById('audioCard');
     let dragging = false, startX = 0, startY = 0, origX = 0, origY = 0;
 
@@ -298,7 +369,9 @@
     }
 
     function onDown(e){
-      if (e.target && (e.target.id === 'playBtn')) return;
+      // allow interacting with play button and seek bar without dragging
+      if (e.target && (e.target.id === 'playBtn' || e.target.id === 'seek')) return;
+
       dragging = true;
       ensurePositionable();
 
