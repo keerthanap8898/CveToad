@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="fediverse:creator" content="@keepur@infosec.exchange">
   <title>CVE Keeper</title>
+
   <style>
     :root{
       --bg:#0b0f14;
@@ -138,6 +139,7 @@
       cursor:pointer;
       box-shadow:0 6px 16px rgba(229,57,53,0.35);
       transition: transform .2s ease, box-shadow .2s ease;
+      flex:0 0 auto;
     }
     #playBtn:hover{ box-shadow:0 8px 22px rgba(229,57,53,.45); }
     #playBtn:active{ transform:scale(.97); }
@@ -161,12 +163,14 @@
       font-size:12px;
       min-width:140px;
       text-align:right;
+      flex:0 0 auto;
     }
 
     .audio-meta{
       display:flex;
       flex-direction:column;
       gap:2px;
+      flex:0 0 auto;
       min-width:120px;
       max-width:160px;
     }
@@ -185,7 +189,7 @@
     }
     .audio-meta a:hover{ text-decoration:underline; }
 
-    /* PDF secondary scrollbar */
+    /* PDF secondary scrollbar (true full-length, because pages are in DOM) */
     .panel.pdf-panel{
       overflow:visible;
       display:flex;
@@ -194,14 +198,42 @@
     .pdf-scroll{
       height:calc(100vh - 190px);
       min-height:640px;
-      overflow-y:auto;
-      overflow-x:hidden;
+      overflow:auto;      /* SECOND scrollbar */
+      padding:12px;
     }
-    .pdf-scroll iframe{
+
+    .pdf-status{
+      color:var(--muted);
+      font-size:13px;
+      margin:0 0 10px 0;
+    }
+
+    .pdf-pages{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .pdf-page{
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:rgba(11,15,20,.55);
+      padding:10px;
+    }
+
+    .pdf-page canvas{
       width:100%;
-      height:100%;
-      border:0;
+      height:auto;
+      display:block;
+      border-radius:8px;
       background:var(--panel);
+    }
+
+    .pdf-page .page-label{
+      margin:0 0 8px 2px;
+      font-size:12px;
+      color:var(--muted);
+      font-variant-numeric:tabular-nums;
     }
 
     .footer-left{
@@ -228,11 +260,13 @@
       .audio-card{width:100%; max-width:100%}
       main{padding:10px}
       .pdf-scroll{height:70vh; min-height:520px}
+      .audio-meta{max-width:unset; min-width:unset}
+      .audio-meta a{max-width:unset}
     }
   </style>
 </head>
-<body>
 
+<body>
 <header>
   <div class="bar">
     <div class="title-wrap">
@@ -242,14 +276,13 @@
         href="https://github.com/keerthanap8898/CveToad"
         target="_blank"
         rel="noopener noreferrer"
-      >
-        CveToad
-      </a>
+      >Repo : github.com/keerthanap8898/CveToad</a>
     </div>
 
     <div class="right">
-      <div id="audioCard" class="audio-card">
+      <div id="audioCard" class="audio-card" title="Drag to reposition">
         <button id="playBtn" type="button">Play</button>
+
         <audio id="audio" preload="metadata" style="display:none">
           <source src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/Audio_CVEkeeper.mp3" type="audio/mpeg">
         </audio>
@@ -257,13 +290,14 @@
         <div class="audio-meta">
           <div class="label">Audio: CVE Keeper</div>
           <a
-            href="https://drive.google.com/file/d/1dMqkAuhqUnD5cqcnMaQBtGmGgBXhJIOJ/view"
+            href="https://drive.google.com/file/d/1dMqkAuhqUnD5cqcnMaQBtGmGgBXhJIOJ/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
+            title="Open audio in Google Drive"
           >Google Drive</a>
         </div>
 
-        <input id="seek" type="range" min="0" max="100" value="0" step="0.1" disabled>
+        <input id="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek audio" disabled>
         <div id="metrics" class="metrics">00:00 / 00:00</div>
       </div>
     </div>
@@ -272,15 +306,16 @@
 
 <main>
   <div class="doc-stack">
+
+    <!-- PDF -->
     <div class="panel pdf-panel">
-      <div class="pdf-scroll">
-        <iframe
-          title="CVE Keeper Document"
-          src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://raw.githubusercontent.com/keerthanap8898/CveToad/main/CVEkeeper_CVEtoad_final.pdf">
-        </iframe>
+      <div class="pdf-scroll" id="pdfScroll">
+        <p class="pdf-status" id="pdfStatus">Loading PDF…</p>
+        <div class="pdf-pages" id="pdfPages"></div>
       </div>
     </div>
 
+    <!-- Poster -->
     <div class="panel poster-wrap">
       <p class="poster-title">Poster</p>
       <img
@@ -289,61 +324,242 @@
         alt="CVE Keeper Poster"
         src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/CVEkeeper_Poster.png">
     </div>
+
   </div>
 </main>
 
 <footer>
   <div class="bar">
     <div class="footer-left">
-      Copyright (C) 2025 Keerthana Purushotham &lt;keep.consult@proton.me&gt;.<br>
-      Licensed under the GNU AGPL v3.
+      Copyright (C) 2025&nbsp; Keerthana Purushotham &lt;keep.consult@proton.me&gt;.<br>
+      Licensed under the GNU AGPL v3. See LICENSE for details.
     </div>
     <div class="footer-right">
       <a href="https://github.com/keerthanap8898" target="_blank" rel="noopener noreferrer">Github</a>
       <a href="https://linkedin.com/in/keerthanapurushotham" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://infosec.exchange/@keepur" target="_blank" rel="me noopener noreferrer">Mastodon</a>
+      <a href="https://infosec.exchange/@keepur" target="_blank" rel="me noopener noreferrer">Mastodon (Infosec)</a>
     </div>
   </div>
 </footer>
 
 <script>
+  // Audio logic (unchanged)
   const audio = document.getElementById('audio');
   const playBtn = document.getElementById('playBtn');
   const metrics = document.getElementById('metrics');
   const seek = document.getElementById('seek');
 
-  const fmt = t =>
-    !isFinite(t) ? "00:00" :
-    String(Math.floor(t/60)).padStart(2,'0') + ":" +
-    String(Math.floor(t%60)).padStart(2,'0');
+  function fmt(t){
+    if (!isFinite(t)) return "00:00";
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60);
+    return String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+  }
 
-  const update = () =>
+  function updateMetrics(){
     metrics.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
+  }
 
-  let seeking = false;
+  let isSeeking = false;
 
-  playBtn.onclick = async () =>
-    audio.paused ? audio.play().catch(()=>{}) : audio.pause();
+  function syncSeek(){
+    if (!isFinite(audio.duration) || audio.duration <= 0) {
+      seek.value = 0;
+      seek.disabled = true;
+      return;
+    }
+    seek.disabled = false;
+    if (!isSeeking) {
+      seek.value = (audio.currentTime / audio.duration) * 100;
+    }
+  }
 
-  audio.onplay  = () => playBtn.textContent = "Pause";
-  audio.onpause = () => playBtn.textContent = "Play";
+  playBtn.addEventListener('click', async () => {
+    if (audio.paused) {
+      try { await audio.play(); } catch(e) {}
+    } else {
+      audio.pause();
+    }
+  });
 
-  audio.ontimeupdate = () => {
-    update();
-    if (!seeking && isFinite(audio.duration))
-      seek.value = audio.currentTime / audio.duration * 100;
-  };
+  audio.addEventListener('play', () => playBtn.textContent = 'Pause');
+  audio.addEventListener('pause', () => playBtn.textContent = 'Play');
 
-  audio.onloadedmetadata = () => {
-    seek.disabled = !isFinite(audio.duration);
-    update();
-  };
+  audio.addEventListener('timeupdate', () => {
+    updateMetrics();
+    syncSeek();
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    updateMetrics();
+    syncSeek();
+  });
+  audio.addEventListener('durationchange', () => {
+    updateMetrics();
+    syncSeek();
+  });
 
-  seek.oninput = e => {
-    seeking = true;
-    audio.currentTime = e.target.value / 100 * audio.duration;
-  };
-  seek.onchange = () => seeking = false;
+  function seekToPercent(pct){
+    if (!isFinite(audio.duration) || audio.duration <= 0) return;
+    const clamped = Math.max(0, Math.min(100, pct));
+    audio.currentTime = (clamped / 100) * audio.duration;
+    updateMetrics();
+    syncSeek();
+  }
+
+  seek.addEventListener('input', (e) => {
+    isSeeking = true;
+    seekToPercent(Number(e.target.value));
+  });
+
+  seek.addEventListener('change', () => { isSeeking = false; });
+  seek.addEventListener('pointerup', () => { isSeeking = false; });
+  seek.addEventListener('keyup', () => { isSeeking = false; });
+
+  setTimeout(async () => {
+    try { await audio.play(); } catch(e) {}
+  }, 3000);
+
+  setInterval(() => {
+    if (audio.paused) {
+      playBtn.classList.remove('play-wobble');
+      void playBtn.offsetWidth;
+      playBtn.classList.add('play-wobble');
+    }
+  }, 3000);
+
+  // Drag-to-reposition audio card (unchanged)
+  const card = document.getElementById('audioCard');
+  let dragging = false, startX = 0, startY = 0, origX = 0, origY = 0;
+
+  function ensurePositionable(){
+    if (getComputedStyle(card).position !== 'fixed') {
+      const rect = card.getBoundingClientRect();
+      card.style.position = 'fixed';
+      card.style.top = rect.top + 'px';
+      card.style.left = rect.left + 'px';
+      card.style.zIndex = 9999;
+    }
+  }
+
+  function onDown(e){
+    if (e.target && (e.target.id === 'playBtn' || e.target.id === 'seek' || e.target.tagName === 'A')) return;
+
+    dragging = true;
+    ensurePositionable();
+
+    const p = ('touches' in e) ? e.touches[0] : e;
+    startX = p.clientX;
+    startY = p.clientY;
+
+    const rect = card.getBoundingClientRect();
+    origX = rect.left;
+    origY = rect.top;
+
+    e.preventDefault();
+  }
+
+  function onMove(e){
+    if (!dragging) return;
+    const p = ('touches' in e) ? e.touches[0] : e;
+    const dx = p.clientX - startX;
+    const dy = p.clientY - startY;
+
+    const rect = card.getBoundingClientRect();
+    const w = rect.width, h = rect.height;
+    const x = Math.min(Math.max(origX + dx, 8), window.innerWidth - w - 8);
+    const y = Math.min(Math.max(origY + dy, 8), window.innerHeight - h - 8);
+
+    card.style.left = x + 'px';
+    card.style.top  = y + 'px';
+  }
+
+  function onUp(){ dragging = false; }
+
+  card.addEventListener('mousedown', onDown);
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onUp);
+
+  card.addEventListener('touchstart', onDown, {passive:false});
+  window.addEventListener('touchmove', onMove, {passive:false});
+  window.addEventListener('touchend', onUp);
+</script>
+
+<!-- PDF.js rendering (true full-length scroll) -->
+<script type="module">
+  import * as pdfjsLib from "https://unpkg.com/pdfjs-dist@5.4.449/build/pdf.min.mjs";
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://unpkg.com/pdfjs-dist@5.4.449/build/pdf.worker.min.mjs";
+
+  const PDF_URL =
+    "https://raw.githubusercontent.com/keerthanap8898/CveToad/main/CVEkeeper_CVEtoad_final.pdf";
+
+  const statusEl = document.getElementById("pdfStatus");
+  const pagesEl = document.getElementById("pdfPages");
+  const scrollEl = document.getElementById("pdfScroll");
+
+  function pageScaleToFit(page){
+    const base = page.getViewport({ scale: 1 });
+    const padding = 24; // pdf-scroll padding left+right approx
+    const target = Math.max(320, scrollEl.clientWidth - padding);
+    return target / base.width;
+  }
+
+  async function renderAll(){
+    pagesEl.innerHTML = "";
+    statusEl.textContent = "Loading PDF…";
+
+    const loadingTask = pdfjsLib.getDocument({ url: PDF_URL });
+    const pdf = await loadingTask.promise;
+
+    const total = pdf.numPages;
+    statusEl.textContent = `Rendering ${total} pages…`;
+
+    for (let i = 1; i <= total; i++){
+      const page = await pdf.getPage(i);
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "pdf-page";
+
+      const label = document.createElement("p");
+      label.className = "page-label";
+      label.textContent = `Page ${i} / ${total}`;
+      wrapper.appendChild(label);
+
+      const canvas = document.createElement("canvas");
+      wrapper.appendChild(canvas);
+      pagesEl.appendChild(wrapper);
+
+      const scale = pageScaleToFit(page);
+      const viewport = page.getViewport({ scale });
+
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.floor(viewport.width * dpr);
+      canvas.height = Math.floor(viewport.height * dpr);
+      canvas.style.width = `${Math.floor(viewport.width)}px`;
+      canvas.style.height = `${Math.floor(viewport.height)}px`;
+
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      await page.render({ canvasContext: ctx, viewport }).promise;
+    }
+
+    statusEl.textContent = "";
+  }
+
+  // Initial render
+  renderAll().catch(err => {
+    statusEl.textContent = "Failed to load PDF.";
+    console.error(err);
+  });
+
+  // Re-render on resize (debounced) so width stays correct
+  let t;
+  window.addEventListener("resize", () => {
+    clearTimeout(t);
+    t = setTimeout(() => renderAll().catch(console.error), 250);
+  });
 </script>
 
 </body>
