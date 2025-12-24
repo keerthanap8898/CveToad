@@ -148,6 +148,19 @@
       outline-offset:2px;
     }
 
+    /* Wobble animation for Play button */
+    @keyframes play-wobble {
+      0%   { transform: rotate(0deg); }
+      15%  { transform: rotate(-3deg); }
+      30%  { transform: rotate(3deg); }
+      45%  { transform: rotate(-2deg); }
+      60%  { transform: rotate(2deg); }
+      75%  { transform: rotate(-1deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .play-wobble{ animation: play-wobble 0.6s ease-in-out; }
+    #playBtn:hover{ animation: play-wobble 0.6s ease-in-out; }
+
     #seek{
       flex:1 1 260px;
       min-width:160px;
@@ -200,12 +213,47 @@
       min-height:640px;
       overflow:auto;      /* SECOND scrollbar */
       padding:12px;
+      position:relative;
     }
 
     .pdf-status{
       color:var(--muted);
       font-size:13px;
       margin:0 0 10px 0;
+    }
+
+    /* Zoom toolbar */
+    .pdf-toolbar{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(15,22,32,.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      margin: -12px -12px 12px -12px; /* match pdf-scroll padding */
+      padding: 10px 12px;
+    }
+    .zbtn{
+      appearance:none;
+      border:1px solid var(--border);
+      background: rgba(11,15,20,.6);
+      color: var(--text);
+      border-radius:10px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:700;
+      line-height:1;
+    }
+    .zbtn:hover{ border-color: rgba(124,199,255,.5); }
+    .zoom-readout{
+      margin-left:auto;
+      color: var(--muted);
+      font-size:12px;
+      font-variant-numeric: tabular-nums;
+      white-space:nowrap;
     }
 
     .pdf-pages{
@@ -262,6 +310,8 @@
       .pdf-scroll{height:70vh; min-height:520px}
       .audio-meta{max-width:unset; min-width:unset}
       .audio-meta a{max-width:unset}
+      .pdf-toolbar{ flex-wrap:wrap; }
+      .zoom-readout{ margin-left:0; }
     }
   </style>
 </head>
@@ -281,7 +331,7 @@
 
     <div class="right">
       <div id="audioCard" class="audio-card" title="Drag to reposition">
-        <button id="playBtn" type="button">Play</button>
+        <button id="playBtn" type="button" aria-pressed="false">Play</button>
 
         <audio id="audio" preload="metadata" style="display:none">
           <source src="https://raw.githubusercontent.com/keerthanap8898/CveToad/main/Audio_CVEkeeper.mp3" type="audio/mpeg">
@@ -311,6 +361,15 @@
     <div class="panel pdf-panel">
       <div class="pdf-scroll" id="pdfScroll">
         <p class="pdf-status" id="pdfStatus">Loading PDF…</p>
+
+        <div class="pdf-toolbar" role="toolbar" aria-label="PDF zoom controls">
+          <button class="zbtn" id="zoomOut" type="button" aria-label="Zoom out">−</button>
+          <button class="zbtn" id="zoomIn" type="button" aria-label="Zoom in">+</button>
+          <button class="zbtn" id="zoomReset" type="button">Reset</button>
+          <button class="zbtn" id="zoomFit" type="button">Fit width</button>
+          <div class="zoom-readout" id="zoomReadout">100%</div>
+        </div>
+
         <div class="pdf-pages" id="pdfPages"></div>
       </div>
     </div>
@@ -343,7 +402,7 @@
 </footer>
 
 <script>
-  // Audio logic (unchanged)
+  // Audio + header play wobble + draggable card
   const audio = document.getElementById('audio');
   const playBtn = document.getElementById('playBtn');
   const metrics = document.getElementById('metrics');
@@ -382,21 +441,18 @@
     }
   });
 
-  audio.addEventListener('play', () => playBtn.textContent = 'Pause');
-  audio.addEventListener('pause', () => playBtn.textContent = 'Play');
+  audio.addEventListener('play', () => {
+    playBtn.textContent = 'Pause';
+    playBtn.setAttribute('aria-pressed', 'true');
+  });
+  audio.addEventListener('pause', () => {
+    playBtn.textContent = 'Play';
+    playBtn.setAttribute('aria-pressed', 'false');
+  });
 
-  audio.addEventListener('timeupdate', () => {
-    updateMetrics();
-    syncSeek();
-  });
-  audio.addEventListener('loadedmetadata', () => {
-    updateMetrics();
-    syncSeek();
-  });
-  audio.addEventListener('durationchange', () => {
-    updateMetrics();
-    syncSeek();
-  });
+  audio.addEventListener('timeupdate', () => { updateMetrics(); syncSeek(); });
+  audio.addEventListener('loadedmetadata', () => { updateMetrics(); syncSeek(); });
+  audio.addEventListener('durationchange', () => { updateMetrics(); syncSeek(); });
 
   function seekToPercent(pct){
     if (!isFinite(audio.duration) || audio.duration <= 0) return;
@@ -415,10 +471,12 @@
   seek.addEventListener('pointerup', () => { isSeeking = false; });
   seek.addEventListener('keyup', () => { isSeeking = false; });
 
+  // Autoplay after 3 seconds (may be blocked by browser policy)
   setTimeout(async () => {
     try { await audio.play(); } catch(e) {}
   }, 3000);
 
+  // Wobble play button every 3 seconds when paused
   setInterval(() => {
     if (audio.paused) {
       playBtn.classList.remove('play-wobble');
@@ -427,7 +485,7 @@
     }
   }, 3000);
 
-  // Drag-to-reposition audio card (unchanged)
+  // Click-and-drag audio card (reposition within viewport)
   const card = document.getElementById('audioCard');
   let dragging = false, startX = 0, startY = 0, origX = 0, origY = 0;
 
@@ -484,7 +542,7 @@
   window.addEventListener('touchend', onUp);
 </script>
 
-<!-- PDF.js rendering (true full-length scroll) -->
+<!-- PDF.js rendering (true full-length scroll) + zoom controls -->
 <script type="module">
   import * as pdfjsLib from "https://unpkg.com/pdfjs-dist@5.4.449/build/pdf.min.mjs";
 
@@ -498,25 +556,47 @@
   const pagesEl = document.getElementById("pdfPages");
   const scrollEl = document.getElementById("pdfScroll");
 
-  function pageScaleToFit(page){
+  const zoomOutBtn = document.getElementById("zoomOut");
+  const zoomInBtn = document.getElementById("zoomIn");
+  const zoomResetBtn = document.getElementById("zoomReset");
+  const zoomFitBtn = document.getElementById("zoomFit");
+  const zoomReadout = document.getElementById("zoomReadout");
+
+  let pdfDoc = null;
+  let zoom = 1; // 1 => 100% (fit-width baseline)
+  const ZOOM_MIN = 0.5;
+  const ZOOM_MAX = 3;
+  const ZOOM_STEP = 0.15;
+
+  function clamp(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
+  function setZoom(z){
+    zoom = clamp(z, ZOOM_MIN, ZOOM_MAX);
+    zoomReadout.textContent = `${Math.round(zoom * 100)}%`;
+  }
+
+  function fitWidthScale(page){
     const base = page.getViewport({ scale: 1 });
     const padding = 24; // pdf-scroll padding left+right approx
     const target = Math.max(320, scrollEl.clientWidth - padding);
     return target / base.width;
   }
 
-  async function renderAll(){
-    pagesEl.innerHTML = "";
+  async function loadPdf(){
     statusEl.textContent = "Loading PDF…";
-
     const loadingTask = pdfjsLib.getDocument({ url: PDF_URL });
-    const pdf = await loadingTask.promise;
+    pdfDoc = await loadingTask.promise;
+    statusEl.textContent = "";
+  }
 
-    const total = pdf.numPages;
+  async function renderAll(){
+    if (!pdfDoc) return;
+
+    pagesEl.innerHTML = "";
+    const total = pdfDoc.numPages;
     statusEl.textContent = `Rendering ${total} pages…`;
 
     for (let i = 1; i <= total; i++){
-      const page = await pdf.getPage(i);
+      const page = await pdfDoc.getPage(i);
 
       const wrapper = document.createElement("div");
       wrapper.className = "pdf-page";
@@ -530,7 +610,7 @@
       wrapper.appendChild(canvas);
       pagesEl.appendChild(wrapper);
 
-      const scale = pageScaleToFit(page);
+      const scale = fitWidthScale(page) * zoom;
       const viewport = page.getViewport({ scale });
 
       const dpr = window.devicePixelRatio || 1;
@@ -548,11 +628,49 @@
     statusEl.textContent = "";
   }
 
-  // Initial render
-  renderAll().catch(err => {
-    statusEl.textContent = "Failed to load PDF.";
-    console.error(err);
+  // Zoom button handlers
+  zoomInBtn.addEventListener("click", () => {
+    setZoom(zoom + ZOOM_STEP);
+    renderAll().catch(console.error);
   });
+
+  zoomOutBtn.addEventListener("click", () => {
+    setZoom(zoom - ZOOM_STEP);
+    renderAll().catch(console.error);
+  });
+
+  zoomResetBtn.addEventListener("click", () => {
+    setZoom(1);
+    renderAll().catch(console.error);
+  });
+
+  zoomFitBtn.addEventListener("click", () => {
+    // In this model, "fit width" is baseline zoom=1 because fitWidthScale() already fits.
+    setZoom(1);
+    renderAll().catch(console.error);
+  });
+
+  // Ctrl/Cmd + wheel zoom inside PDF area
+  scrollEl.addEventListener("wheel", (e) => {
+    const isZoomGesture = e.ctrlKey || e.metaKey;
+    if (!isZoomGesture) return;
+    e.preventDefault();
+    const dir = Math.sign(e.deltaY);
+    setZoom(zoom + (dir > 0 ? -ZOOM_STEP : ZOOM_STEP));
+    renderAll().catch(console.error);
+  }, { passive:false });
+
+  // Initial load + render
+  (async () => {
+    try{
+      setZoom(1);
+      await loadPdf();
+      await renderAll();
+    } catch(err){
+      statusEl.textContent = "Failed to load PDF.";
+      console.error(err);
+    }
+  })();
 
   // Re-render on resize (debounced) so width stays correct
   let t;
