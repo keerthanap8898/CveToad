@@ -1,4 +1,7 @@
-TO-DO: add prior known sources, create super-set schemas, universal pkg-tree in merkle-DAG format, Remediation sources, SIG Forums and sources, Well-know exploit Blogs, relevant books, relevant papers, relevant course material, relevant youtube videos, relevant tutorials, relevant social media articles, etc. idk lol.
+***TO-DO***: 
+> *Add prior known sources, create super-set schemas, universal pkg-tree in merkle-DAG format, Remediation sources, SIG Forums and sources, Well-know exploit Blogs, books, papers, course material, youtube videos, tutorials, social media articles, etc. idk lol.*
+
+---
 
 # CveToad Vulnerability Management Source Inventory
 
