@@ -14,38 +14,33 @@
 >   [*see license*](https://github.com/keerthanap8898/CveToad/blob/main/LICENSE)
 
 #### Note:
-> *Some vendor/security pages change URLs over time, so treat this as a high-coverage baseline rather than a mathematically exhaustive list of every possible vulnerability source.*
+> - *Some vendor/security pages change URLs over time, so treat this as a high-coverage baseline rather than a mathematically exhaustive list of every possible vulnerability source.*
+> - *Key access assumptions were checked against official/public docs where feasible: NVD is free with stricter unauthenticated rate limits & higher limits with an API key; GitHub Advisory Database is free/open-source for global advisories; CISA KEV is public; FIRST EPSS is freely available via CSV/API.*
+> - *Access / Cost labels are best-effort. Many sources are free to read but may require authentication, registration, support entitlement, API keys, paid tiers, or commercial licenses for higher-volume automation, advanced APIs, or complete data. Recheck terms before production ingestion.*
 
 ---
-Key access assumptions were checked against official/public docs where feasible: NVD is free with stricter unauthenticated rate limits & higher limits with an API key; GitHub Advisory Database is free/open-source for global advisories; CISA KEV is public; FIRST EPSS is freely available via CSV/API.  ￼
 
-# CveToad Vulnerability Management Source Inventory
-A consolidated super-set vulnerability-management source inventory for assessing impact, severity, exploitability, exposure, affectedness, prioritization, & remediation of vulnerabilities in technical systems.
-Current draft path:
-[github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md)
-> Access / Cost labels are best-effort. Many sources are free to read but may require authentication, registration, support entitlement, API keys, paid tiers, or commercial licenses for higher-volume automation, advanced APIs, or complete data. Recheck terms before production ingestion.
----
 ## Index
-- **[0. Corrections & normalization notes](#0-corrections--normalization-notes)**
-- **[1. Canonical vulnerability identifiers, CVE records & schemas](#1-canonical-vulnerability-identifiers-cve-records--schemas)**
+- **[0. `Corrections & normalization notes`](#0-corrections--normalization-notes)**
+- **[1. `Canonical vulnerability identifiers, CVE records & schemas`](#1-canonical-vulnerability-identifiers-cve-records--schemas)**
   - [1.1 CVE Program - canonical CVE identity](#11-cve-program---canonical-cve-identity) - [ 7 items ]
   - [1.2 NVD - CVE enrichment, CPE matching, CVSS & configurations](#12-nvd---cve-enrichment-cpe-matching-cvss--configurations) - [ 8 items ]
   - [1.3 Optional CVE meta-mirrors / commercial-community enrichments](#13-optional-cve-meta-mirrors--commercial-community-enrichments) - [ 4 items ]
-- **[2. Open-source vulnerability databases & package advisory sources](#2-open-source-vulnerability-databases--package-advisory-sources)**
+- **[2. `Open-source vulnerability databases & package advisory sources`](#2-open-source-vulnerability-databases--package-advisory-sources)**
   - [2.1 OSV ecosystem](#21-osv-ecosystem) - [ 10 items ]
   - [2.2 GitHub Advisory Database](#22-github-advisory-database) - [ 20 items ]
   - [2.3 Language & package ecosystem advisory databases](#23-language--package-ecosystem-advisory-databases) - [ 33 items ]
-- **[3. Exploitation, prioritization, severity & risk scoring](#3-exploitation-prioritization-severity--risk-scoring)**
+- **[3. `Exploitation, prioritization, severity & risk scoring`](#3-exploitation-prioritization-severity--risk-scoring)**
   - [3.1 Known exploited vulnerability sources](#31-known-exploited-vulnerability-sources) - [ 9 items ]
   - [3.2 Exploit prediction & scoring](#32-exploit-prediction--scoring) - [ 8 items ]
   - [3.3 Decision-support frameworks](#33-decision-support-frameworks) - [ 6 items ]
   - [3.4 Public exploit / proof-of-concept / weaponization signals](#34-public-exploit--proof-of-concept--weaponization-signals) - [ 18 items ]
-- **[4. CWE, CAPEC, ATT&CK, ATLAS & weakness-to-attack mapping](#4-cwe-capec-attck-atlas--weakness-to-attack-mapping)**
+- **[4. `CWE, CAPEC, ATT&CK, ATLAS & weakness-to-attack mapping`](#4-cwe-capec-attck-atlas--weakness-to-attack-mapping)**
   - [4.1 CWE - Common Weakness Enumeration](#41-cwe---common-weakness-enumeration) - [ 10 items ]
   - [4.2 CAPEC - attack patterns](#42-capec---attack-patterns) - [ 5 items ]
   - [4.3 MITRE ATT&CK](#43-mitre-attck) - [ 8 items ]
   - [4.4 AI/ML-specific adversary frameworks](#44-aiml-specific-adversary-frameworks) - [ 14 items ]
-- **[5. Vendor, OS, distribution, container & package affectedness feeds](#5-vendor-os-distribution-container--package-affectedness-feeds)**
+- **[5. `Vendor, OS, distribution, container & package affectedness feeds`](#5-vendor-os-distribution-container--package-affectedness-feeds)**
   - [5.1 Scanner-oriented aggregators & vulnerability DB builders](#51-scanner-oriented-aggregators--vulnerability-db-builders) - [ 18 items ]
   - [5.2 Red Hat / RHEL / CentOS Stream](#52-red-hat--rhel--centos-stream) - [ 7 items ]
   - [5.3 Debian](#53-debian) - [ 6 items ]
@@ -56,39 +51,39 @@ Current draft path:
   - [5.8 Amazon Linux](#58-amazon-linux) - [ 4 items ]
   - [5.9 Fedora, AlmaLinux, Rocky, Arch, Gentoo](#59-fedora-almalinux-rocky-arch-gentoo) - [ 9 items ]
   - [5.10 Wolfi / Chainguard](#510-wolfi--chainguard) - [ 7 items ]
-- **[6. Vendor advisories for enterprise impact assessment](#6-vendor-advisories-for-enterprise-impact-assessment)**
+- **[6. `Vendor advisories for enterprise impact assessment`](#6-vendor-advisories-for-enterprise-impact-assessment)**
   - [6.1 Major OS, browser & platform vendors](#61-major-os-browser--platform-vendors) - [ 15 items ]
   - [6.2 Enterprise infrastructure vendors](#62-enterprise-infrastructure-vendors) - [ 27 items ]
   - [6.3 Cloud provider security bulletins](#63-cloud-provider-security-bulletins) - [ 8 items ]
-- **[7. SBOM, package identity, VEX & advisory exchange standards](#7-sbom-package-identity-vex--advisory-exchange-standards)**
+- **[7. `SBOM, package identity, VEX & advisory exchange standards`](#7-sbom-package-identity-vex--advisory-exchange-standards)**
   - [7.1 SBOM standards](#71-sbom-standards) - [ 9 items ]
   - [7.2 Package & software identity](#72-package--software-identity) - [ 7 items ]
   - [7.3 Advisory exchange, CSAF & VEX](#73-advisory-exchange-csaf--vex) - [ 9 items ]
-- **[8. Malicious package, supply-chain compromise & package reputation sources](#8-malicious-package-supply-chain-compromise--package-reputation-sources)**
+- **[8. `Malicious package, supply-chain compromise & package reputation sources`](#8-malicious-package-supply-chain-compromise--package-reputation-sources)**
   - [8.1 Malicious package databases](#81-malicious-package-databases) - [ 15 items ]
   - [8.2 Package reputation / dependency health](#82-package-reputation--dependency-health) - [ 9 items ]
-- **[9. Automated vulnerability detection, static analysis, dynamic analysis & research datasets](#9-automated-vulnerability-detection-static-analysis-dynamic-analysis--research-datasets)**
+- **[9. `Automated vulnerability detection, static analysis, dynamic analysis & research datasets`](#9-automated-vulnerability-detection-static-analysis-dynamic-analysis--research-datasets)**
   - [9.1 SAST / code query engines](#91-sast--code-query-engines) - [ 22 items ]
   - [9.2 DAST, IAST, fuzzing & dynamic test sources](#92-dast-iast-fuzzing--dynamic-test-sources) - [ 11 items ]
   - [9.3 Vulnerability-detection research datasets](#93-vulnerability-detection-research-datasets) - [ 15 items ]
-- **[10. ICS, OT, IoT, embedded & medical-device sources](#10-ics-ot-iot-embedded--medical-device-sources)**
+- **[10. `ICS, OT, IoT, embedded & medical-device sources`](#10-ics-ot-iot-embedded--medical-device-sources)**
   - [10.1 CISA ICS / medical](#101-cisa-ics--medical) - [ 5 items ]
   - [10.2 OT / ICS vendor advisories](#102-ot--ics-vendor-advisories) - [ 10 items ]
   - [10.3 IoT / embedded](#103-iot--embedded) - [ 5 items ]
-- **[11. Exposure, internet-facing asset & threat telemetry](#11-exposure-internet-facing-asset--threat-telemetry)**
+- **[11. `Exposure, internet-facing asset & threat telemetry`](#11-exposure-internet-facing-asset--threat-telemetry)**
   - [11.1 Internet exposure search engines](#111-internet-exposure-search-engines) - [ 10 items ]
   - [11.2 Scan/exploitation telemetry](#112-scanexploitation-telemetry) - [ 11 items ]
   - [11.3 Attack surface management context](#113-attack-surface-management-context) - [ 6 items ]
-- **[12. Threat intelligence, malware, ransomware & in-the-wild exploitation context](#12-threat-intelligence-malware-ransomware--in-the-wild-exploitation-context)**
+- **[12. `Threat intelligence, malware, ransomware & in-the-wild exploitation context`](#12-threat-intelligence-malware-ransomware--in-the-wild-exploitation-context)**
   - [12.1 Major threat research sources](#121-major-threat-research-sources) - [ 16 items ]
   - [12.2 Malware & IOC repositories](#122-malware--ioc-repositories) - [ 15 items ]
-- **[13. Compliance, baseline configuration & exposure severity standards](#13-compliance-baseline-configuration--exposure-severity-standards)**
+- **[13. `Compliance, baseline configuration & exposure severity standards`](#13-compliance-baseline-configuration--exposure-severity-standards)**
   - [13.1 Security configuration & benchmarks](#131-security-configuration--benchmarks) - [ 6 items ]
   - [13.2 Cloud configuration posture](#132-cloud-configuration-posture) - [ 8 items ]
-- **[14. Source-code, dependency, artifact & build-chain provenance](#14-source-code-dependency-artifact--build-chain-provenance)**
+- **[14. `Source-code, dependency, artifact & build-chain provenance`](#14-source-code-dependency-artifact--build-chain-provenance)**
   - [14.1 Source & artifact provenance](#141-source--artifact-provenance) - [ 7 items ]
   - [14.2 Dependency inventory & graphing](#142-dependency-inventory--graphing) - [ 10 items ]
-- **[15. Practical priority hierarchy for ingestion](#15-practical-priority-hierarchy-for-ingestion)**
+- **[15. `Practical priority hierarchy for ingestion`](#15-practical-priority-hierarchy-for-ingestion)**
   - [15.1 Tier 0 - identifiers & inventory](#151-tier-0---identifiers--inventory) - [ 4 items ]
   - [15.2 Tier 1 - canonical vulnerability records](#152-tier-1---canonical-vulnerability-records) - [ 7 items ]
   - [15.3 Tier 2 - package/ecosystem vulnerability records](#153-tier-2---packageecosystem-vulnerability-records) - [ 11 items ]
@@ -97,14 +92,16 @@ Current draft path:
   - [15.6 Tier 5 - exploitability & weaponization](#156-tier-5---exploitability--weaponization) - [ 10 items ]
   - [15.7 Tier 6 - weakness, attack-pattern & AI context](#157-tier-6---weakness-attack-pattern--ai-context) - [ 9 items ]
   - [15.8 Tier 7 - detection engineering & validation](#158-tier-7---detection-engineering--validation) - [ 9 items ]
-- **[16. Recommended canonical data model coverage](#16-recommended-canonical-data-model-coverage)**
+- **[16. `Recommended canonical data model coverage`](#16-recommended-canonical-data-model-coverage)**
   - [16.1 Vulnerability identity](#161-vulnerability-identity) - [ 9 items ]
   - [16.2 Affectedness](#162-affectedness) - [ 14 items ]
   - [16.3 Severity & exploitability](#163-severity--exploitability) - [ 16 items ]
   - [16.4 Environmental impact](#164-environmental-impact) - [ 14 items ]
   - [16.5 Detection & remediation](#165-detection--remediation) - [ 12 items ]
-- **[17. Minimal source set for production use](#17-minimal-source-set-for-production-use)**
-- **[18. Final structure for all vulnerability management sources & exposure listings](#18-final-structure-for-all-vulnerability-management-sources--exposure-listings)**
+- **[17. `Minimal source set for production use`](#17-minimal-source-set-for-production-use)**
+- **[18. `Final structure for all vulnerability management sources & exposure listings`](#18-final-structure-for-all-vulnerability-management-sources--exposure-listings)**
+
+
 ---
 ## 0. Corrections & normalization notes
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
