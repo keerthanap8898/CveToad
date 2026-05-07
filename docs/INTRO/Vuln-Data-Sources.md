@@ -1,5 +1,5 @@
 ***TO-DO***: 
-> *Add prior known sources, create super-set schemas, universal pkg-tree in merkle-DAG format, Remediation sources, SIG Forums and sources, Well-know exploit Blogs, books, papers, course material, youtube videos, tutorials, social media articles, etc. idk lol.*
+> *Add prior known(to myself) sources, package lists, pagure, env specifications, hardware specs, OS specific plug ins, Paywalls section/column, super-set schemas, universal pkg-tree in merkle-DAG format, Remediation sources, SIG Forums and sources, Well-know exploit Blogs, books, papers, course material, youtube videos, tutorials, social media articles, etc. idk lol.*
 
 ---
 
