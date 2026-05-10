@@ -1,0 +1,10 @@
+# 13.1 Security configuration & benchmarks
+
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CIS Benchmarks | [www.cisecurity.org/cis-benchmarks](https://www.cisecurity.org/cis-benchmarks) | Free with registration for many PDFs; commercial CIS tools/membership available | Secure configuration benchmarks. | Useful for environmental risk scoring & hardening validation. |
+| 2 | CIS Controls | [www.cisecurity.org/controls](https://www.cisecurity.org/controls) | Free public | Security control framework. | Useful for vulnerability management program alignment. |
+| 3 | NIST National Checklist Program | [ncp.nist.gov](https://ncp.nist.gov/) | Free public | Repository of security configuration checklists. | Useful for baseline configuration assessment. |
+| 4 | DISA STIGs | [public.cyber.mil/stigs](https://public.cyber.mil/stigs/) | Free public | Security Technical Implementation Guides. | Important for government/defense compliance. |
+| 5 | OpenSCAP | [www.open-scap.org](https://www.open-scap.org/) | Free / open-source | SCAP tooling for compliance scanning. | Useful for host-level configuration scanning. |
+| 6 | SCAP Security Guide | [github.com/ComplianceAsCode/content](https://github.com/ComplianceAsCode/content) | Free / open-source public GitHub repo | ComplianceAsCode content for SCAP profiles. | Useful for policy-as-code & baseline validation. |

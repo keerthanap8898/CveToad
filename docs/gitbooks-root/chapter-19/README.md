@@ -1,0 +1,28 @@
+# 17. Minimal source set for production use
+
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CVE List v5 | [github.com/CVEProject/cvelistV5](https://github.com/CVEProject/cvelistV5) | Free public GitHub repo | Canonical CVE records. | Start here for CVE identity. |
+| 2 | CVE schema | [github.com/CVEProject/cve-schema](https://github.com/CVEProject/cve-schema) | Free public GitHub repo | CVE schema validation. | Required for robust parsers. |
+| 3 | NVD CVE API | [nvd.nist.gov/developers/vulnerabilities](https://nvd.nist.gov/developers/vulnerabilities) | Free public; optional free API key for higher rate limits | CVSS/CPE/CWE enrichment. | Core product matching source. |
+| 4 | NVD CPE API | [nvd.nist.gov/developers/products](https://nvd.nist.gov/developers/products) | Free public; optional free API key for higher rate limits | Product/platform identity matching. | Combine with PURL. |
+| 5 | OSV full database | [google.github.io/osv.dev/data/#full-database-download](https://google.github.io/osv.dev/data/#full-database-download) | Free public | OSS package vulnerability database. | Local mirroring recommended. |
+| 6 | OSV schema | [ossf.github.io/osv-schema](https://ossf.github.io/osv-schema/) | Free public / open-source | OSS vulnerability record schema. | Needed for parsing affected ranges. |
+| 7 | GitHub Advisory Database repo | [github.com/github/advisory-database](https://github.com/github/advisory-database) | Free / open-source public GitHub repo | Raw GitHub advisory records. | Preserve GHSA aliases. |
+| 8 | CISA KEV JSON | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public feed | Known exploitation signal. | High-priority remediation driver. |
+| 9 | CISA Vulnrichment | [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment) | Free public GitHub repo | CISA ADP & SSVC enrichment. | Coverage varies. |
+| 10 | FIRST EPSS | [www.first.org/epss](https://www.first.org/epss/) | Free public data/API | Exploit likelihood prediction. | Store score date. |
+| 11 | CWE downloads | [cwe.mitre.org/data/downloads.html](https://cwe.mitre.org/data/downloads.html) | Free public downloads | Weakness taxonomy ingestion. | Useful for classification & grouping. |
+| 12 | CAPEC downloads | [capec.mitre.org/data/downloads.html](https://capec.mitre.org/data/downloads.html) | Free public downloads | Attack-pattern taxonomy ingestion. | Useful for weakness-to-attack mapping. |
+| 13 | ATT&CK STIX data | [github.com/mitre-attack/attack-stix-data](https://github.com/mitre-attack/attack-stix-data) | Free public GitHub repo | Machine-readable adversary techniques. | Useful for response/detection mapping. |
+| 14 | MITRE ATLAS | [atlas.mitre.org](https://atlas.mitre.org/) | Free public | AI/ML adversary framework. | Required for AI system risk mapping. |
+| 15 | CycloneDX | [cyclonedx.org/specification/overview](https://cyclonedx.org/specification/overview/) | Free / open standard | SBOM/vulnerability/VEX-capable standard. | Good for inventory ingestion. |
+| 16 | SPDX | [spdx.dev/specifications](https://spdx.dev/specifications/) | Free / open standard | SBOM & package metadata standard. | Common in compliance workflows. |
+| 17 | PURL | [github.com/package-url/purl-spec](https://github.com/package-url/purl-spec) | Free / open-source | Package identity. | Essential for package vulnerability matching. |
+| 18 | CSAF | [docs.oasis-open.org/csaf/csaf/v2.0/os/csaf-v2.0-os.html](https://docs.oasis-open.org/csaf/csaf/v2.0/os/csaf-v2.0-os.html) | Free / open standard | Structured security advisories. | Supports product status & VEX-like workflows. |
+| 19 | OpenVEX | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source | Affected/not-affected status communication. | Reduces false positives. |
+| 20 | Distro feeds | [access.redhat.com/security/data](https://access.redhat.com/security/data), [alas.aws.amazon.com](https://alas.aws.amazon.com/), [linux.oracle.com/security](https://linux.oracle.com/security/), [packages.cgr.dev/chainguard/security.json](https://packages.cgr.dev/chainguard/security.json), [packages.wolfi.dev/os/security.json](https://packages.wolfi.dev/os/security.json), [secdb.alpinelinux.org](https://secdb.alpinelinux.org/), [security-tracker.debian.org](https://security-tracker.debian.org/), [ubuntu.com/security/oval](https://ubuntu.com/security/oval), [www.suse.com/support/security/csaf](https://www.suse.com/support/security/csaf/) | Mostly free public; some vendor support/subscription details may apply | Distro-specific affectedness & patch status. | Required to avoid backport false positives. |
+| 21 | Exploit signal feeds | [docs.greynoise.io](https://docs.greynoise.io/), [github.com/rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework), [project-zero.issues.chromium.org](https://project-zero.issues.chromium.org/), [www.exploit-db.com](https://www.exploit-db.com/), [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/), [www.shadowserver.org](https://www.shadowserver.org/) | Mixed: free public, open-source, free tiers, paid plans, or registration-based access | Exploitability, weaponization, & exposure enrichment. | Use for prioritization, not canonical vulnerability identity. |
+> #### [*Back to **`Index`***](#index)
+---
+
