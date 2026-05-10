@@ -1,11 +1,8 @@
-# VulnKeepur GitBook
+# VulnKeepur
 
-This GitBook reorganizes the source inventory from `docs/INTRO/Vuln-Data-Sources.md` into chapter-based pages for easier navigation.
+Welcome to the VulnKeepur source-inventory GitBook.
 
-## Original Source
+Use the sidebar chapters to navigate by domain and drill down into section pages.
 
-- [Vuln-Data-Sources.md](../INTRO/Vuln-Data-Sources.md)
-
-## Quick Navigation
-
-Use the left sidebar (from `SUMMARY.md`) to browse chapters and sub-sections.
+- Source document: [docs/INTRO/Vuln-Data-Sources.md](../INTRO/Vuln-Data-Sources.md)
+- Book summary: [SUMMARY.md](SUMMARY.md)
