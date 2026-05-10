@@ -1,0 +1,15 @@
+# 8.2 Package reputation / dependency health
+
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | OpenSSF Scorecard | [github.com/ossf/scorecard](https://github.com/ossf/scorecard) | Free / open-source public GitHub repo | Scores open-source project security practices. | Useful as dependency risk signal, not vulnerability proof. |
+| 2 | OpenSSF Scorecard API | [api.securityscorecards.dev](https://api.securityscorecards.dev/) | Free public API subject to service limits | API for Scorecard results. | Use with timestamped results because scores change over time. |
+| 3 | OpenSSF Best Practices Badge | [www.bestpractices.dev](https://www.bestpractices.dev/) | Free public | Project best-practices badge program. | Useful project maturity signal, not vulnerability evidence. |
+| 4 | deps.dev | [deps.dev](https://deps.dev/) | Free public | Dependency metadata, transitive dependencies, security signals. | Useful for dependency graphing & package metadata. |
+| 5 | OpenSSF GUAC | [guac.sh](https://guac.sh/) | Free public / open-source project | Graph for software supply-chain metadata. | Useful for correlating SBOMs, attestations, vulnerabilities, & provenance. |
+| 6 | GUAC GitHub | [github.com/guacsec/guac](https://github.com/guacsec/guac) | Free / open-source public GitHub repo | GUAC implementation repository. | Reference architecture for supply-chain knowledge graphs. |
+| 7 | Sigstore | [www.sigstore.dev](https://www.sigstore.dev/) | Free / open-source public infrastructure | Signing & verification for software artifacts. | Helps assess provenance & tamper resistance. |
+| 8 | Rekor transparency log | [docs.sigstore.dev/logging/overview](https://docs.sigstore.dev/logging/overview/) | Free public docs / public transparency log | Transparency log for signed artifacts. | Useful for provenance verification & audit trails. |
+| 9 | SLSA framework | [slsa.dev](https://slsa.dev/) | Free / open standard | Supply-chain Levels for Software Artifacts. | Helps assess build integrity & supply-chain hardening. |
+> #### [*Back to **`Index`***](#index)
+---

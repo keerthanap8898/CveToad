@@ -1,0 +1,18 @@
+# 16.2 Affectedness
+
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Product name | [nvd.nist.gov/products/cpe](https://nvd.nist.gov/products/cpe) | Free public | Identifies vulnerable products. | Normalize against CPE/PURL/vendor data. |
+| 2 | Vendor | [www.cve.org](https://www.cve.org/) | Free public | Vendor/product attribution. | Vendor naming can differ across sources. |
+| 3 | CPE | [nvd.nist.gov/developers/products](https://nvd.nist.gov/developers/products) | Free public; optional free API key for higher rate limits | Product/platform matching. | Imprecise for many OSS packages. |
+| 4 | PURL | [github.com/package-url/purl-spec](https://github.com/package-url/purl-spec) | Free / open-source | Package identity. | Prefer for package ecosystem matching. |
+| 5 | Package ecosystem | [osv.dev/list](https://osv.dev/list) | Free public | Defines package namespace & version rules. | Version semantics are ecosystem-specific. |
+| 6 | Package name | [deps.dev](https://deps.dev/) | Free public | Dependency identity. | Normalize casing & namespace rules. |
+| 7 | Affected version range | [ossf.github.io/osv-schema](https://ossf.github.io/osv-schema/) | Free public / open-source | Expresses vulnerable versions. | Range interpretation must respect ecosystem semantics. |
+| 8 | Fixed version | [github.com/advisories](https://github.com/advisories), [osv.dev](https://osv.dev/) | Free public | Remediation target. | Distro fixed versions may differ due to backports. |
+| 9 | Introduced version / commit | [ossf.github.io/osv-schema](https://ossf.github.io/osv-schema/) | Free public / open-source | Determines when vulnerability entered codebase. | Not always available. |
+| 10 | Last affected version | [ossf.github.io/osv-schema](https://ossf.github.io/osv-schema/) | Free public / open-source | Helps determine affected version bounds. | Validate with vendor feeds. |
+| 11 | Backport status | [access.redhat.com/security/data](https://access.redhat.com/security/data), [security-tracker.debian.org](https://security-tracker.debian.org/), [ubuntu.com/security/cves](https://ubuntu.com/security/cves) | Mostly free public; some Red Hat support details may require subscription | Determines if a distro package is patched despite upstream version appearing vulnerable. | Essential for reducing false positives. |
+| 12 | VEX status | [github.com/openvex/spec](https://github.com/openvex/spec), [www.csaf.io](https://www.csaf.io/) | Free / open-source standards | Represents affected, not affected, fixed, or under investigation. | Preserve justification & author provenance. |
+| 13 | Justification for not affected | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source | Explains why a product is not affected. | Key for trust & auditability. |
+| 14 | Distro/package release channel | [packages.fedoraproject.org](https://packages.fedoraproject.org/), [pkgs.alpinelinux.org/packages](https://pkgs.alpinelinux.org/packages) | Free public | Tracks package release stream. | Channel differences can affect fix availability. |

@@ -1,0 +1,9 @@
+# 10.1 CISA ICS / medical
+
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CISA ICS Advisories | [www.cisa.gov/news-events/ics-advisories](https://www.cisa.gov/news-events/ics-advisories) | Free public | Industrial Control System advisories. | Critical for OT/ICS environments where patching constraints differ from IT. |
+| 2 | CISA ICS Medical Advisories | [www.cisa.gov/news-events/ics-medical-advisories](https://www.cisa.gov/news-events/ics-medical-advisories) | Free public | Medical device security advisories. | Impact includes patient safety, regulatory, & operational risk. |
+| 3 | CISA cybersecurity advisories | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories) | Free public | CISA cybersecurity advisory hub. | Broader than ICS; use for campaigns & emergent threats. |
+| 4 | ICS-CERT advisories archive | [www.cisa.gov/news-events/ics-advisories](https://www.cisa.gov/news-events/ics-advisories) | Free public | ICS-CERT advisory archive path. | Same URL as ICS advisories, preserved for historical naming. |
+| 5 | CISA ICS recommended practices | [www.cisa.gov/resources-tools/resources/ics-recommended-practices](https://www.cisa.gov/resources-tools/resources/ics-recommended-practices) | Free public | Recommended practices for ICS security. | Useful for mitigation where patching is delayed or impossible. |
