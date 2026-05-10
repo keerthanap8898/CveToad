@@ -1,0 +1,33 @@
+# 10. ICS, OT, IoT, embedded & medical-device sources
+
+### 10.1 CISA ICS / medical
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CISA ICS Advisories | [www.cisa.gov/news-events/ics-advisories](https://www.cisa.gov/news-events/ics-advisories) | Free public | Industrial Control System advisories. | Critical for OT/ICS environments where patching constraints differ from IT. |
+| 2 | CISA ICS Medical Advisories | [www.cisa.gov/news-events/ics-medical-advisories](https://www.cisa.gov/news-events/ics-medical-advisories) | Free public | Medical device security advisories. | Impact includes patient safety, regulatory, & operational risk. |
+| 3 | CISA cybersecurity advisories | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories) | Free public | CISA cybersecurity advisory hub. | Broader than ICS; use for campaigns & emergent threats. |
+| 4 | ICS-CERT advisories archive | [www.cisa.gov/news-events/ics-advisories](https://www.cisa.gov/news-events/ics-advisories) | Free public | ICS-CERT advisory archive path. | Same URL as ICS advisories, preserved for historical naming. |
+| 5 | CISA ICS recommended practices | [www.cisa.gov/resources-tools/resources/ics-recommended-practices](https://www.cisa.gov/resources-tools/resources/ics-recommended-practices) | Free public | Recommended practices for ICS security. | Useful for mitigation where patching is delayed or impossible. |
+### 10.2 OT / ICS vendor advisories
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Siemens ProductCERT | [cert-portal.siemens.com/productcert](https://cert-portal.siemens.com/productcert/) | Free public advisories; some support downloads may require entitlement | Siemens product security advisories. | Critical for industrial environments. |
+| 2 | Schneider Electric Security Notifications | [www.se.com/ww/en/work/support/cybersecurity/security-notifications.jsp](https://www.se.com/ww/en/work/support/cybersecurity/security-notifications.jsp) | Free public | Schneider Electric security notifications. | Product model & firmware version matter heavily. |
+| 3 | Rockwell Automation Security Advisories | [www.rockwellautomation.com/en-us/support/product/product-security-advisories.html](https://www.rockwellautomation.com/en-us/support/product/product-security-advisories.html) | Free public listing; support downloads may require entitlement | Rockwell Automation product advisories. | Operational constraints may affect remediation. |
+| 4 | Honeywell Product Security | [www.honeywell.com/us/en/product-security](https://www.honeywell.com/us/en/product-security) | Free public | Honeywell product security advisories. | Useful for OT product risk. |
+| 5 | Philips Product Security | [www.philips.com/a-w/security/security-advisories.html](https://www.philips.com/a-w/security/security-advisories.html) | Free public | Philips medical/product security advisories. | Patient safety & regulatory implications may affect severity assessment. |
+| 6 | GE Vernova Product Security | [www.gevernova.com/product-security](https://www.gevernova.com/product-security) | Free public | GE Vernova product security. | Important for energy/industrial systems. |
+| 7 | ABB Cyber Security Alerts | [global.abb/group/en/technology/cyber-security/alerts-and-notifications](https://global.abb/group/en/technology/cyber-security/alerts-and-notifications) | Free public | ABB cyber security alerts & notifications. | Product-specific affectedness matters. |
+| 8 | Yokogawa Security Advisories | [www.yokogawa.com/library/resources/white-papers/yokogawa-security-advisory-report-list](https://www.yokogawa.com/library/resources/white-papers/yokogawa-security-advisory-report-list/) | Free public | Yokogawa advisory report list. | Useful for OT control systems. |
+| 9 | Mitsubishi Electric PSIRT | [www.mitsubishielectric.com/en/psirt/vulnerability](https://www.mitsubishielectric.com/en/psirt/vulnerability/) | Free public | Mitsubishi Electric vulnerability advisories. | Important for industrial equipment & automation. |
+| 10 | Johnson Controls Product Security Advisories | [www.johnsoncontrols.com/cyber-solutions/security-advisories](https://www.johnsoncontrols.com/cyber-solutions/security-advisories) | Free public | Johnson Controls security advisories. | Relevant to building management & OT environments. |
+### 10.3 IoT / embedded
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CERT/CC Vulnerability Notes | [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Coordinated disclosure notes, often with embedded/IoT affected vendors. | Useful when many vendors share a vulnerable component. |
+| 2 | IoT Security Foundation | [www.iotsecurityfoundation.org](https://www.iotsecurityfoundation.org/) | Free public resources; membership options may exist | IoT security guidance & resources. | Not a vulnerability feed, but useful for control mapping. |
+| 3 | Firmware Analysis and Comparison Tool - FACT | [github.com/fkie-cad/FACT_core](https://github.com/fkie-cad/FACT_core) | Free / open-source public GitHub repo | Firmware analysis platform. | Useful for extracting components & embedded vuln detection. |
+| 4 | EMBA firmware analyzer | [github.com/e-m-b-a/emba](https://github.com/e-m-b-a/emba) | Free / open-source public GitHub repo | Firmware analyzer for embedded Linux/IoT. | Useful for SBOM-like extraction & vulnerability assessment. |
+| 5 | Binwalk | [github.com/ReFirmLabs/binwalk](https://github.com/ReFirmLabs/binwalk) | Free / open-source public GitHub repo | Firmware extraction & analysis tool. | Useful precursor for embedded component discovery. |
+> #### [*Back to **`Index`***](#index)
+---

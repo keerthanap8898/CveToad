@@ -1,0 +1,107 @@
+# 5. Vendor, OS, distribution, container & package affectedness feeds
+
+### 5.1 Scanner-oriented aggregators & vulnerability DB builders
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | NeuVector vul-dbgen | [github.com/neuvector/vul-dbgen](https://github.com/neuvector/vul-dbgen) | Free / open-source public GitHub repo | Vulnerability DB generation source originally flagged by this project. | Useful as a reference for aggregating distro/package vulnerability feeds. |
+| 2 | NeuVector vul-source | [github.com/neuvector/vul-source](https://github.com/neuvector/vul-source) | Free / open-source public GitHub repo | Vulnerability source data used by NeuVector workflows. | Review for source coverage & feed normalization logic. |
+| 3 | Aqua Trivy vulnerability docs | [trivy.dev/docs/latest/scanner/vulnerability](https://trivy.dev/docs/latest/scanner/vulnerability/) | Free public docs | Scanner behavior across OS packages, language packages, misconfig, Kubernetes, etc. | Useful for scanner semantics & supported target types. |
+| 4 | Trivy DB | [github.com/aquasecurity/trivy-db](https://github.com/aquasecurity/trivy-db) | Free / open-source public GitHub repo | Converts raw advisories into Trivy DB format. | Useful for ingestion architecture & feed normalization patterns. |
+| 5 | Trivy Java DB | [github.com/aquasecurity/trivy-java-db](https://github.com/aquasecurity/trivy-java-db) | Free / open-source public GitHub repo | Java-specific vulnerability database used by Trivy. | Useful for Maven/JAR matching. |
+| 6 | Trivy database configuration docs | [trivy.dev/docs/latest/configuration/db](https://trivy.dev/docs/latest/configuration/db/) | Free public docs | Documents Trivy DB artifacts & configuration. | Useful for operational scanner deployment. |
+| 7 | Anchore Grype | [github.com/anchore/grype](https://github.com/anchore/grype) | Free / open-source public GitHub repo | Vulnerability scanner for container images & filesystems. | Useful reference for SBOM-to-vuln matching. |
+| 8 | Anchore Grype DB | [github.com/anchore/grype-db](https://github.com/anchore/grype-db) | Free / open-source public GitHub repo | Builds Grype vulnerability database from upstream sources. | Useful for feed normalization & source coverage comparison. |
+| 9 | Anchore Syft | [github.com/anchore/syft](https://github.com/anchore/syft) | Free / open-source public GitHub repo | SBOM generation for scanning & exposure matching. | Pair with Grype for inventory-to-vulnerability workflow. |
+| 10 | Quay ClairCore | [github.com/quay/claircore](https://github.com/quay/claircore) | Free / open-source public GitHub repo | Clair vulnerability matching engine core. | Useful for container security ingestion patterns. |
+| 11 | Clair | [github.com/quay/clair](https://github.com/quay/clair) | Free / open-source public GitHub repo | Container vulnerability scanner. | Compare feed matching behavior with Trivy & Grype. |
+| 12 | VulnerableCode | [github.com/nexB/vulnerablecode](https://github.com/nexB/vulnerablecode) | Free / open-source public GitHub repo | Open vulnerability DB aggregator. | Useful for importer coverage & open-source ingestion architecture. |
+| 13 | VulnerableCode importer docs | [vulnerablecode.readthedocs.io/en/latest/importers_link.html](https://vulnerablecode.readthedocs.io/en/latest/importers_link.html) | Free public docs | Lists supported importer sources. | Good checklist for source coverage. |
+| 14 | Dependency-Track | [dependencytrack.org](https://dependencytrack.org/) | Free / open-source core project | SBOM-oriented vulnerability management platform. | Useful reference for BOM ingestion & component risk tracking. |
+| 15 | Dependency-Track data sources | [docs.dependencytrack.org/datasources/overview](https://docs.dependencytrack.org/datasources/overview/) | Free public docs | Documents Dependency-Track data sources. | Useful for comparing source prioritization. |
+| 16 | Dependency-Track GitHub Advisories datasource | [docs.dependencytrack.org/datasources/github-advisories](https://docs.dependencytrack.org/datasources/github-advisories/) | Free public docs | Mirrors GHSA via GitHub public GraphQL API. | Useful reference for GHSA ingestion. |
+| 17 | OpenVAS / Greenbone Community Feed | [www.greenbone.net/en/community-feed](https://www.greenbone.net/en/community-feed/) | Free community feed; commercial Greenbone feeds/products available | Network vulnerability test feed. | Useful for host/network exposure detection, not package-only matching. |
+| 18 | Wazuh vulnerability detector | [documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/index.html](https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/index.html) | Free public docs; Wazuh open-source, commercial support available | Endpoint vulnerability detection capability. | Useful for host-level package inventory & vuln matching behavior. |
+### 5.2 Red Hat / RHEL / CentOS Stream
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Red Hat Security Data | [access.redhat.com/security/data](https://access.redhat.com/security/data) | Free public data; some product details/support content may require subscription | Red Hat CSAF/VEX, OSV, OVAL, CVE data. | Essential for RHEL affectedness & backport-aware status. |
+| 2 | Red Hat Security Data API | [docs.redhat.com/en/documentation/red_hat_security_data_api/1.0/html-single/red_hat_security_data_api/index](https://docs.redhat.com/en/documentation/red_hat_security_data_api/1.0/html-single/red_hat_security_data_api/index) | Free public docs/API; support content may require subscription | API retrieves Red Hat CVE/advisory/security data. | Prefer API for automation; handle auth/rate constraints if applicable. |
+| 3 | Red Hat CVE database | [access.redhat.com/security/security-updates/#/cve](https://access.redhat.com/security/security-updates/#/cve) | Free public | Red Hat CVE lookup. | Human-facing; use data APIs for automation. |
+| 4 | Red Hat OVAL data | [www.redhat.com/security/data/oval](https://www.redhat.com/security/data/oval/) | Free public | OVAL definitions for vulnerability assessment. | Useful for scanner compatibility & package-state evaluation. |
+| 5 | Red Hat CSAF/VEX guidance | [redhatproductsecurity.github.io/security-data-guidelines/csaf-vex](https://redhatproductsecurity.github.io/security-data-guidelines/csaf-vex/) | Free public docs | Explains Red Hat CSAF/VEX & product/package semantics. | Important for correct interpretation of affected/not-affected states. |
+| 6 | Red Hat security advisories | [access.redhat.com/security/security-updates/#/security-advisories](https://access.redhat.com/security/security-updates/#/security-advisories) | Free public listing; some advisory/product support details may require subscription | Red Hat advisory listing. | Useful for patch/remediation references. |
+| 7 | CentOS Stream security tracker | [gitlab.com/redhat/centos-stream/rpms](https://gitlab.com/redhat/centos-stream/rpms) | Free public GitLab | CentOS Stream package source context. | Use carefully; package repo state differs from security advisory truth. |
+### 5.3 Debian
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Debian Security Tracker | [security-tracker.debian.org](https://security-tracker.debian.org/) | Free public | Debian-specific package vulnerability status. | Essential for Debian affectedness & backported patches. |
+| 2 | Debian Security Tracker JSON | [security-tracker.debian.org/tracker/data/json](https://security-tracker.debian.org/tracker/data/json) | Free public JSON | Machine-readable Debian vulnerability data. | Primary automation source for Debian. |
+| 3 | Debian Security Tracker source Git | [salsa.debian.org/security-tracker-team/security-tracker](https://salsa.debian.org/security-tracker-team/security-tracker) | Free / open-source public Git repo | Source repo for tracker data. | Useful for diffs, auditing, & local mirroring. |
+| 4 | Debian Security Information | [www.debian.org/security](https://www.debian.org/security/) | Free public | Debian security notices & process context. | Useful for advisory references & manual review. |
+| 5 | Debian Security Tracker docs | [security-team.debian.org/security_tracker.html](https://security-team.debian.org/security_tracker.html) | Free public docs | Explains Debian tracker semantics. | Important for interpreting statuses like fixed, vulnerable, ignored, or postponed. |
+| 6 | Debian OVAL | [www.debian.org/security/oval](https://www.debian.org/security/oval/) | Free public | OVAL data for Debian vulnerability assessment. | Useful for scanner integrations. |
+### 5.4 Ubuntu / Canonical
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Ubuntu Security Notices | [ubuntu.com/security/notices](https://ubuntu.com/security/notices) | Free public | Ubuntu security notices for fixed packages. | Useful for patch references & release-specific remediation. |
+| 2 | Ubuntu CVE reports | [ubuntu.com/security/cves](https://ubuntu.com/security/cves) | Free public | Ubuntu CVE tracking by package/release. | Important for Ubuntu affectedness & backport interpretation. |
+| 3 | Ubuntu OVAL | [ubuntu.com/security/oval](https://ubuntu.com/security/oval) | Free public | OVAL data for vulnerability assessment & patch status. | Useful for scanner compatibility. |
+| 4 | Ubuntu VEX data | [ubuntu.com/security/vex](https://ubuntu.com/security/vex) | Free public | Ubuntu VEX data. | Useful for affected/not-affected status & scanner false-positive reduction. |
+| 5 | Ubuntu VEX docs | [documentation.ubuntu.com/security/security-updates/vex](https://documentation.ubuntu.com/security/security-updates/vex/) | Free public docs | Ubuntu VEX source documentation. | Important for interpreting Canonical VEX publication model. |
+| 6 | Ubuntu Security Notices GitHub | [github.com/canonical/ubuntu-security-notices](https://github.com/canonical/ubuntu-security-notices) | Free public GitHub repo | USN/LSN JSON, OSV JSON, & OpenVEX JSON formats. | Strong automation source. Preserve format-specific semantics. |
+| 7 | Ubuntu Security Tracker Git | [git.launchpad.net/ubuntu-cve-tracker](https://git.launchpad.net/ubuntu-cve-tracker) | Free public Git repo | Ubuntu CVE tracker source. | Useful for local mirroring & historical diffing. |
+| 8 | Ubuntu security updates docs | [documentation.ubuntu.com/security/security-updates](https://documentation.ubuntu.com/security/security-updates/) | Free public docs | Ubuntu security update documentation. | Useful for process context & VEX/OVAL interpretation. |
+### 5.5 Alpine
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Alpine SecDB | [secdb.alpinelinux.org](https://secdb.alpinelinux.org/) | Free public | Current Alpine machine-readable security DB. | Primary Alpine ingestion source. |
+| 2 | Alpine Security Tracker | [security.alpinelinux.org](https://security.alpinelinux.org/) | Free public | Tracks Alpine security issues. | Useful for human review & status context. |
+| 3 | Alpine SecDB deprecated GitHub mirror | [github.com/alpinelinux/alpine-secdb](https://github.com/alpinelinux/alpine-secdb) | Free public GitHub repo; deprecated | Historical Alpine SecDB mirror. | Deprecated; do not rely on it for current ingestion. |
+| 4 | Alpine packages | [pkgs.alpinelinux.org/packages](https://pkgs.alpinelinux.org/packages) | Free public | Alpine package metadata. | Not a vulnerability DB, but helps resolve package names & versions. |
+### 5.6 SUSE / openSUSE
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | SUSE CSAF | [www.suse.com/support/security/csaf](https://www.suse.com/support/security/csaf/) | Free public | SUSE CSAF advisory data. | Good for vendor-asserted affectedness & remediation states. |
+| 2 | SUSE CVRF / OVAL security data | [www.suse.com/support/security/oval](https://www.suse.com/support/security/oval/) | Free public | SUSE OVAL/CVRF security data. | Useful for scanner compatibility & package-state evaluation. |
+| 3 | SUSE CVE pages | [www.suse.com/security/cve](https://www.suse.com/security/cve/) | Free public | SUSE CVE lookup. | Human-facing; use machine-readable feeds when available. |
+| 4 | SUSE Security Advisories | [www.suse.com/support/update/announcement](https://www.suse.com/support/update/announcement/) | Free public | SUSE security advisory listing. | Useful for remediation & patch references. |
+| 5 | openSUSE Security Announce | [lists.opensuse.org/archives/list/security-announce@lists.opensuse.org](https://lists.opensuse.org/archives/list/security-announce@lists.opensuse.org/) | Free public | openSUSE security announcement mailing list archive. | Useful for distro-specific disclosure context. |
+### 5.7 Oracle Linux
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Oracle Security Alerts & Critical Patch Updates | [www.oracle.com/security-alerts](https://www.oracle.com/security-alerts/) | Free public | Oracle CPU, Security Alerts, third-party bulletins, & CVE mappings. | Oracle products often require vendor advisory interpretation beyond NVD. |
+| 2 | Oracle Linux security data | [linux.oracle.com/security](https://linux.oracle.com/security/) | Free public | Oracle Linux security data. | Useful for Oracle Linux affectedness. |
+| 3 | Oracle Linux OVAL | [linux.oracle.com/security/oval](https://linux.oracle.com/security/oval/) | Free public | Oracle Linux OVAL definitions. | Useful for scanner compatibility. |
+| 4 | Oracle Linux errata | [linux.oracle.com/errata](https://linux.oracle.com/errata/) | Free public | Oracle Linux errata. | Use for patch mapping & fixed versions. |
+| 5 | Oracle Linux CVE search | [linux.oracle.com/cve](https://linux.oracle.com/cve/) | Free public | Oracle Linux CVE lookup. | Human lookup source; pair with OVAL/errata for automation. |
+### 5.8 Amazon Linux
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Amazon Linux Security Center | [alas.aws.amazon.com](https://alas.aws.amazon.com/) | Free public | Amazon Linux security advisory portal. | Important for Amazon Linux package affectedness. |
+| 2 | Amazon Linux 2 advisories | [alas.aws.amazon.com/alas2.html](https://alas.aws.amazon.com/alas2.html) | Free public | Amazon Linux 2 advisories. | Version-specific advisory stream. |
+| 3 | Amazon Linux 2023 advisories | [alas.aws.amazon.com/AL2023](https://alas.aws.amazon.com/AL2023/) | Free public | Amazon Linux 2023 advisories. | Keep AL2 & AL2023 separate because package baselines differ. |
+| 4 | AWS Security Bulletins | [aws.amazon.com/security/security-bulletins](https://aws.amazon.com/security/security-bulletins/) | Free public | AWS security bulletins for services & platforms. | Cloud-service affectedness may not map cleanly to package versions. |
+### 5.9 Fedora, AlmaLinux, Rocky, Arch, Gentoo
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Fedora security updates | [bodhi.fedoraproject.org/updates/?type=security](https://bodhi.fedoraproject.org/updates/?type=security) | Free public | Fedora security update advisories. | Useful for Fedora package remediation tracking. |
+| 2 | Fedora packages | [packages.fedoraproject.org](https://packages.fedoraproject.org/) | Free public | Fedora package metadata. | Not a vulnerability DB, but useful for package identity & version resolution. |
+| 3 | AlmaLinux Errata | [errata.almalinux.org](https://errata.almalinux.org/) | Free public | AlmaLinux errata & security advisories. | Useful for RHEL-compatible distro assessment. |
+| 4 | AlmaLinux OSV data | [github.com/AlmaLinux/osv-database](https://github.com/AlmaLinux/osv-database) | Free public GitHub repo | AlmaLinux OSV-formatted data. | Good for OSV-based pipelines. |
+| 5 | Rocky Linux security advisories | [errata.build.resf.org](https://errata.build.resf.org/) | Free public | Rocky Linux errata/security advisories. | Useful for RHEL-compatible distro assessment. |
+| 6 | Arch Linux Security Tracker | [security.archlinux.org](https://security.archlinux.org/) | Free public | Arch Linux security tracker. | Rolling-release semantics differ from fixed-release distros. |
+| 7 | Arch Linux security JSON | [security.archlinux.org/json](https://security.archlinux.org/json) | Free public JSON | Machine-readable Arch security data. | Useful for automation. |
+| 8 | Gentoo GLSA | [security.gentoo.org/glsa](https://security.gentoo.org/glsa/) | Free public | Gentoo Linux Security Advisories. | Useful for Gentoo package affectedness. |
+| 9 | Gentoo GLSA XML | [security.gentoo.org/glsa/feed.rss](https://security.gentoo.org/glsa/feed.rss) | Free public RSS/XML | Gentoo GLSA RSS/XML feed. | Useful for feed-based monitoring. |
+### 5.10 Wolfi / Chainguard
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Wolfi OS advisories | [github.com/wolfi-dev/advisories](https://github.com/wolfi-dev/advisories) | Free public GitHub repo | Wolfi OS advisory data. | Important for modern minimal container images. |
+| 2 | Wolfi SecDB generator | [github.com/wolfi-dev/secdb](https://github.com/wolfi-dev/secdb) | Free / open-source public GitHub repo | Generates Wolfi security DBs based on Alpine secdb format. | Useful for understanding feed generation semantics. |
+| 3 | Wolfi OS feed | [packages.wolfi.dev/os/security.json](https://packages.wolfi.dev/os/security.json) | Free public feed | Wolfi package security feed. | Use this for Wolfi base images. |
+| 4 | Chainguard Enterprise feed | [packages.cgr.dev/chainguard/security.json](https://packages.cgr.dev/chainguard/security.json) | Publicly reachable feed; may relate to commercial Chainguard product scope | Chainguard Enterprise package security feed. | Separate from Wolfi OS feed. Confirm entitlement/licensing before commercial redistribution. |
+| 5 | Chainguard security advisories docs | [edu.chainguard.dev/chainguard/chainguard-images/staying-secure/security-advisories/how-chainguard-issues](https://edu.chainguard.dev/chainguard/chainguard-images/staying-secure/security-advisories/how-chainguard-issues/) | Free public docs | Explains Chainguard advisory publication model. | Important for interpreting feed semantics & OSV/secdb transition. |
+| 6 | Wolfi vulnerabilities in OSV | [osv.dev/list?ecosystem=Wolfi](https://osv.dev/list?ecosystem=Wolfi) | Free public | Wolfi ecosystem records in OSV. | Good for OSV-aligned ingestion. |
+| 7 | Chainguard OSV advisory feed context | [www.chainguard.dev/unchained/chainguard-enhances-security-with-osv-advisory-feed](https://www.chainguard.dev/unchained/chainguard-enhances-security-with-osv-advisory-feed) | Free public blog | Context on Chainguard OSV advisory feed. | Blog/context source, not primary feed. |
+> #### [*Back to **`Index`***](#index)
+---
