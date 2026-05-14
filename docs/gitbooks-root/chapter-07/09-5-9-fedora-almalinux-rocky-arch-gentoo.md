@@ -1,13 +1,15 @@
 # 5.9 Fedora, AlmaLinux, Rocky, Arch, Gentoo
 
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | Fedora security updates | [bodhi.fedoraproject.org/updates/?type=security](https://bodhi.fedoraproject.org/updates/?type=security) | Free public | Fedora security update advisories. | Useful for Fedora package remediation tracking. |
-| 2 | Fedora packages | [packages.fedoraproject.org](https://packages.fedoraproject.org/) | Free public | Fedora package metadata. | Not a vulnerability DB, but useful for package identity & version resolution. |
-| 3 | AlmaLinux Errata | [errata.almalinux.org](https://errata.almalinux.org/) | Free public | AlmaLinux errata & security advisories. | Useful for RHEL-compatible distro assessment. |
-| 4 | AlmaLinux OSV data | [github.com/AlmaLinux/osv-database](https://github.com/AlmaLinux/osv-database) | Free public GitHub repo | AlmaLinux OSV-formatted data. | Good for OSV-based pipelines. |
-| 5 | Rocky Linux security advisories | [errata.build.resf.org](https://errata.build.resf.org/) | Free public | Rocky Linux errata/security advisories. | Useful for RHEL-compatible distro assessment. |
-| 6 | Arch Linux Security Tracker | [security.archlinux.org](https://security.archlinux.org/) | Free public | Arch Linux security tracker. | Rolling-release semantics differ from fixed-release distros. |
-| 7 | Arch Linux security JSON | [security.archlinux.org/json](https://security.archlinux.org/json) | Free public JSON | Machine-readable Arch security data. | Useful for automation. |
-| 8 | Gentoo GLSA | [security.gentoo.org/glsa](https://security.gentoo.org/glsa/) | Free public | Gentoo Linux Security Advisories. | Useful for Gentoo package affectedness. |
-| 9 | Gentoo GLSA XML | [security.gentoo.org/glsa/feed.rss](https://security.gentoo.org/glsa/feed.rss) | Free public RSS/XML | Gentoo GLSA RSS/XML feed. | Useful for feed-based monitoring. |
+| Sl. # | Title                           | Link(s)                                                                                                  | Access / Cost           | Relevance                               | Notes & POIs                                                                  |
+| ----: | ------------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------- | --------------------------------------- | ----------------------------------------------------------------------------- |
+|     1 | Fedora security updates         | [bodhi.fedoraproject.org/updates/?type=security](https://bodhi.fedoraproject.org/updates/?type=security) | Free public             | Fedora security update advisories.      | Useful for Fedora package remediation tracking.                               |
+|     2 | Fedora packages                 | [packages.fedoraproject.org](https://packages.fedoraproject.org/)                                        | Free public             | Fedora package metadata.                | Not a vulnerability DB, but useful for package identity & version resolution. |
+|     3 | AlmaLinux Errata                | [errata.almalinux.org](https://errata.almalinux.org/)                                                    | Free public             | AlmaLinux errata & security advisories. | Useful for RHEL-compatible distro assessment.                                 |
+|     4 | AlmaLinux OSV data              | [github.com/AlmaLinux/osv-database](https://github.com/AlmaLinux/osv-database)                           | Free public GitHub repo | AlmaLinux OSV-formatted data.           | Good for OSV-based pipelines.                                                 |
+|     5 | Rocky Linux security advisories | [errata.build.resf.org](https://errata.build.resf.org/)                                                  | Free public             | Rocky Linux errata/security advisories. | Useful for RHEL-compatible distro assessment.                                 |
+|     6 | Arch Linux Security Tracker     | [security.archlinux.org](https://security.archlinux.org/)                                                | Free public             | Arch Linux security tracker.            | Rolling-release semantics differ from fixed-release distros.                  |
+|     7 | Arch Linux security JSON        | [security.archlinux.org/json](https://security.archlinux.org/json)                                       | Free public JSON        | Machine-readable Arch security data.    | Useful for automation.                                                        |
+|     8 | Gentoo GLSA                     | [security.gentoo.org/glsa](https://security.gentoo.org/glsa/)                                            | Free public             | Gentoo Linux Security Advisories.       | Useful for Gentoo package affectedness.                                       |
+|     9 | Gentoo GLSA XML                 | [security.gentoo.org/glsa/feed.rss](https://security.gentoo.org/glsa/feed.rss)                           | Free public RSS/XML     | Gentoo GLSA RSS/XML feed.               | Useful for feed-based monitoring.                                             |
+
+> [_**Back to****&#x20;****`Index`**_](../)

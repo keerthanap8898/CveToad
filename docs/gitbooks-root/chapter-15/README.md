@@ -4,5 +4,17 @@ These are not vulnerability feeds, but they help assess impact, control failure,
 
 ## Sections
 
-- [13.1 Security configuration & benchmarks](01-13-1-security-configuration-benchmarks.md)
-- [13.2 Cloud configuration posture](02-13-2-cloud-configuration-posture.md)
+* [13.1 Security configuration & benchmarks](01-13-1-security-configuration-benchmarks.md)
+* [13.2 Cloud configuration posture](02-13-2-cloud-configuration-posture.md)
+
+
+
+
+
+
+
+
+
+
+
+> [_**Back to****&#x20;****`Index`**_](../)
