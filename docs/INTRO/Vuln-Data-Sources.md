@@ -1,121 +1,144 @@
-***TO-DO***: 
-> *Add prior known(to myself) sources, package lists, pagure, env specifications, hardware specs, OS specific plug ins, Paywalls section/column, super-set schemas, universal pkg-tree in merkle-DAG format, Remediation sources, SIG Forums and sources, Well-know exploit Blogs, books, papers, course material, youtube videos, tutorials, social media articles, etc. idk lol.*
-
----
-
 # CveToad Vulnerability Management Source Inventory
 
 #### A consolidated super-set vulnerability-management source inventory for assessing impact, severity, exploitability, exposure, affectedness, prioritization, & remediation of vulnerabilities in technical systems.
 
 
 ### `License`
->     Copyright Ⓒ 2025  Keerthana Purushotham <keep.consult@proton.me>.
->     Licensed under the GNU AGPL v3. See LICENSE for details.
->   [*see license*](https://github.com/keerthanap8898/CveToad/blob/main/LICENSE)
+>      Copyright Ⓒ 2025 Keerthana Purushotham <keep.consult@proton.me>.
+>      Licensed under the GNU AGPL v3. See LICENSE for details.
+> [*see license*](https://github.com/keerthanap8898/CveToad/blob/main/LICENSE)
 
 #### Note:
 > - *Some vendor/security pages change URLs over time, so treat this as a high-coverage baseline rather than a mathematically exhaustive list of every possible vulnerability source.*
 > - *Key access assumptions were checked against official/public docs where feasible: NVD is free with stricter unauthenticated rate limits & higher limits with an API key; GitHub Advisory Database is free/open-source for global advisories; CISA KEV is public; FIRST EPSS is freely available via CSV/API.*
 > - *Access / Cost labels are best-effort. Many sources are free to read but may require authentication, registration, support entitlement, API keys, paid tiers, or commercial licenses for higher-volume automation, advanced APIs, or complete data. Recheck terms before production ingestion.*
+> - *Link-checking note: treat 403, bot-blocked pages, JavaScript-heavy portals, vendor support portals, rate-limited APIs, & authentication-gated consoles as `restricted/manual-review`, not necessarily broken.*
 
 ---
 
+#### Lifecycle organization:
+> - **Chapter A** - CVE record intake, identity, schema & governance.
+> - **Chapter B** - CVE enrichment, exploitability, prioritization & data model.
+> - **Chapter C** - Weakness taxonomy, attack mapping & AI/ML vulnerability context.
+> - **Chapter D** - Affectedness truth across packages, OSes, vendors, cloud, ICS & products.
+> - **Chapter E** - Security supply-chain evidence, SBOM, VEX, provenance & malicious package risk.
+> - **Chapter F** - Detection, exposure, threat telemetry, validation & remediation operations.
+> - **Chapter G** - Governance, compliance, assurance, production baselines & final operating model.
+
+---
 ## Index
-- **[0. `Corrections & normalization notes`](#0-corrections--normalization-notes)**
-- **[1. `Canonical vulnerability identifiers, CVE records & schemas`](#1-canonical-vulnerability-identifiers-cve-records--schemas)**
-  - [1.1 CVE Program - canonical CVE identity](#11-cve-program---canonical-cve-identity) - [ 7 items ]
-  - [1.2 NVD - CVE enrichment, CPE matching, CVSS & configurations](#12-nvd---cve-enrichment-cpe-matching-cvss--configurations) - [ 8 items ]
-  - [1.3 Optional CVE meta-mirrors / commercial-community enrichments](#13-optional-cve-meta-mirrors--commercial-community-enrichments) - [ 4 items ]
-- **[2. `Open-source vulnerability databases & package advisory sources`](#2-open-source-vulnerability-databases--package-advisory-sources)**
-  - [2.1 OSV ecosystem](#21-osv-ecosystem) - [ 10 items ]
-  - [2.2 GitHub Advisory Database](#22-github-advisory-database) - [ 20 items ]
-  - [2.3 Language & package ecosystem advisory databases](#23-language--package-ecosystem-advisory-databases) - [ 33 items ]
-- **[3. `Exploitation, prioritization, severity & risk scoring`](#3-exploitation-prioritization-severity--risk-scoring)**
-  - [3.1 Known exploited vulnerability sources](#31-known-exploited-vulnerability-sources) - [ 9 items ]
-  - [3.2 Exploit prediction & scoring](#32-exploit-prediction--scoring) - [ 8 items ]
-  - [3.3 Decision-support frameworks](#33-decision-support-frameworks) - [ 6 items ]
-  - [3.4 Public exploit / proof-of-concept / weaponization signals](#34-public-exploit--proof-of-concept--weaponization-signals) - [ 18 items ]
-- **[4. `CWE, CAPEC, ATT&CK, ATLAS & weakness-to-attack mapping`](#4-cwe-capec-attck-atlas--weakness-to-attack-mapping)**
-  - [4.1 CWE - Common Weakness Enumeration](#41-cwe---common-weakness-enumeration) - [ 10 items ]
-  - [4.2 CAPEC - attack patterns](#42-capec---attack-patterns) - [ 5 items ]
-  - [4.3 MITRE ATT&CK](#43-mitre-attck) - [ 8 items ]
-  - [4.4 AI/ML-specific adversary frameworks](#44-aiml-specific-adversary-frameworks) - [ 14 items ]
-- **[5. `Vendor, OS, distribution, container & package affectedness feeds`](#5-vendor-os-distribution-container--package-affectedness-feeds)**
-  - [5.1 Scanner-oriented aggregators & vulnerability DB builders](#51-scanner-oriented-aggregators--vulnerability-db-builders) - [ 18 items ]
-  - [5.2 Red Hat / RHEL / CentOS Stream](#52-red-hat--rhel--centos-stream) - [ 7 items ]
-  - [5.3 Debian](#53-debian) - [ 6 items ]
-  - [5.4 Ubuntu / Canonical](#54-ubuntu--canonical) - [ 8 items ]
-  - [5.5 Alpine](#55-alpine) - [ 4 items ]
-  - [5.6 SUSE / openSUSE](#56-suse--opensuse) - [ 5 items ]
-  - [5.7 Oracle Linux](#57-oracle-linux) - [ 5 items ]
-  - [5.8 Amazon Linux](#58-amazon-linux) - [ 4 items ]
-  - [5.9 Fedora, AlmaLinux, Rocky, Arch, Gentoo](#59-fedora-almalinux-rocky-arch-gentoo) - [ 9 items ]
-  - [5.10 Wolfi / Chainguard](#510-wolfi--chainguard) - [ 7 items ]
-- **[6. `Vendor advisories for enterprise impact assessment`](#6-vendor-advisories-for-enterprise-impact-assessment)**
-  - [6.1 Major OS, browser & platform vendors](#61-major-os-browser--platform-vendors) - [ 15 items ]
-  - [6.2 Enterprise infrastructure vendors](#62-enterprise-infrastructure-vendors) - [ 27 items ]
-  - [6.3 Cloud provider security bulletins](#63-cloud-provider-security-bulletins) - [ 8 items ]
-- **[7. `SBOM, package identity, VEX & advisory exchange standards`](#7-sbom-package-identity-vex--advisory-exchange-standards)**
-  - [7.1 SBOM standards](#71-sbom-standards) - [ 9 items ]
-  - [7.2 Package & software identity](#72-package--software-identity) - [ 7 items ]
-  - [7.3 Advisory exchange, CSAF & VEX](#73-advisory-exchange-csaf--vex) - [ 9 items ]
-- **[8. `Malicious package, supply-chain compromise & package reputation sources`](#8-malicious-package-supply-chain-compromise--package-reputation-sources)**
-  - [8.1 Malicious package databases](#81-malicious-package-databases) - [ 15 items ]
-  - [8.2 Package reputation / dependency health](#82-package-reputation--dependency-health) - [ 9 items ]
-- **[9. `Automated vulnerability detection, static analysis, dynamic analysis & research datasets`](#9-automated-vulnerability-detection-static-analysis-dynamic-analysis--research-datasets)**
-  - [9.1 SAST / code query engines](#91-sast--code-query-engines) - [ 22 items ]
-  - [9.2 DAST, IAST, fuzzing & dynamic test sources](#92-dast-iast-fuzzing--dynamic-test-sources) - [ 11 items ]
-  - [9.3 Vulnerability-detection research datasets](#93-vulnerability-detection-research-datasets) - [ 15 items ]
-- **[10. `ICS, OT, IoT, embedded & medical-device sources`](#10-ics-ot-iot-embedded--medical-device-sources)**
-  - [10.1 CISA ICS / medical](#101-cisa-ics--medical) - [ 5 items ]
-  - [10.2 OT / ICS vendor advisories](#102-ot--ics-vendor-advisories) - [ 10 items ]
-  - [10.3 IoT / embedded](#103-iot--embedded) - [ 5 items ]
-- **[11. `Exposure, internet-facing asset & threat telemetry`](#11-exposure-internet-facing-asset--threat-telemetry)**
-  - [11.1 Internet exposure search engines](#111-internet-exposure-search-engines) - [ 10 items ]
-  - [11.2 Scan/exploitation telemetry](#112-scanexploitation-telemetry) - [ 11 items ]
-  - [11.3 Attack surface management context](#113-attack-surface-management-context) - [ 6 items ]
-- **[12. `Threat intelligence, malware, ransomware & in-the-wild exploitation context`](#12-threat-intelligence-malware-ransomware--in-the-wild-exploitation-context)**
-  - [12.1 Major threat research sources](#121-major-threat-research-sources) - [ 16 items ]
-  - [12.2 Malware & IOC repositories](#122-malware--ioc-repositories) - [ 15 items ]
-- **[13. `Compliance, baseline configuration & exposure severity standards`](#13-compliance-baseline-configuration--exposure-severity-standards)**
-  - [13.1 Security configuration & benchmarks](#131-security-configuration--benchmarks) - [ 6 items ]
-  - [13.2 Cloud configuration posture](#132-cloud-configuration-posture) - [ 8 items ]
-- **[14. `Source-code, dependency, artifact & build-chain provenance`](#14-source-code-dependency-artifact--build-chain-provenance)**
-  - [14.1 Source & artifact provenance](#141-source--artifact-provenance) - [ 7 items ]
-  - [14.2 Dependency inventory & graphing](#142-dependency-inventory--graphing) - [ 10 items ]
-- **[15. `Practical priority hierarchy for ingestion`](#15-practical-priority-hierarchy-for-ingestion)**
-  - [15.1 Tier 0 - identifiers & inventory](#151-tier-0---identifiers--inventory) - [ 4 items ]
-  - [15.2 Tier 1 - canonical vulnerability records](#152-tier-1---canonical-vulnerability-records) - [ 7 items ]
-  - [15.3 Tier 2 - package/ecosystem vulnerability records](#153-tier-2---packageecosystem-vulnerability-records) - [ 11 items ]
-  - [15.4 Tier 3 - affectedness, distro & vendor truth](#154-tier-3---affectedness-distro--vendor-truth) - [ 10 items ]
-  - [15.5 Tier 4 - severity & prioritization](#155-tier-4---severity--prioritization) - [ 8 items ]
-  - [15.6 Tier 5 - exploitability & weaponization](#156-tier-5---exploitability--weaponization) - [ 10 items ]
-  - [15.7 Tier 6 - weakness, attack-pattern & AI context](#157-tier-6---weakness-attack-pattern--ai-context) - [ 9 items ]
-  - [15.8 Tier 7 - detection engineering & validation](#158-tier-7---detection-engineering--validation) - [ 9 items ]
-- **[16. `Recommended canonical data model coverage`](#16-recommended-canonical-data-model-coverage)**
-  - [16.1 Vulnerability identity](#161-vulnerability-identity) - [ 9 items ]
-  - [16.2 Affectedness](#162-affectedness) - [ 14 items ]
-  - [16.3 Severity & exploitability](#163-severity--exploitability) - [ 16 items ]
-  - [16.4 Environmental impact](#164-environmental-impact) - [ 14 items ]
-  - [16.5 Detection & remediation](#165-detection--remediation) - [ 12 items ]
-- **[17. `Minimal source set for production use`](#17-minimal-source-set-for-production-use)**
-- **[18. `Final structure for all vulnerability management sources & exposure listings`](#18-final-structure-for-all-vulnerability-management-sources--exposure-listings)**
-
+- **[A. `CVE Record Intake, Identity, Schema & Program Governance`](#a-cve-record-intake-identity-schema-program-governance)**
+  - **[1. `Corrections & normalization notes`](#1-corrections-normalization-notes)**
+  - **[2. `Canonical vulnerability identifiers, CVE records & schemas`](#2-canonical-vulnerability-identifiers-cve-records-schemas)**
+    - [2.1 CVE Program - canonical CVE identity](#21-cve-program-canonical-cve-identity)
+    - [2.2 NVD - CVE enrichment, CPE matching, CVSS & configurations](#22-nvd-cve-enrichment-cpe-matching-cvss-configurations)
+    - [2.3 Optional CVE meta-mirrors / commercial-community enrichments](#23-optional-cve-meta-mirrors-commercial-community-enrichments)
+    - [2.4 CVE Program governance, project repos, working groups & SADP](#24-cve-program-governance-project-repos-working-groups-sadp)
+  - **[3. `CVE metadata analytical framework, user-story resources, papers & community governance`](#3-cve-metadata-analytical-framework-user-story-resources-papers-community-governance)**
+    - [3.1 CveToad CVE consumer/user-story resources](#31-cvetoad-cve-consumeruser-story-resources)
+    - [3.2 CVE/CWE working groups, SIGs & community lists](#32-cvecwe-working-groups-sigs-community-lists)
+    - [3.3 Papers, conference programs, talks, training & community material](#33-papers-conference-programs-talks-training-community-material)
+- **[B. `CVE Enrichment, Exploitability, Prioritization & Data Model`](#b-cve-enrichment-exploitability-prioritization-data-model)**
+  - **[4. `Exploitation, prioritization, severity & risk scoring`](#4-exploitation-prioritization-severity-risk-scoring)**
+    - [4.1 Known exploited vulnerability sources](#41-known-exploited-vulnerability-sources)
+    - [4.2 Exploit prediction & scoring](#42-exploit-prediction-scoring)
+    - [4.3 Decision-support frameworks](#43-decision-support-frameworks)
+    - [4.4 Public exploit / proof-of-concept / weaponization signals](#44-public-exploit-proof-of-concept-weaponization-signals)
+  - **[5. `Practical priority hierarchy for ingestion`](#5-practical-priority-hierarchy-for-ingestion)**
+    - [5.1 Tier 0 - identifiers & inventory](#51-tier-0-identifiers-inventory)
+    - [5.2 Tier 1 - canonical vulnerability records](#52-tier-1-canonical-vulnerability-records)
+    - [5.3 Tier 2 - package/ecosystem vulnerability records](#53-tier-2-packageecosystem-vulnerability-records)
+    - [5.4 Tier 3 - affectedness, distro & vendor truth](#54-tier-3-affectedness-distro-vendor-truth)
+    - [5.5 Tier 4 - severity & prioritization](#55-tier-4-severity-prioritization)
+    - [5.6 Tier 5 - exploitability & weaponization](#56-tier-5-exploitability-weaponization)
+    - [5.7 Tier 6 - weakness, attack-pattern & AI context](#57-tier-6-weakness-attack-pattern-ai-context)
+    - [5.8 Tier 7 - detection engineering & validation](#58-tier-7-detection-engineering-validation)
+  - **[6. `Recommended canonical data model coverage`](#6-recommended-canonical-data-model-coverage)**
+    - [6.1 Vulnerability identity](#61-vulnerability-identity)
+    - [6.2 Affectedness](#62-affectedness)
+    - [6.3 Severity & exploitability](#63-severity-exploitability)
+    - [6.4 Environmental impact](#64-environmental-impact)
+    - [6.5 Detection & remediation](#65-detection-remediation)
+- **[C. `Weakness Taxonomy, Attack Mapping & AI/ML Vulnerability Context`](#c-weakness-taxonomy-attack-mapping-aiml-vulnerability-context)**
+  - **[7. `CWE, CAPEC, ATT&CK, ATLAS & weakness-to-attack mapping`](#7-cwe-capec-attck-atlas-weakness-to-attack-mapping)**
+    - [7.1 CWE - Common Weakness Enumeration](#71-cwe-common-weakness-enumeration)
+    - [7.2 CAPEC - attack patterns](#72-capec-attack-patterns)
+    - [7.3 MITRE ATT&CK](#73-mitre-attck)
+    - [7.4 AI/ML-specific adversary frameworks](#74-aiml-specific-adversary-frameworks)
+- **[D. `Affectedness Truth: Package, OS, Vendor, Cloud, ICS & Product Advisories`](#d-affectedness-truth-package-os-vendor-cloud-ics-product-advisories)**
+  - **[8. `Open-source vulnerability databases & package advisory sources`](#8-open-source-vulnerability-databases-package-advisory-sources)**
+    - [8.1 OSV ecosystem](#81-osv-ecosystem)
+    - [8.2 GitHub Advisory Database](#82-github-advisory-database)
+    - [8.3 Language & package ecosystem advisory databases](#83-language-package-ecosystem-advisory-databases)
+  - **[9. `Vendor, OS, distribution, container & package affectedness feeds`](#9-vendor-os-distribution-container-package-affectedness-feeds)**
+    - [9.1 Scanner-oriented aggregators & vulnerability DB builders](#91-scanner-oriented-aggregators-vulnerability-db-builders)
+    - [9.2 Red Hat / RHEL / CentOS Stream](#92-red-hat-rhel-centos-stream)
+    - [9.3 Debian](#93-debian)
+    - [9.4 Ubuntu / Canonical](#94-ubuntu-canonical)
+    - [9.5 Alpine](#95-alpine)
+    - [9.6 SUSE / openSUSE](#96-suse-opensuse)
+    - [9.7 Oracle Linux](#97-oracle-linux)
+    - [9.8 Amazon Linux](#98-amazon-linux)
+    - [9.9 Fedora, AlmaLinux, Rocky, Arch, Gentoo](#99-fedora-almalinux-rocky-arch-gentoo)
+    - [9.10 Wolfi / Chainguard](#910-wolfi-chainguard)
+  - **[10. `Vendor advisories for enterprise impact assessment`](#10-vendor-advisories-for-enterprise-impact-assessment)**
+    - [10.1 Major OS, browser & platform vendors](#101-major-os-browser-platform-vendors)
+    - [10.2 Enterprise infrastructure vendors](#102-enterprise-infrastructure-vendors)
+    - [10.3 Cloud provider security bulletins](#103-cloud-provider-security-bulletins)
+  - **[11. `ICS, OT, IoT, embedded & medical-device sources`](#11-ics-ot-iot-embedded-medical-device-sources)**
+    - [11.1 CISA ICS / medical](#111-cisa-ics-medical)
+    - [11.2 OT / ICS vendor advisories](#112-ot-ics-vendor-advisories)
+    - [11.3 IoT / embedded](#113-iot-embedded)
+- **[E. `Security Supply Chain Evidence: SBOM, VEX, Provenance & Malicious Package Risk`](#e-security-supply-chain-evidence-sbom-vex-provenance-malicious-package-risk)**
+  - **[12. `SBOM, package identity, VEX & advisory exchange standards`](#12-sbom-package-identity-vex-advisory-exchange-standards)**
+    - [12.1 SBOM standards](#121-sbom-standards)
+    - [12.2 Package & software identity](#122-package-software-identity)
+    - [12.3 Advisory exchange, CSAF & VEX](#123-advisory-exchange-csaf-vex)
+  - **[13. `Malicious package, supply-chain compromise & package reputation sources`](#13-malicious-package-supply-chain-compromise-package-reputation-sources)**
+    - [13.1 Malicious package databases](#131-malicious-package-databases)
+    - [13.2 Package reputation / dependency health](#132-package-reputation-dependency-health)
+  - **[14. `Source-code, dependency, artifact & build-chain provenance`](#14-source-code-dependency-artifact-build-chain-provenance)**
+    - [14.1 Source & artifact provenance](#141-source-artifact-provenance)
+    - [14.2 Dependency inventory & graphing](#142-dependency-inventory-graphing)
+- **[F. `Detection, Exposure, Threat Telemetry, Validation & Remediation Operations`](#f-detection-exposure-threat-telemetry-validation-remediation-operations)**
+  - **[15. `Automated vulnerability detection, static analysis, dynamic analysis & research datasets`](#15-automated-vulnerability-detection-static-analysis-dynamic-analysis-research-datasets)**
+    - [15.1 SAST / code query engines](#151-sast-code-query-engines)
+    - [15.2 DAST, IAST, fuzzing & dynamic test sources](#152-dast-iast-fuzzing-dynamic-test-sources)
+    - [15.3 Vulnerability-detection research datasets](#153-vulnerability-detection-research-datasets)
+  - **[16. `Exposure, internet-facing asset & threat telemetry`](#16-exposure-internet-facing-asset-threat-telemetry)**
+    - [16.1 Internet exposure search engines](#161-internet-exposure-search-engines)
+    - [16.2 Scan/exploitation telemetry](#162-scanexploitation-telemetry)
+    - [16.3 Attack surface management context](#163-attack-surface-management-context)
+  - **[17. `Threat intelligence, malware, ransomware & in-the-wild exploitation context`](#17-threat-intelligence-malware-ransomware-in-the-wild-exploitation-context)**
+    - [17.1 Major threat research sources](#171-major-threat-research-sources)
+    - [17.2 Malware & IOC repositories](#172-malware-ioc-repositories)
+- **[G. `Governance, Compliance, Assurance, Production Baselines & Final Operating Model`](#g-governance-compliance-assurance-production-baselines-final-operating-model)**
+  - **[18. `Compliance, baseline configuration, software assurance & exposure severity standards`](#18-compliance-baseline-configuration-software-assurance-exposure-severity-standards)**
+    - [18.1 Security configuration & benchmarks](#181-security-configuration-benchmarks)
+    - [18.2 Cloud configuration posture](#182-cloud-configuration-posture)
+    - [18.3 Software assurance, secure development, acquisition & NIST publication libraries](#183-software-assurance-secure-development-acquisition-nist-publication-libraries)
+  - **[19. `Minimal source set for production use`](#19-minimal-source-set-for-production-use)**
+  - **[20. `Final structure for all vulnerability management sources & exposure listings`](#20-final-structure-for-all-vulnerability-management-sources-exposure-listings)**
 
 ---
-## 0. Corrections & normalization notes
+
+## A. CVE Record Intake, Identity, Schema & Program Governance
+
+### 1. Corrections & normalization notes
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
-| 1 | Project Zero issue tracker migration | [bugs.chromium.org/p/project-zero/issues/list](https://bugs.chromium.org/p/project-zero/issues/list), [project-zero.issues.chromium.org](https://project-zero.issues.chromium.org/) | Free public web access | Tracks high-quality vulnerability research, root-cause analysis, exploitability notes, & coordinated disclosure. Useful for exploitability context & historical vulnerability behavior. | Prefer the current tracker for ongoing lookups. Keep the old Monorail-style link for historical references that still appear in older writeups. |
+| 1 | Project Zero issue tracker migration | [bugs.chromium.org/p/project-zero/issues/list](https://bugs.chromium.org/p/project-zero/issues/list), [project-zero.issues.chromium.org/issues](https://project-zero.issues.chromium.org/issues) | Free public web access | Tracks high-quality vulnerability research, root-cause analysis, exploitability notes, & coordinated disclosure. Useful for exploitability context & historical vulnerability behavior. | Prefer the current tracker for ongoing lookups. Keep the old Monorail-style link for historical references that still appear in older writeups. |
 | 2 | Alpine SecDB mirror normalization | [github.com/alpinelinux/alpine-secdb](https://github.com/alpinelinux/alpine-secdb), [secdb.alpinelinux.org](https://secdb.alpinelinux.org/) | Free / open-source | Provides Alpine package vulnerability affectedness. Important for container images using Alpine as a base. | The GitHub mirror is deprecated. Use `secdb.alpinelinux.org` as the primary ingestion source. |
 | 3 | Wolfi / Chainguard feed split | [packages.cgr.dev/chainguard/security.json](https://packages.cgr.dev/chainguard/security.json), [packages.wolfi.dev/os/security.json](https://packages.wolfi.dev/os/security.json) | Free public feed for Wolfi; Chainguard feed may depend on product entitlement | Provides secdb-style security feeds for Wolfi & Chainguard images. Key for modern minimal container images. | The Wolfi feed & Chainguard Enterprise feed represent related but distinct package universes. Avoid treating them as exact duplicates. |
 | 4 | GitHub Advisory APIs | [docs.github.com/en/graphql/reference/objects#securityadvisory](https://docs.github.com/en/graphql/reference/objects#securityadvisory), [docs.github.com/en/rest/security-advisories](https://docs.github.com/en/rest/security-advisories), [docs.github.com/en/rest/security-advisories/global-advisories](https://docs.github.com/en/rest/security-advisories/global-advisories) | Free public global advisories; authenticated API / repository advisories may require GitHub account & permissions | Enables programmatic access to GitHub advisories, including GHSA records, CVE aliases, ecosystems, version ranges, & malware advisories. | Keep both GraphQL & REST. GraphQL is useful for complex queries; REST is simpler for ingestion & pagination. |
 | 5 | NVD feeds vs APIs | [nvd.nist.gov/developers](https://nvd.nist.gov/developers), [nvd.nist.gov/vuln/data-feeds](https://nvd.nist.gov/vuln/data-feeds) | Free public; optional free API key for higher rate limits | NVD provides CVE enrichment, CPE configurations, CVSS vectors, CWE mappings, references, & change metadata. | Prefer NVD 2.0 APIs for ongoing sync. Use bulk feeds for bootstrapping, archival snapshots, or local mirroring. |
+| 6 | Link-check allowlist / restricted-source policy | Vendor portals, support portals, API consoles, bot-blocked pages, JavaScript-heavy search pages | Not a data source | Avoids false “broken link” classifications in CI. | Treat `403`, bot-blocked, JS-only, rate-limited, auth-gated, & support-entitlement pages as `restricted/manual-review`, not automatically dead. |
 > #### [*Back to **`Index`***](#index)
 
 ---
-## 1. Canonical vulnerability identifiers, CVE records & schemas
-### 1.1 CVE Program - canonical CVE identity
+
+### 2. Canonical vulnerability identifiers, CVE records & schemas
+#### 2.1 CVE Program - canonical CVE identity
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | CVE.org | [www.cve.org](https://www.cve.org/) | Free public | Official CVE program portal for CVE IDs, CNA/ADP governance, CVE lookup, & program documentation. | Canonical governance source, but not always the richest technical source for scoring, affected versions, or exploitability. |
@@ -125,52 +148,422 @@
 | 5 | CVE Services API / CVE Program API | [cveawg.mitre.org/api-docs](https://cveawg.mitre.org/api-docs/) | Free public docs; API workflows may require role/account for CNA functions | Direct CVE lookup & CVE Services API documentation. Useful for targeted lookup workflows. | API usage may differ from GitHub mirror sync behavior. Use for lookup, not necessarily full mirroring. |
 | 6 | CVE Authorized Data Publishers - ADPs | [www.cve.org/ProgramOrganization/ADPs](https://www.cve.org/ProgramOrganization/ADPs) | Free public | Lists ADPs that can enrich CVE records beyond CNA-provided content. | ADP enrichment can add critical assessment context. Treat ADP data as enrichment layered on top of canonical CNA data. |
 | 7 | CISA Vulnrichment - CVE ADP enrichment | [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment) | Free / open-source public GitHub repo | Provides CISA ADP enrichment of CVE records, including SSVC decision points, & sometimes CWE/CVSS details. | Useful for prioritization. Coverage may not be universal across all CVEs. Track freshness & missing enrichment states. |
-### 1.2 NVD - CVE enrichment, CPE matching, CVSS & configurations
+#### 2.2 NVD - CVE enrichment, CPE matching, CVSS & configurations
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | NVD home | [nvd.nist.gov](https://nvd.nist.gov/) | Free public | U.S. government vulnerability-management repository. Provides vulnerability metadata, scoring, product mapping, & references. | NVD enrichment may lag behind CVE publication or vendor disclosures. Monitor modified dates. |
 | 2 | NVD CVE API 2.0 | [nvd.nist.gov/developers/vulnerabilities](https://nvd.nist.gov/developers/vulnerabilities) | Free public; optional free API key for higher rate limits | Retrieves CVEs with CVSS, weaknesses, references, CPE configurations, & change history. | Central for CPE-based product matching. Rate limits & API keys may affect ingestion design. |
+
 | 3 | NVD CPE API 2.0 | [nvd.nist.gov/developers/products](https://nvd.nist.gov/developers/products) | Free public; optional free API key for higher rate limits | Provides CPE dictionary & CPE match criteria for product/platform matching. | CPE can be imprecise for packages, forks, backports, & cloud services. Combine with PURL, OSV, & vendor feeds. |
 | 4 | NVD Data Feeds | [nvd.nist.gov/vuln/data-feeds](https://nvd.nist.gov/vuln/data-feeds) | Free public | Bulk JSON feeds for CVEs, CPE dictionary, & CPE match feeds. Useful for initial database bootstrapping. | APIs are generally preferred for ongoing updates. Feeds are useful for snapshots & offline ingestion. |
 | 5 | NVD CVSS resources | [nvd.nist.gov/vuln-metrics/cvss](https://nvd.nist.gov/vuln-metrics/cvss) | Free public | CVSS calculators, vector definitions, & severity scoring references. | CVSS is severity, not exploit likelihood. Combine with EPSS, KEV, exposure, & asset criticality. |
 | 6 | NVD CPE Dictionary | [nvd.nist.gov/products/cpe](https://nvd.nist.gov/products/cpe) | Free public | CPE product naming & matching basis. | CPE coverage & naming consistency vary. False positives are common without vendor/package-specific affectedness. |
 | 7 | NVD API documentation root | [nvd.nist.gov/developers](https://nvd.nist.gov/developers) | Free public | API family documentation for NVD data access. | Use this as the stable entry point for NVD API changes. |
 | 8 | NVD CVE Change History API | [nvd.nist.gov/developers/vulnerabilities](https://nvd.nist.gov/developers/vulnerabilities) | Free public; optional free API key for higher rate limits | Enables monitoring changes to CVE enrichment, scoring, references, & configurations. | Treat NVD records as mutable. Store ingestion timestamp, source modified timestamp, & prior versions where possible. |
-### 1.3 Optional CVE meta-mirrors / commercial-community enrichments
+#### 2.3 Optional CVE meta-mirrors / commercial-community enrichments
 These are useful as secondary sources, not canonical replacements.
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | VulnCheck NVD++ | [www.vulncheck.com/nvd2](https://www.vulncheck.com/nvd2) | Commercial; limited free/public info may exist | Aggregated vulnerability intelligence that can supplement CVE/NVD/KEV workflows. | Commercial/community enrichment. Validate terms, licensing, API access, & provenance before production use. |
 | 2 | Vulners | [vulners.com](https://vulners.com/) | Free web search; API/advanced features may require paid plan | Vulnerability intelligence aggregator across many advisory & exploit sources. | Useful for broad search & enrichment. Do not treat as canonical without source provenance. |
 | 3 | OpenCVE | [www.opencve.io](https://www.opencve.io/) | Free tier / paid plans | CVE monitoring, subscriptions, change tracking, & alerting workflows. | Useful for monitoring, but canonical ingestion should still pull from upstream CVE/NVD/vendor feeds. |
-| 4 | CIRCL CVE Search | [cve.circl.lu](https://cve.circl.lu/) | Free public | CVE search & enrichment source, historically useful for threat-intel workflows. | Validate freshness before relying on it. Prefer canonical sources for production scoring. |
-> #### [*Back to **`Index`***](#index)
----
-## 2. Open-source vulnerability databases & package advisory sources
-### 2.1 OSV ecosystem
+| 4 | CIRCL Vulnerability-Lookup / CVE Search | [cve.circl.lu](https://cve.circl.lu/) | Free public | CVE search & enrichment source, historically useful for threat-intel workflows. | Validate freshness before relying on it. Prefer canonical sources for production scoring. |
+| 5 | Vulnerability-Lookup GitHub repository | [github.com/vulnerability-lookup/vulnerability-lookup](https://github.com/vulnerability-lookup/vulnerability-lookup) | Free / open-source public GitHub repo | Correlates vulnerabilities from multiple sources independent of vulnerability IDs & supports coordinated vulnerability disclosure workflows. | Useful as a CVE/vulnerability correlation platform. Treat as a secondary aggregation/enrichment source, not canonical truth. |
+
+#### 2.4 CVE Program governance, project repos, working groups & SADP
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
-| 1 | OSV main site | [osv.dev](https://osv.dev/) | Free public / open data | Aggregates OSS vulnerabilities by package ecosystem, version, commit, & aliases. Key for dependency-based detection. | OSV is package/version-centric & often better than CPE for OSS packages. Coverage depends on upstream ecosystem feeds. |
+| 1 | CVEProject GitHub organization | [github.com/CVEProject](https://github.com/CVEProject) | Free public GitHub org | Source organization for CVE schema, CVE list mirror, automation working group material, & related program repos. | Useful for tracking official repository structure & project-level changes. |
+| 2 | CVE Program Working Groups | [www.cve.org/programorganization/workinggroups](https://www.cve.org/programorganization/workinggroups) | Free public | Official CVE Working Group listing. | Governance/process context, not a vulnerability feed. |
+| 3 | CVE/CWE Programs groups.io main page | [cve-cwe-programs.groups.io/g/main](https://cve-cwe-programs.groups.io/g/main) | Public/registration may vary by list | Community list hub for CVE/CWE program discussions. | Use for process context, community discussions, & WG announcements. |
+| 4 | CVE/CWE Programs groups.io subgroups | [cve-cwe-programs.groups.io/g/main/subgroups](https://cve-cwe-programs.groups.io/g/main/subgroups) | Public/registration may vary by list | Subgroup listing for program working groups. | Useful for discovering WG-specific list URLs. |
+| 5 | CVE Consumer Working Group | [cve-cwe-programs.groups.io/g/ConsumerWG](https://cve-cwe-programs.groups.io/g/ConsumerWG) | Public/registration may vary by list | CVE consumer feedback, use cases, & schema/process discussions. | Important for consumer-oriented CVE metadata requirements. |
+| 6 | CVE Automation Working Group repo | [github.com/CVEProject/automation-working-group](https://github.com/CVEProject/automation-working-group) | Free public GitHub repo | Automation WG materials, workflows, & implementation discussion artifacts. | Useful for automation requirements around CVE publication & ingestion. |
+| 7 | CVE Automation Working Group list | [cve-cwe-programs.groups.io/g/AWG](https://cve-cwe-programs.groups.io/g/AWG) | Public/registration may vary by list | Automation WG mailing list. | Useful for process & tooling evolution tracking. |
+| 8 | CVEProject SADP pilot | [github.com/CVEProject/sadp-pilot](https://github.com/CVEProject/sadp-pilot) | Free public GitHub repo | Supplemental ADP/SADP pilot data & artifacts. | Useful for tracking supplemental vulnerability enrichment experiments. |
+| 9 | Published SADP Records | [github.com/CVEProject/sadp-pilot/tree/main/Published%20SADP%20Records](https://github.com/CVEProject/sadp-pilot/tree/main/Published%20SADP%20Records) | Free public GitHub repo path | Published SADP record corpus. | Machine-readable/source-record context should be validated before ingestion. |
+| 10 | RogoLabs SADP Tracker | [rogolabs.github.io/SADP-Tracker](https://rogolabs.github.io/SADP-Tracker) | Public site; manually revalidate | Community tracker for SADP material. | Add to link-check allowlist until manually verified. |
+| 11 | CWE Working Groups & SIGs | [cwe.mitre.org/community/working_groups.html](https://cwe.mitre.org/community/working_groups.html) | Free public | CWE working group & SIG context. | Important for weakness taxonomy evolution, including AI/ML-related CWE work. |
+| 12 | CVE Services source repository | [github.com/CVEProject/cve-services](https://github.com/CVEProject/cve-services) | Free public GitHub repo | Source repository for the CVE Services API. | Useful for understanding CVE API implementation behavior, endpoint evolution, & service-side validation semantics. |
+> #### [*Back to **`Index`***](#index)
+---
+
+### 3. CVE metadata analytical framework, user-story resources, papers & community governance
+
+#### 3.1 CveToad CVE consumer/user-story resources
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CveToad CVE Consumer User Story | [CVE-Consumer_User-Story.md](https://github.com/keerthanap8898/CveToad/blob/main/CVE-Consumer_User-Story.md) | Free public GitHub repo file | Describes a CVE consumer’s operational pain points around malformed, inconsistent, incomplete, duplicated, or divergent vulnerability metadata. | Useful as local user-story evidence for field requirements, ingestion guardrails, validation rules, & normalization priorities. |
+| 2 | CVE Metadata Elements, Exploitability, & CWE Analytical Framework | [CVE-user-story_Description.md](https://github.com/keerthanap8898/CveToad/blob/main/CVE-user-story_Description.md) | Free public GitHub repo file | Analytical framework for CVE metadata fields, exploitability metrics, CWE normalization, & CVSS/CWE correlation. | Good companion to the source inventory; use for implementation requirements & field mapping. |
+| 3 | CVE metadata framework image | [CVE_Meta-data_Framework_Table.jpg](https://github.com/keerthanap8898/CveToad/blob/main/Resources/Images/CVE_Meta-data_Framework_Table.jpg) | Free public GitHub repo file | Visual/table artifact for CVE metadata framework. | Useful for documentation, diagrams, & explanatory material. |
+
+#### 3.2 CVE/CWE working groups, SIGs & community lists
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CWE Working Groups & SIGs | [cwe.mitre.org/community/working_groups.html](https://cwe.mitre.org/community/working_groups.html) | Free public | CWE taxonomy governance & working-group context. | Useful for tracking taxonomy evolution, especially AI/ML weakness classification. |
+| 2 | CVE Program Working Groups | [www.cve.org/programorganization/workinggroups](https://www.cve.org/programorganization/workinggroups) | Free public | Official CVE WG listing. | Governance/process source, not vulnerability data. |
+| 3 | CVE/CWE Programs groups.io main page | [cve-cwe-programs.groups.io/g/main](https://cve-cwe-programs.groups.io/g/main) | Public/registration may vary | Main groups.io hub for CVE/CWE program communications. | Useful for WG discovery & program discussions. |
+| 4 | CVE/CWE Programs groups.io subgroups | [cve-cwe-programs.groups.io/g/main/subgroups](https://cve-cwe-programs.groups.io/g/main/subgroups) | Public/registration may vary | Subgroup directory. | Useful for finding active CVE/CWE working groups. |
+| 5 | CVE Consumer Working Group | [cve-cwe-programs.groups.io/g/ConsumerWG](https://cve-cwe-programs.groups.io/g/ConsumerWG) | Public/registration may vary | Consumer WG for CVE data consumers. | Directly relevant to CVE metadata quality, schema usability, & downstream ingestion pain points. |
+| 6 | CVE Automation Working Group repo | [github.com/CVEProject/automation-working-group](https://github.com/CVEProject/automation-working-group) | Free public GitHub repo | Automation WG artifacts & implementation discussion. | Useful for automated CVE workflows & publication/ingestion changes. |
+| 7 | CVE Automation Working Group list | [cve-cwe-programs.groups.io/g/AWG](https://cve-cwe-programs.groups.io/g/AWG) | Public/registration may vary | AWG mailing list. | Useful for automation-focused program discussion. |
+| 8 | OpenSSF Vulnerability Disclosures Working Group | [github.com/ossf/wg-vulnerability-disclosures](https://github.com/ossf/wg-vulnerability-disclosures) | Free public GitHub repo | OpenSSF working group focused on improving vulnerability reporting, disclosure, & coordination across open source. | Useful for disclosure-process guidance, ecosystem governance, & vulnerability-handling best practices. |
+
+#### 3.3 Papers, conference programs, talks, training & community material
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Accuracy Is Not Enough in Cybersecurity | [github.com/keerthanap8898/Accuracy-is-Not-Enough-in-Cybersecurity](https://github.com/keerthanap8898/Accuracy-is-Not-Enough-in-Cybersecurity) | Free public GitHub repo | Blog/article backup focused on cybersecurity prediction, CVE/CVSS/EPSS/user-story context, & VulnCon references. | Local/reference material, not canonical upstream data. Deduplicate duplicate mentions into one row. |
+| 2 | FIRST VulnCon 2026 program | [first.org/conference/vulncon26/program](https://www.first.org/conference/vulncon26/program) | Free public conference page | Vulnerability management, CVE, PSIRT, & disclosure conference program context. | Good for community/user-story background. |
+| 3 | FIRST papers - 2026 | [www.first.org/resources/papers/2026](https://www.first.org/resources/papers/2026) | Free public | FIRST papers & security response material. | Useful for research & practitioner references. |
+| 4 | FIRST YouTube channel | [youtube.com/c/FIRSTdotorg](https://www.youtube.com/c/FIRSTdotorg) | Free public video channel | Official FIRST conference/training/media material. | Training/reference source, not vulnerability feed. |
+| 5 | CISA YouTube channel | [youtube.com/@CISAgov](https://www.youtube.com/@CISAgov) | Free public video channel | Official CISA videos, briefings, guidance, & training material. | Mark as media/reference source. |
+| 6 | WhiteSec Cyber Security YouTube channel | [youtube.com/@whiteseccybersecurity](https://www.youtube.com/@whiteseccybersecurity) | Free public video channel | Community cybersecurity training/media material. | Non-authoritative; validate claims against primary sources. |
+| 7 | Breachtrace VulnKeeper docs | [breachtrace.gitbook.io/vulnkeeper](https://breachtrace.gitbook.io/vulnkeeper) | Public docs; manually revalidate | Tool/project documentation for vulnerability tracking workflows. | Community/tooling source; not canonical vulnerability data. |
+| 8 | LangGuard SCOPE MCP | [scope-mcp.langguard.ai](https://scope-mcp.langguard.ai) | Public web tool/service; terms may apply | AI/agent compliance & risk-evaluation resource. | Useful for agent/tool-governance notes in AI security sections. |
+| 9 | CVE-MCP | [github.com/jgamblin/CVE-MCP](https://github.com/jgamblin/CVE-MCP) | Free public GitHub repo | MCP server/tooling for CVE data via the CVE.org API. | Useful as experimental CVE-query tooling, not as a canonical CVE source. Validate API behavior against official CVE Services docs. |
+> #### [*Back to **`Index`***](#index)
+
+---
+
+## B. CVE Enrichment, Exploitability, Prioritization & Data Model
+
+### 4. Exploitation, prioritization, severity & risk scoring
+#### 4.1 Known exploited vulnerability sources
+
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CISA KEV catalog - web | [www.cisa.gov/known-exploited-vulnerabilities-catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | Free public | Authoritative catalog of known exploited vulnerabilities. Critical for prioritization & remediation urgency. | KEV is a strong exploitation signal but not a complete list of all exploited vulnerabilities. |
+| 2 | CISA KEV print view | [www.cisa.gov/known-exploited-vulnerabilities-catalog-print](https://www.cisa.gov/known-exploited-vulnerabilities-catalog-print) | Free public | Human-readable print-oriented KEV view. | Useful for documentation & manual review; use JSON for automation. |
+| 3 | CISA KEV JSON feed | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public feed | Machine- readable KEV feed. | Primary automation source for KEV ingestion. Monitor `dateAdded` & due dates. |
+| 4 | CISA KEV JSON schema | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json) | Free public feed | Schema for KEV JSON validation. | Use for ingestion validation. Schema changes should trigger parser review. |
+| 5 | CISA KEV GitHub mirror | [github.com/cisagov/kev-data](https://github.com/cisagov/kev-data) | Free / open-source public GitHub repo | GitHub mirror of KEV data. | Useful for Git-based diffing & historical tracking. Treat CISA official feed as source of truth. |
+| 6 | VulnCheck KEV | [vulncheck.com/kev](https://vulncheck.com/kev) | Commercial; limited public info may exist | Expanded KEV-like exploitation intelligence. | Not identical to CISA KEV. Validate definitions, coverage, licensing, & freshness. |
+| 7 | Shadowserver reports | [www.shadowserver.org](https://www.shadowserver.org/) | Free for eligible organizations; access/registration may be required | Internet-scale exploitation & exposure observations. | Useful for exposure/scan telemetry. Data may be aggregated & require access setup. |
+| 8 | GreyNoise Visualizer | [viz.greynoise.io](https://viz.greynoise.io/) | Free tier / paid plans | Internet scanning/exploitation noise & actor context. | Helps distinguish benign scanning, mass exploitation, & opportunistic activity. |
+| 9 | GreyNoise API docs | [docs.greynoise.io](https://docs.greynoise.io/) | Free tier / paid plans; API key required | API for IP-based exploitation telemetry enrichment. | API terms, quotas, & plan level can affect automation. |
+#### 4.2 Exploit prediction & scoring
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | FIRST EPSS overview | [www.first.org/epss](https://www.first.org/epss/) | Free public / open data | Exploit Prediction Scoring System. Provides probability-style exploit-likelihood signals. | EPSS predicts exploitation probability, not impact. Use with CVSS, KEV, exposure, & asset criticality. |
+| 2 | FIRST EPSS API | [www.first.org/epss/api](https://www.first.org/epss/api) | Free public API | API endpoint for EPSS scores. | Useful for daily enrichment. Store score date because EPSS changes over time. |
+| 3 | FIRST EPSS data & CSV downloads | [www.first.org/epss/data_stats](https://www.first.org/epss/data_stats) | Free public data downloads | Current & historical EPSS CSV data reference. | Historical scores are useful for model training & retrospective analysis. |
+| 4 | Historical EPSS scores GitHub | [github.com/empiricalsec/epss_scores](https://github.com/empiricalsec/epss_scores) | Free public GitHub repo | Daily historical EPSS snapshots. | Useful for longitudinal training labels. Validate against FIRST releases. |
+| 5 | FIRST CVSS | [www.first.org/cvss](https://www.first.org/cvss/) | Free public | Official CVSS specification home. | CVSS severity must not be treated as exploit likelihood. |
+| 6 | FIRST CVSS v4.0 | [www.first.org/cvss/v4.0/specification-document](https://www.first.org/cvss/v4.0/specification-document) | Free public | CVSS v4.0 specification. | Newer scoring semantics may not be universally populated across vulnerability records yet. |
+| 7 | FIRST CVSS v3.1 | [www.first.org/cvss/v3.1/specification-document](https://www.first.org/cvss/v3.1/specification-document) | Free public | CVSS v3.1 specification. | Still widely used across CVE/NVD/vendor data. |
+| 8 | NVD CVSS resources | [nvd.nist.gov/vuln-metrics/cvss](https://nvd.nist.gov/vuln-metrics/cvss) | Free public | CVSS calculators & vector references. | Useful for parsing & validating NVD scoring data. |
+#### 4.3 Decision-support frameworks
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CISA SSVC | [www.cisa.gov/stakeholder-specific-vulnerability-categorization-ssvc](https://www.cisa.gov/stakeholder-specific-vulnerability-categorization-ssvc) | Free public | Stakeholder-Specific Vulnerability Categorization for vulnerability response decisions. | Useful for decision automation beyond raw severity. Depends on environmental & mission context. |
+| 2 | CERT/CC SSVC project | [github.com/CERTCC/SSVC](https://github.com/CERTCC/SSVC) | Free / open-source public GitHub repo | SSVC model artifacts, examples, & discussions. | Useful for implementing SSVC decision trees & decision points. |
+| 3 | CISA Vulnrichment | [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment) | Free / open-source public GitHub repo | CISA ADP enrichment & SSVC decision points. | Coverage is not universal. Preserve missing/null state distinctly from “low risk.” |
+| 4 | CISA Binding Operational Directive 22-01 | [www.cisa.gov/news-events/directives/bod-22-01-reducing- significant-risk-known-exploited-vulnerabilities](https://www.cisa.gov/news-events/directives/bod-22-01-reducing-significant-risk-known-exploited-vulnerabilities) | Free public | Operational requirement context for KEV remediation. | Primarily binding for U.S. federal civilian agencies but useful as industry prioritization guidance. |
+| 5 | CISA Cybersecurity Advisories | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories) | Free public | Broader CISA advisory feed. | Useful for emergent campaigns, vendor alerts, & remediation guidance. |
+| 6 | CISA Alerts | [www.cisa.gov/news-events/cybersecurity-advisories](https://www.cisa.gov/news-events/cybersecurity-advisories) | Free public | CISA alert/advisory listing. | May overlap with other CISA pages. Deduplicate by advisory ID/date. |
+#### 4.4 Public exploit / proof-of-concept / weaponization signals
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Exploit-DB | [www.exploit-db.com](https://www.exploit-db.com/) | Free public | Public exploit archive. Strong signal for PoC availability. | Public PoC does not always mean reliable weaponization; verify exploit quality & target version. |
+| 2 | SearchSploit | [www.exploit-db.com/searchsploit](https://www.exploit-db.com/searchsploit) | Free / open-source tool | CLI interface for Exploit-DB. | Useful for local workflows & offline search. |
+| 3 | Exploit-DB GitLab mirror | [gitlab.com/exploit-database/exploitdb](https://gitlab.com/exploit-database/exploitdb) | Free public GitLab repo | Git mirror of Exploit-DB content. | Useful for local indexing & diffing. |
+| 4 | Metasploit Framework | [github.com/rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework) | Free / open-source public GitHub repo; commercial Rapid7 products separate | Exploit framework containing modules, payloads, & auxiliary checks. | A Metasploit module is a stronger operationalization signal than a bare PoC. |
+| 5 | Metasploit exploit modules | [github.com/rapid7/metasploit-framework/tree/master/modules/exploits](https://github.com/rapid7/metasploit-framework/tree/master/modules/exploits) | Free / open-source public GitHub repo | Practical signal that a vulnerability has weaponized exploit implementation. | Module maturity, reliability, & target coverage vary. |
+| 6 | Packet Storm Security exploits | [packetstormsecurity.com/files/tags/exploit](https://packetstormsecurity.com/files/tags/exploit/) | Free public; may bot-block automated fetchers | Public exploit & advisory archive. | Quality & metadata normalization vary; cross-reference CVE IDs. Mark bot-blocked fetches as restricted/manual-review. |
+| 7 | VulnCheck Exploit Database Query Console | [console.vulncheck.com](https://console.vulncheck.com/) | Auth-gated / commercial; limited public access may exist | Exploit intelligence query console. | Treat as restricted/manual-review in CI. Validate licensing & provenance before production use. |
+| 8 | Vulners Exploit Catalog | [vulners.com/search](https://vulners.com/search) | Free web search; API/advanced features may require paid plan | Broad exploit/advisory search catalog. | Secondary enrichment. Do not treat as canonical without upstream provenance. |
+| 9 | Project Zero blog | [projectzero.google](https://projectzero.google/) | Free public | High-quality root-cause & exploitation writeups. | Excellent for model features around exploitability primitives & bug classes. |
+| 10 | Project Zero issue tracker - current | [project-zero.issues.chromium.org/issues](https://project-zero.issues.chromium.org/issues) | Free public; some issue details may be restricted before disclosure | Current Project Zero issue tracker. | Good for disclosure timelines & technical details. |
+| 11 | Project Zero issue tracker - old/historical | [bugs.chromium.org/p/project-zero/issues/list](https://bugs.chromium.org/p/project-zero/issues/list) | Free public historical access where still available | Historical Project Zero issue tracker link. | Keep for old references; prefer current `/issues` tracker when available. |
+| 12 | CERT/CC Vulnerability Notes Database | [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Coordinated disclosure context, affected vendors, technical notes, & remediation. | Often useful when multiple vendors/products are affected. |
+| 13 | Rapid7 AttackerKB | [attackerkb.com](https://attackerkb.com/) | Free public content; some Rapid7 ecosystem features may be commercial | Exploitability & attacker-value context. | Community/commercial signals should be weighted with provenance & recency. |
+| 14 | Nuclei templates | [github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) | Free / open-source public GitHub repo | Exposed-condition detection templates. Useful for scanning internet-facing assets. | Template presence is a practical detection signal, not proof of vulnerability unless executed correctly. |
+| 15 | ProjectDiscovery Nuclei | [github.com/projectdiscovery/nuclei](https://github.com/projectdiscovery/nuclei) | Free / open-source public GitHub repo; commercial ProjectDiscovery offerings separate | Template-based vulnerability & exposure scanner. | Detection accuracy depends on template quality, target context, & scanner configuration. |
+| 16 | Horizon3.ai research | [horizon3.ai/attack-research](https://horizon3.ai/attack-research/) | Free public research; commercial products separate | PoC & attack-path writeups. | Useful for exploitability context & reproduction details. |
+| 17 | watchTowr Labs | [labs.watchtowr.com](https://labs.watchtowr.com/) | Free public research; commercial services separate | Vulnerability research & exploitation details. | Research source; verify exact affected versions & mitigations. |
+| 18 | Assetnote research | [www.assetnote.io/resources/research](https://www.assetnote.io/resources/research) | Free public research; commercial services separate | Exploit research & vulnerability detection signatures. | Useful for detection engineering & exposed attack surface context. |
+| 19 | Breachtrace VulnKeeper docs | [breachtrace.gitbook.io/vulnkeeper](https://breachtrace.gitbook.io/vulnkeeper) | Public docs; manually revalidate | Community/tooling documentation for vulnerability tracking. | Treat as non-canonical & keep in manual-review allowlist until verified. |
+> #### [*Back to **`Index`***](#index)
+---
+
+### 5. Practical priority hierarchy for ingestion
+#### 5.1 Tier 0 - identifiers & inventory
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | SBOM | [cyclonedx.org/specification/overview](https://cyclonedx.org/specification/overview/), [spdx.dev/specifications](https://spdx.dev/specifications/) | Free / open standards | Inventory foundation for matching components to vulnerabilities. | Without accurate inventory, vulnerability matching is incomplete or noisy. |
+| 2 | Package identity | [csrc.nist.gov/projects/software-identification-swid](https://csrc.nist.gov/projects/software-identification-swid), [github.com/package-url/purl-spec](https://github.com/package-url/purl-spec), [nvd.nist.gov/products/cpe](https://nvd.nist.gov/products/cpe) | Free public / open standards | Component identity across package, product, & installed software domains. | Use PURL for packages, CPE for products/platforms, SWID for installed software identity. |
+| 3 | Asset exposure | [search.censys.io](https://search.censys.io/), [www.shodan.io](https://www.shodan.io/) | Free tiers / paid plans | Determines whether vulnerable assets are externally reachable. | Combine with internal CMDB, cloud inventory, & authenticated scans. |
+| 4 | Artifact provenance | [in-toto.io](https://in-toto.io/), [slsa.dev](https://slsa.dev/), [www.sigstore.dev](https://www.sigstore.dev/) | Free / open-source / open standards | Validates build-chain integrity & artifact authenticity. | Helps distinguish vulnerable dependency risk from supply-chain tampering risk. |
+#### 5.2 Tier 1 - canonical vulnerability records
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CVE List v5 | [github.com/CVEProject/cvelistV5](https://github.com/CVEProject/cvelistV5) | Free public GitHub repo | Canonical CVE record mirror. | Core identity source. |
+| 2 | CVE schema | [github.com/CVEProject/cve-schema](https://github.com/CVEProject/cve-schema) | Free public GitHub repo | Schema validation for CVE records. | Use for parser correctness. |
+| 3 | CVE Services API | [cveawg.mitre.org/api-docs](https://cveawg.mitre.org/api-docs/) | Free public docs; CNA functions may require role/account | Direct programmatic CVE lookup. | Useful for targeted CVE access. |
+| 4 | NVD CVE API | [nvd.nist.gov/developers/vulnerabilities](https://nvd.nist.gov/developers/vulnerabilities) | Free public; optional free API key for higher rate limits | CVSS/CPE/CWE/reference enrichment. | Core enrichment source. |
+| 5 | NVD CPE API | [nvd.nist.gov/developers/products](https://nvd.nist.gov/developers/products) | Free public; optional free API key for higher rate limits | CPE dictionary & product matching. | Important for product-level mapping. |
+| 6 | NVD data feeds | [nvd.nist.gov/vuln/data-feeds](https://nvd.nist.gov/vuln/data-feeds) | Free public | Bulk NVD feed access. | Useful for bootstrapping. |
+| 7 | CISA Vulnrichment | [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment) | Free public GitHub repo | CISA ADP enrichment & SSVC data. | Prioritization enrichment. |
+#### 5.3 Tier 2 - package/ecosystem vulnerability records
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | OSV full database | [google.github.io/osv.dev/data/#full-database-download](https://google.github.io/osv.dev/data/#full-database-download) | Free public | Local mirror of OSS vulnerability records. | Best for high-volume package matching. |
+| 2 | OSV API | [google.github.io/osv.dev/post-v1-query](https://google.github.io/osv.dev/post-v1-query/) | Free public API | Online vulnerability lookup by package/version/commit/ID. | Good for targeted lookups. |
+| 3 | GitHub Advisory Database | [github.com/advisories](https://github.com/advisories) | Free public | GHSA/CVE/malware advisory records. | Preserve aliases. |
+| 4 | GitHub Advisory Database repo | [github.com/github/advisory-database](https://github.com/github/advisory-database) | Free / open-source public GitHub repo | Raw advisory data for local ingestion. | Useful for mirroring. |
+| 5 | Go vuln DB | [vuln.go.dev](https://vuln.go.dev/) | Free public | Official Go vulnerability database. | Go- specific affectedness. |
+| 6 | RustSec | [rustsec.org](https://rustsec.org/) | Free public / open-source ecosystem | Rust advisory ecosystem. | Rust crate-specific advisories. |
+| 7 | PyPA advisory DB | [github.com/pypa/advisory-database](https://github.com/pypa/advisory-database) | Free public GitHub repo | Python advisory source. | Python/PyPI coverage. |
+| 8 | FriendsOfPHP | [github.com/FriendsOfPHP/security-advisories](https://github.com/FriendsOfPHP/security-advisories) | Free public GitHub repo | PHP Composer advisories. | Composer-specific. |
+| 9 | RubySec | [github.com/rubysec/ruby-advisory-db](https://github.com/rubysec/ruby-advisory-db) | Free public GitHub repo | RubyGems advisories. | Ruby ecosystem. |
+| 10 | OSS Index | [ossindex.sonatype.org](https://ossindex.sonatype.org/) | Free tier / API terms; commercial Sonatype products separate | Package vulnerability intelligence. | Secondary enrichment. |
+| 11 | Packagist API | [packagist.org/apidoc#list-security-advisories](https://packagist.org/apidoc#list-security-advisories) | Free public API docs / public API | Composer advisory API. | Direct PHP ecosystem source. |
+#### 5.4 Tier 3 - affectedness, distro & vendor truth
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Red Hat Security Data | [access.redhat.com/security/data](https://access.redhat.com/security/data) | Free public data; support content may require subscription | RHEL affectedness, CSAF/VEX, OSV, OVAL. | Backport-aware. |
+| 2 | Debian Security Tracker | [security-tracker.debian.org](https://security-tracker.debian.org/) | Free public | Debian package affectedness. | Backport-aware. |
+| 3 | Ubuntu OVAL / OSV / OpenVEX | [github.com/canonical/ubuntu-security-notices](https://github.com/canonical/ubuntu-security-notices), [ubuntu.com/security/oval](https://ubuntu.com/security/oval), [ubuntu.com/security/vex](https://ubuntu.com/security/vex) | Free public | Ubuntu package affectedness & VEX status. | Use release-specific data. |
+| 4 | Alpine SecDB | [secdb.alpinelinux.org](https://secdb.alpinelinux.org/) | Free public | Alpine package vulnerability data. | Container-critical. |
+| 5 | SUSE CSAF / OVAL | [www.suse.com/support/security/csaf](https://www.suse.com/support/security/csaf/), [www.suse.com/support/security/oval](https://www.suse.com/support/security/oval/) | Free public | SUSE vendor affectedness & scanner data. | Use machine-readable formats where possible. |
+| 6 | Oracle Linux OVAL / errata | [linux.oracle.com/errata](https://linux.oracle.com/errata/), [linux.oracle.com/security/oval](https://linux.oracle.com/security/oval/) | Free public | Oracle Linux patch & OVAL data. | Oracle Linux-specific. |
+| 7 | Amazon Linux ALAS | [alas.aws.amazon.com](https://alas.aws.amazon.com/) | Free public | Amazon Linux advisories. | Separate AL2 & AL2023. |
+| 8 | AlmaLinux / Rocky / Fedora / Arch / Gentoo | [bodhi.fedoraproject.org/updates/?type=security](https://bodhi.fedoraproject.org/updates/?type=security), [errata.almalinux.org](https://errata.almalinux.org/), [errata.build.resf.org](https://errata.build.resf.org/), [security.archlinux.org](https://security.archlinux.org/), [security.gentoo.org/glsa](https://security.gentoo.org/glsa/) | Free public | Additional Linux distribution affectedness sources. | Distro semantics vary substantially. |
+| 9 | Wolfi / Chainguard | [github.com/wolfi-dev/advisories](https://github.com/wolfi-dev/advisories), [packages.cgr.dev/chainguard/security.json](https://packages.cgr.dev/chainguard/security.json), [packages.wolfi.dev/os/security.json](https://packages.wolfi.dev/os/security.json) | Wolfi free public; Chainguard feed may relate to commercial product scope | Container-first package vulnerability feeds. | Useful for minimal images. |
+| 10 | Vendor advisories | [helpx.adobe.com/security.html](https://helpx.adobe.com/security.html), [msrc.microsoft.com/update-guide](https://msrc.microsoft.com/update-guide), [security.paloaltonetworks.com](https://security.paloaltonetworks.com/), [sec.cloudapps.cisco.com/security/center/publicationListing.x](https://sec.cloudapps.cisco.com/security/center/publicationListing.x), [support.apple.com/en-us/100100](https://support.apple.com/en-us/100100), [support.broadcom.com/web/ecx/security-advisory](https://support.broadcom.com/web/ecx/security-advisory), [support.citrix.com/securitybulletins](https://support.citrix.com/securitybulletins), [support.sap.com/en/my-support/knowledge-base/security-notes- news.html](https://support.sap.com/en/my-support/knowledge-base/security-notes-news.html), [www.atlassian.com/trust/security/advisories](https://www.atlassian.com/trust/security/advisories), [www.fortiguard.com/psirt](https://www.fortiguard.com/psirt), [forums.ivanti.com/s/security-advisory](https://forums.ivanti.com/s/security-advisory), [www.oracle.com/security-alerts](https://www.oracle.com/security-alerts/) | Mostly free public advisories; some vendors require support accounts/subscriptions for full details or downloads | Vendor truth for affected products, fixed versions, mitigations, & exploitation notes. | Often most authoritative for product affectedness. Access, formatting, & update latency vary. |
+#### 5.5 Tier 4 - severity & prioritization
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CVSS v3.1/v4.0 | [www.first.org/cvss/v3.1/specification-document](https://www.first.org/cvss/v3.1/specification-document), [www.first.org/cvss/v4.0/specification-document](https://www.first.org/cvss/v4.0/specification-document) | Free public | Standard severity scoring. | Severity is not exploit likelihood. |
+| 2 | EPSS | [www.first.org/epss](https://www.first.org/epss/) | Free public data/API | Exploit likelihood prediction. | Temporal; store score date. |
+| 3 | KEV | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public feed | Known exploited vulnerability signal. | Strong but incomplete exploited-in-the-wild signal. |
+| 4 | SSVC | [github.com/CERTCC/SSVC](https://github.com/CERTCC/SSVC), [www.cisa.gov/stakeholder-specific- vulnerability-categorization-ssvc](https://www.cisa.gov/stakeholder-specific-vulnerability-categorization-ssvc) | Free public / open-source | Decision support for remediation urgency. | Requires environmental/mission context. |
+| 5 | CISA Vulnrichment | [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment) | Free public GitHub repo | SSVC & enrichment data. | Coverage varies. |
+| 6 | Vendor exploited-in-the-wild flags | [msrc.microsoft.com/update-guide](https://msrc.microsoft.com/update-guide), [support.apple.com/en-us/100100](https://support.apple.com/en-us/100100), [www.oracle.com/security- alerts](https://www.oracle.com/security-alerts/) | Free public, though product support details may vary | Vendor- provided exploitation status. | Often product-specific & time-sensitive. |
+| 7 | Patch availability & fixed-version feeds | [access.redhat.com/security/data](https://access.redhat.com/security/data), [github.com/canonical/ubuntu-security-notices](https://github.com/canonical/ubuntu-security-notices), [security-tracker.debian.org/tracker/data/json](https://security-tracker.debian.org/tracker/data/json) | Free public data; some vendor support may require subscription | Determines whether remediation exists. | Patch availability varies by distro/release/product. |
+| 8 | Environmental context | [docs.greynoise.io](https://docs.greynoise.io/), [search.censys.io](https://search.censys.io/), [www.shodan.io](https://www.shodan.io/) | Free tiers / paid plans | Internet exposure, asset criticality, privilege boundary, & data sensitivity determine real impact. | Must be joined with internal asset inventory & controls. |
+#### 5.6 Tier 5 - exploitability & weaponization
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Exploit-DB | [www.exploit-db.com](https://www.exploit-db.com/) | Free public | Public exploit availability. | Verify target versions & exploit reliability. |
+| 2 | Metasploit modules | [github.com/rapid7/metasploit-framework/tree/master/modules/exploits](https://github.com/rapid7/metasploit-framework/tree/master/modules/exploits) | Free / open-source | Weaponized exploit modules. | Strong operationalization signal. |
+| 3 | Packet Storm | [packetstormsecurity.com/files/tags/exploit](https://packetstormsecurity.com/files/tags/exploit/) | Free public | Exploit archive. | Metadata quality varies. |
+| 4 | Project Zero | [projectzero.google](https://projectzero.google/), [project- zero.issues.chromium.org](https://project-zero.issues.chromium.org/issues) | Free public; some issues may be restricted pre-disclosure | Root-cause & exploitability research. | High-quality technical details. |
+| 5 | CERT/CC VU notes | [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Coordinated disclosure & affected vendor context. | Useful for ecosystem-wide vulns. |
+| 6 | Rapid7 AttackerKB | [attackerkb.com](https://attackerkb.com/) | Free public content; commercial Rapid7 offerings separate | Attacker value & exploitability context. | Secondary enrichment. |
+| 7 | GreyNoise | [docs.greynoise.io](https://docs.greynoise.io/), [viz.greynoise.io](https://viz.greynoise.io/) | Free tier / paid plans | Internet exploitation/scanning telemetry. | Distinguishes noise from activity. |
+| 8 | Shadowserver | [dashboard.shadowserver.org](https://dashboard.shadowserver.org/), [www.shadowserver.org](https://www.shadowserver.org/) | Free for eligible organizations; registration may be required | Exposure & threat telemetry. | Access & reporting terms vary. |
+| 9 | Nuclei templates | [github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) | Free / open-source | Detection templates for exposed vulnerabilities. | Template presence is not proof of exposure. |
+| 10 | Vendor emergency advisories | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories), [www.fortiguard.com/psirt](https://www.fortiguard.com/psirt), [forums.ivanti.com/s/security-advisory](https://forums.ivanti.com/s/security-advisory) | Free public | Emergency/active exploitation guidance. | Highly time-sensitive; monitor frequently. |
+#### 5.7 Tier 6 - weakness, attack-pattern & AI context
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CWE | [cwe.mitre.org](https://cwe.mitre.org/) | Free public | Weakness taxonomy. | CVE-to-CWE mappings can be broad or missing. |
+| 2 | CAPEC | [capec.mitre.org](https://capec.mitre.org/) | Free public | Attack-pattern taxonomy. | Maps weaknesses to attack patterns. |
+| 3 | ATT&CK Enterprise | [attack.mitre.org/matrices/enterprise](https://attack.mitre.org/matrices/enterprise/) | Free public | Enterprise adversary behavior taxonomy. | More post-exploitation than CVE-specific. |
+| 4 | ATT&CK STIX | [github.com/mitre-attack/attack-stix-data](https://github.com/mitre-attack/attack-stix-data) | Free public GitHub repo | Machine-readable ATT&CK data. | Best for ingestion. |
+| 5 | MITRE CTI repo | [github.com/mitre/cti](https://github.com/mitre/cti) | Free public GitHub repo | MITRE STIX data repository. | Useful for CTI graphing. |
+| 6 | MITRE ATLAS | [atlas.mitre.org](https://atlas.mitre.org/) | Free public | AI adversary tactics & techniques. | Directly relevant to AI/ML systems. |
+| 7 | OWASP LLM Top 10 | [owasp.org/www-project-top-10-for-large-language-model-applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | Free public / open community | LLM application vulnerability taxonomy. | Good for AI appsec. |
+| 8 | OWASP ML Security Top 10 | [owasp.org/www-project-machine-learning-security-top-10](https://owasp.org/www-project-machine-learning-security-top-10/) | Free public / open community | ML security risk taxonomy. | Complements ATLAS. |
+| 9 | NIST AI RMF & NIST AI 600-1 | [nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf), [www.nist.gov/publications/artificial-intelligence-risk- management-framework-generative-artificial-intelligence](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) | Free public | AI risk management & GenAI risk profile. | Governance/risk context, not vuln feed. |
+#### 5.8 Tier 7 - detection engineering & validation
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CodeQL | [codeql.github.com](https://codeql.github.com/) | Free for many open-source uses; commercial GitHub Advanced Security for many enterprise/private workflows | Semantic code vulnerability detection. | Strong for variant analysis. |
+| 2 | Semgrep | [semgrep.dev](https://semgrep.dev/) | Free/open-source CLI; commercial products available | Pattern-based static analysis. | Fast custom rules. |
+| 3 | Joern | [joern.io](https://joern.io/) | Free / open-source | Code property graph analysis. | Useful for research & advanced detection. |
+| 4 | Infer | [fbinfer.com](https://fbinfer.com/) | Free / open-source | Static analysis engine. | Good for specific bug classes. |
+| 5 | Sonar rules | [rules.sonarsource.com](https://rules.sonarsource.com/) | Free public catalog; commercial Sonar products available | Security/code quality rule catalog. | Useful for rule taxonomy mapping. |
+| 6 | Nuclei templates | [github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) | Free / open-source | DAST/exposure templates. | Template quality varies. |
+| 7 | OSS-Fuzz | [google.github.io/oss-fuzz](https://google.github.io/oss-fuzz/) | Free for eligible open-source projects | Continuous fuzzing. | Useful for discovery & OSV-linked vulns. |
+| 8 | SARD / Juliet | [samate.nist.gov/SARD](https://samate.nist.gov/SARD/), [samate.nist.gov/SARD/test- suites/112](https://samate.nist.gov/SARD/test-suites/112) | Free public | Test suites for vulnerability detection. | Useful for evaluation; not production vulnerability feed. |
+| 9 | Vulnerability datasets | [github.com/DLVulDet/PrimeVul](https://github.com/DLVulDet/PrimeVul), [github.com/Icyrockton/MegaVul](https://github.com/Icyrockton/MegaVul), [github.com/ZeoVan/MSR_20_Code_vulnerability_CSV_Dataset](https://github.com/ZeoVan/MSR_20_Code_vulnerability_CSV_Dataset), [github.com/secureIT-project/CVEfixes](https://github.com/secureIT-project/CVEfixes), [github.com/tuhh-softsec/vul4j](https://github.com/tuhh-softsec/vul4j), [github.com/wagner-group/diversevul](https://github.com/wagner-group/diversevul), [sites.google.com/view/devign](https://sites.google.com/view/devign) | Mostly free public research datasets; verify license individually | ML/research datasets for vulnerability detection. | Validate labels, leakage, deduplication, & licensing. |
+> #### [*Back to **`Index`***](#index)
+---
+
+### 6. Recommended canonical data model coverage
+A complete vulnerability impact system should be able to ingest or derive the following fields.
+#### 6.1 Vulnerability identity
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CVE ID | [github.com/CVEProject/cvelistV5](https://github.com/CVEProject/cvelistV5), [www.cve.org](https://www.cve.org/) | Free public | Canonical vulnerability identifier. | Not all advisories have CVEs immediately. |
+| 2 | GHSA ID | [github.com/advisories](https://github.com/advisories) | Free public | GitHub Security Advisory identifier. | May exist without CVE. |
+| 3 | OSV ID | [osv.dev](https://osv.dev/) | Free public | OSV vulnerability identifier. | Links package-specific affectedness & aliases. |
+| 4 | Vendor advisory ID | [msrc.microsoft.com/update-guide](https://msrc.microsoft.com/update-guide), [www.oracle.com/security-alerts](https://www.oracle.com/security-alerts/) | Mostly free public; some support details may require entitlement | Vendor-specific advisory identifier. | Often most authoritative for product-specific truth. |
+| 5 | CWE ID | [cwe.mitre.org](https://cwe.mitre.org/) | Free public | Weakness class identifier. | Quality of mapping varies. |
+| 6 | CAPEC ID | [capec.mitre.org](https://capec.mitre.org/) | Free public | Attack-pattern identifier. | Useful for attack mechanism mapping. |
+| 7 | ATT&CK technique ID | [attack.mitre.org/matrices/enterprise](https://attack.mitre.org/matrices/enterprise/) | Free public | Adversary technique identifier. | Useful for detection/response mapping. |
+| 8 | ATLAS technique ID | [atlas.mitre.org/techniques](https://atlas.mitre.org/techniques) | Free public | AI/ML adversary technique identifier. | Relevant for AI systems. |
+| 9 | Alias graph | [github.com/CVEProject/cvelistV5](https://github.com/CVEProject/cvelistV5), [github.com/advisories](https://github.com/advisories), [osv.dev](https://osv.dev/) | Free public | Maps CVE/GHSA/OSV/vendor aliases. | Crucial for deduplication & correlation. |
+#### 6.2 Affectedness
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Product name | [nvd.nist.gov/products/cpe](https://nvd.nist.gov/products/cpe) | Free public | Identifies vulnerable products. | Normalize against CPE/PURL/vendor data. |
+| 2 | Vendor | [www.cve.org](https://www.cve.org/) | Free public | Vendor/product attribution. | Vendor naming can differ across sources. |
+| 3 | CPE | [nvd.nist.gov/developers/products](https://nvd.nist.gov/developers/products) | Free public; optional free API key for higher rate limits | Product/platform matching. | Imprecise for many OSS packages. |
+| 4 | PURL | [github.com/package-url/purl-spec](https://github.com/package-url/purl-spec) | Free / open-source | Package identity. | Prefer for package ecosystem matching. |
+| 5 | Package ecosystem | [osv.dev/list](https://osv.dev/list) | Free public | Defines package namespace & version rules. | Version semantics are ecosystem-specific. |
+| 6 | Package name | [deps.dev](https://deps.dev/) | Free public | Dependency identity. | Normalize casing & namespace rules. |
+| 7 | Affected version range | [ossf.github.io/osv-schema](https://ossf.github.io/osv-schema/) | Free public / open-source | Expresses vulnerable versions. | Range interpretation must respect ecosystem semantics. |
+| 8 | Fixed version | [github.com/advisories](https://github.com/advisories), [osv.dev](https://osv.dev/) | Free public | Remediation target. | Distro fixed versions may differ due to backports. |
+| 9 | Introduced version / commit | [ossf.github.io/osv-schema](https://ossf.github.io/osv-schema/) | Free public / open-source | Determines when vulnerability entered codebase. | Not always available. |
+| 10 | Last affected version | [ossf.github.io/osv-schema](https://ossf.github.io/osv-schema/) | Free public / open-source | Helps determine affected version bounds. | Validate with vendor feeds. |
+| 11 | Backport status | [access.redhat.com/security/data](https://access.redhat.com/security/data), [security-tracker.debian.org](https://security-tracker.debian.org/), [ubuntu.com/security/cves](https://ubuntu.com/security/cves) | Mostly free public; some Red Hat support details may require subscription | Determines if a distro package is patched despite upstream version appearing vulnerable. | Essential for reducing false positives. |
+| 12 | VEX status | [github.com/openvex/spec](https://github.com/openvex/spec), [www.csaf.io](https://www.csaf.io/) | Free / open-source standards | Represents affected, not affected, fixed, or under investigation. | Preserve justification & author provenance. |
+| 13 | Justification for not affected | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source | Explains why a product is not affected. | Key for trust & auditability. |
+| 14 | Distro/package release channel | [packages.fedoraproject.org](https://packages.fedoraproject.org/), [pkgs.alpinelinux.org/packages](https://pkgs.alpinelinux.org/packages) | Free public | Tracks package release stream. | Channel differences can affect fix availability. |
+#### 6.3 Severity & exploitability
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CVSS v2/v3/v4 vector | [www.first.org/cvss](https://www.first.org/cvss/) | Free public | Structured severity vector. | Use vector, not only numeric score. |
+| 2 | CVSS base/temporal/environmental score | [nvd.nist.gov/vuln-metrics/cvss](https://nvd.nist.gov/vuln-metrics/cvss) | Free public | Severity scoring. | Environmental score should be computed with local context. |
+| 3 | EPSS score | [www.first.org/epss](https://www.first.org/epss/) | Free public data/API | Exploit likelihood. | Temporal; store score date. |
+| 4 | EPSS percentile | [www.first.org/epss/data_stats](https://www.first.org/epss/data_stats) | Free public data downloads | Relative exploit-likelihood ranking. | Useful for prioritization across backlog. |
+| 5 | KEV membership | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public feed | Known exploited vulnerability marker. | Strong exploitation evidence. |
+| 6 | KEV date added | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public feed | Temporal exploitation/prioritization signal. | Use for SLA & trend analysis. |
+| 7 | Known ransomware usage | [www.ransomware.live](https://www.ransomware.live/) | Free public | Ransomware exploitation context. | Attribution & mapping quality vary. |
+| 8 | Public exploit available | [www.exploit-db.com](https://www.exploit-db.com/) | Free public | PoC/exploit availability. | Verify reliability & version applicability. |
+| 9 | Metasploit module available | [github.com/rapid7/metasploit-framework/tree/master/modules/exploits](https://github.com/rapid7/metasploit-framework/tree/master/modules/exploits) | Free / open-source | Weaponized exploit implementation. | Stronger than generic PoC signal. |
+| 10 | Nuclei template available | [github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) | Free / open-source | Detection template availability. | Indicates detectable exposure, not confirmed vulnerability. |
+| 11 | GreyNoise observed scanning | [viz.greynoise.io](https://viz.greynoise.io/) | Free tier / paid plans | Internet scanning/exploitation telemetry. | Helps prioritize exposed services. |
+| 12 | Shadowserver observed exposure | [dashboard.shadowserver.org](https://dashboard.shadowserver.org/) | Free for eligible organizations; registration may be required | Internet-scale exposure telemetry. | Access may require registration/eligibility. |
+| 13 | CISA SSVC decision points | [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment) | Free public GitHub repo | Decision support enrichment. | Useful for prioritization workflows. |
+| 14 | Vendor exploitation status | [msrc.microsoft.com/update-guide](https://msrc.microsoft.com/update-guide), [security.paloaltonetworks.com](https://security.paloaltonetworks.com/), [support.apple.com/en-us/100100](https://support.apple.com/en-us/100100) | Free public | Vendor-provided exploitation notes. | Time-sensitive & product-specific. |
+| 15 | Patch availability | [access.redhat.com/security/data](https://access.redhat.com/security/data), [security-tracker.debian.org](https://security-tracker.debian.org/), [ubuntu.com/security/notices](https://ubuntu.com/security/notices) | Mostly free public; some vendor support details may require subscription | Determines if a fix exists. | Patch availability varies by release stream. |
+| 16 | Workaround availability | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories), [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Temporary mitigation when patching is not available. | Workarounds may reduce but not eliminate risk. |
+#### 6.4 Environmental impact
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+
+| 1 | Asset criticality | [www.cisecurity.org/controls](https://www.cisecurity.org/controls) | Free public | Business/system importance affects risk. | Must come from internal asset inventory. |
+| 2 | Internet exposure | [search.censys.io](https://search.censys.io/), [www.shodan.io](https://www.shodan.io/) | Free tiers / paid plans | Determines external exploitability surface. | External scan data may be incomplete or stale. |
+| 3 | Network reachability | [nmap.org](https://nmap.org/) | Free / open-source | Determines whether an exploit path exists. | Internal network context required. |
+| 4 | Authentication required | [www.first.org/cvss](https://www.first.org/cvss/) | Free public | Impacts exploitability. | CVSS may not capture local compensating controls. |
+| 5 | Privilege required | [www.first.org/cvss](https://www.first.org/cvss/) | Free public | Impacts exploitability & blast radius. | Validate with product configuration. |
+| 6 | User interaction required | [www.first.org/cvss](https://www.first.org/cvss/) | Free public | Impacts exploitability conditions. | User interaction can be bypassed in some real-world chains. |
+| 7 | Exploit preconditions | [projectzero.google](https://projectzero.google/), [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Defines required configuration or state. | Crucial for false-positive reduction. |
+| 8 | Data sensitivity | [www.cisecurity.org/controls](https://www.cisecurity.org/controls) | Free public | Determines business impact. | Internal classification required. |
+| 9 | Compensating controls | [public.cyber.mil/stigs](https://public.cyber.mil/stigs/), [www.cisecurity.org/cis- benchmarks](https://www.cisecurity.org/cis-benchmarks) | Free public; CIS benchmarks may require free registration | Controls can reduce practical exploitability. | Document assumptions & evidence. |
+| 10 | Runtime configuration | [docs.dependencytrack.org/datasources/overview](https://docs.dependencytrack.org/datasources/overview/) | Free public docs | Enabled features/modules influence affectedness. | Scanner package matches alone can over-report. |
+| 11 | Feature/module enabled | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source | VEX not-affected reasoning may depend on disabled code paths. | Requires product/runtime evidence. |
+| 12 | Cloud account/project/environment | [github.com/prowler-cloud/prowler](https://github.com/prowler-cloud/prowler) | Free / open-source core; commercial products separate | Cloud context affects exposure & blast radius. | Join vulnerability data with cloud inventory. |
+| 13 | Blast radius | [github.com/salesforce/cloudsplaining](https://github.com/salesforce/cloudsplaining) | Free / open-source | Privilege & dependency spread determine impact. | Requires IAM, network, & data-flow context. |
+| 14 | Business process ownership | [www.cisecurity.org/controls](https://www.cisecurity.org/controls) | Free public | Ownership determines remediation accountability. | Internal data source required. |
+#### 6.5 Detection & remediation
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Scanner finding ID | [dependencytrack.org](https://dependencytrack.org/), [github.com/anchore/grype](https://github.com/anchore/grype), [trivy.dev/docs/latest/scanner/vulnerability](https://trivy.dev/docs/latest/scanner/vulnerability/) | Free / open-source core tools; commercial support/products may exist | Scanner-specific finding identity. | Preserve source scanner & version for reproducibility. |
+| 2 | Detection method | [codeql.github.com](https://codeql.github.com/), [github.com/projectdiscovery/nuclei](https://github.com/projectdiscovery/nuclei), [owasp.org/www-project-top-ten](https://owasp.org/www-project-top-ten/) | Mixed: free/open-source, with some commercial tiers | Indicates whether finding came from SBOM, CPE, package manager, SAST, DAST, IaC, or runtime telemetry. | Different methods have different false-positive characteristics. |
+| 3 | Confidence | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source | Confidence helps rank findings. | Use evidence & source provenance to compute confidence. |
+| 4 | False-positive reason | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source | Captures why a match is not actually exploitable or affected. | VEX justification is key for auditability. |
+| 5 | Fix version | [github.com/advisories](https://github.com/advisories), [osv.dev](https://osv.dev/) | Free public | Remediation target version. | Distro fixed versions may differ due to backports. |
+| 6 | Patch advisory | [access.redhat.com/security/data](https://access.redhat.com/security/data), [ubuntu.com/security/notices](https://ubuntu.com/security/notices), [www.debian.org/security](https://www.debian.org/security/) | Mostly free public; some Red Hat support details may require subscription | Links vulnerability to vendor patch guidance. | Use vendor patch source for production remediation. |
+| 7 | Mitigation | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories), [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Temporary or compensating controls. | Mitigations may be partial & context-specific. |
+| 8 | Workaround | [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Alternative remediation when patch unavailable. | Track expiration & replacement by patch. |
+| 9 | Exploit detection signatures | [github.com/SigmaHQ/sigma](https://github.com/SigmaHQ/sigma), [github.com/VirusTotal/yara](https://github.com/VirusTotal/yara), [github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) | Free / open-source public GitHub repos | Detection content for exploit attempts or compromise. | Validate signatures in environment before high-confidence alerting. |
+| 10 | Regression test | [github.com/google/oss-fuzz](https://github.com/google/oss-fuzz), [google.github.io/oss- fuzz](https://google.github.io/oss-fuzz/) | Free / open-source; OSS-Fuzz service for eligible OSS projects | Tests that a vulnerability class or bug does not reappear. | Useful for secure SDLC feedback loops. |
+| 11 | Verification command | [github.com/anchore/grype](https://github.com/anchore/grype), [github.com/aquasecurity/trivy-db](https://github.com/aquasecurity/trivy-db), [github.com/projectdiscovery/nuclei](https://github.com/projectdiscovery/nuclei) | Free / open-source | Command/procedure to verify vulnerability or remediation state. | Required for repeatable remediation closure. |
+| 12 | SLA due date | [www.cisa.gov/news-events/directives/bod-22-01-reducing-significant-risk-known-exploited- vulnerabilities](https://www.cisa.gov/news-events/directives/bod-22-01-reducing-significant-risk-known-exploited-vulnerabilities), [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public | Remediation deadline derived from KEV, severity, exposure, policy, or business context. | SLA should be policy-driven & context- aware. |
+> #### [*Back to **`Index`***](#index)
+---
+
+---
+
+## C. Weakness Taxonomy, Attack Mapping & AI/ML Vulnerability Context
+
+### 7. CWE, CAPEC, ATT&CK, ATLAS & weakness-to-attack mapping
+#### 7.1 CWE - Common Weakness Enumeration
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CWE home | [cwe.mitre.org](https://cwe.mitre.org/) | Free public | Common Weakness Enumeration root. Provides standardized weakness taxonomy. | CVE-to-CWE mappings are sometimes missing, broad, or imprecise. |
+| 2 | CWE downloads | [cwe.mitre.org/data/downloads.html](https://cwe.mitre.org/data/downloads.html) | Free public downloads | XML, CSV, archive bundles, & views for machine ingestion. | Use downloadable structured data for robust taxonomy ingestion. |
+| 3 | CWE latest PDF | [cwe.mitre.org/data/published/cwe_latest.pdf](https://cwe.mitre.org/data/published/cwe_latest.pdf) | Free public PDF | PDF publication of latest CWE content. | Better for manual reference than automated ingestion. |
+| 4 | CWE reports | [cwe.mitre.org/data/reports.html](https://cwe.mitre.org/data/reports.html) | Free public | Reports & curated views of CWE data. | Useful for understanding categories, views, & prioritization. |
+| 5 | CWE chains & composites | [cwe.mitre.org/data/reports/chains_and_composites.html](https://cwe.mitre.org/data/reports/chains_and_composites.html) | Free public | Describes weakness chains & composite weaknesses. | Important for modeling multi-step root causes & compound vulnerabilities. |
+| 6 | CWE schema docs | [cwe.mitre.org/documents/schema/index.html](https://cwe.mitre.org/documents/schema/index.html) | Free public | Schema documentation for CWE data. | Use for parser validation & taxonomy consistency. |
+
+| 7 | CWE data definitions | [cwe.mitre.org/data/definitions/1000.html](https://cwe.mitre.org/data/definitions/1000.html) | Free public | CWE views & weakness hierarchy. | Useful for grouping weaknesses into higher-level categories. |
+| 8 | CWE Top 25 | [cwe.mitre.org/top25](https://cwe.mitre.org/top25/) | Free public | Most dangerous software weaknesses. | Good for model priors & training labels, but not a substitute for context-specific risk. |
+| 9 | CWE AI/ML category - CWE-1448 | [cwe.mitre.org/data/definitions/1448.html](https://cwe.mitre.org/data/definitions/1448.html) | Free public | AI/ML-related weakness category. | Emerging taxonomy area; expect coverage to evolve. |
+| 10 | CWE AI Working Group | [cwe.mitre.org/community/working_groups.html](https://cwe.mitre.org/community/working_groups.html) | Free public | CWE/CVE AI Working Group context. | Useful for tracking evolution of AI-related weakness classifications. |
+#### 7.2 CAPEC - attack patterns
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CAPEC home | [capec.mitre.org](https://capec.mitre.org/) | Free public | Catalog of attack patterns used to exploit weaknesses. | CAPEC bridges weakness taxonomy & attacker behavior patterns. |
+| 2 | CAPEC downloads | [capec.mitre.org/data/downloads.html](https://capec.mitre.org/data/downloads.html) | Free public downloads | XML/CSV attack-pattern bundles. | Prefer structured downloads for ingestion. |
+| 3 | CAPEC schema docs | [capec.mitre.org/documents/schema/index.html](https://capec.mitre.org/documents/schema/index.html) | Free public | Schema docs for CAPEC data. | Important for parser validation. |
+| 4 | CAPEC data index | [capec.mitre.org/data/index.html](https://capec.mitre.org/data/index.html) | Free public | Browsable CAPEC entries & views. | Useful for manual mapping & explanation. |
+| 5 | MITRE CTI repository - ATT&CK & CAPEC in STIX | [github.com/mitre/cti](https://github.com/mitre/cti) | Free / open-source public GitHub repo | MITRE ATT&CK & CAPEC datasets expressed in STIX 2.0. | Useful for graph-based relationships. May differ from newer ATT&CK-specific STIX repo content. |
+#### 7.3 MITRE ATT&CK
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | ATT&CK Enterprise Matrix | [attack.mitre.org/matrices/enterprise](https://attack.mitre.org/matrices/enterprise/) | Free public | Enterprise adversary tactics & techniques. | More relevant for adversary behavior after exploitation than raw CVE severity. |
+| 2 | ATT&CK Matrices | [attack.mitre.org/matrices](https://attack.mitre.org/matrices/) | Free public | ATT&CK matrices across domains. | Useful for selecting enterprise, mobile, ICS, or other domain views. |
+| 3 | ATT&CK Data & Tools | [attack.mitre.org/resources/attack-data-and-tools](https://attack.mitre.org/resources/attack-data-and-tools/) | Free public | ATT&CK Navigator, STIX/TAXII, Workbench, & tooling references. | Prefer machine-readable STIX/TAXII for ingestion. |
+| 4 | ATT&CK STIX data repo | [github.com/mitre-attack/attack-stix-data](https://github.com/mitre-attack/attack-stix-data) | Free / open-source public GitHub repo | Machine-readable ATT&CK STIX data. | Best source for automated technique/tactic ingestion. |
+| 5 | MITRE CTI repository | [github.com/mitre/cti](https://github.com/mitre/cti) | Free / open-source public GitHub repo | MITRE CTI STIX datasets. | Keep for historical/related STIX content. |
+| 6 | ATT&CK Navigator | [mitre-attack.github.io/attack-navigator](https://mitre-attack.github.io/attack-navigator/) | Free / open-source web tool | Visual mapping of techniques to campaigns, risks, or controls. | Useful for reporting & matrix visualization, not raw vuln ingestion. |
+| 7 | ATT&CK Workbench | [github.com/center-for-threat-informed-defense/attack-workbench-frontend](https://github.com/center-for-threat-informed-defense/attack-workbench-frontend) | Free / open-source public GitHub repo | Tooling for ATT&CK customization & management. | Useful for internal technique mapping workflows. |
+| 8 | ATT&CK TAXII server docs | [attack.mitre.org/resources/attack-data-and-tools](https://attack.mitre.org/resources/attack-data-and-tools/) | Free public | TAXII/STIX access docs. | Same source as ATT&CK Data & Tools; retained to preserve the explicit TAXII reference. |
+| 9 | ATT&CK Sync | [github.com/center-for-threat-informed-defense/attack-sync](https://github.com/center-for-threat-informed-defense/attack-sync) | Free / open-source public GitHub repo | Tooling for consuming MITRE ATT&CK version updates into internal systems & processes. | Useful for keeping local ATT&CK technique mappings current. |
+| 10 | MITRE ATT&CK Python | [github.com/mitre-attack/mitreattack-python](https://github.com/mitre-attack/mitreattack-python) | Free / open-source public GitHub repo | Python module for working with ATT&CK datasets. | Useful for programmatic ATT&CK ingestion, transformation, & analysis. |
+| 11 | ATT&CK Navigator GitHub repo | [github.com/mitre-attack/attack-navigator](https://github.com/mitre-attack/attack-navigator) | Free / open-source public GitHub repo | Source repository for the ATT&CK Navigator web app. | Complements the hosted Navigator URL; useful for local customization & offline visualization workflows. |
+#### 7.4 AI/ML-specific adversary frameworks
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | MITRE ATLAS | [atlas.mitre.org](https://atlas.mitre.org/) | Free public | Living knowledge base of adversary tactics & techniques against AI-enabled systems. | More directly relevant to AI systems than ATT&CK Enterprise alone. |
+| 2 | MITRE ATLAS matrix | [atlas.mitre.org/matrices/ATLAS](https://atlas.mitre.org/matrices/ATLAS) | Free public | Matrix view of AI adversary tactics & techniques. | Useful for AI threat modeling & impact mapping. |
+| 3 | MITRE ATLAS techniques | [atlas.mitre.org/techniques](https://atlas.mitre.org/techniques) | Free public | Technique-level ATLAS entries. | Use for structured AI attack technique mapping. |
+| 4 | MITRE ATLAS case studies | [atlas.mitre.org/studies](https://atlas.mitre.org/studies) | Free public | Case studies of AI attacks & failures. | Helpful for real-world analogs & model training examples. |
+| 5 | MITRE ATLAS data repository / case-study data | [github.com/mitre-atlas/atlas-data](https://github.com/mitre-atlas/atlas-data), [case studies](https://github.com/mitre-atlas/atlas-data/tree/main/data/case-studies) | Free / open-source public GitHub repo | Structured ATLAS data, including case-study material. | Prefer this for machine-readable ATLAS case-study ingestion. |
+| 6 | MITRE ATLAS GitHub / Adversarial ML Threat Matrix | [github.com/mitre/advmlthreatmatrix](https://github.com/mitre/advmlthreatmatrix) | Free / open-source public GitHub repo | Historical & structured project data for adversarial ML threat matrix. | May not be the most current ATLAS view; keep for lineage. |
+| 7 | MITRE SAFE-AI report | [atlas.mitre.org/pdf-files/SAFEAI_Full_Report.pdf](https://atlas.mitre.org/pdf-files/SAFEAI_Full_Report.pdf) | Free public PDF | AI system risk mapping across model, data, platform, & environment layers. | Useful for AI-specific control mapping & architecture risk analysis. |
+| 8 | OWASP Top 10 for LLM Applications | [owasp.org/www-project-top-10-for-large-language-model-applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | Free / open-source community project | Practical LLM application vulnerability taxonomy. | Useful for AI appsec detection categories beyond CVE. |
+| 9 | OWASP Top 10 for Machine Learning Security | [owasp.org/www-project-machine-learning-security-top-10](https://owasp.org/www-project-machine-learning-security-top-10/) | Free / open-source community project | ML-specific application/security risk taxonomy. | Complements ATLAS with appsec-oriented framing. |
+| 10 | OWASP AI Exchange | [owaspai.org](https://owaspai.org/) | Free public community resource | AI security risks, controls, & threat modeling references. | Useful for governance & risk mapping. |
+| 11 | NIST AI Risk Management Framework | [www.nist.gov/itl/ai-risk-management-framework](https://www.nist.gov/itl/ai-risk-management-framework) | Free public | AI risk management framework. | Useful for risk controls, governance, & impact framing. |
+| 12 | NIST AI RMF 1.0 PDF | [nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf) | Free public PDF | AI RMF 1.0 document. | PDF reference; not a vulnerability feed. |
+| 13 | NIST AI 600-1 - Generative AI Profile | [www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) | Free public | GenAI risk profile companion to AI RMF. | Useful for LLM/generative AI-specific risk categories. |
+| 14 | NIST adversarial machine learning taxonomy | [www.nist.gov/publications/adversarial-machine-learning-taxonomy-and-terminology-attacks-and-mitigations](https://www.nist.gov/publications/adversarial-machine-learning-taxonomy-and-terminology-attacks-and-mitigations) | Free public | Taxonomy & terminology for adversarial ML attacks & mitigations. | Good for consistent AI vulnerability vocabulary. |
+| 15 | MLCommons AI Safety | [mlcommons.org/working-groups/ai-safety](https://mlcommons.org/working-groups/ai-safety/) | Free public community resource | AI safety benchmarks & working group context. | Useful for AI system risk evaluation, not direct CVE matching. |
+| 16 | MITRE ATLAS AI Risk Database | [github.com/mitre-atlas/ai-risk-database](https://github.com/mitre-atlas/ai-risk-database) | Free / open-source public GitHub repo | AI supply-chain risk database associated with MITRE ATLAS ecosystem work. | Useful for AI-specific supply-chain risk analysis & case-study style enrichment. |
+| 17 | Cisco AI Defense Skill Scanner | [github.com/cisco-ai-defense/skill-scanner](https://github.com/cisco-ai-defense/skill-scanner) | Free / open-source public GitHub repo | Security scanner for agent skills. | Useful for AI-agent/tooling security review, prompt/tool-surface assessment, & skill-level exposure analysis. |
+> #### [*Back to **`Index`***](#index)
+---
+
+---
+
+## D. Affectedness Truth: Package, OS, Vendor, Cloud, ICS & Product Advisories
+
+### 8. Open-source vulnerability databases & package advisory sources
+#### 8.1 OSV ecosystem
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | OSV main site | [osv.dev](https://osv.dev/) | Free public / open data | Aggregates OSS vulnerabilities by package ecosystem, version, commit, & aliases. Key for dependency-based detection. | OSV is package/version- centric & often better than CPE for OSS packages. Coverage depends on upstream ecosystem feeds. |
 | 2 | OSV vulnerability list | [osv.dev/list](https://osv.dev/list) | Free public | Human-browsable OSV records. | Useful for manual triage & ecosystem browsing. Prefer API/full downloads for automation. |
 | 3 | OSV full database download | [google.github.io/osv.dev/data/#full-database-download](https://google.github.io/osv.dev/data/#full-database-download) | Free public / open data | Full database ZIP, including withdrawn records, via `gs://osv-vulnerabilities/all.zip`. | Best for local mirroring. Preserve withdrawn records for historical auditability. |
 | 4 | OSV data sources page | [google.github.io/osv.dev/data](https://google.github.io/osv.dev/data/) | Free public | Per-ecosystem downloads & full-database download. | Useful for targeted ecosystem ingestion. |
+
 | 5 | OSV schema rendered spec | [ossf.github.io/osv-schema](https://ossf.github.io/osv-schema/) | Free public / open-source | Standard interchange format for OSS vulnerability records. | Handle aliases, affected ranges, fixed versions, withdrawn records, & ecosystem-specific semantics. |
 | 6 | OSV schema GitHub repo | [github.com/ossf/osv-schema](https://github.com/ossf/osv-schema) | Free / open-source public GitHub repo | Schema source, releases, bindings, & tooling. | Track schema versions & validation changes over time. |
 | 7 | OSV API docs | [google.github.io/osv.dev/post-v1-query](https://google.github.io/osv.dev/post-v1-query/) | Free public API | Query vulnerabilities by package, version, commit, or vulnerability ID. | Good for online lookup. Use full downloads for high-volume local matching. |
 | 8 | OSV Scanner | [google.github.io/osv-scanner](https://google.github.io/osv-scanner/) | Free public / open-source | Reference scanner using OSV data. | Useful implementation reference for lockfile parsing & version matching. |
 | 9 | OSV Scanner GitHub | [github.com/google/osv-scanner](https://github.com/google/osv-scanner) | Free / open-source public GitHub repo | Scanner implementation, matching logic, & lockfile parsing. | Review for practical matching edge cases. |
 | 10 | OSV ecosystem list | [osv.dev/list](https://osv.dev/list) | Free public | Ecosystem browsing for Maven, npm, PyPI, Go, crates.io, Debian, Alpine, Ubuntu, Wolfi, OSS-Fuzz, etc. | Repeats the list URL intentionally because it serves both record browsing & ecosystem discovery. |
-### 2.2 GitHub Advisory Database
+| 11 | OSV.dev GitHub repository | [github.com/google/osv.dev](https://github.com/google/osv.dev) | Free / open-source public GitHub repo | Source/infrastructure repo for OSV.dev, API, data dump references, importer/conversion tooling, workers, docs, & service code. | Useful for understanding OSV implementation, feed conversion, API behavior & ecosystem semantics. |
+#### 8.2 GitHub Advisory Database
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | GitHub Advisory Database - web | [github.com/advisories](https://github.com/advisories) | Free public | GitHub-reviewed, unreviewed, malware, GHSA, & CVE advisory records across ecosystems. | GHSA records can exist without CVEs. Preserve alias relationships between GHSA, CVE, & OSV. |
 | 2 | GitHub Advisory Database repo | [github.com/github/advisory-database](https://github.com/github/advisory-database) | Free / open-source public GitHub repo | Raw advisory data for local ingestion. | Use for mirroring; validate ecosystem/version range semantics. |
-| 3 | About GitHub Advisory Database | [docs.github.com/en/code-security/concepts/vulnerability-reporting-and-management/about-the-github-advisory-database](https://docs.github.com/en/code-security/concepts/vulnerability-reporting-and-management/about-the-github-advisory-database) | Free public docs | Explains reviewed, unreviewed, & malware advisory model. | Important for confidence scoring. Reviewed vs unreviewed status affects dependability. |
+| 3 | About GitHub Advisory Database | [docs.github.com/en/code-security/concepts/vulnerability-reporting-and- management/about-the-github-advisory-database](https://docs.github.com/en/code-security/concepts/vulnerability-reporting-and-management/about-the-github-advisory-database) | Free public docs | Explains reviewed, unreviewed, & malware advisory model. | Important for confidence scoring. Reviewed vs unreviewed status affects dependability. |
 | 4 | GitHub Security Advisory GraphQL object | [docs.github.com/en/graphql/reference/objects#securityadvisory](https://docs.github.com/en/graphql/reference/objects#securityadvisory) | Free docs; API usage may require GitHub auth token | Programmatic advisory metadata access via GraphQL. | Useful for complex filtered queries. Requires API authentication for robust use. |
 | 5 | GitHub REST API - global security advisories | [docs.github.com/en/rest/security-advisories/global-advisories](https://docs.github.com/en/rest/security-advisories/global-advisories) | Free public API; auth recommended for higher rate limits | REST access for listing & retrieving global security advisories. | Easier to integrate than GraphQL for many ingestion jobs. |
 | 6 | GitHub REST API - security advisories root | [docs.github.com/en/rest/security-advisories](https://docs.github.com/en/rest/security-advisories) | Free public docs; some repository endpoints require permissions | Root documentation for global & repository security advisory endpoints. | Use to distinguish global advisories from repo-private advisories. |
 | 7 | GitHub Dependabot alerts REST API | [docs.github.com/en/rest/dependabot/alerts](https://docs.github.com/en/rest/dependabot/alerts) | Requires GitHub account, repository access, & relevant permissions | Repository-specific vulnerability exposure from dependency graph. | Requires repo access. Useful for actual asset exposure, not just global vulnerability existence. |
-| 8 | Dependabot supported ecosystems | [docs.github.com/en/code-security/reference/supply-chain-security/supported-ecosystems-and-repositories](https://docs.github.com/en/code-security/reference/supply-chain-security/supported-ecosystems-and-repositories) | Free public docs | Supported ecosystem list for GitHub dependency graph & alerts. | Coverage constraints impact blind spots in detection. |
+| 8 | Dependabot supported ecosystems | [docs.github.com/en/code-security/reference/supply-chain- security/supported-ecosystems-and-repositories](https://docs.github.com/en/code-security/reference/supply-chain-security/supported-ecosystems-and-repositories) | Free public docs | Supported ecosystem list for GitHub dependency graph & alerts. | Coverage constraints impact blind spots in detection. |
+
 | 9 | GitHub malware advisories | [github.com/advisories?query=type%3Amalware](https://github.com/advisories?query=type%3Amalware) | Free public | Malicious package advisories. | Useful for supply-chain compromise detection beyond CVE-style vulnerabilities. |
 | 10 | GitHub npm advisories | [github.com/advisories?query=ecosystem%3Anpm](https://github.com/advisories?query=ecosystem%3Anpm) | Free public | npm ecosystem advisories. | Version ranges & semver semantics are ecosystem-specific. |
 | 11 | GitHub pip advisories | [github.com/advisories?query=ecosystem%3Apip](https://github.com/advisories?query=ecosystem%3Apip) | Free public | Python/PyPI advisories. | Cross-check with PyPA advisory DB & OSV. |
@@ -183,185 +576,78 @@ These are useful as secondary sources, not canonical replacements.
 | 18 | GitHub Pub advisories | [github.com/advisories?query=ecosystem%3Apub](https://github.com/advisories?query=ecosystem%3Apub) | Free public | Dart/Pub advisories. | Coverage may vary by ecosystem maturity. |
 | 19 | GitHub Swift advisories | [github.com/advisories?query=ecosystem%3Aswift](https://github.com/advisories?query=ecosystem%3Aswift) | Free public | Swift package advisories. | Useful for Swift Package Manager ecosystems. |
 | 20 | GitHub Erlang advisories | [github.com/advisories?query=ecosystem%3Aerlang](https://github.com/advisories?query=ecosystem%3Aerlang) | Free public | Erlang/Hex advisories. | Validate package naming conventions against Hex. |
-### 2.3 Language & package ecosystem advisory databases
-#### 2.3.1 Go
+#### 8.3 Language & package ecosystem advisory databases
+##### 8.3.1 Go
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Go Vulnerability Database | [vuln.go.dev](https://vuln.go.dev/) | Free public / open data | Official Go vulnerability database for Go modules. | Strong source for Go-specific affected symbols, modules, packages, & fixed versions. |
 | 2 | Go vulnerability database docs | [go.dev/doc/security/vuln/database](https://go.dev/doc/security/vuln/database) | Free public docs | Explains Go vulnerability DB data model & OSV usage. | Important for correct ingestion & symbol/package-level interpretation. |
 | 3 | Go vuln browser | [pkg.go.dev/vuln](https://pkg.go.dev/vuln/) | Free public | Human-readable curated Go vulnerability reports. | Useful for triage & manual review. |
 | 4 | Go vuln tooling | [pkg.go.dev/golang.org/x/vuln/cmd/govulncheck](https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck) | Free / open-source Go module | Go source/binary vulnerability checking. | Can reduce false positives by analyzing call reachability in Go code. |
-#### 2.3.2 Rust
+##### 8.3.2 Rust
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | RustSec | [rustsec.org](https://rustsec.org/) | Free public / open-source ecosystem | Rust crate advisory ecosystem. | Often includes Rust-specific unsoundness, yanked crates, & ecosystem-specific risk. |
 | 2 | RustSec advisory DB repo | [github.com/RustSec/advisory-db](https://github.com/RustSec/advisory-db) | Free / open-source public GitHub repo | Machine-ingestible Rust advisories. | Good for local ingestion & cargo-audit compatible workflows. |
 | 3 | RustSec advisories browser | [rustsec.org/advisories](https://rustsec.org/advisories/) | Free public | Human-browsable Rust advisories. | Useful for manual triage. |
 | 4 | cargo-audit | [github.com/RustSec/rustsec/tree/main/cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit) | Free / open-source public GitHub repo | RustSec-based vulnerability scanner. | Reference implementation for Rust dependency scanning. |
-#### 2.3.3 Python / PyPI
+##### 8.3.3 Python / PyPI
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | PyPA advisory database | [github.com/pypa/advisory-database](https://github.com/pypa/advisory-database) | Free / open-source public GitHub repo | Python/PyPI advisory source. | Use with OSV & GitHub advisories for better Python coverage. |
 | 2 | PyPI security page | [pypi.org/security](https://pypi.org/security/) | Free public | PyPI security reporting & advisory context. | Useful for process context, not necessarily complete advisory ingestion. |
 | 3 | pip-audit | [github.com/pypa/pip-audit](https://github.com/pypa/pip-audit) | Free / open-source public GitHub repo | Python dependency vulnerability scanner. | Reference implementation for Python dependency assessment. |
 | 4 | Safety DB | [github.com/pyupio/safety-db](https://github.com/pyupio/safety-db) | Free public GitHub repo; related products may be commercial | Historical Python advisory source. | Validate freshness & licensing before relying on it. |
-#### 2.3.4 JavaScript / npm
+##### 8.3.4 JavaScript / npm
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | npm advisories via GitHub | [github.com/advisories?query=ecosystem%3Anpm](https://github.com/advisories?query=ecosystem%3Anpm) | Free public | npm ecosystem vulnerability advisories. | Semver ranges, lockfiles, transitive dependencies, & malicious packages require careful parsing. |
 | 2 | Node.js Security Working Group | [github.com/nodejs/security-wg](https://github.com/nodejs/security-wg) | Free / open-source public GitHub repo | Node ecosystem security coordination & historical advisory sources. | Some historical records may be superseded by GitHub Advisory DB. |
 | 3 | npm audit docs | [docs.npmjs.com/cli/commands/npm-audit](https://docs.npmjs.com/cli/commands/npm-audit) | Free public docs | Documents npm audit behavior. | Useful to understand scanner behavior, dependency tree handling, & remediation suggestions. |
 | 4 | Socket.dev security research | [socket.dev/blog](https://socket.dev/blog) | Free public blog; product/API features may be commercial | Malicious package & JS supply-chain threat intel. | Research source. Validate indicators & package claims against primary registries. |
-#### 2.3.5 Java / Maven / JVM
+##### 8.3.5 Java / Maven / JVM
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Sonatype OSS Index | [ossindex.sonatype.org](https://ossindex.sonatype.org/) | Free tier / API terms; Sonatype products may be commercial | OSS vulnerability intelligence commonly used for Maven & other ecosystems. | Commercial/community source. Validate API terms, limits, & provenance. |
 | 2 | Sonatype vulnerability database | [sonatype.com/resources/vulnerability-database](https://sonatype.com/resources/vulnerability-database) | Free public search / commercial ecosystem | Sonatype vulnerability intelligence database. | Useful for enrichment & triage, but not canonical. |
 | 3 | Maven Central | [central.sonatype.com](https://central.sonatype.com/) | Free public | Package identity & metadata for JVM packages. | Not a vulnerability DB, but essential for coordinate resolution & metadata. |
 | 4 | OSS Index API docs | [ossindex.sonatype.org/doc/rest](https://ossindex.sonatype.org/doc/rest) | Free tier / API terms | REST API access for OSS Index. | Consider rate limits, authentication, & terms before ingestion. |
-#### 2.3.6 PHP / Composer
+##### 8.3.6 PHP / Composer
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | FriendsOfPHP security advisories | [github.com/FriendsOfPHP/security-advisories](https://github.com/FriendsOfPHP/security-advisories) | Free / open-source public GitHub repo | PHP Composer package advisories. | Historical & ecosystem-specific source. Cross-check with Packagist & GHSA. |
 | 2 | Packagist security advisories API | [packagist.org/apidoc#list-security-advisories](https://packagist.org/apidoc#list-security-advisories) | Free public API docs / public API | Composer package advisory API. | Direct ecosystem source for Composer package advisories. |
 | 3 | Composer audit docs | [getcomposer.org/doc/03-cli.md#audit](https://getcomposer.org/doc/03-cli.md#audit) | Free public docs | Documents Composer audit behavior. | Useful for implementation parity with Composer-native workflows. |
-#### 2.3.7 Ruby
+##### 8.3.7 Ruby
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | RubySec advisory DB | [github.com/rubysec/ruby-advisory-db](https://github.com/rubysec/ruby-advisory-db) | Free / open-source public GitHub repo | RubyGems advisories. | Cross-check with GHSA RubyGems advisories. |
 | 2 | Bundler audit | [github.com/rubysec/bundler-audit](https://github.com/rubysec/bundler-audit) | Free / open-source public GitHub repo | Ruby dependency vulnerability scanner. | Reference implementation for Gemfile.lock scanning. |
-#### 2.3.8 .NET / NuGet
+##### 8.3.8 .NET / NuGet
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | NuGet advisories via GitHub | [github.com/advisories?query=ecosystem%3Anuget](https://github.com/advisories?query=ecosystem%3Anuget) | Free public | NuGet ecosystem advisories. | Use with lockfile/project metadata for actual exposure. |
 | 2 | NuGet audit docs | [learn.microsoft.com/en-us/nuget/concepts/auditing-packages](https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages) | Free public docs | Documents NuGet package auditing. | Useful for Microsoft ecosystem parity & remediation guidance. |
-#### 2.3.9 Erlang / Elixir / Hex
+##### 8.3.9 Erlang / Elixir / Hex
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Erlang advisories via GitHub | [github.com/advisories?query=ecosystem%3Aerlang](https://github.com/advisories?query=ecosystem%3Aerlang) | Free public | Erlang/Hex advisories. | Validate ecosystem naming, package coordinates, & version semantics. |
 | 2 | Hex package manager | [hex.pm](https://hex.pm/) | Free public | Package registry for Erlang/Elixir packages. | Registry metadata helps resolve package identity. |
-#### 2.3.10 Dart / Flutter / Pub
+##### 8.3.10 Dart / Flutter / Pub
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Pub advisories via GitHub | [github.com/advisories?query=ecosystem%3Apub](https://github.com/advisories?query=ecosystem%3Apub) | Free public | Dart/Pub advisories. | Coverage depends on GitHub advisory ingestion. |
 | 2 | Dart package repository | [pub.dev](https://pub.dev/) | Free public | Package registry for Dart/Flutter dependencies. | Useful for package identity & version metadata. |
-#### 2.3.11 Swift
+##### 8.3.11 Swift
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Swift advisories via GitHub | [github.com/advisories?query=ecosystem%3Aswift](https://github.com/advisories?query=ecosystem%3Aswift) | Free public | Swift ecosystem advisories. | Coverage depends on GitHub Advisory DB support. |
 | 2 | Swift Package Index | [swiftpackageindex.com](https://swiftpackageindex.com/) | Free public | Swift package metadata & ecosystem context. | Not a vulnerability DB, but useful for package discovery & metadata. |
 > #### [*Back to **`Index`***](#index)
 ---
-## 3. Exploitation, prioritization, severity & risk scoring
-### 3.1 Known exploited vulnerability sources
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CISA KEV catalog - web | [www.cisa.gov/known-exploited-vulnerabilities-catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | Free public | Authoritative catalog of known exploited vulnerabilities. Critical for prioritization & remediation urgency. | KEV is a strong exploitation signal but not a complete list of all exploited vulnerabilities. |
-| 2 | CISA KEV print view | [www.cisa.gov/known-exploited-vulnerabilities-catalog-print](https://www.cisa.gov/known-exploited-vulnerabilities-catalog-print) | Free public | Human-readable print-oriented KEV view. | Useful for documentation & manual review; use JSON for automation. |
-| 3 | CISA KEV JSON feed | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public feed | Machine-readable KEV feed. | Primary automation source for KEV ingestion. Monitor `dateAdded` & due dates. |
-| 4 | CISA KEV JSON schema | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json) | Free public feed | Schema for KEV JSON validation. | Use for ingestion validation. Schema changes should trigger parser review. |
-| 5 | CISA KEV GitHub mirror | [github.com/cisagov/kev-data](https://github.com/cisagov/kev-data) | Free / open-source public GitHub repo | GitHub mirror of KEV data. | Useful for Git-based diffing & historical tracking. Treat CISA official feed as source of truth. |
-| 6 | VulnCheck KEV | [vulncheck.com/kev](https://vulncheck.com/kev) | Commercial; limited public info may exist | Expanded KEV-like exploitation intelligence. | Not identical to CISA KEV. Validate definitions, coverage, licensing, & freshness. |
-| 7 | Shadowserver reports | [www.shadowserver.org](https://www.shadowserver.org/) | Free for eligible organizations; access/registration may be required | Internet-scale exploitation & exposure observations. | Useful for exposure/scan telemetry. Data may be aggregated & require access setup. |
-| 8 | GreyNoise Visualizer | [viz.greynoise.io](https://viz.greynoise.io/) | Free tier / paid plans | Internet scanning/exploitation noise & actor context. | Helps distinguish benign scanning, mass exploitation, & opportunistic activity. |
-| 9 | GreyNoise API docs | [docs.greynoise.io](https://docs.greynoise.io/) | Free tier / paid plans; API key required | API for IP-based exploitation telemetry enrichment. | API terms, quotas, & plan level can affect automation. |
-### 3.2 Exploit prediction & scoring
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | FIRST EPSS overview | [www.first.org/epss](https://www.first.org/epss/) | Free public / open data | Exploit Prediction Scoring System. Provides probability-style exploit-likelihood signals. | EPSS predicts exploitation probability, not impact. Use with CVSS, KEV, exposure, & asset criticality. |
-| 2 | FIRST EPSS API | [www.first.org/epss/api](https://www.first.org/epss/api) | Free public API | API endpoint for EPSS scores. | Useful for daily enrichment. Store score date because EPSS changes over time. |
-| 3 | FIRST EPSS data & CSV downloads | [www.first.org/epss/data_stats](https://www.first.org/epss/data_stats) | Free public data downloads | Current & historical EPSS CSV data reference. | Historical scores are useful for model training & retrospective analysis. |
-| 4 | Historical EPSS scores GitHub | [github.com/empiricalsec/epss_scores](https://github.com/empiricalsec/epss_scores) | Free public GitHub repo | Daily historical EPSS snapshots. | Useful for longitudinal training labels. Validate against FIRST releases. |
-| 5 | FIRST CVSS | [www.first.org/cvss](https://www.first.org/cvss/) | Free public | Official CVSS specification home. | CVSS severity must not be treated as exploit likelihood. |
-| 6 | FIRST CVSS v4.0 | [www.first.org/cvss/v4.0/specification-document](https://www.first.org/cvss/v4.0/specification-document) | Free public | CVSS v4.0 specification. | Newer scoring semantics may not be universally populated across vulnerability records yet. |
-| 7 | FIRST CVSS v3.1 | [www.first.org/cvss/v3.1/specification-document](https://www.first.org/cvss/v3.1/specification-document) | Free public | CVSS v3.1 specification. | Still widely used across CVE/NVD/vendor data. |
-| 8 | NVD CVSS resources | [nvd.nist.gov/vuln-metrics/cvss](https://nvd.nist.gov/vuln-metrics/cvss) | Free public | CVSS calculators & vector references. | Useful for parsing & validating NVD scoring data. |
-### 3.3 Decision-support frameworks
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CISA SSVC | [www.cisa.gov/stakeholder-specific-vulnerability-categorization-ssvc](https://www.cisa.gov/stakeholder-specific-vulnerability-categorization-ssvc) | Free public | Stakeholder-Specific Vulnerability Categorization for vulnerability response decisions. | Useful for decision automation beyond raw severity. Depends on environmental & mission context. |
-| 2 | CERT/CC SSVC project | [github.com/CERTCC/SSVC](https://github.com/CERTCC/SSVC) | Free / open-source public GitHub repo | SSVC model artifacts, examples, & discussions. | Useful for implementing SSVC decision trees & decision points. |
-| 3 | CISA Vulnrichment | [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment) | Free / open-source public GitHub repo | CISA ADP enrichment & SSVC decision points. | Coverage is not universal. Preserve missing/null state distinctly from “low risk.” |
-| 4 | CISA Binding Operational Directive 22-01 | [www.cisa.gov/news-events/directives/bod-22-01-reducing-significant-risk-known-exploited-vulnerabilities](https://www.cisa.gov/news-events/directives/bod-22-01-reducing-significant-risk-known-exploited-vulnerabilities) | Free public | Operational requirement context for KEV remediation. | Primarily binding for U.S. federal civilian agencies but useful as industry prioritization guidance. |
-| 5 | CISA Cybersecurity Advisories | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories) | Free public | Broader CISA advisory feed. | Useful for emergent campaigns, vendor alerts, & remediation guidance. |
-| 6 | CISA Alerts | [www.cisa.gov/news-events/cybersecurity-advisories](https://www.cisa.gov/news-events/cybersecurity-advisories) | Free public | CISA alert/advisory listing. | May overlap with other CISA pages. Deduplicate by advisory ID/date. |
-### 3.4 Public exploit / proof-of-concept / weaponization signals
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | Exploit-DB | [www.exploit-db.com](https://www.exploit-db.com/) | Free public | Public exploit archive. Strong signal for PoC availability. | Public PoC does not always mean reliable weaponization; verify exploit quality & target version. |
-| 2 | SearchSploit | [www.exploit-db.com/searchsploit](https://www.exploit-db.com/searchsploit) | Free / open-source tool | CLI interface for Exploit-DB. | Useful for local workflows & offline search. |
-| 3 | Exploit-DB GitLab mirror | [gitlab.com/exploit-database/exploitdb](https://gitlab.com/exploit-database/exploitdb) | Free public GitLab repo | Git mirror of Exploit-DB content. | Useful for local indexing & diffing. |
-| 4 | Metasploit Framework | [github.com/rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework) | Free / open-source public GitHub repo; commercial Rapid7 products separate | Exploit framework containing modules, payloads, & auxiliary checks. | A Metasploit module is a stronger operationalization signal than a bare PoC. |
-| 5 | Metasploit exploit modules | [github.com/rapid7/metasploit-framework/tree/master/modules/exploits](https://github.com/rapid7/metasploit-framework/tree/master/modules/exploits) | Free / open-source public GitHub repo | Practical signal that a vulnerability has weaponized exploit implementation. | Module maturity, reliability, & target coverage vary. |
-| 6 | Packet Storm Security exploits | [packetstormsecurity.com/files/tags/exploit](https://packetstormsecurity.com/files/tags/exploit/) | Free public | Public exploit & advisory archive. | Quality & metadata normalization vary; cross-reference CVE IDs. |
-| 7 | 0day.today | [0day.today](https://0day.today/) | Mixed; some access may require account/payment | Public zero-day/exploit listing. | Use carefully. Legal, provenance, accuracy, & quality may vary substantially. |
-| 8 | Project Zero blog | [googleprojectzero.blogspot.com](https://googleprojectzero.blogspot.com/) | Free public | High-quality root-cause & exploitation writeups. | Excellent for model features around exploitability primitives & bug classes. |
-| 9 | Project Zero issue tracker - current | [project-zero.issues.chromium.org](https://project-zero.issues.chromium.org/) | Free public; some issue details may be restricted before disclosure | Current Project Zero issue tracker. | Good for disclosure timelines & technical details. |
-| 10 | Project Zero issue tracker - old/historical | [bugs.chromium.org/p/project-zero/issues/list](https://bugs.chromium.org/p/project-zero/issues/list) | Free public historical access where still available | Historical Project Zero issue tracker link. | Keep for old references; prefer current tracker when available. |
-| 11 | CERT/CC Vulnerability Notes Database | [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Coordinated disclosure context, affected vendors, technical notes, & remediation. | Often useful when multiple vendors/products are affected. |
-| 12 | CERT/CC VINCE public notes | [kb.cert.org/vuls/html](https://kb.cert.org/vuls/html/) | Free public | Modern public vulnerability note interface. | Good for public vulnerability notes & coordination context. |
-| 13 | Rapid7 AttackerKB | [attackerkb.com](https://attackerkb.com/) | Free public content; some Rapid7 ecosystem features may be commercial | Exploitability & attacker-value context. | Community/commercial signals should be weighted with provenance & recency. |
-| 14 | Nuclei templates | [github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) | Free / open-source public GitHub repo | Exposed-condition detection templates. Useful for scanning internet-facing assets. | Template presence is a practical detection signal, not proof of vulnerability unless executed correctly. |
-| 15 | ProjectDiscovery Nuclei | [github.com/projectdiscovery/nuclei](https://github.com/projectdiscovery/nuclei) | Free / open-source public GitHub repo; commercial ProjectDiscovery offerings separate | Template-based vulnerability & exposure scanner. | Detection accuracy depends on template quality, target context, & scanner configuration. |
-| 16 | Horizon3.ai research | [www.horizon3.ai/attack-research](https://www.horizon3.ai/attack-research/) | Free public research; commercial products separate | PoC & attack-path writeups. | Useful for exploitability context & reproduction details. |
-| 17 | watchTowr Labs | [labs.watchtowr.com](https://labs.watchtowr.com/) | Free public research; commercial services separate | Vulnerability research & exploitation details. | Research source; verify exact affected versions & mitigations. |
-| 18 | Assetnote research | [www.assetnote.io/resources/research](https://www.assetnote.io/resources/research) | Free public research; commercial services separate | Exploit research & vulnerability detection signatures. | Useful for detection engineering & exposed attack surface context. |
-> #### [*Back to **`Index`***](#index)
----
-## 4. CWE, CAPEC, ATT&CK, ATLAS & weakness-to-attack mapping
-### 4.1 CWE - Common Weakness Enumeration
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CWE home | [cwe.mitre.org](https://cwe.mitre.org/) | Free public | Common Weakness Enumeration root. Provides standardized weakness taxonomy. | CVE-to-CWE mappings are sometimes missing, broad, or imprecise. |
-| 2 | CWE downloads | [cwe.mitre.org/data/downloads.html](https://cwe.mitre.org/data/downloads.html) | Free public downloads | XML, CSV, archive bundles, & views for machine ingestion. | Use downloadable structured data for robust taxonomy ingestion. |
-| 3 | CWE latest PDF | [cwe.mitre.org/data/published/cwe_latest.pdf](https://cwe.mitre.org/data/published/cwe_latest.pdf) | Free public PDF | PDF publication of latest CWE content. | Better for manual reference than automated ingestion. |
-| 4 | CWE reports | [cwe.mitre.org/data/reports.html](https://cwe.mitre.org/data/reports.html) | Free public | Reports & curated views of CWE data. | Useful for understanding categories, views, & prioritization. |
-| 5 | CWE chains & composites | [cwe.mitre.org/data/reports/chains_and_composites.html](https://cwe.mitre.org/data/reports/chains_and_composites.html) | Free public | Describes weakness chains & composite weaknesses. | Important for modeling multi-step root causes & compound vulnerabilities. |
-| 6 | CWE schema docs | [cwe.mitre.org/documents/schema/index.html](https://cwe.mitre.org/documents/schema/index.html) | Free public | Schema documentation for CWE data. | Use for parser validation & taxonomy consistency. |
-| 7 | CWE data definitions | [cwe.mitre.org/data/definitions/1000.html](https://cwe.mitre.org/data/definitions/1000.html) | Free public | CWE views & weakness hierarchy. | Useful for grouping weaknesses into higher-level categories. |
-| 8 | CWE Top 25 | [cwe.mitre.org/top25](https://cwe.mitre.org/top25/) | Free public | Most dangerous software weaknesses. | Good for model priors & training labels, but not a substitute for context-specific risk. |
-| 9 | CWE AI/ML category - CWE-1448 | [cwe.mitre.org/data/definitions/1448.html](https://cwe.mitre.org/data/definitions/1448.html) | Free public | AI/ML-related weakness category. | Emerging taxonomy area; expect coverage to evolve. |
-| 10 | CWE AI Working Group | [cwe.mitre.org/community/working_groups.html](https://cwe.mitre.org/community/working_groups.html) | Free public | CWE/CVE AI Working Group context. | Useful for tracking evolution of AI-related weakness classifications. |
-### 4.2 CAPEC - attack patterns
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CAPEC home | [capec.mitre.org](https://capec.mitre.org/) | Free public | Catalog of attack patterns used to exploit weaknesses. | CAPEC bridges weakness taxonomy & attacker behavior patterns. |
-| 2 | CAPEC downloads | [capec.mitre.org/data/downloads.html](https://capec.mitre.org/data/downloads.html) | Free public downloads | XML/CSV attack-pattern bundles. | Prefer structured downloads for ingestion. |
-| 3 | CAPEC schema docs | [capec.mitre.org/documents/schema/index.html](https://capec.mitre.org/documents/schema/index.html) | Free public | Schema docs for CAPEC data. | Important for parser validation. |
-| 4 | CAPEC data index | [capec.mitre.org/data/index.html](https://capec.mitre.org/data/index.html) | Free public | Browsable CAPEC entries & views. | Useful for manual mapping & explanation. |
-| 5 | MITRE CTI repository - ATT&CK & CAPEC in STIX | [github.com/mitre/cti](https://github.com/mitre/cti) | Free / open-source public GitHub repo | MITRE ATT&CK & CAPEC datasets expressed in STIX 2.0. | Useful for graph-based relationships. May differ from newer ATT&CK-specific STIX repo content. |
-### 4.3 MITRE ATT&CK
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | ATT&CK Enterprise Matrix | [attack.mitre.org/matrices/enterprise](https://attack.mitre.org/matrices/enterprise/) | Free public | Enterprise adversary tactics & techniques. | More relevant for adversary behavior after exploitation than raw CVE severity. |
-| 2 | ATT&CK Matrices | [attack.mitre.org/matrices](https://attack.mitre.org/matrices/) | Free public | ATT&CK matrices across domains. | Useful for selecting enterprise, mobile, ICS, or other domain views. |
-| 3 | ATT&CK Data & Tools | [attack.mitre.org/resources/attack-data-and-tools](https://attack.mitre.org/resources/attack-data-and-tools/) | Free public | ATT&CK Navigator, STIX/TAXII, Workbench, & tooling references. | Prefer machine-readable STIX/TAXII for ingestion. |
-| 4 | ATT&CK STIX data repo | [github.com/mitre-attack/attack-stix-data](https://github.com/mitre-attack/attack-stix-data) | Free / open-source public GitHub repo | Machine-readable ATT&CK STIX data. | Best source for automated technique/tactic ingestion. |
-| 5 | MITRE CTI repository | [github.com/mitre/cti](https://github.com/mitre/cti) | Free / open-source public GitHub repo | MITRE CTI STIX datasets. | Keep for historical/related STIX content. |
-| 6 | ATT&CK Navigator | [mitre-attack.github.io/attack-navigator](https://mitre-attack.github.io/attack-navigator/) | Free / open-source web tool | Visual mapping of techniques to campaigns, risks, or controls. | Useful for reporting & matrix visualization, not raw vuln ingestion. |
-| 7 | ATT&CK Workbench | [github.com/center-for-threat-informed-defense/attack-workbench-frontend](https://github.com/center-for-threat-informed-defense/attack-workbench-frontend) | Free / open-source public GitHub repo | Tooling for ATT&CK customization & management. | Useful for internal technique mapping workflows. |
-| 8 | ATT&CK TAXII server docs | [attack.mitre.org/resources/attack-data-and-tools](https://attack.mitre.org/resources/attack-data-and-tools/) | Free public | TAXII/STIX access docs. | Same source as ATT&CK Data & Tools; retained to preserve the explicit TAXII reference. |
-### 4.4 AI/ML-specific adversary frameworks
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | MITRE ATLAS | [atlas.mitre.org](https://atlas.mitre.org/) | Free public | Living knowledge base of adversary tactics & techniques against AI-enabled systems. | More directly relevant to AI systems than ATT&CK Enterprise alone. |
-| 2 | MITRE ATLAS matrix | [atlas.mitre.org/matrices/ATLAS](https://atlas.mitre.org/matrices/ATLAS) | Free public | Matrix view of AI adversary tactics & techniques. | Useful for AI threat modeling & impact mapping. |
-| 3 | MITRE ATLAS techniques | [atlas.mitre.org/techniques](https://atlas.mitre.org/techniques) | Free public | Technique-level ATLAS entries. | Use for structured AI attack technique mapping. |
-| 4 | MITRE ATLAS case studies | [atlas.mitre.org/studies](https://atlas.mitre.org/studies) | Free public | Case studies of AI attacks & failures. | Helpful for real-world analogs & model training examples. |
-| 5 | MITRE ATLAS GitHub / Adversarial ML Threat Matrix | [github.com/mitre/advmlthreatmatrix](https://github.com/mitre/advmlthreatmatrix) | Free / open-source public GitHub repo | Historical & structured project data for adversarial ML threat matrix. | May not be the most current ATLAS view; keep for lineage. |
-| 6 | MITRE SAFE-AI report | [atlas.mitre.org/pdf-files/SAFEAI_Full_Report.pdf](https://atlas.mitre.org/pdf-files/SAFEAI_Full_Report.pdf) | Free public PDF | AI system risk mapping across model, data, platform, & environment layers. | Useful for AI-specific control mapping & architecture risk analysis. |
-| 7 | OWASP Top 10 for LLM Applications | [owasp.org/www-project-top-10-for-large-language-model-applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | Free / open-source community project | Practical LLM application vulnerability taxonomy. | Useful for AI appsec detection categories beyond CVE. |
-| 8 | OWASP Top 10 for Machine Learning Security | [owasp.org/www-project-machine-learning-security-top-10](https://owasp.org/www-project-machine-learning-security-top-10/) | Free / open-source community project | ML-specific application/security risk taxonomy. | Complements ATLAS with appsec-oriented framing. |
-| 9 | OWASP AI Exchange | [owaspai.org](https://owaspai.org/) | Free public community resource | AI security risks, controls, & threat modeling references. | Useful for governance & risk mapping. |
-| 10 | NIST AI Risk Management Framework | [www.nist.gov/itl/ai-risk-management-framework](https://www.nist.gov/itl/ai-risk-management-framework) | Free public | AI risk management framework. | Useful for risk controls, governance, & impact framing. |
-| 11 | NIST AI RMF 1.0 PDF | [nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf) | Free public PDF | AI RMF 1.0 document. | PDF reference; not a vulnerability feed. |
-| 12 | NIST AI 600-1 - Generative AI Profile | [www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) | Free public | GenAI risk profile companion to AI RMF. | Useful for LLM/generative AI-specific risk categories. |
-| 13 | NIST adversarial machine learning taxonomy | [www.nist.gov/publications/adversarial-machine-learning-taxonomy-and-terminology-attacks-and-mitigations](https://www.nist.gov/publications/adversarial-machine-learning-taxonomy-and-terminology-attacks-and-mitigations) | Free public | Taxonomy & terminology for adversarial ML attacks & mitigations. | Good for consistent AI vulnerability vocabulary. |
-| 14 | MLCommons AI Safety | [mlcommons.org/working-groups/ai-safety](https://mlcommons.org/working-groups/ai-safety/) | Free public community resource | AI safety benchmarks & working group context. | Useful for AI system risk evaluation, not direct CVE matching. |
-> #### [*Back to **`Index`***](#index)
----
-## 5. Vendor, OS, distribution, container & package affectedness feeds
-### 5.1 Scanner-oriented aggregators & vulnerability DB builders
+
+### 9. Vendor, OS, distribution, container & package affectedness feeds
+#### 9.1 Scanner-oriented aggregators & vulnerability DB builders
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | NeuVector vul-dbgen | [github.com/neuvector/vul-dbgen](https://github.com/neuvector/vul-dbgen) | Free / open-source public GitHub repo | Vulnerability DB generation source originally flagged by this project. | Useful as a reference for aggregating distro/package vulnerability feeds. |
@@ -381,18 +667,21 @@ These are useful as secondary sources, not canonical replacements.
 | 15 | Dependency-Track data sources | [docs.dependencytrack.org/datasources/overview](https://docs.dependencytrack.org/datasources/overview/) | Free public docs | Documents Dependency-Track data sources. | Useful for comparing source prioritization. |
 | 16 | Dependency-Track GitHub Advisories datasource | [docs.dependencytrack.org/datasources/github-advisories](https://docs.dependencytrack.org/datasources/github-advisories/) | Free public docs | Mirrors GHSA via GitHub public GraphQL API. | Useful reference for GHSA ingestion. |
 | 17 | OpenVAS / Greenbone Community Feed | [www.greenbone.net/en/community-feed](https://www.greenbone.net/en/community-feed/) | Free community feed; commercial Greenbone feeds/products available | Network vulnerability test feed. | Useful for host/network exposure detection, not package-only matching. |
-| 18 | Wazuh vulnerability detector | [documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/index.html](https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/index.html) | Free public docs; Wazuh open-source, commercial support available | Endpoint vulnerability detection capability. | Useful for host-level package inventory & vuln matching behavior. |
-### 5.2 Red Hat / RHEL / CentOS Stream
+| 18 | Wazuh vulnerability detector | [documentation.wazuh.com/current/user-manual/capabilities/vulnerability- detection/index.html](https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/index.html) | Free public docs; Wazuh open-source, commercial support available | Endpoint vulnerability detection capability. | Useful for host-level package inventory & vuln matching behavior. |
+| 19 | OSV-SCALIBR | [github.com/google/osv-scalibr](https://github.com/google/osv-scalibr) | Free / open-source public GitHub repo | Google library for Software Composition Analysis. | Useful for SCA implementation patterns, package/component extraction, vulnerability matching, & OSV-aligned workflows. |
+| 20 | HarborGuard | [github.com/HarborGuard/HarborGuard](https://github.com/HarborGuard/HarborGuard) | Free / open-source public GitHub repo | Image vulnerability scanning & patching platform with multi-tool integration. | Relevant to container/image vulnerability management, scanner orchestration, & remediation workflow automation. |
+#### 9.2 Red Hat / RHEL / CentOS Stream
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+
 |---:|---|---|---|---|---|
 | 1 | Red Hat Security Data | [access.redhat.com/security/data](https://access.redhat.com/security/data) | Free public data; some product details/support content may require subscription | Red Hat CSAF/VEX, OSV, OVAL, CVE data. | Essential for RHEL affectedness & backport-aware status. |
-| 2 | Red Hat Security Data API | [docs.redhat.com/en/documentation/red_hat_security_data_api/1.0/html-single/red_hat_security_data_api/index](https://docs.redhat.com/en/documentation/red_hat_security_data_api/1.0/html-single/red_hat_security_data_api/index) | Free public docs/API; support content may require subscription | API retrieves Red Hat CVE/advisory/security data. | Prefer API for automation; handle auth/rate constraints if applicable. |
+| 2 | Red Hat Security Data API | [docs.redhat.com/en/documentation/red_hat_security_data_api/1.0/html- single/red_hat_security_data_api/index](https://docs.redhat.com/en/documentation/red_hat_security_data_api/1.0/html-single/red_hat_security_data_api/index) | Free public docs/API; support content may require subscription | API retrieves Red Hat CVE/advisory/security data. | Prefer API for automation; handle auth/rate constraints if applicable. |
 | 3 | Red Hat CVE database | [access.redhat.com/security/security-updates/#/cve](https://access.redhat.com/security/security-updates/#/cve) | Free public | Red Hat CVE lookup. | Human-facing; use data APIs for automation. |
 | 4 | Red Hat OVAL data | [www.redhat.com/security/data/oval](https://www.redhat.com/security/data/oval/) | Free public | OVAL definitions for vulnerability assessment. | Useful for scanner compatibility & package-state evaluation. |
 | 5 | Red Hat CSAF/VEX guidance | [redhatproductsecurity.github.io/security-data-guidelines/csaf-vex](https://redhatproductsecurity.github.io/security-data-guidelines/csaf-vex/) | Free public docs | Explains Red Hat CSAF/VEX & product/package semantics. | Important for correct interpretation of affected/not-affected states. |
 | 6 | Red Hat security advisories | [access.redhat.com/security/security-updates/#/security-advisories](https://access.redhat.com/security/security-updates/#/security-advisories) | Free public listing; some advisory/product support details may require subscription | Red Hat advisory listing. | Useful for patch/remediation references. |
 | 7 | CentOS Stream security tracker | [gitlab.com/redhat/centos-stream/rpms](https://gitlab.com/redhat/centos-stream/rpms) | Free public GitLab | CentOS Stream package source context. | Use carefully; package repo state differs from security advisory truth. |
-### 5.3 Debian
+#### 9.3 Debian
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Debian Security Tracker | [security-tracker.debian.org](https://security-tracker.debian.org/) | Free public | Debian-specific package vulnerability status. | Essential for Debian affectedness & backported patches. |
@@ -401,7 +690,7 @@ These are useful as secondary sources, not canonical replacements.
 | 4 | Debian Security Information | [www.debian.org/security](https://www.debian.org/security/) | Free public | Debian security notices & process context. | Useful for advisory references & manual review. |
 | 5 | Debian Security Tracker docs | [security-team.debian.org/security_tracker.html](https://security-team.debian.org/security_tracker.html) | Free public docs | Explains Debian tracker semantics. | Important for interpreting statuses like fixed, vulnerable, ignored, or postponed. |
 | 6 | Debian OVAL | [www.debian.org/security/oval](https://www.debian.org/security/oval/) | Free public | OVAL data for Debian vulnerability assessment. | Useful for scanner integrations. |
-### 5.4 Ubuntu / Canonical
+#### 9.4 Ubuntu / Canonical
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Ubuntu Security Notices | [ubuntu.com/security/notices](https://ubuntu.com/security/notices) | Free public | Ubuntu security notices for fixed packages. | Useful for patch references & release-specific remediation. |
@@ -412,14 +701,14 @@ These are useful as secondary sources, not canonical replacements.
 | 6 | Ubuntu Security Notices GitHub | [github.com/canonical/ubuntu-security-notices](https://github.com/canonical/ubuntu-security-notices) | Free public GitHub repo | USN/LSN JSON, OSV JSON, & OpenVEX JSON formats. | Strong automation source. Preserve format-specific semantics. |
 | 7 | Ubuntu Security Tracker Git | [git.launchpad.net/ubuntu-cve-tracker](https://git.launchpad.net/ubuntu-cve-tracker) | Free public Git repo | Ubuntu CVE tracker source. | Useful for local mirroring & historical diffing. |
 | 8 | Ubuntu security updates docs | [documentation.ubuntu.com/security/security-updates](https://documentation.ubuntu.com/security/security-updates/) | Free public docs | Ubuntu security update documentation. | Useful for process context & VEX/OVAL interpretation. |
-### 5.5 Alpine
+#### 9.5 Alpine
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Alpine SecDB | [secdb.alpinelinux.org](https://secdb.alpinelinux.org/) | Free public | Current Alpine machine-readable security DB. | Primary Alpine ingestion source. |
 | 2 | Alpine Security Tracker | [security.alpinelinux.org](https://security.alpinelinux.org/) | Free public | Tracks Alpine security issues. | Useful for human review & status context. |
 | 3 | Alpine SecDB deprecated GitHub mirror | [github.com/alpinelinux/alpine-secdb](https://github.com/alpinelinux/alpine-secdb) | Free public GitHub repo; deprecated | Historical Alpine SecDB mirror. | Deprecated; do not rely on it for current ingestion. |
 | 4 | Alpine packages | [pkgs.alpinelinux.org/packages](https://pkgs.alpinelinux.org/packages) | Free public | Alpine package metadata. | Not a vulnerability DB, but helps resolve package names & versions. |
-### 5.6 SUSE / openSUSE
+#### 9.6 SUSE / openSUSE
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | SUSE CSAF | [www.suse.com/support/security/csaf](https://www.suse.com/support/security/csaf/) | Free public | SUSE CSAF advisory data. | Good for vendor-asserted affectedness & remediation states. |
@@ -427,82 +716,90 @@ These are useful as secondary sources, not canonical replacements.
 | 3 | SUSE CVE pages | [www.suse.com/security/cve](https://www.suse.com/security/cve/) | Free public | SUSE CVE lookup. | Human-facing; use machine-readable feeds when available. |
 | 4 | SUSE Security Advisories | [www.suse.com/support/update/announcement](https://www.suse.com/support/update/announcement/) | Free public | SUSE security advisory listing. | Useful for remediation & patch references. |
 | 5 | openSUSE Security Announce | [lists.opensuse.org/archives/list/security-announce@lists.opensuse.org](https://lists.opensuse.org/archives/list/security-announce@lists.opensuse.org/) | Free public | openSUSE security announcement mailing list archive. | Useful for distro-specific disclosure context. |
-### 5.7 Oracle Linux
+#### 9.7 Oracle Linux
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Oracle Security Alerts & Critical Patch Updates | [www.oracle.com/security-alerts](https://www.oracle.com/security-alerts/) | Free public | Oracle CPU, Security Alerts, third-party bulletins, & CVE mappings. | Oracle products often require vendor advisory interpretation beyond NVD. |
 | 2 | Oracle Linux security data | [linux.oracle.com/security](https://linux.oracle.com/security/) | Free public | Oracle Linux security data. | Useful for Oracle Linux affectedness. |
 | 3 | Oracle Linux OVAL | [linux.oracle.com/security/oval](https://linux.oracle.com/security/oval/) | Free public | Oracle Linux OVAL definitions. | Useful for scanner compatibility. |
+
 | 4 | Oracle Linux errata | [linux.oracle.com/errata](https://linux.oracle.com/errata/) | Free public | Oracle Linux errata. | Use for patch mapping & fixed versions. |
 | 5 | Oracle Linux CVE search | [linux.oracle.com/cve](https://linux.oracle.com/cve/) | Free public | Oracle Linux CVE lookup. | Human lookup source; pair with OVAL/errata for automation. |
-### 5.8 Amazon Linux
+#### 9.8 Amazon Linux
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Amazon Linux Security Center | [alas.aws.amazon.com](https://alas.aws.amazon.com/) | Free public | Amazon Linux security advisory portal. | Important for Amazon Linux package affectedness. |
-| 2 | Amazon Linux 2 advisories | [alas.aws.amazon.com/alas2.html](https://alas.aws.amazon.com/alas2.html) | Free public | Amazon Linux 2 advisories. | Version-specific advisory stream. |
-| 3 | Amazon Linux 2023 advisories | [alas.aws.amazon.com/AL2023](https://alas.aws.amazon.com/AL2023/) | Free public | Amazon Linux 2023 advisories. | Keep AL2 & AL2023 separate because package baselines differ. |
-| 4 | AWS Security Bulletins | [aws.amazon.com/security/security-bulletins](https://aws.amazon.com/security/security-bulletins/) | Free public | AWS security bulletins for services & platforms. | Cloud-service affectedness may not map cleanly to package versions. |
-### 5.9 Fedora, AlmaLinux, Rocky, Arch, Gentoo
+| 2 | Amazon Linux ALAS Explorer | [explore.alas.aws.amazon.com](https://explore.alas.aws.amazon.com/) | Free public | Search/explore interface for Amazon Linux advisories. | Useful for manual triage & ALAS advisory lookup. |
+| 3 | Amazon Linux 2 advisories | [alas.aws.amazon.com/alas2.html](https://alas.aws.amazon.com/alas2.html) | Free public | Amazon Linux 2 advisories. | Version-specific advisory stream. |
+| 4 | Amazon Linux 2023 advisories | [alas.aws.amazon.com/AL2023](https://alas.aws.amazon.com/AL2023/) | Free public | Amazon Linux 2023 advisories. | Keep AL2 & AL2023 separate because package baselines differ. |
+| 5 | AWS Security Bulletins | [aws.amazon.com/security/security-bulletins](https://aws.amazon.com/security/security-bulletins/) | Free public | AWS security bulletins for services & platforms. | Cloud-service affectedness may not map cleanly to package versions. |
+| 6 | Amazon Linux 2023 GitHub repository | [github.com/amazonlinux/amazon-linux-2023](https://github.com/amazonlinux/amazon-linux-2023) | Free public GitHub repo | Amazon Linux 2023 project repository. | Useful for Amazon Linux 2023 package context, release notes, source/package metadata references, & distro-specific affectedness workflows. |
+
+#### 9.9 Fedora, AlmaLinux, Rocky, Arch, Gentoo
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Fedora security updates | [bodhi.fedoraproject.org/updates/?type=security](https://bodhi.fedoraproject.org/updates/?type=security) | Free public | Fedora security update advisories. | Useful for Fedora package remediation tracking. |
 | 2 | Fedora packages | [packages.fedoraproject.org](https://packages.fedoraproject.org/) | Free public | Fedora package metadata. | Not a vulnerability DB, but useful for package identity & version resolution. |
-| 3 | AlmaLinux Errata | [errata.almalinux.org](https://errata.almalinux.org/) | Free public | AlmaLinux errata & security advisories. | Useful for RHEL-compatible distro assessment. |
-| 4 | AlmaLinux OSV data | [github.com/AlmaLinux/osv-database](https://github.com/AlmaLinux/osv-database) | Free public GitHub repo | AlmaLinux OSV-formatted data. | Good for OSV-based pipelines. |
-| 5 | Rocky Linux security advisories | [errata.build.resf.org](https://errata.build.resf.org/) | Free public | Rocky Linux errata/security advisories. | Useful for RHEL-compatible distro assessment. |
-| 6 | Arch Linux Security Tracker | [security.archlinux.org](https://security.archlinux.org/) | Free public | Arch Linux security tracker. | Rolling-release semantics differ from fixed-release distros. |
-| 7 | Arch Linux security JSON | [security.archlinux.org/json](https://security.archlinux.org/json) | Free public JSON | Machine-readable Arch security data. | Useful for automation. |
-| 8 | Gentoo GLSA | [security.gentoo.org/glsa](https://security.gentoo.org/glsa/) | Free public | Gentoo Linux Security Advisories. | Useful for Gentoo package affectedness. |
-| 9 | Gentoo GLSA XML | [security.gentoo.org/glsa/feed.rss](https://security.gentoo.org/glsa/feed.rss) | Free public RSS/XML | Gentoo GLSA RSS/XML feed. | Useful for feed-based monitoring. |
-### 5.10 Wolfi / Chainguard
+| 3 | Fedora packages static - Pagure | [pagure.io/fedora-packages-static](https://pagure.io/fedora-packages-static) | Free public Pagure project; manually revalidate | Fedora package-name & metadata/script reference. | Keep in link-check allowlist until manually validated; not a primary security advisory source. |
+| 4 | AlmaLinux Errata | [errata.almalinux.org](https://errata.almalinux.org/) | Free public | AlmaLinux errata & security advisories. | Useful for RHEL-compatible distro assessment. |
+| 5 | AlmaLinux OSV data | [github.com/AlmaLinux/osv-database](https://github.com/AlmaLinux/osv-database) | Free public GitHub repo | AlmaLinux OSV-formatted data. | Good for OSV-based pipelines. |
+| 6 | Rocky Linux security advisories | [errata.build.resf.org](https://errata.build.resf.org/) | Free public | Rocky Linux errata/security advisories. | Useful for RHEL-compatible distro assessment. |
+| 7 | Arch Linux Security Tracker | [security.archlinux.org](https://security.archlinux.org/) | Free public | Arch Linux security tracker. | Rolling-release semantics differ from fixed-release distros. |
+| 8 | Arch Linux security JSON | [security.archlinux.org/json](https://security.archlinux.org/json) | Free public JSON | Machine-readable Arch security data. | Useful for automation. |
+| 9 | Gentoo GLSA | [security.gentoo.org/glsa](https://security.gentoo.org/glsa/) | Free public | Gentoo Linux Security Advisories. | Useful for Gentoo package affectedness. |
+| 10 | Gentoo GLSA XML | [security.gentoo.org/glsa/feed.rss](https://security.gentoo.org/glsa/feed.rss) | Free public RSS/XML | Gentoo GLSA RSS/XML feed. | Useful for feed-based monitoring. |
+
+#### 9.10 Wolfi / Chainguard
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Wolfi OS advisories | [github.com/wolfi-dev/advisories](https://github.com/wolfi-dev/advisories) | Free public GitHub repo | Wolfi OS advisory data. | Important for modern minimal container images. |
 | 2 | Wolfi SecDB generator | [github.com/wolfi-dev/secdb](https://github.com/wolfi-dev/secdb) | Free / open-source public GitHub repo | Generates Wolfi security DBs based on Alpine secdb format. | Useful for understanding feed generation semantics. |
 | 3 | Wolfi OS feed | [packages.wolfi.dev/os/security.json](https://packages.wolfi.dev/os/security.json) | Free public feed | Wolfi package security feed. | Use this for Wolfi base images. |
 | 4 | Chainguard Enterprise feed | [packages.cgr.dev/chainguard/security.json](https://packages.cgr.dev/chainguard/security.json) | Publicly reachable feed; may relate to commercial Chainguard product scope | Chainguard Enterprise package security feed. | Separate from Wolfi OS feed. Confirm entitlement/licensing before commercial redistribution. |
-| 5 | Chainguard security advisories docs | [edu.chainguard.dev/chainguard/chainguard-images/staying-secure/security-advisories/how-chainguard-issues](https://edu.chainguard.dev/chainguard/chainguard-images/staying-secure/security-advisories/how-chainguard-issues/) | Free public docs | Explains Chainguard advisory publication model. | Important for interpreting feed semantics & OSV/secdb transition. |
+
+| 5 | Chainguard security advisories docs | [edu.chainguard.dev/chainguard/chainguard-images/staying- secure/security-advisories/how-chainguard-issues](https://edu.chainguard.dev/chainguard/chainguard-images/staying-secure/security-advisories/how-chainguard-issues/) | Free public docs | Explains Chainguard advisory publication model. | Important for interpreting feed semantics & OSV/secdb transition. |
 | 6 | Wolfi vulnerabilities in OSV | [osv.dev/list?ecosystem=Wolfi](https://osv.dev/list?ecosystem=Wolfi) | Free public | Wolfi ecosystem records in OSV. | Good for OSV-aligned ingestion. |
-| 7 | Chainguard OSV advisory feed context | [www.chainguard.dev/unchained/chainguard-enhances-security-with-osv-advisory-feed](https://www.chainguard.dev/unchained/chainguard-enhances-security-with-osv-advisory-feed) | Free public blog | Context on Chainguard OSV advisory feed. | Blog/context source, not primary feed. |
+| 7 | Chainguard OSV advisory feed context | [www.chainguard.dev/unchained/chainguard-enhances-security-with- osv-advisory-feed](https://www.chainguard.dev/unchained/chainguard-enhances-security-with-osv-advisory-feed) | Free public blog | Context on Chainguard OSV advisory feed. | Blog/context source, not primary feed. |
 > #### [*Back to **`Index`***](#index)
 ---
-## 6. Vendor advisories for enterprise impact assessment
-### 6.1 Major OS, browser & platform vendors
+
+### 10. Vendor advisories for enterprise impact assessment
+#### 10.1 Major OS, browser & platform vendors
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Microsoft Security Update Guide | [msrc.microsoft.com/update-guide](https://msrc.microsoft.com/update-guide) | Free public | Microsoft vulnerability advisories, CVEs, affected products, & fixes. | Critical for Windows, Office, Exchange, Azure components, & enterprise Microsoft stack. |
 | 2 | Microsoft MSRC blog | [msrc.microsoft.com/blog](https://msrc.microsoft.com/blog/) | Free public | Microsoft security research & advisory context. | Useful for exploitation context & urgent guidance. |
 | 3 | Microsoft Security Response Center | [msrc.microsoft.com](https://msrc.microsoft.com/) | Free public | Microsoft security response portal. | Entry point for MSRC resources. |
 | 4 | Apple Security Releases | [support.apple.com/en-us/100100](https://support.apple.com/en-us/100100) | Free public | Apple security release index. | Important for iOS, macOS, Safari, watchOS, tvOS, & ecosystem patch tracking. |
-| 5 | Apple security updates | [support.apple.com/en-us/HT201222](https://support.apple.com/en-us/HT201222) | Free public | Apple security update listing. | Keep with newer Apple security release page for compatibility. |
-| 6 | Google Android Security Bulletins | [source.android.com/docs/security/bulletin](https://source.android.com/docs/security/bulletin) | Free public | Android platform security bulletins. | Device/vendor patch latency may differ from bulletin availability. |
-| 7 | Google Chrome Releases | [chromereleases.googleblog.com](https://chromereleases.googleblog.com/) | Free public | Chrome release announcements. | Security fixes are often disclosed with delayed details. |
-| 8 | Chrome security advisories | [chromereleases.googleblog.com/search/label/Security](https://chromereleases.googleblog.com/search/label/Security) | Free public | Chrome security-specific release posts. | Good for urgent browser vulnerability tracking. |
-| 9 | Chromium issue tracker | [issues.chromium.org](https://issues.chromium.org/) | Free public for public issues; restricted issues may require access | Chromium issue tracking. | Security bugs may have restricted visibility until disclosure. |
-| 10 | Mozilla Security Advisories | [www.mozilla.org/en-US/security/advisories](https://www.mozilla.org/en-US/security/advisories/) | Free public | Mozilla security advisories. | Important for Firefox, Thunderbird, & related products. |
-| 11 | Mozilla Foundation Security Advisories | [www.mozilla.org/en-US/security/known-vulnerabilities](https://www.mozilla.org/en-US/security/known-vulnerabilities/) | Free public | Mozilla known vulnerabilities index. | Useful for historical advisory lookup. |
-| 12 | Google Cloud Security Bulletins | [cloud.google.com/support/bulletins](https://cloud.google.com/support/bulletins) | Free public | Google Cloud service/product security bulletins. | Cloud advisories often require service-specific interpretation. |
-| 13 | Kubernetes Security Announcements | [groups.google.com/g/kubernetes-security-announce](https://groups.google.com/g/kubernetes-security-announce) | Free public Google Group | Kubernetes security announcement mailing list. | Authoritative operational alerting channel for Kubernetes CVEs. |
-| 14 | Kubernetes official CVE feed | [kubernetes.io/docs/reference/issues-security/official-cve-feed](https://kubernetes.io/docs/reference/issues-security/official-cve-feed/) | Free public | Official Kubernetes CVE feed reference. | Useful for automation & Kubernetes-specific CVE tracking. |
-| 15 | Kubernetes security & disclosure | [kubernetes.io/docs/reference/issues-security/security](https://kubernetes.io/docs/reference/issues-security/security/) | Free public | Kubernetes security disclosure process. | Useful for understanding embargo, disclosure, & patch handling. |
-### 6.2 Enterprise infrastructure vendors
+| 5 | Google Android Security Bulletins | [source.android.com/docs/security/bulletin](https://source.android.com/docs/security/bulletin) | Free public | Android platform security bulletins. | Device/vendor patch latency may differ from bulletin availability. |
+| 6 | Google Chrome Releases | [chromereleases.googleblog.com](https://chromereleases.googleblog.com/) | Free public | Chrome release announcements. | Security fixes are often disclosed with delayed details. |
+| 7 | Chrome security advisories | [chromereleases.googleblog.com/search/label/Security](https://chromereleases.googleblog.com/search/label/Security) | Free public | Chrome security-specific release posts. | Good for urgent browser vulnerability tracking. |
+| 8 | Chromium issue tracker | [issues.chromium.org](https://issues.chromium.org/) | Free public for public issues; restricted issues may require access | Chromium issue tracking. | Security bugs may have restricted visibility until disclosure. |
+| 9 | Mozilla Security Advisories | [www.mozilla.org/en-US/security/advisories](https://www.mozilla.org/en-US/security/advisories/) | Free public | Mozilla security advisories. | Important for Firefox, Thunderbird, & related products. |
+| 10 | Mozilla Foundation Security Advisories | [www.mozilla.org/en-US/security/known-vulnerabilities](https://www.mozilla.org/en-US/security/known-vulnerabilities/) | Free public | Mozilla known vulnerabilities index. | Useful for historical advisory lookup. |
+| 11 | Google Cloud Security Bulletins | [cloud.google.com/support/bulletins](https://cloud.google.com/support/bulletins) | Free public | Google Cloud service/product security bulletins. | Cloud advisories often require service-specific interpretation. |
+| 12 | Kubernetes Security Announcements | [groups.google.com/g/kubernetes-security-announce](https://groups.google.com/g/kubernetes-security-announce) | Free public Google Group | Kubernetes security announcement mailing list. | Authoritative operational alerting channel for Kubernetes CVEs. |
+| 13 | Kubernetes official CVE feed | [kubernetes.io/docs/reference/issues-security/official-cve-feed](https://kubernetes.io/docs/reference/issues-security/official-cve-feed/) | Free public | Official Kubernetes CVE feed reference. | Useful for automation & Kubernetes-specific CVE tracking. |
+| 14 | Kubernetes security & disclosure | [kubernetes.io/docs/reference/issues-security/security](https://kubernetes.io/docs/reference/issues-security/security/) | Free public | Kubernetes security disclosure process. | Useful for understanding embargo, disclosure, & patch handling. |
+#### 10.2 Enterprise infrastructure vendors
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Cisco Security Advisories | [sec.cloudapps.cisco.com/security/center/publicationListing.x](https://sec.cloudapps.cisco.com/security/center/publicationListing.x) | Free public | Cisco product advisories, affected versions, fixed versions, & workarounds. | Critical for network infrastructure exposure. |
 | 2 | VMware / Broadcom Security Advisories | [support.broadcom.com/web/ecx/security-advisory](https://support.broadcom.com/web/ecx/security-advisory) | Free public listing; some support downloads may require entitlement | VMware/Broadcom security advisories. | Important for virtualization, ESXi, vCenter, & enterprise infrastructure. |
 | 3 | Palo Alto Networks Security Advisories | [security.paloaltonetworks.com](https://security.paloaltonetworks.com/) | Free public | PAN-OS & Palo Alto product advisories. | Often includes exploited-in-the-wild notes & mitigation guidance. |
 | 4 | Fortinet PSIRT Advisories | [www.fortiguard.com/psirt](https://www.fortiguard.com/psirt) | Free public | Fortinet product advisories. | Critical for perimeter devices; exploitability can change quickly. |
-| 5 | Ivanti Security Advisories | [www.ivanti.com/resources/v/doc/ivi/2629/0e3e2be1e66d](https://www.ivanti.com/resources/v/doc/ivi/2629/0e3e2be1e66d) | Free public | Ivanti security advisories. | Track emergency advisories closely due to recurring exploitation patterns. |
+| 5 | Ivanti Security Advisories | [forums.ivanti.com/s/security-advisory](https://forums.ivanti.com/s/security-advisory) | Free public | Ivanti security advisories. | Track emergency advisories closely due to recurring exploitation patterns. |
 | 6 | Citrix Security Bulletins | [support.citrix.com/securitybulletins](https://support.citrix.com/securitybulletins) | Free public | Citrix product security bulletins. | Useful for exposed remote access infrastructure. |
 | 7 | F5 Security Advisories | [my.f5.com/manage/s/solutions?series=Security_Advisory](https://my.f5.com/manage/s/solutions?series=Security_Advisory) | Free public listing; some support content may require account | F5 product security advisories. | Product modules/configuration affect exploitability. |
-| 8 | Juniper Security Advisories | [supportportal.juniper.net/s/global-search/%40uri#sort=relevancy&f:ctype=[Security%20Advisories]](https://supportportal.juniper.net/s/global-search/%40uri#sort=relevancy&f:ctype=[Security%20Advisories]) | Free public listing; support portal may require account for some content | Juniper security advisory listing. | Useful for network infrastructure patching. |
+| 8 | Juniper Security Advisories | [supportportal.juniper.net/s/global-search/%40uri#sort=relevancy&f:ctype= [Security%20Advisories]](https://supportportal.juniper.net/s/global-search/%40uri#sort=relevancy&f:ctype=%5BSecurity%20Advisories%5D) | Free public listing; support portal may require account for some content | Juniper security advisory listing. | Useful for network infrastructure patching. |
 | 9 | Dell Security Advisories | [www.dell.com/support/security](https://www.dell.com/support/security) | Free public listing; downloads/support may require entitlement | Dell product security advisories. | Covers firmware, hardware, drivers, & enterprise products. |
-| 10 | HPE Security Bulletins | [support.hpe.com/hpesc/public/home](https://support.hpe.com/hpesc/public/home) | Free public listing; support portal may require account/entitlement | HPE security bulletins. | May require product filtering & support portal navigation. |
+| 10 | HPE Security Bulletins | [support.hpe.com/connect/s/securitybulletins](https://support.hpe.com/connect/s/securitybulletins) | Free public listing; support portal may require account/entitlement | HPE security bulletins. | May require product filtering & support portal navigation. |
 | 11 | Lenovo Product Security Advisories | [support.lenovo.com/us/en/product_security/home](https://support.lenovo.com/us/en/product_security/home) | Free public | Lenovo product security advisories. | Useful for firmware & device fleet management. |
 | 12 | IBM PSIRT | [www.ibm.com/support/pages/ibm-psirt](https://www.ibm.com/support/pages/ibm-psirt) | Free public listing; some IBM support docs may require entitlement | IBM product security incident response. | Useful for IBM software/hardware exposure. |
 | 13 | SAP Security Notes | [support.sap.com/en/my-support/knowledge-base/security-notes-news.html](https://support.sap.com/en/my-support/knowledge-base/security-notes-news.html) | SAP support account / subscription often required for full Security Notes | SAP security notes & patch-day guidance. | May require SAP support access for full note details. |
 | 14 | Adobe Security Bulletins | [helpx.adobe.com/security.html](https://helpx.adobe.com/security.html) | Free public | Adobe security bulletins. | Important for client-side & enterprise Adobe software. |
 | 15 | Oracle Critical Patch Updates | [www.oracle.com/security-alerts](https://www.oracle.com/security-alerts/) | Free public | Oracle CPU, Security Alerts, & CVE mappings. | Oracle advisories often bundle many products; mapping requires product/version context. |
+
 | 16 | Atlassian Security Advisories | [www.atlassian.com/trust/security/advisories](https://www.atlassian.com/trust/security/advisories) | Free public | Atlassian product advisories. | Important for exposed collaboration/dev tooling like Confluence & Jira. |
 | 17 | Elastic Security Announcements | [discuss.elastic.co/c/announcements/security-announcements/31](https://discuss.elastic.co/c/announcements/security-announcements/31) | Free public forum | Elastic security announcements. | Useful for Elasticsearch/Kibana stack. |
 | 18 | HashiCorp Security | [www.hashicorp.com/security](https://www.hashicorp.com/security) | Free public; enterprise support separate | HashiCorp security advisories & disclosure policy. | Relevant for Terraform, Vault, Consul, Nomad. |
@@ -515,7 +812,7 @@ These are useful as secondary sources, not canonical replacements.
 | 25 | OpenSSL Vulnerabilities | [www.openssl.org/news/vulnerabilities.html](https://www.openssl.org/news/vulnerabilities.html) | Free public | OpenSSL vulnerability list. | Critical transitive dependency in many systems; patch status depends on bundled library versions. |
 | 26 | OpenSSH release notes | [www.openssh.com/releasenotes.html](https://www.openssh.com/releasenotes.html) | Free public | OpenSSH release notes. | Security-relevant changes may appear in release notes. |
 | 27 | curl security advisories | [curl.se/docs/security.html](https://curl.se/docs/security.html) | Free public | curl/libcurl security advisories. | Important for widely embedded dependency exposure. |
-### 6.3 Cloud provider security bulletins
+#### 10.3 Cloud provider security bulletins
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | AWS Security Bulletins | [aws.amazon.com/security/security-bulletins](https://aws.amazon.com/security/security-bulletins/) | Free public | AWS service/product security bulletins. | Cloud provider advisories often require service/configuration context. |
@@ -525,11 +822,50 @@ These are useful as secondary sources, not canonical replacements.
 | 5 | Microsoft Azure security / MSRC | [msrc.microsoft.com/update-guide](https://msrc.microsoft.com/update-guide) | Free public | Microsoft/Azure-related security updates. | Azure service advisories may require separate portal/status checks. |
 | 6 | Azure updates | [azure.microsoft.com/en-us/updates](https://azure.microsoft.com/en-us/updates/) | Free public | Azure product update feed. | Not purely security-specific; filter carefully. |
 | 7 | Oracle Cloud security | [www.oracle.com/security-alerts](https://www.oracle.com/security-alerts/) | Free public | Oracle cloud/product security alerts. | Oracle advisories often span cloud & on-prem products. |
+
 | 8 | IBM Cloud security bulletins | [cloud.ibm.com/status/security](https://cloud.ibm.com/status/security) | Free public | IBM Cloud security bulletins. | Useful for managed service exposure. |
 > #### [*Back to **`Index`***](#index)
 ---
-## 7. SBOM, package identity, VEX & advisory exchange standards
-### 7.1 SBOM standards
+
+### 11. ICS, OT, IoT, embedded & medical-device sources
+#### 11.1 CISA ICS / medical
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CISA ICS Advisories | [www.cisa.gov/news-events/ics-advisories](https://www.cisa.gov/news-events/ics-advisories) | Free public | Industrial Control System advisories. | Critical for OT/ICS environments where patching constraints differ from IT. |
+| 2 | CISA ICS Medical Advisories | [www.cisa.gov/news-events/ics-medical-advisories](https://www.cisa.gov/news-events/ics-medical-advisories) | Free public | Medical device security advisories. | Impact includes patient safety, regulatory, & operational risk. |
+| 3 | CISA cybersecurity advisories | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories) | Free public | CISA cybersecurity advisory hub. | Broader than ICS; use for campaigns & emergent threats. |
+| 4 | ICS-CERT advisories archive | [www.cisa.gov/news-events/ics-advisories](https://www.cisa.gov/news-events/ics-advisories) | Free public | ICS-CERT advisory archive path. | Same URL as ICS advisories, preserved for historical naming. |
+| 5 | CISA ICS recommended practices | [www.cisa.gov/resources-tools/resources/ics-recommended-practices](https://www.cisa.gov/resources-tools/resources/ics-recommended-practices) | Free public | Recommended practices for ICS security. | Useful for mitigation where patching is delayed or impossible. |
+#### 11.2 OT / ICS vendor advisories
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | Siemens ProductCERT | [cert-portal.siemens.com/productcert](https://cert-portal.siemens.com/productcert/) | Free public advisories; some support downloads may require entitlement | Siemens product security advisories. | Critical for industrial environments. |
+| 2 | Schneider Electric Security Notifications | [www.se.com/ww/en/work/support/cybersecurity/security- notifications.jsp](https://www.se.com/ww/en/work/support/cybersecurity/security-notifications.jsp) | Free public | Schneider Electric security notifications. | Product model & firmware version matter heavily. |
+| 3 | Rockwell Automation Security Advisories | [www.rockwellautomation.com/en-us/support/product/product- security-advisories.html](https://www.rockwellautomation.com/en-us/support/product/product-security-advisories.html) | Free public listing; support downloads may require entitlement | Rockwell Automation product advisories. | Operational constraints may affect remediation. |
+| 4 | Honeywell Product Security | [www.honeywell.com/us/en/product-security](https://www.honeywell.com/us/en/product-security) | Free public | Honeywell product security advisories. | Useful for OT product risk. |
+| 5 | Philips Product Security | [www.philips.com/a-w/security/security-advisories.html](https://www.philips.com/a-w/security/security-advisories.html) | Free public | Philips medical/product security advisories. | Patient safety & regulatory implications may affect severity assessment. |
+| 6 | GE Vernova Product Security | [www.gevernova.com/product-security](https://www.gevernova.com/product-security) | Free public | GE Vernova product security. | Important for energy/industrial systems. |
+| 7 | ABB Cyber Security Alerts | [global.abb/group/en/technology/cyber-security/alerts-and-notifications](https://global.abb/group/en/technology/cyber-security/alerts-and-notifications) | Free public | ABB cyber security alerts & notifications. | Product-specific affectedness matters. |
+| 8 | Yokogawa Security Advisories | [www.yokogawa.com/library/resources/white-papers/yokogawa-security- advisory-report-list](https://www.yokogawa.com/library/resources/white-papers/yokogawa-security-advisory-report-list/) | Free public | Yokogawa advisory report list. | Useful for OT control systems. |
+| 9 | Mitsubishi Electric PSIRT | [www.mitsubishielectric.com/en/psirt/vulnerability](https://www.mitsubishielectric.com/en/psirt/vulnerability/) | Free public | Mitsubishi Electric vulnerability advisories. | Important for industrial equipment & automation. |
+| 10 | Johnson Controls Product Security Advisories | [www.johnsoncontrols.com/cyber-solutions/security-advisories](https://www.johnsoncontrols.com/cyber-solutions/security-advisories) | Free public | Johnson Controls security advisories. | Relevant to building management & OT environments. |
+#### 11.3 IoT / embedded
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CERT/CC Vulnerability Notes | [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Coordinated disclosure notes, often with embedded/IoT affected vendors. | Useful when many vendors share a vulnerable component. |
+| 2 | IoT Security Foundation | [www.iotsecurityfoundation.org](https://www.iotsecurityfoundation.org/) | Free public resources; membership options may exist | IoT security guidance & resources. | Not a vulnerability feed, but useful for control mapping. |
+| 3 | Firmware Analysis and Comparison Tool - FACT | [github.com/fkie-cad/FACT_core](https://github.com/fkie-cad/FACT_core) | Free / open-source public GitHub repo | Firmware analysis platform. | Useful for extracting components & embedded vuln detection. |
+| 4 | EMBA firmware analyzer | [github.com/e-m-b-a/emba](https://github.com/e-m-b-a/emba) | Free / open-source public GitHub repo | Firmware analyzer for embedded Linux/IoT. | Useful for SBOM-like extraction & vulnerability assessment. |
+| 5 | Binwalk | [github.com/ReFirmLabs/binwalk](https://github.com/ReFirmLabs/binwalk) | Free / open-source public GitHub repo | Firmware extraction & analysis tool. | Useful precursor for embedded component discovery. |
+> #### [*Back to **`Index`***](#index)
+---
+
+---
+
+## E. Security Supply Chain Evidence: SBOM, VEX, Provenance & Malicious Package Risk
+
+### 12. SBOM, package identity, VEX & advisory exchange standards
+#### 12.1 SBOM standards
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | CycloneDX specification overview | [cyclonedx.org/specification/overview](https://cyclonedx.org/specification/overview/) | Free / open standard | SBOM, SaaSBOM, BOM, VEX, vulnerability & component metadata standard. | Good fit for vulnerability management workflows due to vulnerability & VEX support. |
@@ -541,7 +877,7 @@ These are useful as secondary sources, not canonical replacements.
 | 7 | SPDX GitHub | [github.com/spdx/spdx-spec](https://github.com/spdx/spdx-spec) | Free / open-source public GitHub repo | SPDX specification repository. | Use for release tracking & schema/source inspection. |
 | 8 | NTIA SBOM resources | [www.ntia.gov/page/software-bill-materials](https://www.ntia.gov/page/software-bill-materials) | Free public | SBOM policy & foundational resources. | Useful for governance & compliance context. |
 | 9 | CISA SBOM | [www.cisa.gov/sbom](https://www.cisa.gov/sbom) | Free public | CISA SBOM guidance & resources. | Useful for U.S. public-sector & enterprise SBOM program alignment. |
-### 7.2 Package & software identity
+#### 12.2 Package & software identity
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Package URL - PURL spec | [github.com/package-url/purl-spec](https://github.com/package-url/purl-spec) | Free / open-source public GitHub repo | Standard package identifier used in SBOMs & vulnerability DBs. | Crucial for OSV & package ecosystem matching. |
@@ -550,31 +886,33 @@ These are useful as secondary sources, not canonical replacements.
 | 4 | NVD CPE API | [nvd.nist.gov/developers/products](https://nvd.nist.gov/developers/products) | Free public; optional free API key for higher rate limits | Programmatic CPE dictionary access. | Required for automated CPE matching workflows. |
 | 5 | SWID tags - NIST | [csrc.nist.gov/projects/software-identification-swid](https://csrc.nist.gov/projects/software-identification-swid) | Free public | Software Identification Tags for installed software identity. | Useful in enterprise asset inventory & compliance. |
 | 6 | GS1 Digital Link / identifiers | [www.gs1.org/standards/gs1-digital-link](https://www.gs1.org/standards/gs1-digital-link) | Free public standard docs; GS1 membership may apply for assigned identifiers | Optional identity standard for physical/embedded supply chains. | Not a vulnerability standard, but can matter in hardware/product traceability. |
-| 7 | Software Heritage IDs | [www.swhid.org](https://www.swhid.org/) | Free public / open | Persistent source-code artifact identity. | Useful for source provenance & precise code artifact references. |
-### 7.3 Advisory exchange, CSAF & VEX
+| 7 | Software Heritage IDs | [www.swhid.org](https://www.swhid.org/) | Free public / open | Persistent source- code artifact identity. | Useful for source provenance & precise code artifact references. |
+#### 12.3 Advisory exchange, CSAF & VEX
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | OASIS CSAF 2.0 specification | [docs.oasis-open.org/csaf/csaf/v2.0/os/csaf-v2.0-os.html](https://docs.oasis-open.org/csaf/csaf/v2.0/os/csaf-v2.0-os.html) | Free / open standard | Common Security Advisory Framework for structured advisories. | CSAF can express product status, remediation, impact, & VEX-like affectedness. |
 | 2 | CSAF home | [www.csaf.io](https://www.csaf.io/) | Free public | CSAF ecosystem & tooling hub. | Good starting point for CSAF adoption. |
-| 3 | OpenVEX specification | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source public GitHub repo | Minimal JSON-LD VEX format based on CISA VEX requirements. | Useful for communicating not-affected/fixed/affected status. |
+| 3 | OpenVEX specification | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source public GitHub repo | Minimal JSON-LD VEX format based on CISA VEX requirements. | Useful for communicating not- affected/fixed/affected status. |
 | 4 | OpenVEX project page | [openssf.org/projects/openvex](https://openssf.org/projects/openvex/) | Free public | OpenSSF project page for OpenVEX. | Project-level overview. |
-| 5 | CISA Minimum Requirements for VEX | [www.cisa.gov/sites/default/files/2023-04/minimum-requirements-for-vex-508c.pdf](https://www.cisa.gov/sites/default/files/2023-04/minimum-requirements-for-vex-508c.pdf) | Free public PDF | Baseline VEX requirements. | Useful for evaluating VEX completeness. |
+| 5 | CISA Minimum Requirements for VEX | [www.cisa.gov/sites/default/files/2023-04/minimum-requirements-for- vex-508c.pdf](https://www.cisa.gov/sites/default/files/2023-04/minimum-requirements-for-vex-508c.pdf) | Free public PDF | Baseline VEX requirements. | Useful for evaluating VEX completeness. |
 | 6 | OpenSSF VDR, VEX, OpenVEX & CSAF explainer | [openssf.org/blog/2023/09/07/vdr-vex-openvex-and-csaf](https://openssf.org/blog/2023/09/07/vdr-vex-openvex-and-csaf/) | Free public | Explains VDR, VEX, OpenVEX, & CSAF. | Useful for conceptual alignment & terminology. |
 | 7 | Red Hat CSAF/VEX guidance | [redhatproductsecurity.github.io/security-data-guidelines/csaf-vex](https://redhatproductsecurity.github.io/security-data-guidelines/csaf-vex/) | Free public docs | Red Hat CSAF/VEX semantics & usage guidance. | Important for vendor-specific interpretation. |
 | 8 | Ubuntu VEX | [ubuntu.com/security/vex](https://ubuntu.com/security/vex) | Free public | Ubuntu VEX data entry point. | Useful for Ubuntu affectedness & false-positive reduction. |
 | 9 | Canonical Ubuntu Security Notices repo - OSV & OpenVEX | [github.com/canonical/ubuntu-security-notices](https://github.com/canonical/ubuntu-security-notices) | Free public GitHub repo | Canonical USN/LSN, OSV, & OpenVEX JSON data. | Strong machine-readable source for Ubuntu security status. |
 > #### [*Back to **`Index`***](#index)
 ---
-## 8. Malicious package, supply-chain compromise & package reputation sources
-### 8.1 Malicious package databases
+
+### 13. Malicious package, supply-chain compromise & package reputation sources
+#### 13.1 Malicious package databases
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | OpenSSF Malicious Packages repository | [github.com/ossf/malicious-packages](https://github.com/ossf/malicious-packages) | Free / open-source public GitHub repo | Public malicious package reports consumable via OSV format. | Covers malicious packages, which may not be CVEs. |
-| 2 | OpenSSF Malicious Packages announcement | [openssf.org/blog/2023/10/12/introducing-openssfs-malicious-packages-repository](https://openssf.org/blog/2023/10/12/introducing-openssfs-malicious-packages-repository/) | Free public | Explains the public DB for malicious package reports. | Context source, not the primary data feed. |
+| 2 | OpenSSF Malicious Packages announcement | [openssf.org/blog/2023/10/12/introducing-openssfs-malicious- packages-repository](https://openssf.org/blog/2023/10/12/introducing-openssfs-malicious-packages-repository/) | Free public | Explains the public DB for malicious package reports. | Context source, not the primary data feed. |
 | 3 | OpenSSF Package Analysis | [openssf.org/package-analysis](https://openssf.org/package-analysis/) | Free public project info | Detects malicious package behavior & informs package consumers. | Behavioral analysis may surface packages before CVE/advisory assignment. |
 | 4 | OpenSSF Package Analysis GitHub | [github.com/ossf/package-analysis](https://github.com/ossf/package-analysis) | Free / open-source public GitHub repo | Open-source package analysis system. | Useful for detection logic & behavioral signal review. |
 | 5 | OpenSSF Package Feeds | [github.com/ossf/package-feeds](https://github.com/ossf/package-feeds) | Free / open-source public GitHub repo | Package ecosystem feed monitoring. | Useful for observing new packages in ecosystems. |
 | 6 | GitHub malware advisories | [github.com/advisories?query=type%3Amalware](https://github.com/advisories?query=type%3Amalware) | Free public | GitHub malware advisories across ecosystems. | Treat as supply-chain compromise data, not conventional vuln data. |
+
 | 7 | npm malware advisories via GitHub | [github.com/advisories?query=ecosystem%3Anpm+type%3Amalware](https://github.com/advisories?query=ecosystem%3Anpm+type%3Amalware) | Free public | npm-specific malware advisories. | npm has high malicious package volume; prioritize transitive dependency visibility. |
 | 8 | PyPI malware advisories via GitHub | [github.com/advisories?query=ecosystem%3Apip+type%3Amalware](https://github.com/advisories?query=ecosystem%3Apip+type%3Amalware) | Free public | PyPI-specific malware advisories. | Use with lockfiles & package provenance checks. |
 | 9 | Socket.dev blog | [socket.dev/blog](https://socket.dev/blog) | Free public blog; product/API features may be commercial | Supply-chain attack research & malicious package analysis. | Research feed; verify indicators before automated blocking. |
@@ -584,22 +922,56 @@ These are useful as secondary sources, not canonical replacements.
 | 13 | Phylum research | [blog.phylum.io](https://blog.phylum.io/) | Free public blog; commercial products separate | Software supply-chain attack research. | Research source; useful for malicious package trends. |
 | 14 | ReversingLabs threat research | [www.reversinglabs.com/blog](https://www.reversinglabs.com/blog) | Free public blog; commercial products separate | Threat research focused on malware & supply-chain compromise. | Use for context, not as canonical package advisory data. |
 | 15 | Checkmarx supply-chain research | [checkmarx.com/blog](https://checkmarx.com/blog/) | Free public blog; commercial products separate | Supply-chain & application security research. | Useful for emerging package attack patterns. |
-### 8.2 Package reputation / dependency health
+#### 13.2 Package reputation / dependency health
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | OpenSSF Scorecard | [github.com/ossf/scorecard](https://github.com/ossf/scorecard) | Free / open-source public GitHub repo | Scores open-source project security practices. | Useful as dependency risk signal, not vulnerability proof. |
 | 2 | OpenSSF Scorecard API | [api.securityscorecards.dev](https://api.securityscorecards.dev/) | Free public API subject to service limits | API for Scorecard results. | Use with timestamped results because scores change over time. |
 | 3 | OpenSSF Best Practices Badge | [www.bestpractices.dev](https://www.bestpractices.dev/) | Free public | Project best-practices badge program. | Useful project maturity signal, not vulnerability evidence. |
 | 4 | deps.dev | [deps.dev](https://deps.dev/) | Free public | Dependency metadata, transitive dependencies, security signals. | Useful for dependency graphing & package metadata. |
-| 5 | OpenSSF GUAC | [guac.sh](https://guac.sh/) | Free public / open-source project | Graph for software supply-chain metadata. | Useful for correlating SBOMs, attestations, vulnerabilities, & provenance. |
+| 5 | OpenSSF GUAC | [guac.sh](https://guac.sh/) | Free public / open-source project | Graph for software supply- chain metadata. | Useful for correlating SBOMs, attestations, vulnerabilities, & provenance. |
 | 6 | GUAC GitHub | [github.com/guacsec/guac](https://github.com/guacsec/guac) | Free / open-source public GitHub repo | GUAC implementation repository. | Reference architecture for supply-chain knowledge graphs. |
 | 7 | Sigstore | [www.sigstore.dev](https://www.sigstore.dev/) | Free / open-source public infrastructure | Signing & verification for software artifacts. | Helps assess provenance & tamper resistance. |
 | 8 | Rekor transparency log | [docs.sigstore.dev/logging/overview](https://docs.sigstore.dev/logging/overview/) | Free public docs / public transparency log | Transparency log for signed artifacts. | Useful for provenance verification & audit trails. |
 | 9 | SLSA framework | [slsa.dev](https://slsa.dev/) | Free / open standard | Supply-chain Levels for Software Artifacts. | Helps assess build integrity & supply-chain hardening. |
 > #### [*Back to **`Index`***](#index)
 ---
-## 9. Automated vulnerability detection, static analysis, dynamic analysis & research datasets
-### 9.1 SAST / code query engines
+
+### 14. Source-code, dependency, artifact & build-chain provenance
+#### 14.1 Source & artifact provenance
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | SLSA | [slsa.dev](https://slsa.dev/) | Free / open standard | Supply-chain Levels for Software Artifacts. | Useful for evaluating build integrity & provenance risk. |
+| 2 | Sigstore | [www.sigstore.dev](https://www.sigstore.dev/) | Free / open-source public infrastructure | Signing & verification for software artifacts. | Helps verify artifact integrity & publisher identity. |
+| 3 | Cosign | [github.com/sigstore/cosign](https://github.com/sigstore/cosign) | Free / open-source public GitHub repo | Container/artifact signing tool. | Useful for verifying container image provenance. |
+| 4 | Rekor | [docs.sigstore.dev/logging/overview](https://docs.sigstore.dev/logging/overview/) | Free public docs / public transparency log | Transparency log for signed artifacts. | Useful for auditability & tamper detection. |
+| 5 | in-toto | [in-toto.io](https://in-toto.io/) | Free / open-source | Supply-chain integrity framework. | Useful for verifying build steps & provenance attestations. |
+| 6 | The Update Framework - TUF | [theupdateframework.io](https://theupdateframework.io/) | Free / open-source | Secure software update framework. | Useful for update-channel compromise resistance. |
+| 7 | SLSA GitHub generators | [github.com/slsa-framework/slsa-github-generator](https://github.com/slsa-framework/slsa-github-generator) | Free / open-source public GitHub repo | GitHub-based SLSA provenance generators. | Useful for CI/CD provenance generation. |
+#### 14.2 Dependency inventory & graphing
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+
+| 1 | deps.dev | [deps.dev](https://deps.dev/) | Free public | Dependency metadata, transitive dependency graphing, & security signals. | Useful for OSS dependency context. |
+| 2 | GUAC | [guac.sh](https://guac.sh/) | Free public / open-source project | Graph for software supply-chain metadata. | Useful for correlating SBOMs, vulnerabilities, provenance, & attestations. |
+| 3 | GUAC GitHub | [github.com/guacsec/guac](https://github.com/guacsec/guac) | Free / open-source public GitHub repo | GUAC implementation repository. | Reference architecture for software supply-chain knowledge graphs. |
+| 4 | OpenSSF Scorecard | [github.com/ossf/scorecard](https://github.com/ossf/scorecard) | Free / open-source public GitHub repo | Open-source project security practice scoring. | Useful as a dependency risk signal. |
+| 5 | OpenSSF Scorecard API | [api.securityscorecards.dev](https://api.securityscorecards.dev/) | Free public API subject to service limits | API for Scorecard results. | Scores are temporal; store retrieval time. |
+| 6 | Maven Central | [central.sonatype.com](https://central.sonatype.com/) | Free public | Maven package metadata. | Useful for Java dependency resolution. |
+| 7 | npm registry | [registry.npmjs.org](https://registry.npmjs.org/) | Free public registry API | npm package registry API endpoint. | Useful for package metadata & version resolution. |
+| 8 | PyPI JSON API | [docs.pypi.org/api/json](https://docs.pypi.org/api/json/) | Free public API docs / public API | PyPI JSON API documentation. | Useful for Python package metadata. |
+| 9 | crates.io API | [crates.io/data-access](https://crates.io/data-access) | Free public API subject to policy/rate limits | crates.io data access documentation. | Useful for Rust package metadata. |
+| 10 | Go module proxy | [proxy.golang.org](https://proxy.golang.org/) | Free public | Go module proxy. | Useful for Go module version metadata. |
+> #### [*Back to **`Index`***](#index)
+---
+
+---
+
+## F. Detection, Exposure, Threat Telemetry, Validation & Remediation Operations
+
+### 15. Automated vulnerability detection, static analysis, dynamic analysis & research datasets
+
+#### 15.1 SAST / code query engines
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | CodeQL | [codeql.github.com](https://codeql.github.com/) | Free for many open-source uses; GitHub Advanced Security commercial for private enterprise use | Semantic code analysis engine for vulnerability discovery. | Strong for variant analysis & source-level detection. |
@@ -624,7 +996,9 @@ These are useful as secondary sources, not canonical replacements.
 | 20 | Horusec | [github.com/ZupIT/horusec](https://github.com/ZupIT/horusec) | Free / open-source public GitHub repo | Multi-language security scanner. | Useful for broad SAST coverage. |
 | 21 | Bearer | [github.com/Bearer/bearer](https://github.com/Bearer/bearer) | Free / open-source public GitHub repo | Code security/privacy scanner. | Useful for data-flow & sensitive data exposure detection. |
 | 22 | MobSF | [github.com/MobSF/Mobile-Security-Framework-MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF) | Free / open-source public GitHub repo | Mobile security testing framework. | Useful for Android/iOS static & dynamic app analysis. |
-### 9.2 DAST, IAST, fuzzing & dynamic test sources
+| 23 | zizmor | [github.com/zizmorcore/zizmor](https://github.com/zizmorcore/zizmor) | Free / open-source public GitHub repo | Static analysis for GitHub Actions. | Useful for CI/CD workflow security, GitHub Actions hardening, & supply-chain pipeline risk detection. |
+| 24 | OpenAnt | [github.com/knostic/OpenAnt](https://github.com/knostic/OpenAnt) | Free / open-source public GitHub repo | LLM-based vulnerability discovery product focused on verified security flaws & reduced false positives. | Useful as AI-assisted vulnerability discovery tooling. Validate findings against primary evidence before treating as confirmed vulnerabilities. |
+#### 15.2 DAST, IAST, fuzzing & dynamic test sources
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | OSS-Fuzz | [google.github.io/oss-fuzz](https://google.github.io/oss-fuzz/) | Free for eligible open-source projects | Continuous fuzzing for open-source projects. | Useful for vulnerability discovery & bug lifecycle data. |
@@ -638,7 +1012,7 @@ These are useful as secondary sources, not canonical replacements.
 | 9 | OWASP ZAP | [www.zaproxy.org](https://www.zaproxy.org/) | Free / open-source | Web application dynamic security scanner. | Useful for DAST & app exposure validation. |
 | 10 | Nuclei | [github.com/projectdiscovery/nuclei](https://github.com/projectdiscovery/nuclei) | Free / open-source public GitHub repo; commercial ecosystem separate | Template-based vulnerability & exposure scanner. | Useful for automated exposed-service checks. |
 | 11 | Nuclei templates | [github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) | Free / open-source public GitHub repo | Community/official detection templates. | Template quality varies; review false-positive potential. |
-### 9.3 Vulnerability-detection research datasets
+#### 15.3 Vulnerability-detection research datasets
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | NIST SARD | [samate.nist.gov/SARD](https://samate.nist.gov/SARD/) | Free public | Software Assurance Reference Dataset. | Useful for evaluating static analysis tools & ML models. |
@@ -648,6 +1022,7 @@ These are useful as secondary sources, not canonical replacements.
 | 5 | Draper VDISC | [osf.io/d45bw](https://osf.io/d45bw/) | Free public OSF dataset; verify license/terms | Vulnerability discovery dataset. | Useful for ML baselines; inspect labeling quality. |
 | 6 | DiverseVul | [github.com/wagner-group/diversevul](https://github.com/wagner-group/diversevul) | Free public GitHub repo; verify license | Diverse vulnerability dataset. | Useful for model training/evaluation; check license & label quality. |
 | 7 | PrimeVul | [github.com/DLVulDet/PrimeVul](https://github.com/DLVulDet/PrimeVul) | Free public GitHub repo; verify license | Vulnerability detection benchmark dataset. | Useful for modern ML vulnerability detection benchmarking. |
+
 | 8 | MegaVul | [github.com/Icyrockton/MegaVul](https://github.com/Icyrockton/MegaVul) | Free public GitHub repo; verify license | Large-scale vulnerability dataset. | Validate methodology before using as labels. |
 | 9 | Vul4J | [github.com/tuhh-softsec/vul4j](https://github.com/tuhh-softsec/vul4j) | Free / open-source public GitHub repo | Java vulnerability benchmark. | Useful for Java-focused vulnerability repair/detection. |
 | 10 | VulnCode-DB | [github.com/vegardit/vulncode-db](https://github.com/vegardit/vulncode-db) | Free public GitHub repo; verify license | Vulnerable code examples. | Useful for examples & tests. |
@@ -658,53 +1033,23 @@ These are useful as secondary sources, not canonical replacements.
 | 15 | VulDeePecker | [github.com/CGCL-codes/VulDeePecker](https://github.com/CGCL-codes/VulDeePecker) | Free public GitHub repo; verify license | Deep-learning vulnerability detection dataset/tooling. | Older benchmark; inspect for duplication & outdated methodology. |
 > #### [*Back to **`Index`***](#index)
 ---
-## 10. ICS, OT, IoT, embedded & medical-device sources
-### 10.1 CISA ICS / medical
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CISA ICS Advisories | [www.cisa.gov/news-events/ics-advisories](https://www.cisa.gov/news-events/ics-advisories) | Free public | Industrial Control System advisories. | Critical for OT/ICS environments where patching constraints differ from IT. |
-| 2 | CISA ICS Medical Advisories | [www.cisa.gov/news-events/ics-medical-advisories](https://www.cisa.gov/news-events/ics-medical-advisories) | Free public | Medical device security advisories. | Impact includes patient safety, regulatory, & operational risk. |
-| 3 | CISA cybersecurity advisories | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories) | Free public | CISA cybersecurity advisory hub. | Broader than ICS; use for campaigns & emergent threats. |
-| 4 | ICS-CERT advisories archive | [www.cisa.gov/news-events/ics-advisories](https://www.cisa.gov/news-events/ics-advisories) | Free public | ICS-CERT advisory archive path. | Same URL as ICS advisories, preserved for historical naming. |
-| 5 | CISA ICS recommended practices | [www.cisa.gov/resources-tools/resources/ics-recommended-practices](https://www.cisa.gov/resources-tools/resources/ics-recommended-practices) | Free public | Recommended practices for ICS security. | Useful for mitigation where patching is delayed or impossible. |
-### 10.2 OT / ICS vendor advisories
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | Siemens ProductCERT | [cert-portal.siemens.com/productcert](https://cert-portal.siemens.com/productcert/) | Free public advisories; some support downloads may require entitlement | Siemens product security advisories. | Critical for industrial environments. |
-| 2 | Schneider Electric Security Notifications | [www.se.com/ww/en/work/support/cybersecurity/security-notifications.jsp](https://www.se.com/ww/en/work/support/cybersecurity/security-notifications.jsp) | Free public | Schneider Electric security notifications. | Product model & firmware version matter heavily. |
-| 3 | Rockwell Automation Security Advisories | [www.rockwellautomation.com/en-us/support/product/product-security-advisories.html](https://www.rockwellautomation.com/en-us/support/product/product-security-advisories.html) | Free public listing; support downloads may require entitlement | Rockwell Automation product advisories. | Operational constraints may affect remediation. |
-| 4 | Honeywell Product Security | [www.honeywell.com/us/en/product-security](https://www.honeywell.com/us/en/product-security) | Free public | Honeywell product security advisories. | Useful for OT product risk. |
-| 5 | Philips Product Security | [www.philips.com/a-w/security/security-advisories.html](https://www.philips.com/a-w/security/security-advisories.html) | Free public | Philips medical/product security advisories. | Patient safety & regulatory implications may affect severity assessment. |
-| 6 | GE Vernova Product Security | [www.gevernova.com/product-security](https://www.gevernova.com/product-security) | Free public | GE Vernova product security. | Important for energy/industrial systems. |
-| 7 | ABB Cyber Security Alerts | [global.abb/group/en/technology/cyber-security/alerts-and-notifications](https://global.abb/group/en/technology/cyber-security/alerts-and-notifications) | Free public | ABB cyber security alerts & notifications. | Product-specific affectedness matters. |
-| 8 | Yokogawa Security Advisories | [www.yokogawa.com/library/resources/white-papers/yokogawa-security-advisory-report-list](https://www.yokogawa.com/library/resources/white-papers/yokogawa-security-advisory-report-list/) | Free public | Yokogawa advisory report list. | Useful for OT control systems. |
-| 9 | Mitsubishi Electric PSIRT | [www.mitsubishielectric.com/en/psirt/vulnerability](https://www.mitsubishielectric.com/en/psirt/vulnerability/) | Free public | Mitsubishi Electric vulnerability advisories. | Important for industrial equipment & automation. |
-| 10 | Johnson Controls Product Security Advisories | [www.johnsoncontrols.com/cyber-solutions/security-advisories](https://www.johnsoncontrols.com/cyber-solutions/security-advisories) | Free public | Johnson Controls security advisories. | Relevant to building management & OT environments. |
-### 10.3 IoT / embedded
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CERT/CC Vulnerability Notes | [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Coordinated disclosure notes, often with embedded/IoT affected vendors. | Useful when many vendors share a vulnerable component. |
-| 2 | IoT Security Foundation | [www.iotsecurityfoundation.org](https://www.iotsecurityfoundation.org/) | Free public resources; membership options may exist | IoT security guidance & resources. | Not a vulnerability feed, but useful for control mapping. |
-| 3 | Firmware Analysis and Comparison Tool - FACT | [github.com/fkie-cad/FACT_core](https://github.com/fkie-cad/FACT_core) | Free / open-source public GitHub repo | Firmware analysis platform. | Useful for extracting components & embedded vuln detection. |
-| 4 | EMBA firmware analyzer | [github.com/e-m-b-a/emba](https://github.com/e-m-b-a/emba) | Free / open-source public GitHub repo | Firmware analyzer for embedded Linux/IoT. | Useful for SBOM-like extraction & vulnerability assessment. |
-| 5 | Binwalk | [github.com/ReFirmLabs/binwalk](https://github.com/ReFirmLabs/binwalk) | Free / open-source public GitHub repo | Firmware extraction & analysis tool. | Useful precursor for embedded component discovery. |
-> #### [*Back to **`Index`***](#index)
----
-## 11. Exposure, internet-facing asset & threat telemetry
-### 11.1 Internet exposure search engines
+
+### 16. Exposure, internet-facing asset & threat telemetry
+#### 16.1 Internet exposure search engines
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Censys Search | [search.censys.io](https://search.censys.io/) | Free tier / paid plans | Internet exposure search engine. | Useful for determining if vulnerable services are internet-facing. |
 | 2 | Censys API | [search.censys.io/api](https://search.censys.io/api) | Free tier / paid plans; API key required | Programmatic Censys access. | API terms & quotas may apply. |
 | 3 | Shodan | [www.shodan.io](https://www.shodan.io/) | Free limited access / paid plans | Internet-connected device search. | Useful for exposure discovery & banner-based matching. |
 | 4 | Shodan developer API | [developer.shodan.io](https://developer.shodan.io/) | Paid/API credit model may apply; account required | Shodan API documentation. | Useful for automation. |
+
 | 5 | ZoomEye | [www.zoomeye.org](https://www.zoomeye.org/) | Free limited access / paid plans | Internet asset search engine. | Useful as additional exposure telemetry. |
 | 6 | FOFA | [fofa.info](https://fofa.info/) | Free limited access / paid plans | Internet asset search. | Coverage & access terms vary. |
 | 7 | BinaryEdge | [www.binaryedge.io](https://www.binaryedge.io/) | Commercial / limited trial may exist | Internet scanning & threat intelligence. | Useful for external exposure enrichment. |
 | 8 | Onyphe | [www.onyphe.io](https://www.onyphe.io/) | Free tier / paid plans | Cyber defense search engine. | Useful for passive/active exposure context. |
 | 9 | SecurityTrails | [securitytrails.com](https://securitytrails.com/) | Free limited access / paid plans | DNS & asset intelligence. | Useful for attack surface discovery. |
 | 10 | InternetDB by Shodan | [internetdb.shodan.io](https://internetdb.shodan.io/) | Free public API | Lightweight Shodan InternetDB API. | Useful for quick IP exposure enrichment. |
-### 11.2 Scan/exploitation telemetry
+#### 16.2 Scan/exploitation telemetry
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | GreyNoise Visualizer | [viz.greynoise.io](https://viz.greynoise.io/) | Free tier / paid plans | Internet scanning/exploitation telemetry. | Helps separate background scanning from targeted activity. |
@@ -718,7 +1063,7 @@ These are useful as secondary sources, not canonical replacements.
 | 9 | urlscan.io | [urlscan.io](https://urlscan.io/) | Free tier / paid plans | URL scanning & web telemetry. | Useful for phishing, web exposure, & IOC enrichment. |
 | 10 | VirusTotal | [www.virustotal.com](https://www.virustotal.com/) | Free community access / paid enterprise plans | File, URL, domain, & IP reputation. | Useful for malware/IOC enrichment; licensing constraints apply. |
 | 11 | VirusTotal API | [docs.virustotal.com/reference/overview](https://docs.virustotal.com/reference/overview) | Free community API / paid enterprise API | VirusTotal API documentation. | API quota & data-sharing policies matter. |
-### 11.3 Attack surface management context
+#### 16.3 Attack surface management context
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Amass | [github.com/owasp-amass/amass](https://github.com/owasp-amass/amass) | Free / open-source public GitHub repo | Attack surface mapping & DNS enumeration. | Useful for external asset discovery. |
@@ -729,8 +1074,9 @@ These are useful as secondary sources, not canonical replacements.
 | 6 | Masscan | [github.com/robertdavidgraham/masscan](https://github.com/robertdavidgraham/masscan) | Free / open-source public GitHub repo | High-speed port scanner. | Use carefully; scan authorization & network impact matter. |
 > #### [*Back to **`Index`***](#index)
 ---
-## 12. Threat intelligence, malware, ransomware & in-the-wild exploitation context
-### 12.1 Major threat research sources
+
+### 17. Threat intelligence, malware, ransomware & in-the-wild exploitation context
+#### 17.1 Major threat research sources
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Mandiant / Google Cloud Threat Intelligence | [cloud.google.com/blog/topics/threat-intelligence](https://cloud.google.com/blog/topics/threat-intelligence) | Free public blog; commercial threat intel products separate | Threat intelligence & exploitation-in-the-wild context. | Useful for campaign-level vulnerability exploitation context. |
@@ -749,7 +1095,8 @@ These are useful as secondary sources, not canonical replacements.
 | 14 | Check Point Research | [research.checkpoint.com](https://research.checkpoint.com/) | Free public blog; commercial products separate | Threat research & vulnerability analysis. | Useful for campaign & exploit analysis. |
 | 15 | Elastic Security Labs | [www.elastic.co/security-labs](https://www.elastic.co/security-labs) | Free public research; commercial products separate | Detection engineering & threat research. | Useful for detection logic & adversary behavior. |
 | 16 | Sekoia Threat Intelligence | [blog.sekoia.io](https://blog.sekoia.io/) | Free public blog; commercial threat intel separate | Threat intelligence research. | Useful for IOCs & campaign context. |
-### 12.2 Malware & IOC repositories
+#### 17.2 Malware & IOC repositories
+
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | MISP | [www.misp-project.org](https://www.misp-project.org/) | Free / open-source; data sharing depends on communities/instances | Threat intelligence sharing platform. | Useful for IOC correlation & sharing. |
@@ -769,9 +1116,14 @@ These are useful as secondary sources, not canonical replacements.
 | 15 | Ransomware.live | [www.ransomware.live](https://www.ransomware.live/) | Free public | Ransomware group/leak-site tracking. | Useful for ransomware exploitation context & trend analysis. |
 > #### [*Back to **`Index`***](#index)
 ---
-## 13. Compliance, baseline configuration & exposure severity standards
+
+---
+
+## G. Governance, Compliance, Assurance, Production Baselines & Final Operating Model
+
+### 18. Compliance, baseline configuration, software assurance & exposure severity standards
 These are not vulnerability feeds, but they help assess impact, control failure, configuration exposure, & exploitability in a given environment.
-### 13.1 Security configuration & benchmarks
+#### 18.1 Security configuration & benchmarks
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | CIS Benchmarks | [www.cisecurity.org/cis-benchmarks](https://www.cisecurity.org/cis-benchmarks) | Free with registration for many PDFs; commercial CIS tools/membership available | Secure configuration benchmarks. | Useful for environmental risk scoring & hardening validation. |
@@ -779,8 +1131,9 @@ These are not vulnerability feeds, but they help assess impact, control failure,
 | 3 | NIST National Checklist Program | [ncp.nist.gov](https://ncp.nist.gov/) | Free public | Repository of security configuration checklists. | Useful for baseline configuration assessment. |
 | 4 | DISA STIGs | [public.cyber.mil/stigs](https://public.cyber.mil/stigs/) | Free public | Security Technical Implementation Guides. | Important for government/defense compliance. |
 | 5 | OpenSCAP | [www.open-scap.org](https://www.open-scap.org/) | Free / open-source | SCAP tooling for compliance scanning. | Useful for host-level configuration scanning. |
+
 | 6 | SCAP Security Guide | [github.com/ComplianceAsCode/content](https://github.com/ComplianceAsCode/content) | Free / open-source public GitHub repo | ComplianceAsCode content for SCAP profiles. | Useful for policy-as-code & baseline validation. |
-### 13.2 Cloud configuration posture
+#### 18.2 Cloud configuration posture
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Prowler - AWS/Azure/GCP/Kubernetes | [github.com/prowler-cloud/prowler](https://github.com/prowler-cloud/prowler) | Free / open-source core; commercial product available | Cloud & Kubernetes security posture scanning. | Useful for environmental exposure & misconfiguration risk. |
@@ -791,214 +1144,24 @@ These are not vulnerability feeds, but they help assess impact, control failure,
 | 6 | Kubernetes CIS benchmark | [www.cisecurity.org/benchmark/kubernetes](https://www.cisecurity.org/benchmark/kubernetes) | Free with registration for benchmark PDFs; commercial CIS tools/membership available | Kubernetes configuration benchmark. | Useful for cluster hardening & exposure scoring. |
 | 7 | kube-bench | [github.com/aquasecurity/kube-bench](https://github.com/aquasecurity/kube-bench) | Free / open-source public GitHub repo | Kubernetes CIS benchmark scanner. | Useful for automated cluster benchmark checks. |
 | 8 | kube-hunter | [github.com/aquasecurity/kube-hunter](https://github.com/aquasecurity/kube-hunter) | Free / open-source public GitHub repo | Kubernetes penetration testing tool. | Use only in authorized environments. |
+#### 18.3 Software assurance, secure development, acquisition & NIST publication libraries
+| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
+|---:|---|---|---|---|---|
+| 1 | CISA Software Acquisition Guide | [cisa.gov/resources-tools/resources/software-acquisition-guide-government-enterprise-consumers-software-assurance-cyber-supply-chain](https://www.cisa.gov/resources-tools/resources/software-acquisition-guide-government-enterprise-consumers-software-assurance-cyber-supply-chain) | Free public; CISA pages may bot-block automated fetchers | Software assurance & cyber supply-chain acquisition guidance for enterprise/government consumers. | Not a vulnerability feed, but useful for procurement, assurance, & supplier-risk context. |
+| 2 | NIST Secure Software Development Framework - SSDF | [csrc.nist.gov/projects/ssdf](https://csrc.nist.gov/projects/ssdf) | Free public | Secure development practice framework for reducing software vulnerabilities. | Useful for SDLC controls, attestation, & vulnerability-prevention context. |
+| 3 | NIST FIPS publications | [csrc.nist.gov/publications/fips](https://csrc.nist.gov/publications/fips) | Free public | Federal Information Processing Standards. | Compliance/standards reference, not vuln feed. |
+| 4 | NIST Special Publications root | [csrc.nist.gov/publications/sp](https://csrc.nist.gov/publications/sp) | Free public | NIST Special Publication library. | Useful for standards research & compliance mapping. |
+| 5 | NIST SP 800 series | [csrc.nist.gov/publications/sp800](https://csrc.nist.gov/publications/sp800) | Free public | Computer/security guidance series. | High-value for security-control, risk, identity, cryptography, & vulnerability-management context. |
+| 6 | NIST SP 1800 series | [csrc.nist.gov/publications/sp1800](https://csrc.nist.gov/publications/sp1800) | Free public | NIST Cybersecurity Practice Guides. | Practical implementation patterns & reference architectures. |
+| 7 | NIST SP 500 series | [csrc.nist.gov/publications/sp500](https://csrc.nist.gov/publications/sp500) | Free public | Information technology publications. | Useful for supporting standards & technical guidance. |
+| 8 | NIST AI publication search | [csrc.nist.gov/publications/search?sortBy-lg=relevance&viewMode-lg=brief&ipp-lg=50&status-lg=Final%2CDraft&series-lg=AI](https://csrc.nist.gov/publications/search?sortBy-lg=relevance&viewMode-lg=brief&ipp-lg=50&status-lg=Final%2CDraft&series-lg=AI) | Free public filtered search | NIST AI-series publication discovery. | Filtered search URL; cite individual publications separately when used for evidence. |
+| 9 | LangGuard SCOPE MCP | [scope-mcp.langguard.ai](https://scope-mcp.langguard.ai) | Public web tool/service; terms may apply | AI/agent compliance & pre-flight risk evaluation for tool use. | Useful for AI/agent security governance, not vulnerability source ingestion. |
+| 10 | FIRST 2026 papers | [www.first.org/resources/papers/2026](https://www.first.org/resources/papers/2026) | Free public | FIRST papers & security response knowledge base. | Research/training context, not canonical vulnerability data. |
+| 11 | FIRST VulnCon 2026 program | [first.org/conference/vulncon26/program](https://www.first.org/conference/vulncon26/program) | Free public conference page | Vulnerability management & disclosure conference content. | Useful for user stories, emerging practices, & CVE/PSIRT ecosystem context. |
 > #### [*Back to **`Index`***](#index)
 ---
-## 14. Source-code, dependency, artifact & build-chain provenance
-### 14.1 Source & artifact provenance
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | SLSA | [slsa.dev](https://slsa.dev/) | Free / open standard | Supply-chain Levels for Software Artifacts. | Useful for evaluating build integrity & provenance risk. |
-| 2 | Sigstore | [www.sigstore.dev](https://www.sigstore.dev/) | Free / open-source public infrastructure | Signing & verification for software artifacts. | Helps verify artifact integrity & publisher identity. |
-| 3 | Cosign | [github.com/sigstore/cosign](https://github.com/sigstore/cosign) | Free / open-source public GitHub repo | Container/artifact signing tool. | Useful for verifying container image provenance. |
-| 4 | Rekor | [docs.sigstore.dev/logging/overview](https://docs.sigstore.dev/logging/overview/) | Free public docs / public transparency log | Transparency log for signed artifacts. | Useful for auditability & tamper detection. |
-| 5 | in-toto | [in-toto.io](https://in-toto.io/) | Free / open-source | Supply-chain integrity framework. | Useful for verifying build steps & provenance attestations. |
-| 6 | The Update Framework - TUF | [theupdateframework.io](https://theupdateframework.io/) | Free / open-source | Secure software update framework. | Useful for update-channel compromise resistance. |
-| 7 | SLSA GitHub generators | [github.com/slsa-framework/slsa-github-generator](https://github.com/slsa-framework/slsa-github-generator) | Free / open-source public GitHub repo | GitHub-based SLSA provenance generators. | Useful for CI/CD provenance generation. |
-### 14.2 Dependency inventory & graphing
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | deps.dev | [deps.dev](https://deps.dev/) | Free public | Dependency metadata, transitive dependency graphing, & security signals. | Useful for OSS dependency context. |
-| 2 | GUAC | [guac.sh](https://guac.sh/) | Free public / open-source project | Graph for software supply-chain metadata. | Useful for correlating SBOMs, vulnerabilities, provenance, & attestations. |
-| 3 | GUAC GitHub | [github.com/guacsec/guac](https://github.com/guacsec/guac) | Free / open-source public GitHub repo | GUAC implementation repository. | Reference architecture for software supply-chain knowledge graphs. |
-| 4 | OpenSSF Scorecard | [github.com/ossf/scorecard](https://github.com/ossf/scorecard) | Free / open-source public GitHub repo | Open-source project security practice scoring. | Useful as a dependency risk signal. |
-| 5 | OpenSSF Scorecard API | [api.securityscorecards.dev](https://api.securityscorecards.dev/) | Free public API subject to service limits | API for Scorecard results. | Scores are temporal; store retrieval time. |
-| 6 | Maven Central | [central.sonatype.com](https://central.sonatype.com/) | Free public | Maven package metadata. | Useful for Java dependency resolution. |
-| 7 | npm registry | [registry.npmjs.org](https://registry.npmjs.org/) | Free public registry API | npm package registry API endpoint. | Useful for package metadata & version resolution. |
-| 8 | PyPI JSON API | [docs.pypi.org/api/json](https://docs.pypi.org/api/json/) | Free public API docs / public API | PyPI JSON API documentation. | Useful for Python package metadata. |
-| 9 | crates.io API | [crates.io/data-access](https://crates.io/data-access) | Free public API subject to policy/rate limits | crates.io data access documentation. | Useful for Rust package metadata. |
-| 10 | Go module proxy | [proxy.golang.org](https://proxy.golang.org/) | Free public | Go module proxy. | Useful for Go module version metadata. |
-> #### [*Back to **`Index`***](#index)
----
-## 15. Practical priority hierarchy for ingestion
-### 15.1 Tier 0 - identifiers & inventory
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | SBOM | [cyclonedx.org/specification/overview](https://cyclonedx.org/specification/overview/), [spdx.dev/specifications](https://spdx.dev/specifications/) | Free / open standards | Inventory foundation for matching components to vulnerabilities. | Without accurate inventory, vulnerability matching is incomplete or noisy. |
-| 2 | Package identity | [csrc.nist.gov/projects/software-identification-swid](https://csrc.nist.gov/projects/software-identification-swid), [github.com/package-url/purl-spec](https://github.com/package-url/purl-spec), [nvd.nist.gov/products/cpe](https://nvd.nist.gov/products/cpe) | Free public / open standards | Component identity across package, product, & installed software domains. | Use PURL for packages, CPE for products/platforms, SWID for installed software identity. |
-| 3 | Asset exposure | [search.censys.io](https://search.censys.io/), [www.shodan.io](https://www.shodan.io/) | Free tiers / paid plans | Determines whether vulnerable assets are externally reachable. | Combine with internal CMDB, cloud inventory, & authenticated scans. |
-| 4 | Artifact provenance | [in-toto.io](https://in-toto.io/), [slsa.dev](https://slsa.dev/), [www.sigstore.dev](https://www.sigstore.dev/) | Free / open-source / open standards | Validates build-chain integrity & artifact authenticity. | Helps distinguish vulnerable dependency risk from supply-chain tampering risk. |
-### 15.2 Tier 1 - canonical vulnerability records
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CVE List v5 | [github.com/CVEProject/cvelistV5](https://github.com/CVEProject/cvelistV5) | Free public GitHub repo | Canonical CVE record mirror. | Core identity source. |
-| 2 | CVE schema | [github.com/CVEProject/cve-schema](https://github.com/CVEProject/cve-schema) | Free public GitHub repo | Schema validation for CVE records. | Use for parser correctness. |
-| 3 | CVE Services API | [cveawg.mitre.org/api-docs](https://cveawg.mitre.org/api-docs/) | Free public docs; CNA functions may require role/account | Direct programmatic CVE lookup. | Useful for targeted CVE access. |
-| 4 | NVD CVE API | [nvd.nist.gov/developers/vulnerabilities](https://nvd.nist.gov/developers/vulnerabilities) | Free public; optional free API key for higher rate limits | CVSS/CPE/CWE/reference enrichment. | Core enrichment source. |
-| 5 | NVD CPE API | [nvd.nist.gov/developers/products](https://nvd.nist.gov/developers/products) | Free public; optional free API key for higher rate limits | CPE dictionary & product matching. | Important for product-level mapping. |
-| 6 | NVD data feeds | [nvd.nist.gov/vuln/data-feeds](https://nvd.nist.gov/vuln/data-feeds) | Free public | Bulk NVD feed access. | Useful for bootstrapping. |
-| 7 | CISA Vulnrichment | [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment) | Free public GitHub repo | CISA ADP enrichment & SSVC data. | Prioritization enrichment. |
-### 15.3 Tier 2 - package/ecosystem vulnerability records
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | OSV full database | [google.github.io/osv.dev/data/#full-database-download](https://google.github.io/osv.dev/data/#full-database-download) | Free public | Local mirror of OSS vulnerability records. | Best for high-volume package matching. |
-| 2 | OSV API | [google.github.io/osv.dev/post-v1-query](https://google.github.io/osv.dev/post-v1-query/) | Free public API | Online vulnerability lookup by package/version/commit/ID. | Good for targeted lookups. |
-| 3 | GitHub Advisory Database | [github.com/advisories](https://github.com/advisories) | Free public | GHSA/CVE/malware advisory records. | Preserve aliases. |
-| 4 | GitHub Advisory Database repo | [github.com/github/advisory-database](https://github.com/github/advisory-database) | Free / open-source public GitHub repo | Raw advisory data for local ingestion. | Useful for mirroring. |
-| 5 | Go vuln DB | [vuln.go.dev](https://vuln.go.dev/) | Free public | Official Go vulnerability database. | Go-specific affectedness. |
-| 6 | RustSec | [rustsec.org](https://rustsec.org/) | Free public / open-source ecosystem | Rust advisory ecosystem. | Rust crate-specific advisories. |
-| 7 | PyPA advisory DB | [github.com/pypa/advisory-database](https://github.com/pypa/advisory-database) | Free public GitHub repo | Python advisory source. | Python/PyPI coverage. |
-| 8 | FriendsOfPHP | [github.com/FriendsOfPHP/security-advisories](https://github.com/FriendsOfPHP/security-advisories) | Free public GitHub repo | PHP Composer advisories. | Composer-specific. |
-| 9 | RubySec | [github.com/rubysec/ruby-advisory-db](https://github.com/rubysec/ruby-advisory-db) | Free public GitHub repo | RubyGems advisories. | Ruby ecosystem. |
-| 10 | OSS Index | [ossindex.sonatype.org](https://ossindex.sonatype.org/) | Free tier / API terms; commercial Sonatype products separate | Package vulnerability intelligence. | Secondary enrichment. |
-| 11 | Packagist API | [packagist.org/apidoc#list-security-advisories](https://packagist.org/apidoc#list-security-advisories) | Free public API docs / public API | Composer advisory API. | Direct PHP ecosystem source. |
-### 15.4 Tier 3 - affectedness, distro & vendor truth
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | Red Hat Security Data | [access.redhat.com/security/data](https://access.redhat.com/security/data) | Free public data; support content may require subscription | RHEL affectedness, CSAF/VEX, OSV, OVAL. | Backport-aware. |
-| 2 | Debian Security Tracker | [security-tracker.debian.org](https://security-tracker.debian.org/) | Free public | Debian package affectedness. | Backport-aware. |
-| 3 | Ubuntu OVAL / OSV / OpenVEX | [github.com/canonical/ubuntu-security-notices](https://github.com/canonical/ubuntu-security-notices), [ubuntu.com/security/oval](https://ubuntu.com/security/oval), [ubuntu.com/security/vex](https://ubuntu.com/security/vex) | Free public | Ubuntu package affectedness & VEX status. | Use release-specific data. |
-| 4 | Alpine SecDB | [secdb.alpinelinux.org](https://secdb.alpinelinux.org/) | Free public | Alpine package vulnerability data. | Container-critical. |
-| 5 | SUSE CSAF / OVAL | [www.suse.com/support/security/csaf](https://www.suse.com/support/security/csaf/), [www.suse.com/support/security/oval](https://www.suse.com/support/security/oval/) | Free public | SUSE vendor affectedness & scanner data. | Use machine-readable formats where possible. |
-| 6 | Oracle Linux OVAL / errata | [linux.oracle.com/errata](https://linux.oracle.com/errata/), [linux.oracle.com/security/oval](https://linux.oracle.com/security/oval/) | Free public | Oracle Linux patch & OVAL data. | Oracle Linux-specific. |
-| 7 | Amazon Linux ALAS | [alas.aws.amazon.com](https://alas.aws.amazon.com/) | Free public | Amazon Linux advisories. | Separate AL2 & AL2023. |
-| 8 | AlmaLinux / Rocky / Fedora / Arch / Gentoo | [bodhi.fedoraproject.org/updates/?type=security](https://bodhi.fedoraproject.org/updates/?type=security), [errata.almalinux.org](https://errata.almalinux.org/), [errata.build.resf.org](https://errata.build.resf.org/), [security.archlinux.org](https://security.archlinux.org/), [security.gentoo.org/glsa](https://security.gentoo.org/glsa/) | Free public | Additional Linux distribution affectedness sources. | Distro semantics vary substantially. |
-| 9 | Wolfi / Chainguard | [github.com/wolfi-dev/advisories](https://github.com/wolfi-dev/advisories), [packages.cgr.dev/chainguard/security.json](https://packages.cgr.dev/chainguard/security.json), [packages.wolfi.dev/os/security.json](https://packages.wolfi.dev/os/security.json) | Wolfi free public; Chainguard feed may relate to commercial product scope | Container-first package vulnerability feeds. | Useful for minimal images. |
-| 10 | Vendor advisories | [helpx.adobe.com/security.html](https://helpx.adobe.com/security.html), [msrc.microsoft.com/update-guide](https://msrc.microsoft.com/update-guide), [security.paloaltonetworks.com](https://security.paloaltonetworks.com/), [sec.cloudapps.cisco.com/security/center/publicationListing.x](https://sec.cloudapps.cisco.com/security/center/publicationListing.x), [support.apple.com/en-us/100100](https://support.apple.com/en-us/100100), [support.broadcom.com/web/ecx/security-advisory](https://support.broadcom.com/web/ecx/security-advisory), [support.citrix.com/securitybulletins](https://support.citrix.com/securitybulletins), [support.sap.com/en/my-support/knowledge-base/security-notes-news.html](https://support.sap.com/en/my-support/knowledge-base/security-notes-news.html), [www.atlassian.com/trust/security/advisories](https://www.atlassian.com/trust/security/advisories), [www.fortiguard.com/psirt](https://www.fortiguard.com/psirt), [www.ivanti.com/resources/v/doc/ivi/2629/0e3e2be1e66d](https://www.ivanti.com/resources/v/doc/ivi/2629/0e3e2be1e66d), [www.oracle.com/security-alerts](https://www.oracle.com/security-alerts/) | Mostly free public advisories; some vendors require support accounts/subscriptions for full details or downloads | Vendor truth for affected products, fixed versions, mitigations, & exploitation notes. | Often most authoritative for product affectedness. Access, formatting, & update latency vary. |
-### 15.5 Tier 4 - severity & prioritization
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CVSS v3.1/v4.0 | [www.first.org/cvss/v3.1/specification-document](https://www.first.org/cvss/v3.1/specification-document), [www.first.org/cvss/v4.0/specification-document](https://www.first.org/cvss/v4.0/specification-document) | Free public | Standard severity scoring. | Severity is not exploit likelihood. |
-| 2 | EPSS | [www.first.org/epss](https://www.first.org/epss/) | Free public data/API | Exploit likelihood prediction. | Temporal; store score date. |
-| 3 | KEV | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public feed | Known exploited vulnerability signal. | Strong but incomplete exploited-in-the-wild signal. |
-| 4 | SSVC | [github.com/CERTCC/SSVC](https://github.com/CERTCC/SSVC), [www.cisa.gov/stakeholder-specific-vulnerability-categorization-ssvc](https://www.cisa.gov/stakeholder-specific-vulnerability-categorization-ssvc) | Free public / open-source | Decision support for remediation urgency. | Requires environmental/mission context. |
-| 5 | CISA Vulnrichment | [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment) | Free public GitHub repo | SSVC & enrichment data. | Coverage varies. |
-| 6 | Vendor exploited-in-the-wild flags | [msrc.microsoft.com/update-guide](https://msrc.microsoft.com/update-guide), [support.apple.com/en-us/100100](https://support.apple.com/en-us/100100), [www.oracle.com/security-alerts](https://www.oracle.com/security-alerts/) | Free public, though product support details may vary | Vendor-provided exploitation status. | Often product-specific & time-sensitive. |
-| 7 | Patch availability & fixed-version feeds | [access.redhat.com/security/data](https://access.redhat.com/security/data), [github.com/canonical/ubuntu-security-notices](https://github.com/canonical/ubuntu-security-notices), [security-tracker.debian.org/tracker/data/json](https://security-tracker.debian.org/tracker/data/json) | Free public data; some vendor support may require subscription | Determines whether remediation exists. | Patch availability varies by distro/release/product. |
-| 8 | Environmental context | [docs.greynoise.io](https://docs.greynoise.io/), [search.censys.io](https://search.censys.io/), [www.shodan.io](https://www.shodan.io/) | Free tiers / paid plans | Internet exposure, asset criticality, privilege boundary, & data sensitivity determine real impact. | Must be joined with internal asset inventory & controls. |
-### 15.6 Tier 5 - exploitability & weaponization
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | Exploit-DB | [www.exploit-db.com](https://www.exploit-db.com/) | Free public | Public exploit availability. | Verify target versions & exploit reliability. |
-| 2 | Metasploit modules | [github.com/rapid7/metasploit-framework/tree/master/modules/exploits](https://github.com/rapid7/metasploit-framework/tree/master/modules/exploits) | Free / open-source | Weaponized exploit modules. | Strong operationalization signal. |
-| 3 | Packet Storm | [packetstormsecurity.com/files/tags/exploit](https://packetstormsecurity.com/files/tags/exploit/) | Free public | Exploit archive. | Metadata quality varies. |
-| 4 | Project Zero | [googleprojectzero.blogspot.com](https://googleprojectzero.blogspot.com/), [project-zero.issues.chromium.org](https://project-zero.issues.chromium.org/) | Free public; some issues may be restricted pre-disclosure | Root-cause & exploitability research. | High-quality technical details. |
-| 5 | CERT/CC VU notes | [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Coordinated disclosure & affected vendor context. | Useful for ecosystem-wide vulns. |
-| 6 | Rapid7 AttackerKB | [attackerkb.com](https://attackerkb.com/) | Free public content; commercial Rapid7 offerings separate | Attacker value & exploitability context. | Secondary enrichment. |
-| 7 | GreyNoise | [docs.greynoise.io](https://docs.greynoise.io/), [viz.greynoise.io](https://viz.greynoise.io/) | Free tier / paid plans | Internet exploitation/scanning telemetry. | Distinguishes noise from activity. |
-| 8 | Shadowserver | [dashboard.shadowserver.org](https://dashboard.shadowserver.org/), [www.shadowserver.org](https://www.shadowserver.org/) | Free for eligible organizations; registration may be required | Exposure & threat telemetry. | Access & reporting terms vary. |
-| 9 | Nuclei templates | [github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) | Free / open-source | Detection templates for exposed vulnerabilities. | Template presence is not proof of exposure. |
-| 10 | Vendor emergency advisories | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories), [www.fortiguard.com/psirt](https://www.fortiguard.com/psirt), [www.ivanti.com/resources/v/doc/ivi/2629/0e3e2be1e66d](https://www.ivanti.com/resources/v/doc/ivi/2629/0e3e2be1e66d) | Free public | Emergency/active exploitation guidance. | Highly time-sensitive; monitor frequently. |
-### 15.7 Tier 6 - weakness, attack-pattern & AI context
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CWE | [cwe.mitre.org](https://cwe.mitre.org/) | Free public | Weakness taxonomy. | CVE-to-CWE mappings can be broad or missing. |
-| 2 | CAPEC | [capec.mitre.org](https://capec.mitre.org/) | Free public | Attack-pattern taxonomy. | Maps weaknesses to attack patterns. |
-| 3 | ATT&CK Enterprise | [attack.mitre.org/matrices/enterprise](https://attack.mitre.org/matrices/enterprise/) | Free public | Enterprise adversary behavior taxonomy. | More post-exploitation than CVE-specific. |
-| 4 | ATT&CK STIX | [github.com/mitre-attack/attack-stix-data](https://github.com/mitre-attack/attack-stix-data) | Free public GitHub repo | Machine-readable ATT&CK data. | Best for ingestion. |
-| 5 | MITRE CTI repo | [github.com/mitre/cti](https://github.com/mitre/cti) | Free public GitHub repo | MITRE STIX data repository. | Useful for CTI graphing. |
-| 6 | MITRE ATLAS | [atlas.mitre.org](https://atlas.mitre.org/) | Free public | AI adversary tactics & techniques. | Directly relevant to AI/ML systems. |
-| 7 | OWASP LLM Top 10 | [owasp.org/www-project-top-10-for-large-language-model-applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | Free public / open community | LLM application vulnerability taxonomy. | Good for AI appsec. |
-| 8 | OWASP ML Security Top 10 | [owasp.org/www-project-machine-learning-security-top-10](https://owasp.org/www-project-machine-learning-security-top-10/) | Free public / open community | ML security risk taxonomy. | Complements ATLAS. |
-| 9 | NIST AI RMF & NIST AI 600-1 | [nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf), [www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) | Free public | AI risk management & GenAI risk profile. | Governance/risk context, not vuln feed. |
-### 15.8 Tier 7 - detection engineering & validation
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CodeQL | [codeql.github.com](https://codeql.github.com/) | Free for many open-source uses; commercial GitHub Advanced Security for many enterprise/private workflows | Semantic code vulnerability detection. | Strong for variant analysis. |
-| 2 | Semgrep | [semgrep.dev](https://semgrep.dev/) | Free/open-source CLI; commercial products available | Pattern-based static analysis. | Fast custom rules. |
-| 3 | Joern | [joern.io](https://joern.io/) | Free / open-source | Code property graph analysis. | Useful for research & advanced detection. |
-| 4 | Infer | [fbinfer.com](https://fbinfer.com/) | Free / open-source | Static analysis engine. | Good for specific bug classes. |
-| 5 | Sonar rules | [rules.sonarsource.com](https://rules.sonarsource.com/) | Free public catalog; commercial Sonar products available | Security/code quality rule catalog. | Useful for rule taxonomy mapping. |
-| 6 | Nuclei templates | [github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) | Free / open-source | DAST/exposure templates. | Template quality varies. |
-| 7 | OSS-Fuzz | [google.github.io/oss-fuzz](https://google.github.io/oss-fuzz/) | Free for eligible open-source projects | Continuous fuzzing. | Useful for discovery & OSV-linked vulns. |
-| 8 | SARD / Juliet | [samate.nist.gov/SARD](https://samate.nist.gov/SARD/), [samate.nist.gov/SARD/test-suites/112](https://samate.nist.gov/SARD/test-suites/112) | Free public | Test suites for vulnerability detection. | Useful for evaluation; not production vulnerability feed. |
-| 9 | Vulnerability datasets | [github.com/DLVulDet/PrimeVul](https://github.com/DLVulDet/PrimeVul), [github.com/Icyrockton/MegaVul](https://github.com/Icyrockton/MegaVul), [github.com/ZeoVan/MSR_20_Code_vulnerability_CSV_Dataset](https://github.com/ZeoVan/MSR_20_Code_vulnerability_CSV_Dataset), [github.com/secureIT-project/CVEfixes](https://github.com/secureIT-project/CVEfixes), [github.com/tuhh-softsec/vul4j](https://github.com/tuhh-softsec/vul4j), [github.com/wagner-group/diversevul](https://github.com/wagner-group/diversevul), [sites.google.com/view/devign](https://sites.google.com/view/devign) | Mostly free public research datasets; verify license individually | ML/research datasets for vulnerability detection. | Validate labels, leakage, deduplication, & licensing. |
-> #### [*Back to **`Index`***](#index)
----
-## 16. Recommended canonical data model coverage
-A complete vulnerability impact system should be able to ingest or derive the following fields.
-### 16.1 Vulnerability identity
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CVE ID | [github.com/CVEProject/cvelistV5](https://github.com/CVEProject/cvelistV5), [www.cve.org](https://www.cve.org/) | Free public | Canonical vulnerability identifier. | Not all advisories have CVEs immediately. |
-| 2 | GHSA ID | [github.com/advisories](https://github.com/advisories) | Free public | GitHub Security Advisory identifier. | May exist without CVE. |
-| 3 | OSV ID | [osv.dev](https://osv.dev/) | Free public | OSV vulnerability identifier. | Links package-specific affectedness & aliases. |
-| 4 | Vendor advisory ID | [msrc.microsoft.com/update-guide](https://msrc.microsoft.com/update-guide), [www.oracle.com/security-alerts](https://www.oracle.com/security-alerts/) | Mostly free public; some support details may require entitlement | Vendor-specific advisory identifier. | Often most authoritative for product-specific truth. |
-| 5 | CWE ID | [cwe.mitre.org](https://cwe.mitre.org/) | Free public | Weakness class identifier. | Quality of mapping varies. |
-| 6 | CAPEC ID | [capec.mitre.org](https://capec.mitre.org/) | Free public | Attack-pattern identifier. | Useful for attack mechanism mapping. |
-| 7 | ATT&CK technique ID | [attack.mitre.org/matrices/enterprise](https://attack.mitre.org/matrices/enterprise/) | Free public | Adversary technique identifier. | Useful for detection/response mapping. |
-| 8 | ATLAS technique ID | [atlas.mitre.org/techniques](https://atlas.mitre.org/techniques) | Free public | AI/ML adversary technique identifier. | Relevant for AI systems. |
-| 9 | Alias graph | [github.com/CVEProject/cvelistV5](https://github.com/CVEProject/cvelistV5), [github.com/advisories](https://github.com/advisories), [osv.dev](https://osv.dev/) | Free public | Maps CVE/GHSA/OSV/vendor aliases. | Crucial for deduplication & correlation. |
-### 16.2 Affectedness
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | Product name | [nvd.nist.gov/products/cpe](https://nvd.nist.gov/products/cpe) | Free public | Identifies vulnerable products. | Normalize against CPE/PURL/vendor data. |
-| 2 | Vendor | [www.cve.org](https://www.cve.org/) | Free public | Vendor/product attribution. | Vendor naming can differ across sources. |
-| 3 | CPE | [nvd.nist.gov/developers/products](https://nvd.nist.gov/developers/products) | Free public; optional free API key for higher rate limits | Product/platform matching. | Imprecise for many OSS packages. |
-| 4 | PURL | [github.com/package-url/purl-spec](https://github.com/package-url/purl-spec) | Free / open-source | Package identity. | Prefer for package ecosystem matching. |
-| 5 | Package ecosystem | [osv.dev/list](https://osv.dev/list) | Free public | Defines package namespace & version rules. | Version semantics are ecosystem-specific. |
-| 6 | Package name | [deps.dev](https://deps.dev/) | Free public | Dependency identity. | Normalize casing & namespace rules. |
-| 7 | Affected version range | [ossf.github.io/osv-schema](https://ossf.github.io/osv-schema/) | Free public / open-source | Expresses vulnerable versions. | Range interpretation must respect ecosystem semantics. |
-| 8 | Fixed version | [github.com/advisories](https://github.com/advisories), [osv.dev](https://osv.dev/) | Free public | Remediation target. | Distro fixed versions may differ due to backports. |
-| 9 | Introduced version / commit | [ossf.github.io/osv-schema](https://ossf.github.io/osv-schema/) | Free public / open-source | Determines when vulnerability entered codebase. | Not always available. |
-| 10 | Last affected version | [ossf.github.io/osv-schema](https://ossf.github.io/osv-schema/) | Free public / open-source | Helps determine affected version bounds. | Validate with vendor feeds. |
-| 11 | Backport status | [access.redhat.com/security/data](https://access.redhat.com/security/data), [security-tracker.debian.org](https://security-tracker.debian.org/), [ubuntu.com/security/cves](https://ubuntu.com/security/cves) | Mostly free public; some Red Hat support details may require subscription | Determines if a distro package is patched despite upstream version appearing vulnerable. | Essential for reducing false positives. |
-| 12 | VEX status | [github.com/openvex/spec](https://github.com/openvex/spec), [www.csaf.io](https://www.csaf.io/) | Free / open-source standards | Represents affected, not affected, fixed, or under investigation. | Preserve justification & author provenance. |
-| 13 | Justification for not affected | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source | Explains why a product is not affected. | Key for trust & auditability. |
-| 14 | Distro/package release channel | [packages.fedoraproject.org](https://packages.fedoraproject.org/), [pkgs.alpinelinux.org/packages](https://pkgs.alpinelinux.org/packages) | Free public | Tracks package release stream. | Channel differences can affect fix availability. |
-### 16.3 Severity & exploitability
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | CVSS v2/v3/v4 vector | [www.first.org/cvss](https://www.first.org/cvss/) | Free public | Structured severity vector. | Use vector, not only numeric score. |
-| 2 | CVSS base/temporal/environmental score | [nvd.nist.gov/vuln-metrics/cvss](https://nvd.nist.gov/vuln-metrics/cvss) | Free public | Severity scoring. | Environmental score should be computed with local context. |
-| 3 | EPSS score | [www.first.org/epss](https://www.first.org/epss/) | Free public data/API | Exploit likelihood. | Temporal; store score date. |
-| 4 | EPSS percentile | [www.first.org/epss/data_stats](https://www.first.org/epss/data_stats) | Free public data downloads | Relative exploit-likelihood ranking. | Useful for prioritization across backlog. |
-| 5 | KEV membership | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public feed | Known exploited vulnerability marker. | Strong exploitation evidence. |
-| 6 | KEV date added | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public feed | Temporal exploitation/prioritization signal. | Use for SLA & trend analysis. |
-| 7 | Known ransomware usage | [www.ransomware.live](https://www.ransomware.live/) | Free public | Ransomware exploitation context. | Attribution & mapping quality vary. |
-| 8 | Public exploit available | [www.exploit-db.com](https://www.exploit-db.com/) | Free public | PoC/exploit availability. | Verify reliability & version applicability. |
-| 9 | Metasploit module available | [github.com/rapid7/metasploit-framework/tree/master/modules/exploits](https://github.com/rapid7/metasploit-framework/tree/master/modules/exploits) | Free / open-source | Weaponized exploit implementation. | Stronger than generic PoC signal. |
-| 10 | Nuclei template available | [github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) | Free / open-source | Detection template availability. | Indicates detectable exposure, not confirmed vulnerability. |
-| 11 | GreyNoise observed scanning | [viz.greynoise.io](https://viz.greynoise.io/) | Free tier / paid plans | Internet scanning/exploitation telemetry. | Helps prioritize exposed services. |
-| 12 | Shadowserver observed exposure | [dashboard.shadowserver.org](https://dashboard.shadowserver.org/) | Free for eligible organizations; registration may be required | Internet-scale exposure telemetry. | Access may require registration/eligibility. |
-| 13 | CISA SSVC decision points | [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment) | Free public GitHub repo | Decision support enrichment. | Useful for prioritization workflows. |
-| 14 | Vendor exploitation status | [msrc.microsoft.com/update-guide](https://msrc.microsoft.com/update-guide), [security.paloaltonetworks.com](https://security.paloaltonetworks.com/), [support.apple.com/en-us/100100](https://support.apple.com/en-us/100100) | Free public | Vendor-provided exploitation notes. | Time-sensitive & product-specific. |
-| 15 | Patch availability | [access.redhat.com/security/data](https://access.redhat.com/security/data), [security-tracker.debian.org](https://security-tracker.debian.org/), [ubuntu.com/security/notices](https://ubuntu.com/security/notices) | Mostly free public; some vendor support details may require subscription | Determines if a fix exists. | Patch availability varies by release stream. |
-| 16 | Workaround availability | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories), [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Temporary mitigation when patching is not available. | Workarounds may reduce but not eliminate risk. |
-### 16.4 Environmental impact
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | Asset criticality | [www.cisecurity.org/controls](https://www.cisecurity.org/controls) | Free public | Business/system importance affects risk. | Must come from internal asset inventory. |
-| 2 | Internet exposure | [search.censys.io](https://search.censys.io/), [www.shodan.io](https://www.shodan.io/) | Free tiers / paid plans | Determines external exploitability surface. | External scan data may be incomplete or stale. |
-| 3 | Network reachability | [nmap.org](https://nmap.org/) | Free / open-source | Determines whether an exploit path exists. | Internal network context required. |
-| 4 | Authentication required | [www.first.org/cvss](https://www.first.org/cvss/) | Free public | Impacts exploitability. | CVSS may not capture local compensating controls. |
-| 5 | Privilege required | [www.first.org/cvss](https://www.first.org/cvss/) | Free public | Impacts exploitability & blast radius. | Validate with product configuration. |
-| 6 | User interaction required | [www.first.org/cvss](https://www.first.org/cvss/) | Free public | Impacts exploitability conditions. | User interaction can be bypassed in some real-world chains. |
-| 7 | Exploit preconditions | [googleprojectzero.blogspot.com](https://googleprojectzero.blogspot.com/), [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Defines required configuration or state. | Crucial for false-positive reduction. |
-| 8 | Data sensitivity | [www.cisecurity.org/controls](https://www.cisecurity.org/controls) | Free public | Determines business impact. | Internal classification required. |
-| 9 | Compensating controls | [public.cyber.mil/stigs](https://public.cyber.mil/stigs/), [www.cisecurity.org/cis-benchmarks](https://www.cisecurity.org/cis-benchmarks) | Free public; CIS benchmarks may require free registration | Controls can reduce practical exploitability. | Document assumptions & evidence. |
-| 10 | Runtime configuration | [docs.dependencytrack.org/datasources/overview](https://docs.dependencytrack.org/datasources/overview/) | Free public docs | Enabled features/modules influence affectedness. | Scanner package matches alone can over-report. |
-| 11 | Feature/module enabled | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source | VEX not-affected reasoning may depend on disabled code paths. | Requires product/runtime evidence. |
-| 12 | Cloud account/project/environment | [github.com/prowler-cloud/prowler](https://github.com/prowler-cloud/prowler) | Free / open-source core; commercial products separate | Cloud context affects exposure & blast radius. | Join vulnerability data with cloud inventory. |
-| 13 | Blast radius | [github.com/salesforce/cloudsplaining](https://github.com/salesforce/cloudsplaining) | Free / open-source | Privilege & dependency spread determine impact. | Requires IAM, network, & data-flow context. |
-| 14 | Business process ownership | [www.cisecurity.org/controls](https://www.cisecurity.org/controls) | Free public | Ownership determines remediation accountability. | Internal data source required. |
-### 16.5 Detection & remediation
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | Scanner finding ID | [dependencytrack.org](https://dependencytrack.org/), [github.com/anchore/grype](https://github.com/anchore/grype), [trivy.dev/docs/latest/scanner/vulnerability](https://trivy.dev/docs/latest/scanner/vulnerability/) | Free / open-source core tools; commercial support/products may exist | Scanner-specific finding identity. | Preserve source scanner & version for reproducibility. |
-| 2 | Detection method | [codeql.github.com](https://codeql.github.com/), [github.com/projectdiscovery/nuclei](https://github.com/projectdiscovery/nuclei), [owasp.org/www-project-top-ten](https://owasp.org/www-project-top-ten/) | Mixed: free/open-source, with some commercial tiers | Indicates whether finding came from SBOM, CPE, package manager, SAST, DAST, IaC, or runtime telemetry. | Different methods have different false-positive characteristics. |
-| 3 | Confidence | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source | Confidence helps rank findings. | Use evidence & source provenance to compute confidence. |
-| 4 | False-positive reason | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source | Captures why a match is not actually exploitable or affected. | VEX justification is key for auditability. |
-| 5 | Fix version | [github.com/advisories](https://github.com/advisories), [osv.dev](https://osv.dev/) | Free public | Remediation target version. | Distro fixed versions may differ due to backports. |
-| 6 | Patch advisory | [access.redhat.com/security/data](https://access.redhat.com/security/data), [ubuntu.com/security/notices](https://ubuntu.com/security/notices), [www.debian.org/security](https://www.debian.org/security/) | Mostly free public; some Red Hat support details may require subscription | Links vulnerability to vendor patch guidance. | Use vendor patch source for production remediation. |
-| 7 | Mitigation | [www.cisa.gov/cybersecurity-advisories](https://www.cisa.gov/cybersecurity-advisories), [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Temporary or compensating controls. | Mitigations may be partial & context-specific. |
-| 8 | Workaround | [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/) | Free public | Alternative remediation when patch unavailable. | Track expiration & replacement by patch. |
-| 9 | Exploit detection signatures | [github.com/SigmaHQ/sigma](https://github.com/SigmaHQ/sigma), [github.com/VirusTotal/yara](https://github.com/VirusTotal/yara), [github.com/projectdiscovery/nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) | Free / open-source public GitHub repos | Detection content for exploit attempts or compromise. | Validate signatures in environment before high-confidence alerting. |
-| 10 | Regression test | [github.com/google/oss-fuzz](https://github.com/google/oss-fuzz), [google.github.io/oss-fuzz](https://google.github.io/oss-fuzz/) | Free / open-source; OSS-Fuzz service for eligible OSS projects | Tests that a vulnerability class or bug does not reappear. | Useful for secure SDLC feedback loops. |
-| 11 | Verification command | [github.com/anchore/grype](https://github.com/anchore/grype), [github.com/aquasecurity/trivy-db](https://github.com/aquasecurity/trivy-db), [github.com/projectdiscovery/nuclei](https://github.com/projectdiscovery/nuclei) | Free / open-source | Command/procedure to verify vulnerability or remediation state. | Required for repeatable remediation closure. |
-| 12 | SLA due date | [www.cisa.gov/news-events/directives/bod-22-01-reducing-significant-risk-known-exploited-vulnerabilities](https://www.cisa.gov/news-events/directives/bod-22-01-reducing-significant-risk-known-exploited-vulnerabilities), [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public | Remediation deadline derived from KEV, severity, exposure, policy, or business context. | SLA should be policy-driven & context-aware. |
-> #### [*Back to **`Index`***](#index)
----
-## 17. Minimal source set for production use
+
+### 19. Minimal source set for production use
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | CVE List v5 | [github.com/CVEProject/cvelistV5](https://github.com/CVEProject/cvelistV5) | Free public GitHub repo | Canonical CVE records. | Start here for CVE identity. |
@@ -1011,6 +1174,7 @@ A complete vulnerability impact system should be able to ingest or derive the fo
 | 8 | CISA KEV JSON | [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) | Free public feed | Known exploitation signal. | High-priority remediation driver. |
 | 9 | CISA Vulnrichment | [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment) | Free public GitHub repo | CISA ADP & SSVC enrichment. | Coverage varies. |
 | 10 | FIRST EPSS | [www.first.org/epss](https://www.first.org/epss/) | Free public data/API | Exploit likelihood prediction. | Store score date. |
+
 | 11 | CWE downloads | [cwe.mitre.org/data/downloads.html](https://cwe.mitre.org/data/downloads.html) | Free public downloads | Weakness taxonomy ingestion. | Useful for classification & grouping. |
 | 12 | CAPEC downloads | [capec.mitre.org/data/downloads.html](https://capec.mitre.org/data/downloads.html) | Free public downloads | Attack-pattern taxonomy ingestion. | Useful for weakness-to-attack mapping. |
 | 13 | ATT&CK STIX data | [github.com/mitre-attack/attack-stix-data](https://github.com/mitre-attack/attack-stix-data) | Free public GitHub repo | Machine-readable adversary techniques. | Useful for response/detection mapping. |
@@ -1021,10 +1185,11 @@ A complete vulnerability impact system should be able to ingest or derive the fo
 | 18 | CSAF | [docs.oasis-open.org/csaf/csaf/v2.0/os/csaf-v2.0-os.html](https://docs.oasis-open.org/csaf/csaf/v2.0/os/csaf-v2.0-os.html) | Free / open standard | Structured security advisories. | Supports product status & VEX-like workflows. |
 | 19 | OpenVEX | [github.com/openvex/spec](https://github.com/openvex/spec) | Free / open-source | Affected/not-affected status communication. | Reduces false positives. |
 | 20 | Distro feeds | [access.redhat.com/security/data](https://access.redhat.com/security/data), [alas.aws.amazon.com](https://alas.aws.amazon.com/), [linux.oracle.com/security](https://linux.oracle.com/security/), [packages.cgr.dev/chainguard/security.json](https://packages.cgr.dev/chainguard/security.json), [packages.wolfi.dev/os/security.json](https://packages.wolfi.dev/os/security.json), [secdb.alpinelinux.org](https://secdb.alpinelinux.org/), [security-tracker.debian.org](https://security-tracker.debian.org/), [ubuntu.com/security/oval](https://ubuntu.com/security/oval), [www.suse.com/support/security/csaf](https://www.suse.com/support/security/csaf/) | Mostly free public; some vendor support/subscription details may apply | Distro-specific affectedness & patch status. | Required to avoid backport false positives. |
-| 21 | Exploit signal feeds | [docs.greynoise.io](https://docs.greynoise.io/), [github.com/rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework), [project-zero.issues.chromium.org](https://project-zero.issues.chromium.org/), [www.exploit-db.com](https://www.exploit-db.com/), [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/), [www.shadowserver.org](https://www.shadowserver.org/) | Mixed: free public, open-source, free tiers, paid plans, or registration-based access | Exploitability, weaponization, & exposure enrichment. | Use for prioritization, not canonical vulnerability identity. |
+| 21 | Exploit signal feeds | [docs.greynoise.io](https://docs.greynoise.io/), [github.com/rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework), [project-zero.issues.chromium.org/issues](https://project-zero.issues.chromium.org/issues), [www.exploit-db.com](https://www.exploit-db.com/), [www.kb.cert.org/vuls](https://www.kb.cert.org/vuls/), [www.shadowserver.org](https://www.shadowserver.org/) | Mixed: free public, open-source, free tiers, paid plans, or registration-based access | Exploitability, weaponization, & exposure enrichment. | Use for prioritization, not canonical vulnerability identity. |
 > #### [*Back to **`Index`***](#index)
 ---
-## 18. Final structure for all vulnerability management sources & exposure listings
+
+### 20. Final structure for all vulnerability management sources & exposure listings
 | Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
 |---:|---|---|---|---|---|
 | 1 | Canonical vulnerability records | [github.com/CVEProject/cvelistV5](https://github.com/CVEProject/cvelistV5), [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment), [nvd.nist.gov](https://nvd.nist.gov/), [www.cve.org](https://www.cve.org/) | Free public / open-source; NVD optional API key | CVE, NVD, CVE schema, & CISA Vulnrichment provide base vulnerability identity & enrichment. | Use as foundational sources but enrich with vendor/package-specific affectedness. |
@@ -1032,7 +1197,7 @@ A complete vulnerability impact system should be able to ingest or derive the fo
 | 3 | Vendor & distro affectedness | [access.redhat.com/security/data](https://access.redhat.com/security/data), [secdb.alpinelinux.org](https://secdb.alpinelinux.org/), [security-tracker.debian.org](https://security-tracker.debian.org/), [ubuntu.com/security/oval](https://ubuntu.com/security/oval), [www.suse.com/support/security/csaf](https://www.suse.com/support/security/csaf/) | Mostly free public; some vendor support entitlements may apply | CSAF, VEX, OVAL, secdb, OSV, & vendor advisories identify whether a specific product/package is affected. | Essential for reducing false positives & handling backports. |
 | 4 | Exploitability & prioritization | [github.com/rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework), [viz.greynoise.io](https://viz.greynoise.io/), [www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json), [www.exploit-db.com](https://www.exploit-db.com/), [www.first.org/epss](https://www.first.org/epss/) | Mixed: free public, open-source, free tiers / paid plans | KEV, EPSS, SSVC, CVSS, Exploit-DB, Metasploit, & GreyNoise inform urgency. | Do not conflate severity with exploitability. |
 | 5 | Weakness & adversary mapping | [attack.mitre.org/matrices/enterprise](https://attack.mitre.org/matrices/enterprise/), [atlas.mitre.org](https://atlas.mitre.org/), [capec.mitre.org](https://capec.mitre.org/), [cwe.mitre.org](https://cwe.mitre.org/) | Free public | CWE, CAPEC, ATT&CK, & ATLAS map vulnerabilities to weaknesses & adversary behavior. | Useful for detection engineering & root-cause analysis. |
-| 6 | AI-specific vulnerability context | [atlas.mitre.org](https://atlas.mitre.org/), [owasp.org/www-project-machine-learning-security-top-10](https://owasp.org/www-project-machine-learning-security-top-10/), [owasp.org/www-project-top-10-for-large-language-model-applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/), [www.nist.gov/itl/ai-risk-management-framework](https://www.nist.gov/itl/ai-risk-management-framework) | Free public / open community | ATLAS, OWASP LLM Top 10, OWASP ML Top 10, & NIST AI RMF frame AI/ML risk. | AI vulnerabilities often lack CVEs; include threat-model & control frameworks. |
+| 6 | AI-specific vulnerability context | [atlas.mitre.org](https://atlas.mitre.org/), [owasp.org/www-project- machine-learning-security-top-10](https://owasp.org/www-project-machine-learning-security-top-10/), [owasp.org/www-project-top-10-for-large-language-model-applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/), [www.nist.gov/itl/ai-risk-management-framework](https://www.nist.gov/itl/ai-risk-management-framework) | Free public / open community | ATLAS, OWASP LLM Top 10, OWASP ML Top 10, & NIST AI RMF frame AI/ML risk. | AI vulnerabilities often lack CVEs; include threat-model & control frameworks. |
 | 7 | SBOM & identity | [cyclonedx.org/specification/overview](https://cyclonedx.org/specification/overview/), [github.com/package-url/purl-spec](https://github.com/package-url/purl-spec), [nvd.nist.gov/products/cpe](https://nvd.nist.gov/products/cpe), [spdx.dev/specifications](https://spdx.dev/specifications/) | Free public / open standards | CycloneDX, SPDX, PURL, CPE, & SWID identify components for matching. | Accurate inventory is prerequisite to vulnerability assessment. |
 | 8 | Exposure telemetry | [leakix.net](https://leakix.net/), [search.censys.io](https://search.censys.io/), [viz.greynoise.io](https://viz.greynoise.io/), [www.shadowserver.org](https://www.shadowserver.org/), [www.shodan.io](https://www.shodan.io/) | Mixed: free public, free tiers, paid plans, registration-based access | Censys, Shodan, Shadowserver, GreyNoise, LeakIX, & internal inventory help assess real exposure. | External scan data can be stale or incomplete; join with internal evidence. |
 | 9 | Malicious package & supply-chain compromise | [github.com/advisories?query=type%3Amalware](https://github.com/advisories?query=type%3Amalware), [github.com/ossf/malicious-packages](https://github.com/ossf/malicious-packages), [github.com/ossf/package-analysis](https://github.com/ossf/package-analysis), [security.snyk.io](https://security.snyk.io/), [socket.dev/blog](https://socket.dev/blog), [sonatype.com/resources/vulnerability-database](https://sonatype.com/resources/vulnerability-database) | Mixed: free public, open-source, free tiers / commercial products | Tracks malicious package risk that may not appear as conventional CVEs. | Essential for supply-chain defense & dependency risk. |
@@ -1041,12 +1206,18 @@ A complete vulnerability impact system should be able to ingest or derive the fo
 | 12 | Compliance & configuration impact | [github.com/ComplianceAsCode/content](https://github.com/ComplianceAsCode/content), [ncp.nist.gov](https://ncp.nist.gov/), [public.cyber.mil/stigs](https://public.cyber.mil/stigs/), [www.cisecurity.org/cis-benchmarks](https://www.cisecurity.org/cis-benchmarks), [www.open-scap.org](https://www.open-scap.org/) | Mostly free public / open-source; CIS benchmarks may require free registration & commercial tools exist | CIS, STIG, SCAP, cloud posture, & Kubernetes benchmarks help assess environmental control weakness. | These are not vulnerability feeds but determine practical risk & exploitability. |
 > #### [*Back to **`Index`***](#index)
 
+
+---
+---
+
 ---
 
 #### `License`
->     Copyright Ⓒ 2025  Keerthana Purushotham <keep.consult@proton.me>.
->     Licensed under the GNU AGPL v3. See LICENSE for details.
->   [*see license*](https://github.com/keerthanap8898/CveToad/blob/main/LICENSE)
+>   Copyright Ⓒ 2025 Keerthana Purushotham <keep.consult@proton.me>.
+>   Licensed under the GNU AGPL v3. See LICENSE for details.
+> [*see license*](https://github.com/keerthanap8898/CveToad/blob/main/LICENSE)
+
 
 ##### Note:
-> *Some vendor/security pages change URLs over time, so treat this as a high-coverage baseline rather than a mathematically exhaustive list of every possible vulnerability source.*
+> *Some vendor/security pages change URLs over time, so treat this as a high-coverage baseline rather than a
+mathematically exhaustive list of every possible vulnerability source.*
