@@ -1,11 +1,13 @@
 # 14.1 Source & artifact provenance
 
-| Sl. # | Title | Link(s) | Access / Cost | Relevance | Notes & POIs |
-|---:|---|---|---|---|---|
-| 1 | SLSA | [slsa.dev](https://slsa.dev/) | Free / open standard | Supply-chain Levels for Software Artifacts. | Useful for evaluating build integrity & provenance risk. |
-| 2 | Sigstore | [www.sigstore.dev](https://www.sigstore.dev/) | Free / open-source public infrastructure | Signing & verification for software artifacts. | Helps verify artifact integrity & publisher identity. |
-| 3 | Cosign | [github.com/sigstore/cosign](https://github.com/sigstore/cosign) | Free / open-source public GitHub repo | Container/artifact signing tool. | Useful for verifying container image provenance. |
-| 4 | Rekor | [docs.sigstore.dev/logging/overview](https://docs.sigstore.dev/logging/overview/) | Free public docs / public transparency log | Transparency log for signed artifacts. | Useful for auditability & tamper detection. |
-| 5 | in-toto | [in-toto.io](https://in-toto.io/) | Free / open-source | Supply-chain integrity framework. | Useful for verifying build steps & provenance attestations. |
-| 6 | The Update Framework - TUF | [theupdateframework.io](https://theupdateframework.io/) | Free / open-source | Secure software update framework. | Useful for update-channel compromise resistance. |
-| 7 | SLSA GitHub generators | [github.com/slsa-framework/slsa-github-generator](https://github.com/slsa-framework/slsa-github-generator) | Free / open-source public GitHub repo | GitHub-based SLSA provenance generators. | Useful for CI/CD provenance generation. |
+| Sl. # | Title                      | Link(s)                                                                                                    | Access / Cost                              | Relevance                                      | Notes & POIs                                                |
+| ----: | -------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------ | ---------------------------------------------- | ----------------------------------------------------------- |
+|     1 | SLSA                       | [slsa.dev](https://slsa.dev/)                                                                              | Free / open standard                       | Supply-chain Levels for Software Artifacts.    | Useful for evaluating build integrity & provenance risk.    |
+|     2 | Sigstore                   | [www.sigstore.dev](https://www.sigstore.dev/)                                                              | Free / open-source public infrastructure   | Signing & verification for software artifacts. | Helps verify artifact integrity & publisher identity.       |
+|     3 | Cosign                     | [github.com/sigstore/cosign](https://github.com/sigstore/cosign)                                           | Free / open-source public GitHub repo      | Container/artifact signing tool.               | Useful for verifying container image provenance.            |
+|     4 | Rekor                      | [docs.sigstore.dev/logging/overview](https://docs.sigstore.dev/logging/overview/)                          | Free public docs / public transparency log | Transparency log for signed artifacts.         | Useful for auditability & tamper detection.                 |
+|     5 | in-toto                    | [in-toto.io](https://in-toto.io/)                                                                          | Free / open-source                         | Supply-chain integrity framework.              | Useful for verifying build steps & provenance attestations. |
+|     6 | The Update Framework - TUF | [theupdateframework.io](https://theupdateframework.io/)                                                    | Free / open-source                         | Secure software update framework.              | Useful for update-channel compromise resistance.            |
+|     7 | SLSA GitHub generators     | [github.com/slsa-framework/slsa-github-generator](https://github.com/slsa-framework/slsa-github-generator) | Free / open-source public GitHub repo      | GitHub-based SLSA provenance generators.       | Useful for CI/CD provenance generation.                     |
+
+> [_**Back to****&#x20;****`Index`**_](../)

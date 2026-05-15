@@ -1,9 +1,8 @@
-# Summary
+# Table of contents
 
-* [VulnKeepur GitBook](README.md)
+* [Vulnerability Assessment Yellow Pages](README.md "VulnKeeper GitBook: Vulnerability Assessment Yellow Pages")
 * [Preface](00-preface.md)
-* [Index](01-index.md)
-
+* [Table of Contents](01-index.md)
 * [0. Corrections & normalization notes](chapter-02/README.md)
 * [1. Canonical vulnerability identifiers, CVE records & schemas](chapter-03/README.md)
   * [1.1 CVE Program - canonical CVE identity](chapter-03/01-1-1-cve-program-canonical-cve-identity.md)
@@ -18,10 +17,10 @@
   * [3.2 Exploit prediction & scoring](chapter-05/02-3-2-exploit-prediction-scoring.md)
   * [3.3 Decision-support frameworks](chapter-05/03-3-3-decision-support-frameworks.md)
   * [3.4 Public exploit / proof-of-concept / weaponization signals](chapter-05/04-3-4-public-exploit-proof-of-concept-weaponization-signals.md)
-* [4. CWE, CAPEC, ATT&CK, ATLAS & weakness-to-attack mapping](chapter-06/README.md)
+* [4. CWE, CAPEC, ATT\&CK, ATLAS & weakness-to-attack mapping](chapter-06/README.md)
   * [4.1 CWE - Common Weakness Enumeration](chapter-06/01-4-1-cwe-common-weakness-enumeration.md)
   * [4.2 CAPEC - attack patterns](chapter-06/02-4-2-capec-attack-patterns.md)
-  * [4.3 MITRE ATT&CK](chapter-06/03-4-3-mitre-att-ck.md)
+  * [4.3 MITRE ATT\&CK](chapter-06/03-4-3-mitre-att-ck.md)
   * [4.4 AI/ML-specific adversary frameworks](chapter-06/04-4-4-ai-ml-specific-adversary-frameworks.md)
 * [5. Vendor, OS, distribution, container & package affectedness feeds](chapter-07/README.md)
   * [5.1 Scanner-oriented aggregators & vulnerability DB builders](chapter-07/01-5-1-scanner-oriented-aggregators-vulnerability-db-builders.md)
