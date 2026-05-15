@@ -35,7 +35,7 @@
   - **[1. `Corrections & normalization notes`](#1-corrections)**
 
   - **[2. `Canonical vulnerability identifiers, CVE records & schemas`](#2-canonical-vulnerability)**
-     - [2.1 CVE Program - canonical CVE identity](#21-cve-program-canonical)
+     - [2.1 CVE Program - canonical CVE identity](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#21-cve-program)
      - [2.2 NVD - CVE enrichment, CPE matching, CVSS & configurations](#22-nvd-cve-enrichment-cpe)
      - [2.3 Optional CVE meta-mirrors / commercial-community enrichments](#23-optional-cve-meta)
      - [2.4 CVE Program governance, project repos, working groups & SADP](#24-cve-program-gov)
