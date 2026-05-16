@@ -30,12 +30,12 @@
 ## Index
 
 
-- #### **[A. `CVE Record Intake, Identity, Schema & Program Governance`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#a-cve-record-intake-identity-schema-program-governance)**
+- #### **[A. `CVE Record Intake, Identity, Schema & Program Governance`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#a-cve-record-intake-identity-schema--program-governance)**
 
-  - **[1. `Corrections & normalization notes`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#1-corrections)**
+  - **[1. `Corrections & normalization notes`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#1-corrections--normalization-notes)**
 
-  - **[2. `Canonical vulnerability identifiers, CVE records & schemas`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#2-canonical-vulnerability)**
-     - [2.1 CVE Program - canonical CVE identity](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#21-cve-program)
+  - **[2. `Canonical vulnerability identifiers, CVE records & schemas`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#2-canonical-vulnerability-identifiers-cve-records--schemas)**
+     - [2.1 CVE Program - canonical CVE identity](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#21-cve-program---canonical-cve-identity)
      - [2.2 NVD - CVE enrichment, CPE matching, CVSS & configurations](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#22-nvd---cve-enrichment-cpe-matching-cvss--configurations)
      - [2.3 Optional CVE meta-mirrors / commercial-community enrichments](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#23-optional-cve-meta-mirrors--commercial-community-enrichments)
      - [2.4 CVE Program governance, project repos, working groups & SADP](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#24-cve-program-governance-project-repos-working-groups--sadp)
@@ -43,118 +43,118 @@
 
   - **[3. `CVE metadata analytical framework, user-story resources, papers & community governance`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#3-cve-metadata-analytical-framework-user-story-resources-papers--community-governance)**
      - [3.1 CveToad CVE consumer/user-story resources](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#31-cvetoad-cve-consumeruser-story-resources)
-     - [3.2 CVE/CWE working groups, SIGs & community lists](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#32-cvecwe-working-groups-sigs-community-lists)
-     - [3.3 Papers, conference programs, talks, training & community material](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#33-papers-conference-programs-talks-training-community-material)
+     - [3.2 CVE/CWE working groups, SIGs & community lists](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#32-cvecwe-working-groups-sigs--community-lists)
+     - [3.3 Papers, conference programs, talks, training & community material](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#33-papers-conference-programs-talks-training--community-material)
 
 
-- #### **[B. `CVE Enrichment, Exploitability, Prioritization & Data Model`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#b-cve-enrichment-exploitability-prioritization-data-model)**
+- #### **[B. `CVE Enrichment, Exploitability, Prioritization & Data Model`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#b-cve-enrichment-exploitability-prioritization--data-model)**
 
-  - **[4. `Exploitation, prioritization, severity & risk scoring`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#4-exploitation-prioritization-severity-risk-scoring)**
+  - **[4. `Exploitation, prioritization, severity & risk scoring`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#4-exploitation-prioritization-severity--risk-scoring)**
      - [4.1 Known exploited vulnerability sources](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#41-known-exploited-vulnerability-sources)
-     - [4.2 Exploit prediction & scoring](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#42-exploit-prediction-scoring)
+     - [4.2 Exploit prediction & scoring](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#42-exploit-prediction--scoring)
      - [4.3 Decision-support frameworks](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#43-decision-support-frameworks)
-     - [4.4 Public exploit / proof-of-concept / weaponization signals](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#44-public-exploit-proof-of-concept-weaponization-signals)
+     - [4.4 Public exploit / proof-of-concept / weaponization signals](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#44-public-exploit--proof-of-concept--weaponization-signals)
 
   - **[5. `Practical priority hierarchy for ingestion`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#5-practical-priority-hierarchy-for-ingestion)**
-     - [5.1 Tier 0 - identifiers & inventory](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#51-tier-0-identifiers-inventory)
-     - [5.2 Tier 1 - canonical vulnerability records](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#52-tier-1-canonical-vulnerability-records)
-     - [5.3 Tier 2 - package/ecosystem vulnerability records](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#53-tier-2-packageecosystem-vulnerability-records)
-     - [5.4 Tier 3 - affectedness, distro & vendor truth](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#54-tier-3-affectedness-distro-vendor-truth)
-     - [5.5 Tier 4 - severity & prioritization](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#55-tier-4-severity-prioritization)
-     - [5.6 Tier 5 - exploitability & weaponization](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#56-tier-5-exploitability-weaponization)
-     - [5.7 Tier 6 - weakness, attack-pattern & AI context](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#57-tier-6-weakness-attack-pattern-ai-context)
-     - [5.8 Tier 7 - detection engineering & validation](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#58-tier-7-detection-engineering-validation)
+     - [5.1 Tier 0 - identifiers & inventory](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#51-tier-0---identifiers--inventory)
+     - [5.2 Tier 1 - canonical vulnerability records](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#52-tier-1---canonical-vulnerability-records)
+     - [5.3 Tier 2 - package/ecosystem vulnerability records](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#53-tier-2---packageecosystem-vulnerability-records)
+     - [5.4 Tier 3 - affectedness, distro & vendor truth](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#54-tier-3---affectedness-distro--vendor-truth)
+     - [5.5 Tier 4 - severity & prioritization](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#55-tier-4---severity--prioritization)
+     - [5.6 Tier 5 - exploitability & weaponization](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#56-tier-5---exploitability--weaponization)
+     - [5.7 Tier 6 - weakness, attack-pattern & AI context](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#57-tier-6---weakness-attack-pattern--ai-context)
+     - [5.8 Tier 7 - detection engineering & validation](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#58-tier-7---detection-engineering--validation)
 
   - **[6. `Recommended canonical data model coverage`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#6-recommended-canonical-data-model-coverage)**
      - [6.1 Vulnerability identity](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#61-vulnerability-identity)
      - [6.2 Affectedness](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#62-affectedness)
-     - [6.3 Severity & exploitability](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#63-severity-exploitability)
+     - [6.3 Severity & exploitability](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#63-severity--exploitability)
      - [6.4 Environmental impact](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#64-environmental-impact)
-     - [6.5 Detection & remediation](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#65-detection-remediation)
+     - [6.5 Detection & remediation](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#65-detection--remediation)
 
 
-- #### **[C. `Weakness Taxonomy, Attack Mapping & AI/ML Vulnerability Context`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#c-weakness-taxonomy-attack-mapping-aiml-vulnerability-context)**
+- #### **[C. `Weakness Taxonomy, Attack Mapping & AI/ML Vulnerability Context`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#c-weakness-taxonomy-attack-mapping--aiml-vulnerability-context)**
 
-   - **[7. `CWE, CAPEC, ATT&CK, ATLAS & weakness-to-attack mapping`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#7-cwe-capec-attck-atlas-weakness-to-attack-mapping)**
-     - [7.1 CWE - Common Weakness Enumeration](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#71-cwe-common-weakness-enumeration)
-     - [7.2 CAPEC - attack patterns](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#72-capec-attack-patterns)
+   - **[7. `CWE, CAPEC, ATT&CK, ATLAS & weakness-to-attack mapping`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#7-cwe-capec-attck-atlas--weakness-to-attack-mapping)**
+     - [7.1 CWE - Common Weakness Enumeration](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#71-cwe---common-weakness-enumeration)
+     - [7.2 CAPEC - attack patterns](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#72-capec---attack-patterns)
      - [7.3 MITRE ATT&CK](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#73-mitre-attck)
      - [7.4 AI/ML-specific adversary frameworks](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#74-aiml-specific-adversary-frameworks)
 
 
-- #### **[D. `Affectedness Truth: Package, OS, Vendor, Cloud, ICS & Product Advisories`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#d-affectedness-truth-package-os-vendor-cloud-ics-product-advisories)**
+- #### **[D. `Affectedness Truth: Package, OS, Vendor, Cloud, ICS & Product Advisories`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#d-affectedness-truth-package-os-vendor-cloud-ics--product-advisories)**
 
-  - **[8. `Open-source vulnerability databases & package advisory sources`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#8-open-source-vulnerability-databases-package-advisory-sources)**
+  - **[8. `Open-source vulnerability databases & package advisory sources`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#8-open-source-vulnerability-databases--package-advisory-sources)**
      - [8.1 OSV ecosystem](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#81-osv-ecosystem)
      - [8.2 GitHub Advisory Database](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#82-github-advisory-database)
-     - [8.3 Language & package ecosystem advisory databases](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#83-language-package-ecosystem-advisory-databases)
+     - [8.3 Language & package ecosystem advisory databases](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#83-language--package-ecosystem-advisory-databases)
 
-  - **[9. `Vendor, OS, distribution, container & package affectedness feeds`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#9-vendor-os-distribution-container-package-affectedness-feeds)**
-     - [9.1 Scanner-oriented aggregators & vulnerability DB builders](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#91-scanner-oriented-aggregators-vulnerability-db-builders)
-     - [9.2 Red Hat / RHEL / CentOS Stream](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#92-red-hat-rhel-centos-stream)
+  - **[9. `Vendor, OS, distribution, container & package affectedness feeds`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#9-vendor-os-distribution-container--package-affectedness-feeds)**
+     - [9.1 Scanner-oriented aggregators & vulnerability DB builders](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#91-scanner-oriented-aggregators--vulnerability-db-builders)
+     - [9.2 Red Hat / RHEL / CentOS Stream](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#92-red-hat--rhel--centos-stream)
      - [9.3 Debian](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#93-debian)
-     - [9.4 Ubuntu / Canonical](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#94-ubuntu-canonical)
+     - [9.4 Ubuntu / Canonical](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#94-ubuntu--canonical)
      - [9.5 Alpine](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#95-alpine)
-     - [9.6 SUSE / openSUSE](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#96-suse-opensuse)
+     - [9.6 SUSE / openSUSE](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#96-suse--opensuse)
      - [9.7 Oracle Linux](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#97-oracle-linux)
      - [9.8 Amazon Linux](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#98-amazon-linux)
      - [9.9 Fedora, AlmaLinux, Rocky, Arch, Gentoo](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#99-fedora-almalinux-rocky-arch-gentoo)
-     - [9.10 Wolfi / Chainguard](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#910-wolfi-chainguard)
+     - [9.10 Wolfi / Chainguard](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#910-wolfi--chainguard)
 
   - **[10. `Vendor advisories for enterprise impact assessment`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#10-vendor-advisories-for-enterprise-impact-assessment)**
-     - [10.1 Major OS, browser & platform vendors](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#101-major-os-browser-platform-vendors)
+     - [10.1 Major OS, browser & platform vendors](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#101-major-os-browser--platform-vendors)
      - [10.2 Enterprise infrastructure vendors](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#102-enterprise-infrastructure-vendors)
      - [10.3 Cloud provider security bulletins](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#103-cloud-provider-security-bulletins)
 
-  - **[11. `ICS, OT, IoT, embedded & medical-device sources`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#11-ics-ot-iot-embedded-medical-device-sources)**
-     - [11.1 CISA ICS / medical](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#111-cisa-ics-medical)
-     - [11.2 OT / ICS vendor advisories](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#112-ot-ics-vendor-advisories)
-     - [11.3 IoT / embedded](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#113-iot-embedded)
+  - **[11. `ICS, OT, IoT, embedded & medical-device sources`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#11-ics-ot-iot-embedded--medical-device-sources)**
+     - [11.1 CISA ICS / medical](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#111-cisa-ics--medical)
+     - [11.2 OT / ICS vendor advisories](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#112-ot--ics-vendor-advisories)
+     - [11.3 IoT / embedded](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#113-iot--embedded)
 
 
-- #### **[E. `Security Supply Chain Evidence: SBOM, VEX, Provenance & Malicious Package Risk`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#e-security-supply-chain-evidence-sbom-vex-provenance-malicious-package-risk)**
+- #### **[E. `Security Supply Chain Evidence: SBOM, VEX, Provenance & Malicious Package Risk`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#e-security-supply-chain-evidence-sbom-vex-provenance--malicious-package-risk)**
 
-  - **[12. `SBOM, package identity, VEX & advisory exchange standards`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#12-sbom-package-identity-vex-advisory-exchange-standards)**
+  - **[12. `SBOM, package identity, VEX & advisory exchange standards`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#12-sbom-package-identity-vex--advisory-exchange-standards)**
      - [12.1 SBOM standards](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#121-sbom-standards)
-     - [12.2 Package & software identity](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#122-package-software-identity)
-     - [12.3 Advisory exchange, CSAF & VEX](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#123-advisory-exchange-csaf-vex)
+     - [12.2 Package & software identity](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#122-package--software-identity)
+     - [12.3 Advisory exchange, CSAF & VEX](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#123-advisory-exchange-csaf--vex)
 
-  - **[13. `Malicious package, supply-chain compromise & package reputation sources`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#13-malicious-package-supply-chain-compromise-package-reputation-sources)**
+  - **[13. `Malicious package, supply-chain compromise & package reputation sources`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#13-malicious-package-supply-chain-compromise--package-reputation-sources)**
      - [13.1 Malicious package databases](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#131-malicious-package-databases)
-     - [13.2 Package reputation / dependency health](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#132-package-reputation-dependency-health)
+     - [13.2 Package reputation / dependency health](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#132-package-reputation--dependency-health)
 
-  - **[14. `Source-code, dependency, artifact & build-chain provenance`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#14-source-code-dependency-artifact-build-chain-provenance)**
-     - [14.1 Source & artifact provenance](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#141-source-artifact-provenance)
-     - [14.2 Dependency inventory & graphing](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#142-dependency-inventory-graphing)
+  - **[14. `Source-code, dependency, artifact & build-chain provenance`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#14-source-code-dependency-artifact--build-chain-provenance)**
+     - [14.1 Source & artifact provenance](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#141-source--artifact-provenance)
+     - [14.2 Dependency inventory & graphing](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#142-dependency-inventory--graphing)
 
 
-- #### **[F. `Detection, Exposure, Threat Telemetry, Validation & Remediation Operations`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#f-detection-exposure-threat-telemetry-validation-remediation-operations)**
+- #### **[F. `Detection, Exposure, Threat Telemetry, Validation & Remediation Operations`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#f-detection-exposure-threat-telemetry-validation--remediation-operations)**
 
-  - **[15. `Automated vulnerability detection, static analysis, dynamic analysis & research datasets`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#15-automated-vulnerability-detection-static-analysis-dynamic-analysis-research-datasets)**
-     - [15.1 SAST / code query engines](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#151-sast-code-query-engines)
-     - [15.2 DAST, IAST, fuzzing & dynamic test sources](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#152-dast-iast-fuzzing-dynamic-test-sources)
+  - **[15. `Automated vulnerability detection, static analysis, dynamic analysis & research datasets`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#15-automated-vulnerability-detection-static-analysis-dynamic-analysis--research-datasets)**
+     - [15.1 SAST / code query engines](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#151-sast--code-query-engines)
+     - [15.2 DAST, IAST, fuzzing & dynamic test sources](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#152-dast-iast-fuzzing--dynamic-test-sources)
      - [15.3 Vulnerability-detection research datasets](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#153-vulnerability-detection-research-datasets)
 
-  - **[16. `Exposure, internet-facing asset & threat telemetry`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#16-exposure-internet-facing-asset-threat-telemetry)**
+  - **[16. `Exposure, internet-facing asset & threat telemetry`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#16-exposure-internet-facing-asset--threat-telemetry)**
      - [16.1 Internet exposure search engines](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#161-internet-exposure-search-engines)
      - [16.2 Scan/exploitation telemetry](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#162-scanexploitation-telemetry)
      - [16.3 Attack surface management context](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#163-attack-surface-management-context)
       
-  - **[17. `Threat intelligence, malware, ransomware & in-the-wild exploitation context`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#17-threat-intelligence-malware-ransomware-in-the-wild-exploitation-context)**
+  - **[17. `Threat intelligence, malware, ransomware & in-the-wild exploitation context`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#17-threat-intelligence-malware-ransomware--in-the-wild-exploitation-context)**
      - [17.1 Major threat research sources](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#171-major-threat-research-sources)
-     - [17.2 Malware & IOC repositories](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#172-malware-ioc-repositories)
+     - [17.2 Malware & IOC repositories](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#172-malware--ioc-repositories)
 
       
-- #### **[G. `Governance, Compliance, Assurance, Production Baselines & Final Operating Model`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#g-governance-compliance-assurance-production-baselines-final-operating-model)**
+- #### **[G. `Governance, Compliance, Assurance, Production Baselines & Final Operating Model`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#g-governance-compliance-assurance-production-baselines--final-operating-model)**
   
-  - **[18. `Compliance, baseline configuration, software assurance & exposure severity standards`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#18-compliance-baseline-configuration-software-assurance-exposure-severity-standards)**
-     - [18.1 Security configuration & benchmarks](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#181-security-configuration-benchmarks)
+  - **[18. `Compliance, baseline configuration, software assurance & exposure severity standards`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#18-compliance-baseline-configuration-software-assurance--exposure-severity-standards)**
+     - [18.1 Security configuration & benchmarks](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#181-security-configuration--benchmarks)
      - [18.2 Cloud configuration posture](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#182-cloud-configuration-posture)
-     - [18.3 Software assurance, secure development, acquisition & NIST publication libraries](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#183-software-assurance-secure-development-acquisition-nist-publication-libraries)
+     - [18.3 Software assurance, secure development, acquisition & NIST publication libraries](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#183-software-assurance-secure-development-acquisition--nist-publication-libraries)
       
   - **[19. `Minimal source set for production use`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#19-minimal-source-set-for-production-use)**
     
-  - **[20. `Final structure for all vulnerability management sources & exposure listings`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#20-final-structure-for-all-vulnerability-management-sources-exposure-listings)**
+  - **[20. `Final structure for all vulnerability management sources & exposure listings`](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/Vuln-Data-Sources.md#20-final-structure-for-all-vulnerability-management-sources--exposure-listings)**
 
 ---
 
