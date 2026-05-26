@@ -2,6 +2,24 @@
 description: >-
   This overview contains the numbered section pages for Chapter A - CVE record
   intake, identity, schema & governance.
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: false
+  tags:
+    visible: true
+  actions:
+    visible: true
 ---
 
 # Overview

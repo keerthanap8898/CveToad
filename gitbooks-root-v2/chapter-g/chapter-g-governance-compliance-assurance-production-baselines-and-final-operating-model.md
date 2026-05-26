@@ -4,9 +4,9 @@ This overview contains the numbered section pages for **Chapter G - Governance, 
 
 ## Chapter sections
 
-* [18. Compliance, baseline configuration, software assurance & exposure severity standards](18-18-compliance-baseline-configuration-software-assurance-and-exposure-severity-st/)
-* [19. Minimal source set for production use](19-19-minimal-source-set-for-production-use/)
-* [20. Final structure for all vulnerability management sources & exposure listings](20-20-final-structure-for-all-vulnerability-management-sources-and-exposure-listing/)
+* [18. Compliance, baseline configuration, software assurance & exposure severity standards](18-18-compliance-baseline-configuration-software-assurance-and-exposure-severity-st.md)
+* [19. Minimal source set for production use](19-19-minimal-source-set-for-production-use.md)
+* [20. Final structure for all vulnerability management sources & exposure listings](20-20-final-structure-for-all-vulnerability-management-sources-and-exposure-listing.md)
 
 ## Discussion
 
