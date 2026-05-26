@@ -4,14 +4,14 @@ This index mirrors the lifecycle chapter groups.
 
 ## [Chapter A - CVE record intake, identity, schema & governance](/broken/spaces/WhFywdlK4jDRIXcZflwi/pages/9czlddKnmh9wCCBVfO5M)
 
-* [1. Corrections & normalization notes](chapter-a-cve-record-intake-identity-schema-and-governance/01-1-corrections-and-normalization-notes.md)
-* [2. Canonical vulnerability identifiers, CVE records & schemas](chapter-a-cve-record-intake-identity-schema-and-governance/02-2-canonical-vulnerability-identifiers-cve-records-and-schemas.md) - 5 topic pages/views
+* [1. Corrections & normalization notes](chapter-a/01-1-corrections-and-normalization-notes.md)
+* [2. Canonical vulnerability identifiers, CVE records & schemas](chapter-a/02-2-canonical-vulnerability-identifiers-cve-records-and-schemas.md) - 5 topic pages/views
   * 2.1 CVE Program - canonical CVE identity
   * 2.2 NVD - CVE enrichment, CPE matching, CVSS & configurations
   * 2.3 Optional CVE meta-mirrors / commercial-community enrichments
   * 2.4 CVE Program governance, project repos, working groups & SADP
   * 2.5 Free CVE lifecycle data feeds, APIs & endpoint references
-* [3. CVE metadata analytical framework, user-story resources, papers & community governance](chapter-a-cve-record-intake-identity-schema-and-governance/03-3-cve-metadata-analytical-framework-user-story-resources-papers-and-community-go.md) - 3 topic pages/views
+* [3. CVE metadata analytical framework, user-story resources, papers & community governance](chapter-a/03-3-cve-metadata-analytical-framework-user-story-resources-papers-and-community-go.md) - 3 topic pages/views
   * 3.1 CveToad CVE consumer/user-story resources
   * 3.2 CVE/CWE working groups, SIGs & community lists
   * 3.3 Papers, conference programs, talks, training & community material

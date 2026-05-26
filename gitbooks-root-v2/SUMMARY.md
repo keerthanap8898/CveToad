@@ -3,12 +3,14 @@
 * [CveToad Vulnerability Management Source Inventory](README.md)
 * [Table of Contents](01-index.md)
 
-## Chapter A - CVE record intake, identity, schema & governance
+## Chapter A
 
-* [Overview](chapter-a-cve-record-intake-identity-schema-and-governance/chapter-a-cve-record-intake-identity-schema-and-program-governance.md)
-* [1. Corrections & normalization notes](chapter-a-cve-record-intake-identity-schema-and-governance/01-1-corrections-and-normalization-notes.md)
-* [2. Canonical vulnerability identifiers, CVE records & schemas](chapter-a-cve-record-intake-identity-schema-and-governance/02-2-canonical-vulnerability-identifiers-cve-records-and-schemas.md)
-* [3. CVE metadata analytical framework, user-story resources, papers & community governance](chapter-a-cve-record-intake-identity-schema-and-governance/03-3-cve-metadata-analytical-framework-user-story-resources-papers-and-community-go.md)
+* [Overview](chapter-a/overview.md)
+* [1. Corrections & normalization notes](chapter-a/01-1-corrections-and-normalization-notes.md)
+* [2. Canonical vulnerability identifiers, CVE records & schemas](chapter-a/02-2-canonical-vulnerability-identifiers-cve-records-and-schemas.md)
+* [3. CVE metadata analytical framework, user-story resources, papers & community governance](chapter-a/03-3-cve-metadata-analytical-framework-user-story-resources-papers-and-community-go.md)
+
+## Chapter A - CVE record intake, identity, schema & governance
 
 ## Chapter B - CVE enrichment, exploitability, prioritization & data model
 

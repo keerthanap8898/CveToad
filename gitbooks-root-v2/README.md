@@ -9,7 +9,7 @@ This draft uses seven lifecycle page groups, twenty numbered chapter sections, &
 
 ## Page Groups
 
-* [A. CVE Record Intake, Identity, Schema & Program Governance](chapter-a-cve-record-intake-identity-schema-and-governance/chapter-a-cve-record-intake-identity-schema-and-program-governance.md)
+* [A. CVE Record Intake, Identity, Schema & Program Governance](/broken/pages/VELuuQOkdY6rDc7xXLYc)
 * [B. CVE Enrichment, Exploitability, Prioritization & Data Model](chapter-b-cve-enrichment-exploitability-prioritization-and-data-model/chapter-b-cve-enrichment-exploitability-prioritization-and-data-model.md)
 * [C. Weakness Taxonomy, Attack Mapping & AI/ML Vulnerability Context](chapter-c-weakness-taxonomy-attack-mapping-and-ai-ml-vulnerability-context/chapter-c-weakness-taxonomy-attack-mapping-and-ai-ml-vulnerability-context.md)
 * [D. Affectedness Truth: Package, OS, Vendor, Cloud, ICS & Product Advisories](chapter-d-affectedness-truth-across-packages-oses-vendors-cloud-ics-and-products/chapter-d-affectedness-truth-package-os-vendor-cloud-ics-and-product-advisories.md)
