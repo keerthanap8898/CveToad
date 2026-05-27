@@ -112,10 +112,19 @@ The shell initialises with short-lived authentication tokens (≤ 8 hours) and d
 > > 2. [**CVE-Project Official Schema** - *github.com/CVEProject/cve-schema*](https://github.com/CVEProject/cve-schema) ,
 > > 3. [**CVE-Project Automation Working group** - *github.com/CVEProject/automation-working-group*](https://github.com/CVEProject/automation-working-group) .
 > >
----
+> ---
+> 
+
+# **`VulnKeeper`**
+### [***`breachtrace.gitbook.io/vulnkeeper`***](https://breachtrace.gitbook.io/vulnkeeper/) 
+> #### [ *`GitBook`* ]
+>
+> ```⎯⎯✧﹌𓆤༉𖧧𖥧𖤣. ༘༝ၴ( ၴႅၴ˖𓏲⚘ཐི༏ཋྀˎ ྀ𓏲𓇗𖤣﹏𓆏࿐⚘𖥧𖤣𓇗ˎˊˎˊ𓆈ˊˎ゛✧⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯```
+> 
+> ## Root path to serve as a **`persistent link`** for `static files/PDFs` in addition to **storing archives** upon any updates / iterations, &/or extentions.
+> 
+> ---
 
 
-### 9. `License`
->     CopyrightⒸ 2025  Keerthana Purushotham <keep.consult@proton.me>.
->     Licensed under the GNU AGPL v3. See LICENSE for details.
->   [*see license*](https://github.com/keerthanap8898/CveToad/blob/main/LICENSE)
+![Slides](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/pdf-Vuln-Sources/Vuln-Keeper-watermark_longImg.jpg)
+
