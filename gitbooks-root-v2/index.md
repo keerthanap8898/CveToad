@@ -6,7 +6,7 @@ description: This index mirrors the lifecycle chapter groups.
 
 
 
-## \[[**`Chapter A`**](https://breachtrace.gitbook.io/vulnkeeper/chapter-a)][ - CVE record intake, identity, schema & governance](https://breachtrace.gitbook.io/vulnkeeper/chapter-a)
+## \[[**`Chapter A`**](https://breachtrace.gitbook.io/vulnkeeper/chapter-a)][ - _CVE record intake, identity, schema & governance_](https://breachtrace.gitbook.io/vulnkeeper/chapter-a)
 
 * [1. **Corrections & normalization notes**](chapter-a/01-1-corrections-and-normalization-notes.md)
 * [2. **Canonical vulnerability identifiers, CVE records & schemas**](chapter-a/02-2-canonical-vulnerability-identifiers-cve-records-and-schemas.md) - `5 topics`
