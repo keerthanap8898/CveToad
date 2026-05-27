@@ -1,7 +1,7 @@
 # Table of contents
 
-* [CveToad Vulnerability Management Source Inventory](README.md)
-* [Index](01-index.md)
+* [\[CVE-Toad\] Vulnerability Management Source Inventory](README.md)
+* [INDEX](index.md)
 
 ## Ⓐ . CVE record intake, identity, schema & governance <a href="#chapter-a" id="chapter-a"></a>
 
