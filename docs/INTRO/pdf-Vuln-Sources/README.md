@@ -8,3 +8,6 @@
 > ### Root path to serve as a **`persistent link`** for `static files/PDFs` in addition to **storing archives** upon any updates / iterations, &/or extentions.
 > 
 > ---
+
+
+![Slides](https://github.com/keerthanap8898/CveToad/tree/main/docs/INTRO/pdf-Vuln-Sources/Vuln-Keeper-watermark_longImg.jpg)
