@@ -9,7 +9,7 @@ This draft uses seven lifecycle page groups, twenty numbered chapter sections, &
 
 ## Page Groups
 
-* [A. CVE Record Intake, Identity, Schema & Program Governance](/broken/pages/VELuuQOkdY6rDc7xXLYc)
+* [A. CVE Record Intake, Identity, Schema & Program Governance](https://breachtrace.gitbook.io/vulnkeeper/chapter-a)
 * [B. CVE Enrichment, Exploitability, Prioritization & Data Model](chapter-b/chapter-b-cve-enrichment-exploitability-prioritization-and-data-model.md)
 * [C. Weakness Taxonomy, Attack Mapping & AI/ML Vulnerability Context](chapter-c/chapter-c-weakness-taxonomy-attack-mapping-and-ai-ml-vulnerability-context.md)
 * [D. Affectedness Truth: Package, OS, Vendor, Cloud, ICS & Product Advisories](chapter-d/chapter-d-affectedness-truth-package-os-vendor-cloud-ics-and-product-advisories.md)

@@ -3,7 +3,7 @@
 * [CveToad Vulnerability Management Source Inventory](README.md)
 * [Index](01-index.md)
 
-## Ⓐ . CVE record intake, identity, schema & governance. <a href="#chapter-a" id="chapter-a"></a>
+## Ⓐ . CVE record intake, identity, schema & governance <a href="#chapter-a" id="chapter-a"></a>
 
 * [Overview](chapter-a/overview.md)
 * [1. Corrections & normalization notes](chapter-a/01-1-corrections-and-normalization-notes.md)
