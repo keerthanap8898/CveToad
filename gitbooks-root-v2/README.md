@@ -2,7 +2,7 @@
 description: A GitBook draft generated from the latest Vuln-Data-Sources markdown source.
 ---
 
-# \[CVE-Toad] Vulnerability Management Source Inventory
+# VulnKeeper: A Yellow-Pages analogue for vulnerability-management intelligence sources.
 
 > <sup>**This draft uses seven lifecycle page groups, twenty numbered chapter sections, & per-chapter discussion pages.**</sup>
 
@@ -21,3 +21,7 @@ description: A GitBook draft generated from the latest Vuln-Data-Sources markdow
 ***
 
 #### [Back to Index](index.md)
+
+***
+
+<figure><img src=".gitbook/assets/Vuln-Keeper-watermark_1.jpg" alt=""><figcaption></figcaption></figure>
