@@ -1,6 +1,6 @@
 # Table of contents
 
-* [\[CVE-Toad\] Vulnerability Management Source Inventory](README.md)
+* [VulnKeeper: A Yellow-Pages analogue for vulnerability-management intelligence sources.](README.md)
 * [INDEX](index.md)
 
 ## Ⓐ . CVE record intake, identity, schema & governance <a href="#chapter-a" id="chapter-a"></a>
