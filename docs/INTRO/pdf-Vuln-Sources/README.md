@@ -10,4 +10,4 @@
 > ---
 
 
-![Slides](https://github.com/keerthanap8898/CveToad/tree/main/docs/INTRO/pdf-Vuln-Sources/Vuln-Keeper-watermark_longImg.jpg)
+![Slides](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/pdf-Vuln-Sources/Vuln-Keeper-watermark_longImg.jpg)
