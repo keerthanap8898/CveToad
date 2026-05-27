@@ -5,7 +5,7 @@ A GitBook draft generated from the latest Vuln-Data-Sources markdown source.
 This draft uses seven lifecycle page groups, twenty numbered chapter sections, & per-chapter discussion pages.
 
 * Source document: [../INTRO/Vuln-Data-Sources.md](../INTRO/Vuln-Data-Sources.md)
-* Navigation index: [01-index.md](01-index.md)
+* <sub>Navigation:</sub> [**`Index`**](01-index.md)
 
 ## Page Groups
 
