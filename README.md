@@ -125,7 +125,7 @@ The shell initialises with short-lived authentication tokens (≤ 8 hours) and d
 > 
 > ---
 
-### LICENSE
+### 9. LICENSE
 
 CveToad is available under the
 [GNU Affero General Public License version 3](LICENSE) or under a separately
