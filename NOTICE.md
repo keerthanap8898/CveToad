@@ -4,7 +4,9 @@
 Copyright (C) 2025-2026 Keerthana Purushotham.
 
 SPDX-FileCopyrightText: 2025-2026 Keerthana Purushotham
+
 SPDX-License-Identifier: AGPL-3.0-only
+
 
 This file is part of CveToad.
 
@@ -30,7 +32,7 @@ version 3 with this program. If not, see:
 
 https://www.gnu.org/licenses/agpl-3.0.html
 
-Project source and Corresponding Source:
+Project Source:
 
 https://github.com/keerthanap8898/CveToad
 

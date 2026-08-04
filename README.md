@@ -127,19 +127,18 @@ The shell initialises with short-lived authentication tokens (≤ 8 hours) and d
 
 ### 9. LICENSE
 
-CveToad is available under the
-[GNU Affero General Public License version 3](LICENSE) or under a separately
-negotiated commercial license.
+CveToad is available under the [GNU Affero General Public License version 3](LICENSE) or under a separately negotiated commercial license.
 
 Project licensing documents:
-
+- [GNU Affero General Public License version 3](LICENSE)
 - [Dual-license and project governance](LICENSING.md)
+- [Project copyright and licensing notice](NOTICE.md)
 - [Commercial use and deployment](COMMERCIAL-USE.md)
 - [Contribution policy](CONTRIBUTING.md)
 
 The licensing scope expressly includes qualifying original materials in the
-[CVE-Merkle-RPM slides](MerkleRPM_KP_watermark-May26.pdf) and the
-[VulnKeeper GitBook](https://breachtrace.gitbook.io/vulnkeeper/), as
-described in [`LICENSING.md`](LICENSING.md).
+- [CVE-Merkle-RPM slides](MerkleRPM_KP_watermark-May26.pdf) & the
+- [VulnKeeper GitBook](https://breachtrace.gitbook.io/vulnkeeper/), 
+as described in [`LICENSING.md`](LICENSING.md).
 
 Copyright © 2025-2026 Keerthana Purushotham.
