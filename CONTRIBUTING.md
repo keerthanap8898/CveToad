@@ -165,7 +165,7 @@ Accepted Contributions may be distributed:
 ## 10. Project Materials
 
 The project's licensing scope may include original materials expressly
-identified in the root `LICENSE`, including:
+identified in [`LICENSING.md`](LICENSING.md), including:
 
 - the CveToad source repository;
 - the

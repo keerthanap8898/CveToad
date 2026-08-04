@@ -125,6 +125,21 @@ The shell initialises with short-lived authentication tokens (≤ 8 hours) and d
 > 
 > ---
 
+### LICENSE
 
-![Slides](https://github.com/keerthanap8898/CveToad/blob/main/docs/INTRO/pdf-Vuln-Sources/Vuln-Keeper-watermark_longImg.jpg)
+CveToad is available under the
+[GNU Affero General Public License version 3](LICENSE) or under a separately
+negotiated commercial license.
 
+Project licensing documents:
+
+- [Dual-license and project governance](LICENSING.md)
+- [Commercial use and deployment](COMMERCIAL-USE.md)
+- [Contribution policy](CONTRIBUTING.md)
+
+The licensing scope expressly includes qualifying original materials in the
+[CVE-Merkle-RPM slides](MerkleRPM_KP_watermark-May26.pdf) and the
+[VulnKeeper GitBook](https://breachtrace.gitbook.io/vulnkeeper/), as
+described in [`LICENSING.md`](LICENSING.md).
+
+Copyright © 2025-2026 Keerthana Purushotham.

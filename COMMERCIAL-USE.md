@@ -20,8 +20,8 @@ different from those provided by the AGPLv3.
 
 ## 2. Covered Project Materials
 
-Subject to the definitive scope stated in the root `LICENSE`, the project's
-original materials may include:
+Subject to the definitive scope stated in [`LICENSING.md`](LICENSING.md),
+the project's original materials may include:
 
 1. **CveToad**
    - Original source code, scripts, tests, documentation, diagrams,

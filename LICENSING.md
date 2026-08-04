@@ -357,7 +357,8 @@ https://github.com/keerthanap8898
 A complete, unmodified copy of the GNU Affero General Public License,
 version 3, is provided in:
 
-`LICENSE-AGPL-3.0`
+
+[`LICENSE`](LICENSE)
 
 The official license text is also available at:
 
